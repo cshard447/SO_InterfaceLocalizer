@@ -48,8 +48,8 @@ namespace InterfaceLocalizer
 
             foreach (string file in CFileList.checkedFiles)
             {
-                string path = Properties.Settings.Default.PathToFiles + "\\Russian\\" + file;
-                dataManager.addFileToManager(path);
+                //string path = Properties.Settings.Default.PathToFiles + "\\Russian\\" + file;
+                dataManager.addFileToManager(file);
             }
 
             List<CTextData> texts = dataManager.getTexts();
@@ -63,6 +63,7 @@ namespace InterfaceLocalizer
                 values[0] = CFileList.getFilenameFromPath(td.filename);
                 values[1] = temp;
                 values[2] = td.phrase;
+                values[3] = td.engPhrase;
                 gridViewTranslation.Rows.Add(values);
             }
         }
