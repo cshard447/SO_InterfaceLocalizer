@@ -29,17 +29,19 @@
         private void InitializeComponent()
         {
             this.bOK = new Telerik.WinControls.UI.RadButton();
-            this.radLabel1 = new Telerik.WinControls.UI.RadLabel();
+            this.lPathInfo = new Telerik.WinControls.UI.RadLabel();
             this.bePathToFiles = new Telerik.WinControls.UI.RadBrowseEditor();
             this.lvFilesList = new Telerik.WinControls.UI.RadListView();
             this.lFileCount = new Telerik.WinControls.UI.RadLabel();
             this.lCheckedCount = new Telerik.WinControls.UI.RadLabel();
+            this.cbSelectAll = new Telerik.WinControls.UI.RadCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lPathInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lFileCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,13 +54,13 @@
             this.bOK.Text = "ОК";
             this.bOK.Click += new System.EventHandler(this.bOK_Click);
             // 
-            // radLabel1
+            // lPathInfo
             // 
-            this.radLabel1.Location = new System.Drawing.Point(59, 24);
-            this.radLabel1.Name = "radLabel1";
-            this.radLabel1.Size = new System.Drawing.Size(313, 18);
-            this.radLabel1.TabIndex = 2;
-            this.radLabel1.Text = "Введите путь, по котрому расположены файлы с данными:";
+            this.lPathInfo.Location = new System.Drawing.Point(59, 24);
+            this.lPathInfo.Name = "lPathInfo";
+            this.lPathInfo.Size = new System.Drawing.Size(313, 18);
+            this.lPathInfo.TabIndex = 2;
+            this.lPathInfo.Text = "Введите путь, по котрому расположены файлы с данными:";
             // 
             // bePathToFiles
             // 
@@ -92,16 +94,26 @@
             this.lCheckedCount.Size = new System.Drawing.Size(2, 2);
             this.lCheckedCount.TabIndex = 7;
             // 
+            // cbSelectAll
+            // 
+            this.cbSelectAll.Location = new System.Drawing.Point(248, 399);
+            this.cbSelectAll.Name = "cbSelectAll";
+            this.cbSelectAll.Size = new System.Drawing.Size(124, 18);
+            this.cbSelectAll.TabIndex = 8;
+            this.cbSelectAll.Text = "Выделить/Снять все";
+            this.cbSelectAll.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.cbSelectAll_ToggleStateChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 481);
+            this.Controls.Add(this.cbSelectAll);
             this.Controls.Add(this.lCheckedCount);
             this.Controls.Add(this.lFileCount);
             this.Controls.Add(this.lvFilesList);
             this.Controls.Add(this.bePathToFiles);
-            this.Controls.Add(this.radLabel1);
+            this.Controls.Add(this.lPathInfo);
             this.Controls.Add(this.bOK);
             this.Name = "SettingsForm";
             // 
@@ -111,11 +123,12 @@
             this.Text = "Настройки";
             this.ThemeName = "ControlDefault";
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lPathInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lFileCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -125,10 +138,11 @@
         #endregion
 
         private Telerik.WinControls.UI.RadButton bOK;
-        private Telerik.WinControls.UI.RadLabel radLabel1;
+        private Telerik.WinControls.UI.RadLabel lPathInfo;
         private Telerik.WinControls.UI.RadBrowseEditor bePathToFiles;
         private Telerik.WinControls.UI.RadListView lvFilesList;
         private Telerik.WinControls.UI.RadLabel lFileCount;
         private Telerik.WinControls.UI.RadLabel lCheckedCount;
+        private Telerik.WinControls.UI.RadCheckBox cbSelectAll;
     }
 }

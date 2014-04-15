@@ -81,5 +81,11 @@ namespace InterfaceLocalizer.GUI
             int checkedCount = lvFilesList.CheckedItems.Count;
             lCheckedCount.Text = "Выделено " + checkedCount.ToString() + " файла";
         }
+
+        private void cbSelectAll_ToggleStateChanged(object sender, StateChangedEventArgs args)
+        {
+            foreach(ListViewDataItem item in lvFilesList.Items)
+                item.CheckState = args.ToggleState;
+        }
     }
 }

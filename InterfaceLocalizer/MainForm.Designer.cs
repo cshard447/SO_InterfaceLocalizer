@@ -43,6 +43,7 @@
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             this.cmbColumnsHide = new Telerik.WinControls.UI.CommandBarButton();
             this.menuItemStatistics = new Telerik.WinControls.UI.RadMenuItem();
+            this.cmlListedItems = new Telerik.WinControls.UI.CommandBarLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -101,7 +102,8 @@
             this.commandBarStripElement.DisplayName = "Полоса управления";
             this.commandBarStripElement.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] {
             this.cmbShowData,
-            this.cmbColumnsHide});
+            this.cmbColumnsHide,
+            this.cmlListedItems});
             this.commandBarStripElement.Name = "commandBarStripElement1";
             // 
             // cmbShowData
@@ -184,6 +186,13 @@
             this.menuItemStatistics.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.menuItemStatistics.Click += new System.EventHandler(this.menuItemStatistics_Click);
             // 
+            // cmlListedItems
+            // 
+            this.cmlListedItems.DisplayName = "Число строк";
+            this.cmlListedItems.Name = "cmlListedItems";
+            this.cmlListedItems.Text = "";
+            this.cmlListedItems.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +225,7 @@
         private Telerik.WinControls.UI.CommandBarButton cmbShowData;
         private Telerik.WinControls.UI.CommandBarButton cmbColumnsHide;
         private Telerik.WinControls.UI.RadMenuItem menuItemStatistics;
+        private Telerik.WinControls.UI.CommandBarLabel cmlListedItems;
     }
 }
 

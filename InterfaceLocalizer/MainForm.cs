@@ -75,6 +75,7 @@ namespace InterfaceLocalizer
                 values[3] = td.engPhrase;
                 gridViewTranslation.Rows.Add(values);
             }
+            cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
         }
 
         private void cmbColumnsHide_Click(object sender, EventArgs e)
@@ -82,9 +83,6 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFileName"].IsVisible = !gridViewTranslation.Columns["columnFileName"].IsVisible;
             gridViewTranslation.Columns["columnTags"].IsVisible = !gridViewTranslation.Columns["columnTags"].IsVisible;
         }
-
-
-
 
     }
 }

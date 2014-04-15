@@ -52,9 +52,9 @@
             // 
             this.lStats.Location = new System.Drawing.Point(41, 40);
             this.lStats.Name = "lStats";
-            this.lStats.Size = new System.Drawing.Size(55, 18);
+            this.lStats.Size = new System.Drawing.Size(33, 18);
             this.lStats.TabIndex = 1;
-            this.lStats.Text = "radLabel1";
+            this.lStats.Text = "lStats";
             // 
             // rbTotal
             // 
