@@ -89,28 +89,15 @@ namespace InterfaceLocalizer.Classes
         public string getValueFromXml(XDocument doc, Stack<string> tags)
         {
             string result = "";
-            string s1 = "";
-            string s2 = "";
-            string s3 = "";
-            Stack<string> copy = new Stack<string>(tags);
             //Stack<string> ntags = invertStack(copy);            
             Stack<string> ntags = new Stack<string>(tags);
 
             try
             {
                 if (ntags.Count == 1)
-                {
-                    //s1 = ntags.Pop();
                     result = doc.Element(ntags.Pop()).Value.ToString();
-                    //result = doc.Element(s1).Value.ToString();
-                }
                 else if (ntags.Count == 2)
-                {
-                    //s1 = ntags.Pop();
-                    //s2 = ntags.Pop();
                     result = doc.Element(ntags.Pop()).Element(ntags.Pop()).Value.ToString();
-                    //result = doc.Element(s2).Element(s1).Value.ToString();
-                }
                 else if (ntags.Count == 3)
                     result = doc.Element(ntags.Pop()).Element(ntags.Pop()).Element(ntags.Pop()).Value.ToString();
             }
@@ -122,6 +109,7 @@ namespace InterfaceLocalizer.Classes
             return result;        
         }
 
+        /*
         private Stack<string> invertStack(Stack<string> stack)
         {
             Stack<string> result = new Stack<string>();
@@ -129,5 +117,6 @@ namespace InterfaceLocalizer.Classes
                 result.Push(stack.Pop());
             return result;
         }
+         */ 
     }
 }

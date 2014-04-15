@@ -33,11 +33,13 @@
             this.bePathToFiles = new Telerik.WinControls.UI.RadBrowseEditor();
             this.lvFilesList = new Telerik.WinControls.UI.RadListView();
             this.lFileCount = new Telerik.WinControls.UI.RadLabel();
+            this.lCheckedCount = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radLabel1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lFileCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,6 +76,7 @@
             this.lvFilesList.ShowCheckBoxes = true;
             this.lvFilesList.Size = new System.Drawing.Size(313, 284);
             this.lvFilesList.TabIndex = 4;
+            this.lvFilesList.ItemCheckedChanged += new Telerik.WinControls.UI.ListViewItemEventHandler(this.lvFilesList_ItemCheckedChanged);
             // 
             // lFileCount
             // 
@@ -82,11 +85,19 @@
             this.lFileCount.Size = new System.Drawing.Size(2, 2);
             this.lFileCount.TabIndex = 6;
             // 
+            // lCheckedCount
+            // 
+            this.lCheckedCount.Location = new System.Drawing.Point(59, 422);
+            this.lCheckedCount.Name = "lCheckedCount";
+            this.lCheckedCount.Size = new System.Drawing.Size(2, 2);
+            this.lCheckedCount.TabIndex = 7;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(437, 481);
+            this.Controls.Add(this.lCheckedCount);
             this.Controls.Add(this.lFileCount);
             this.Controls.Add(this.lvFilesList);
             this.Controls.Add(this.bePathToFiles);
@@ -104,6 +115,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lFileCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -117,5 +129,6 @@
         private Telerik.WinControls.UI.RadBrowseEditor bePathToFiles;
         private Telerik.WinControls.UI.RadListView lvFilesList;
         private Telerik.WinControls.UI.RadLabel lFileCount;
+        private Telerik.WinControls.UI.RadLabel lCheckedCount;
     }
 }

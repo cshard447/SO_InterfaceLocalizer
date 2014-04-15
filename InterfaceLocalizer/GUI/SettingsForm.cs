@@ -54,7 +54,7 @@ namespace InterfaceLocalizer.GUI
             foreach (string filepath in files)
             {
                 lvFilesList.Items.Add(CFileList.getFilenameFromPath(filepath));
-                fileList.Add(filepath);
+                fileList.Add(CFileList.getFilenameFromPath(filepath));
                 count++;
             }
 
@@ -66,7 +66,7 @@ namespace InterfaceLocalizer.GUI
             List<string> checkedFiles = new List<string>();
             foreach (ListViewDataItem item in lvFilesList.CheckedItems)
                 checkedFiles.Add(item.Text);
-
+            
             Properties.Settings.Default.PathToFiles = path;
             Properties.Settings.Default.CheckedFiles = CFileList.getListAsString(checkedFiles);
             Properties.Settings.Default.Save();
@@ -74,6 +74,12 @@ namespace InterfaceLocalizer.GUI
             CFileList.allFiles = fileList;
             CFileList.checkedFiles = checkedFiles;
             this.Close();
+        }
+
+        private void lvFilesList_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
+        {
+            int checkedCount = lvFilesList.CheckedItems.Count;
+            lCheckedCount.Text = "Выделено " + checkedCount.ToString() + " файла";
         }
     }
 }

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Collections.Generic;
 
 using InterfaceLocalizer.GUI;
 using InterfaceLocalizer.Classes;
@@ -41,16 +41,19 @@ namespace InterfaceLocalizer
             sf.Show();
         }
 
+        private void menuItemStatistics_Click(object sender, EventArgs e)
+        {
+            StatisticsForm sf = new StatisticsForm();
+            sf.Show();
+        }
+
         private void cmbShowData_Click(object sender, EventArgs e)
         {
             dataManager.clearAllData();
             gridViewTranslation.Rows.Clear();
 
             foreach (string file in CFileList.checkedFiles)
-            {
-                //string path = Properties.Settings.Default.PathToFiles + "\\Russian\\" + file;
                 dataManager.addFileToManager(file);
-            }
 
             List<CTextData> texts = dataManager.getTexts();
             foreach (CTextData td in texts)
@@ -67,6 +70,13 @@ namespace InterfaceLocalizer
                 gridViewTranslation.Rows.Add(values);
             }
         }
+
+        private void cmbColumnsHide_Click(object sender, EventArgs e)
+        {
+            gridViewTranslation.Columns["columnFileName"].IsVisible = !gridViewTranslation.Columns["columnFileName"].IsVisible;
+            gridViewTranslation.Columns["columnTags"].IsVisible = !gridViewTranslation.Columns["columnTags"].IsVisible;
+        }
+
 
 
 
