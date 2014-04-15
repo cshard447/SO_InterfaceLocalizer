@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -28,11 +29,16 @@ namespace InterfaceLocalizer
         private void MainForm_Load(object sender, EventArgs e)
         {
             CFileList.checkedFiles.Clear();
+            CFileList.allFiles.Clear();
             string path = Properties.Settings.Default.PathToFiles;
             string check = Properties.Settings.Default.CheckedFiles;
             string[] fileArray = check.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
             foreach (string file in fileArray)
                 CFileList.checkedFiles.Add(file);
+
+            IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path + "\\Russian\\", "*.xml", SearchOption.TopDirectoryOnly);
+            foreach (string filepath in files)
+                CFileList.allFiles.Add(CFileList.getFilenameFromPath(filepath));
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)

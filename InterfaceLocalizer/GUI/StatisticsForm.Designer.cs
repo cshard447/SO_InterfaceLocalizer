@@ -30,8 +30,12 @@
         {
             this.bOK = new Telerik.WinControls.UI.RadButton();
             this.lStats = new Telerik.WinControls.UI.RadLabel();
+            this.rbTotal = new Telerik.WinControls.UI.RadRadioButton();
+            this.rbChecked = new Telerik.WinControls.UI.RadRadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lStats)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbTotal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbChecked)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,11 +56,31 @@
             this.lStats.TabIndex = 1;
             this.lStats.Text = "radLabel1";
             // 
+            // rbTotal
+            // 
+            this.rbTotal.Location = new System.Drawing.Point(56, 329);
+            this.rbTotal.Name = "rbTotal";
+            this.rbTotal.Size = new System.Drawing.Size(59, 18);
+            this.rbTotal.TabIndex = 2;
+            this.rbTotal.Text = "Полная";
+            this.rbTotal.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.rbTotal_ToggleStateChanged);
+            // 
+            // rbChecked
+            // 
+            this.rbChecked.Location = new System.Drawing.Point(232, 329);
+            this.rbChecked.Name = "rbChecked";
+            this.rbChecked.Size = new System.Drawing.Size(118, 18);
+            this.rbChecked.TabIndex = 3;
+            this.rbChecked.Text = "Выбранные файлы";
+            this.rbChecked.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.rbChecked_ToggleStateChanged);
+            // 
             // StatisticsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(413, 407);
+            this.Controls.Add(this.rbChecked);
+            this.Controls.Add(this.rbTotal);
             this.Controls.Add(this.lStats);
             this.Controls.Add(this.bOK);
             this.Name = "StatisticsForm";
@@ -69,6 +93,8 @@
             this.Load += new System.EventHandler(this.StatisticsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lStats)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbTotal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.rbChecked)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -79,5 +105,7 @@
 
         private Telerik.WinControls.UI.RadButton bOK;
         private Telerik.WinControls.UI.RadLabel lStats;
+        private Telerik.WinControls.UI.RadRadioButton rbTotal;
+        private Telerik.WinControls.UI.RadRadioButton rbChecked;
     }
 }
