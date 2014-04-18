@@ -152,21 +152,44 @@ namespace InterfaceLocalizer.Classes
                     //if (copy.Count == 1)
                         //element = new XElement(copy.Pop(), text.engPhrase);
                     //if (item.Element("Reward").Descendants().Any(itm2 => itm2.Name == "Probability"))
-                    copy.Pop();
+                    string root = copy.Pop();
+                    string chapter = copy.Pop();
+                    string item = copy.Pop();
+                    string value = text.engPhrase;
 
-                    if (copy.Count == 1)
+                    if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter))
                     {
-                        element = new XElement(copy.Pop(), text.engPhrase);
-                        //element.Name = copy.Pop();
-                        //element.Value = text.engPhrase;
+                        if (doc.Root.Element(chapter).Descendants().Any(tag2 => tag2.Name == item))
+                            doc.Root.Element(chapter).Element(item).Value = value;
+                        else
+                        {
+                            XElement el = new XElement(item, value);
+                            //doc.Root.Add(el);
+                            doc.Root.Element(chapter).Add(el);
+                        }
                     }
-                    else if (copy.Count == 2)
+                    else
                     {
-                        element = new XElement(new XElement(copy.Pop(),
-                                            new XElement(copy.Pop(), text.engPhrase)));
+                        XElement el = new XElement(chapter, new XElement(item, value));
+                        doc.Root.Add(el);
+                        
+                        /*
+                        if (copy.Count == 1)
+                        {
+                            element = new XElement(copy.Pop(), text.engPhrase);
+                            //element.Name = copy.Pop();
+                            //element.Value = text.engPhrase;
+                        }
+                        else if (copy.Count == 2)
+                        {
+                            element = new XElement(new XElement(copy.Pop(),
+                                                new XElement(copy.Pop(), text.engPhrase)));
+                        }
+                        doc.Root.Add(element);
+                         */ 
                     }
                     
-                    doc.Root.Add(element);
+                    
                     //int c = doc.Root.Element("").Elements().Count;
                     /*
                     try
