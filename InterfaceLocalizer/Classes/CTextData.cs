@@ -52,10 +52,10 @@ namespace InterfaceLocalizer.Classes
         {   
             string phrase = "";
             string eng = "";
-            Stack<string> tags = new Stack<string>();            
+            Stack<string> tags = new Stack<string>();
 
             string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
-            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;            
+            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
             XmlTextReader reader = new XmlTextReader (rusPath);
             XDocument engDoc = new XDocument();
             engDoc = XDocument.Load(engPath);
@@ -74,8 +74,8 @@ namespace InterfaceLocalizer.Classes
                         if (phrase != "")
                         {
                             eng = getValueFromXml(engDoc, tags);
-                            Stack<string> queue = new Stack<string>(tags.ToArray());
-                            texts.Add(new CTextData(phrase, eng, filename, queue));
+                            Stack<string> copy = new Stack<string>(tags.ToArray());                            
+                            texts.Add(new CTextData(phrase, eng, filename, copy));
                             phrase = "";
                             eng = "";
                         }
@@ -83,7 +83,6 @@ namespace InterfaceLocalizer.Classes
                         break;
                 }
             }
-
         }
 
         public string getValueFromXml(XDocument doc, Stack<string> tags)
@@ -109,14 +108,86 @@ namespace InterfaceLocalizer.Classes
             return result;        
         }
 
-        /*
-        private Stack<string> invertStack(Stack<string> stack)
+        public void saveDataToFile()
         {
-            Stack<string> result = new Stack<string>();
-            while (stack.Count > 0)
-                result.Push(stack.Pop());
-            return result;
+            string engPath = Properties.Settings.Default.PathToFiles + "\\EnglishTest\\";
+            foreach (string file in CFileList.checkedFiles)
+            {
+                XDocument doc = new XDocument();                
+                doc = XDocument.Load(engPath + file);
+
+                
+                IEnumerable<XElement> del = doc.Root.Descendants().ToList();
+                del.Remove();
+                doc.Save(file);
+                
+
+                foreach (CTextData text in texts)
+                {
+                    if (text.filename != file)
+                        continue;
+                    /*
+                    IEnumerable<XElement> find = doc.Element(section).Descendants("person").Where(
+                                t => t.Element("personId").Value == person.getID().ToString());
+                    foreach (XElement elem in find)
+                        elem.Remove();
+                    */
+                    Stack<string> copy = new Stack<string>(text.tags);
+                    copy = CFileList.invertStack(copy);
+
+                    XElement element = new XElement("test");                                        
+                    /*
+                    if (copy.Count == 1)
+                        element = new XElement(copy.Pop(), text.engPhrase);
+
+                    else if (copy.Count == 2)
+                        element = new XElement(copy.Pop(),
+                                        new XElement(copy.Pop(), text.engPhrase));
+                    else if (copy.Count == 3)
+                        element = new XElement(copy.Pop(),
+                                        new XElement(copy.Pop(), 
+                                            new XElement(copy.Pop(), text.engPhrase)));
+                    */
+
+                    //if (copy.Count == 1)
+                        //element = new XElement(copy.Pop(), text.engPhrase);
+                    //if (item.Element("Reward").Descendants().Any(itm2 => itm2.Name == "Probability"))
+                    copy.Pop();
+
+                    if (copy.Count == 1)
+                    {
+                        element = new XElement(copy.Pop(), text.engPhrase);
+                        //element.Name = copy.Pop();
+                        //element.Value = text.engPhrase;
+                    }
+                    else if (copy.Count == 2)
+                    {
+                        element = new XElement(new XElement(copy.Pop(),
+                                            new XElement(copy.Pop(), text.engPhrase)));
+                    }
+                    
+                    doc.Root.Add(element);
+                    //int c = doc.Root.Element("").Elements().Count;
+                    /*
+                    try
+                    {
+                        if (copy.Count == 1)
+                            doc.Element(copy.Pop()).Value = text.engPhrase;
+                        else if (copy.Count == 2)
+                            doc.Element(copy.Pop()).Element(copy.Pop()).Value = text.engPhrase;
+                        else if (copy.Count == 3)
+                            doc.Element(copy.Pop()).Element(copy.Pop()).Element(copy.Pop()).Value = text.engPhrase;
+                    }
+                    catch {
+                        doc.AddAfterSelf(element);
+                        //doc.
+                    } 
+                     */ 
+                }
+
+                doc.Save(engPath + file);            
+            }
         }
-         */ 
+    
     }
 }

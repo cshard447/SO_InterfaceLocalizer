@@ -64,18 +64,44 @@ namespace InterfaceLocalizer
             List<CTextData> texts = dataManager.getTexts();
             foreach (CTextData td in texts)
             {
-                string temp = "";
-                while (td.tags.Count != 0)
-                    temp += td.tags.Pop() + " -> ";
-
-                object[] values = new object[4];
-                values[0] = CFileList.getFilenameFromPath(td.filename);
-                values[1] = temp;
-                values[2] = td.phrase;
-                values[3] = td.engPhrase;
-                gridViewTranslation.Rows.Add(values);
+                addDataToGridView(td);
             }
             cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
+        }
+
+        private void cmbShowUndoneData_Click(object sender, EventArgs e)
+        {
+            dataManager.clearAllData();
+            gridViewTranslation.Rows.Clear();
+
+            foreach (string file in CFileList.checkedFiles)
+                dataManager.addFileToManager(file);
+
+            List<CTextData> texts = dataManager.getTexts();
+            foreach (CTextData td in texts)
+            {
+                if (td.engPhrase == "<NO DATA>" || td.engPhrase == "")
+                {
+                    addDataToGridView(td);
+                }
+            }
+            cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
+        }
+
+        private void addDataToGridView(CTextData td)
+        {
+            Stack<string> copy = new Stack<string>(td.tags);
+            copy = CFileList.invertStack(copy);
+            string temp = "";
+            while (copy.Count != 0)
+                temp += copy.Pop() + " -> ";
+
+            object[] values = new object[4];
+            values[0] = CFileList.getFilenameFromPath(td.filename);
+            values[1] = temp;
+            values[2] = td.phrase;
+            values[3] = td.engPhrase;
+            gridViewTranslation.Rows.Add(values);        
         }
 
         private void cmbColumnsHide_Click(object sender, EventArgs e)
@@ -83,6 +109,12 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFileName"].IsVisible = !gridViewTranslation.Columns["columnFileName"].IsVisible;
             gridViewTranslation.Columns["columnTags"].IsVisible = !gridViewTranslation.Columns["columnTags"].IsVisible;
         }
+
+        private void cmbSaveChecked_Click(object sender, EventArgs e)
+        {
+            dataManager.saveDataToFile();
+        }
+
 
     }
 }

@@ -29,21 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             this.mainMenu = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemStatistics = new Telerik.WinControls.UI.RadMenuItem();
             this.commandBarTranslation = new Telerik.WinControls.UI.RadCommandBar();
             this.commandBarRowElement1 = new Telerik.WinControls.UI.CommandBarRowElement();
             this.commandBarStripElement = new Telerik.WinControls.UI.CommandBarStripElement();
             this.cmbShowData = new Telerik.WinControls.UI.CommandBarButton();
-            this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
+            this.cmbShowUndoneData = new Telerik.WinControls.UI.CommandBarButton();
             this.cmbColumnsHide = new Telerik.WinControls.UI.CommandBarButton();
-            this.menuItemStatistics = new Telerik.WinControls.UI.RadMenuItem();
             this.cmlListedItems = new Telerik.WinControls.UI.CommandBarLabel();
+            this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
+            this.cmbSaveChecked = new Telerik.WinControls.UI.CommandBarButton();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -80,6 +82,15 @@
             this.menuItemSettings.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
+            // menuItemStatistics
+            // 
+            this.menuItemStatistics.AccessibleDescription = "Статистика";
+            this.menuItemStatistics.AccessibleName = "Статистика";
+            this.menuItemStatistics.Name = "menuItemStatistics";
+            this.menuItemStatistics.Text = "Статистика";
+            this.menuItemStatistics.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemStatistics.Click += new System.EventHandler(this.menuItemStatistics_Click);
+            // 
             // commandBarTranslation
             // 
             this.commandBarTranslation.Dock = System.Windows.Forms.DockStyle.Top;
@@ -102,8 +113,10 @@
             this.commandBarStripElement.DisplayName = "Полоса управления";
             this.commandBarStripElement.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] {
             this.cmbShowData,
+            this.cmbShowUndoneData,
             this.cmbColumnsHide,
-            this.cmlListedItems});
+            this.cmlListedItems,
+            this.cmbSaveChecked});
             this.commandBarStripElement.Name = "commandBarStripElement1";
             // 
             // cmbShowData
@@ -114,11 +127,44 @@
             this.cmbShowData.DrawText = true;
             this.cmbShowData.Image = ((System.Drawing.Image)(resources.GetObject("cmbShowData.Image")));
             this.cmbShowData.Name = "cmbShowData";
-            this.cmbShowData.Text = "Показать данные";
+            this.cmbShowData.Text = "Показать все";
             this.cmbShowData.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.cmbShowData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmbShowData.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.cmbShowData.Click += new System.EventHandler(this.cmbShowData_Click);
+            // 
+            // cmbShowUndoneData
+            // 
+            this.cmbShowUndoneData.AccessibleDescription = "Показать неготовые";
+            this.cmbShowUndoneData.AccessibleName = "Показать неготовые";
+            this.cmbShowUndoneData.DisplayName = "commandBarButton1";
+            this.cmbShowUndoneData.DrawText = true;
+            this.cmbShowUndoneData.Image = ((System.Drawing.Image)(resources.GetObject("cmbShowUndoneData.Image")));
+            this.cmbShowUndoneData.Name = "cmbShowUndoneData";
+            this.cmbShowUndoneData.Text = "Показать неготовые";
+            this.cmbShowUndoneData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmbShowUndoneData.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.cmbShowUndoneData.Click += new System.EventHandler(this.cmbShowUndoneData_Click);
+            // 
+            // cmbColumnsHide
+            // 
+            this.cmbColumnsHide.AccessibleDescription = "Убрать инфо";
+            this.cmbColumnsHide.AccessibleName = "Убрать инфо";
+            this.cmbColumnsHide.DisplayName = "Убрать столбцы";
+            this.cmbColumnsHide.DrawText = true;
+            this.cmbColumnsHide.Image = ((System.Drawing.Image)(resources.GetObject("cmbColumnsHide.Image")));
+            this.cmbColumnsHide.Name = "cmbColumnsHide";
+            this.cmbColumnsHide.Text = "Убрать инфо";
+            this.cmbColumnsHide.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmbColumnsHide.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.cmbColumnsHide.Click += new System.EventHandler(this.cmbColumnsHide_Click);
+            // 
+            // cmlListedItems
+            // 
+            this.cmlListedItems.DisplayName = "Число строк";
+            this.cmlListedItems.Name = "cmlListedItems";
+            this.cmlListedItems.Text = "";
+            this.cmlListedItems.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // gridViewTranslation
             // 
@@ -135,27 +181,27 @@
             this.gridViewTranslation.MasterTemplate.AllowAddNewRow = false;
             this.gridViewTranslation.MasterTemplate.AllowColumnReorder = false;
             this.gridViewTranslation.MasterTemplate.AllowDeleteRow = false;
-            gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.HeaderText = "Имя файла";
-            gridViewTextBoxColumn1.Name = "columnFileName";
-            gridViewTextBoxColumn1.Width = 93;
-            gridViewTextBoxColumn2.EnableExpressionEditor = false;
-            gridViewTextBoxColumn2.HeaderText = "Теги";
-            gridViewTextBoxColumn2.Name = "columnTags";
-            gridViewTextBoxColumn2.Width = 117;
-            gridViewTextBoxColumn3.EnableExpressionEditor = false;
-            gridViewTextBoxColumn3.HeaderText = "Русский";
-            gridViewTextBoxColumn3.Name = "columnRussianPhrase";
-            gridViewTextBoxColumn3.Width = 312;
-            gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.HeaderText = "Английский";
-            gridViewTextBoxColumn4.Name = "columnEnglishPhrase";
-            gridViewTextBoxColumn4.Width = 238;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.HeaderText = "Имя файла";
+            gridViewTextBoxColumn9.Name = "columnFileName";
+            gridViewTextBoxColumn9.Width = 93;
+            gridViewTextBoxColumn10.EnableExpressionEditor = false;
+            gridViewTextBoxColumn10.HeaderText = "Теги";
+            gridViewTextBoxColumn10.Name = "columnTags";
+            gridViewTextBoxColumn10.Width = 117;
+            gridViewTextBoxColumn11.EnableExpressionEditor = false;
+            gridViewTextBoxColumn11.HeaderText = "Русский";
+            gridViewTextBoxColumn11.Name = "columnRussianPhrase";
+            gridViewTextBoxColumn11.Width = 312;
+            gridViewTextBoxColumn12.EnableExpressionEditor = false;
+            gridViewTextBoxColumn12.HeaderText = "Английский";
+            gridViewTextBoxColumn12.Name = "columnEnglishPhrase";
+            gridViewTextBoxColumn12.Width = 238;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4});
+            gridViewTextBoxColumn9,
+            gridViewTextBoxColumn10,
+            gridViewTextBoxColumn11,
+            gridViewTextBoxColumn12});
             this.gridViewTranslation.MasterTemplate.EnableGrouping = false;
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
@@ -164,34 +210,18 @@
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
             // 
-            // cmbColumnsHide
+            // cmbSaveChecked
             // 
-            this.cmbColumnsHide.AccessibleDescription = "Убрать инфо";
-            this.cmbColumnsHide.AccessibleName = "Убрать инфо";
-            this.cmbColumnsHide.DisplayName = "Убрать столбцы";
-            this.cmbColumnsHide.DrawText = true;
-            this.cmbColumnsHide.Image = ((System.Drawing.Image)(resources.GetObject("cmbColumnsHide.Image")));
-            this.cmbColumnsHide.Name = "cmbColumnsHide";
-            this.cmbColumnsHide.Text = "Убрать инфо";
-            this.cmbColumnsHide.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.cmbColumnsHide.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.cmbColumnsHide.Click += new System.EventHandler(this.cmbColumnsHide_Click);
-            // 
-            // menuItemStatistics
-            // 
-            this.menuItemStatistics.AccessibleDescription = "Статистика";
-            this.menuItemStatistics.AccessibleName = "Статистика";
-            this.menuItemStatistics.Name = "menuItemStatistics";
-            this.menuItemStatistics.Text = "Статистика";
-            this.menuItemStatistics.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.menuItemStatistics.Click += new System.EventHandler(this.menuItemStatistics_Click);
-            // 
-            // cmlListedItems
-            // 
-            this.cmlListedItems.DisplayName = "Число строк";
-            this.cmlListedItems.Name = "cmlListedItems";
-            this.cmlListedItems.Text = "";
-            this.cmlListedItems.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.cmbSaveChecked.AccessibleDescription = "Сохранить";
+            this.cmbSaveChecked.AccessibleName = "Сохранить";
+            this.cmbSaveChecked.DisplayName = "Сохранить данные";
+            this.cmbSaveChecked.DrawText = true;
+            this.cmbSaveChecked.Image = ((System.Drawing.Image)(resources.GetObject("cmbSaveChecked.Image")));
+            this.cmbSaveChecked.Name = "cmbSaveChecked";
+            this.cmbSaveChecked.Text = "Сохранить";
+            this.cmbSaveChecked.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmbSaveChecked.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.cmbSaveChecked.Click += new System.EventHandler(this.cmbSaveChecked_Click);
             // 
             // MainForm
             // 
@@ -226,6 +256,8 @@
         private Telerik.WinControls.UI.CommandBarButton cmbColumnsHide;
         private Telerik.WinControls.UI.RadMenuItem menuItemStatistics;
         private Telerik.WinControls.UI.CommandBarLabel cmlListedItems;
+        private Telerik.WinControls.UI.CommandBarButton cmbShowUndoneData;
+        private Telerik.WinControls.UI.CommandBarButton cmbSaveChecked;
     }
 }
 

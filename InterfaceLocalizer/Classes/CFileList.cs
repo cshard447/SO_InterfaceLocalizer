@@ -37,5 +37,14 @@ namespace InterfaceLocalizer.Classes
                 result += str + ";";
             return result;
         }
+        
+        public static Stack<string> invertStack(Stack<string> stack)
+        {
+            Stack<string> result = new Stack<string>(stack);
+            //while (stack.Count > 0)
+            //    result.Push(stack.Pop());
+            return result;
+        }
+          
     }
 }
