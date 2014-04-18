@@ -54,9 +54,9 @@ namespace InterfaceLocalizer.GUI
             foreach (string file in fileList)
                 dataManager.addFileToManager(file);
 
-            List<CTextData> texts = dataManager.getTexts();
+            Dictionary<int, CTextData> texts = dataManager.getTextsDict();
             phrasesCount = texts.Count;
-            foreach (CTextData text in texts)
+            foreach (CTextData text in texts.Values)
             {
                 symbolsCount += text.phrase.Length;
                 engSymbols += text.engPhrase.Length;

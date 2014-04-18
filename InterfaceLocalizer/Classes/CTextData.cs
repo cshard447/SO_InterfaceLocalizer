@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using Telerik.WinControls.UI;
 using System.Collections.Generic;
+
 
 namespace InterfaceLocalizer.Classes
 {
@@ -31,29 +33,31 @@ namespace InterfaceLocalizer.Classes
 
     public class CDataManager
     {
-        private List<CTextData> texts = new List<CTextData>();
+        private Dictionary<int, CTextData> textsDict = new Dictionary<int, CTextData>();
+        int id = 0;
         
-
         public CDataManager()
-        { 
-        }
-
-        public List<CTextData> getTexts()
         {
-            return texts;
+            id = 0;
+        }
+ 
+        public Dictionary<int, CTextData> getTextsDict()
+        {
+            return textsDict;
         }
 
         public void clearAllData()
         {
-            texts.Clear();
+            textsDict.Clear();
+            id = 0;
         }
 
         public void addFileToManager(string filename)
         {   
             string phrase = "";
             string eng = "";
-            Stack<string> tags = new Stack<string>();
 
+            Stack<string> tags = new Stack<string>();
             string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
             string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
             XmlTextReader reader = new XmlTextReader (rusPath);
@@ -75,7 +79,8 @@ namespace InterfaceLocalizer.Classes
                         {
                             eng = getValueFromXml(engDoc, tags);
                             Stack<string> copy = new Stack<string>(tags.ToArray());                            
-                            texts.Add(new CTextData(phrase, eng, filename, copy));
+                            //texts.Add(new CTextData(phrase, eng, filename, copy));
+                            textsDict.Add(id++, new CTextData(phrase, eng, filename, copy));
                             phrase = "";
                             eng = "";
                         }
@@ -108,50 +113,30 @@ namespace InterfaceLocalizer.Classes
             return result;        
         }
 
+        public void updateTextsFromGridView(RadGridView gridView)
+        { 
+        
+        }
+
         public void saveDataToFile()
         {
-            string engPath = Properties.Settings.Default.PathToFiles + "\\EnglishTest\\";
+            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\";
             foreach (string file in CFileList.checkedFiles)
             {
                 XDocument doc = new XDocument();                
-                doc = XDocument.Load(engPath + file);
-
-                
+                doc = XDocument.Load(engPath + file);                
                 IEnumerable<XElement> del = doc.Root.Descendants().ToList();
                 del.Remove();
                 doc.Save(file);
                 
-
-                foreach (CTextData text in texts)
+                foreach (CTextData text in textsDict.Values)
                 {
                     if (text.filename != file)
                         continue;
-                    /*
-                    IEnumerable<XElement> find = doc.Element(section).Descendants("person").Where(
-                                t => t.Element("personId").Value == person.getID().ToString());
-                    foreach (XElement elem in find)
-                        elem.Remove();
-                    */
+
                     Stack<string> copy = new Stack<string>(text.tags);
-                    copy = CFileList.invertStack(copy);
+                    copy = CFileList.invertStack(copy);                                                            
 
-                    XElement element = new XElement("test");                                        
-                    /*
-                    if (copy.Count == 1)
-                        element = new XElement(copy.Pop(), text.engPhrase);
-
-                    else if (copy.Count == 2)
-                        element = new XElement(copy.Pop(),
-                                        new XElement(copy.Pop(), text.engPhrase));
-                    else if (copy.Count == 3)
-                        element = new XElement(copy.Pop(),
-                                        new XElement(copy.Pop(), 
-                                            new XElement(copy.Pop(), text.engPhrase)));
-                    */
-
-                    //if (copy.Count == 1)
-                        //element = new XElement(copy.Pop(), text.engPhrase);
-                    //if (item.Element("Reward").Descendants().Any(itm2 => itm2.Name == "Probability"))
                     string root = copy.Pop();
                     string chapter = copy.Pop();
                     string item = copy.Pop();
@@ -164,50 +149,15 @@ namespace InterfaceLocalizer.Classes
                         else
                         {
                             XElement el = new XElement(item, value);
-                            //doc.Root.Add(el);
                             doc.Root.Element(chapter).Add(el);
                         }
                     }
                     else
                     {
                         XElement el = new XElement(chapter, new XElement(item, value));
-                        doc.Root.Add(el);
-                        
-                        /*
-                        if (copy.Count == 1)
-                        {
-                            element = new XElement(copy.Pop(), text.engPhrase);
-                            //element.Name = copy.Pop();
-                            //element.Value = text.engPhrase;
-                        }
-                        else if (copy.Count == 2)
-                        {
-                            element = new XElement(new XElement(copy.Pop(),
-                                                new XElement(copy.Pop(), text.engPhrase)));
-                        }
-                        doc.Root.Add(element);
-                         */ 
-                    }
-                    
-                    
-                    //int c = doc.Root.Element("").Elements().Count;
-                    /*
-                    try
-                    {
-                        if (copy.Count == 1)
-                            doc.Element(copy.Pop()).Value = text.engPhrase;
-                        else if (copy.Count == 2)
-                            doc.Element(copy.Pop()).Element(copy.Pop()).Value = text.engPhrase;
-                        else if (copy.Count == 3)
-                            doc.Element(copy.Pop()).Element(copy.Pop()).Element(copy.Pop()).Value = text.engPhrase;
-                    }
-                    catch {
-                        doc.AddAfterSelf(element);
-                        //doc.
-                    } 
-                     */ 
+                        doc.Root.Add(el);                       
+                    }                                        
                 }
-
                 doc.Save(engPath + file);            
             }
         }
