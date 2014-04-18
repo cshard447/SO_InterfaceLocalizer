@@ -114,17 +114,37 @@ namespace InterfaceLocalizer.Classes
         }
 
         public void updateTextsFromGridView(RadGridView gridView)
-        { 
-        
+        {
+            for (int row = 0; row < gridView.RowCount; row++)
+            {
+                int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
+                string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
+                string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
+                string rus = gridView.Rows[row].Cells["columnRussianPhrase"].Value.ToString();
+                string eng = gridView.Rows[row].Cells["columnEnglishPhrase"].Value.ToString();
+
+                if (!textsDict.ContainsKey(id))
+                    throw new System.ArgumentException("Фразы с таким ID не существует!");
+
+                if (textsDict[id].filename != filename)
+                    throw new System.ArgumentException("Имена файлов не совпадают!");
+
+                textsDict[id].phrase = rus;
+                textsDict[id].engPhrase = eng;
+            }            
         }
 
-        public void saveDataToFile()
+        public void saveDataToFile(bool english)
         {
-            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\";
+            string path;
+            if (english)
+                path = Properties.Settings.Default.PathToFiles + "\\English\\";
+            else
+                path = Properties.Settings.Default.PathToFiles + "\\Russian\\";
             foreach (string file in CFileList.checkedFiles)
             {
                 XDocument doc = new XDocument();                
-                doc = XDocument.Load(engPath + file);                
+                doc = XDocument.Load(path + file);                
                 IEnumerable<XElement> del = doc.Root.Descendants().ToList();
                 del.Remove();
                 doc.Save(file);
@@ -140,7 +160,11 @@ namespace InterfaceLocalizer.Classes
                     string root = copy.Pop();
                     string chapter = copy.Pop();
                     string item = copy.Pop();
-                    string value = text.engPhrase;
+                    string value;
+                    if (english)
+                        value = text.engPhrase;
+                    else
+                        value = text.phrase;
 
                     if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter))
                     {
@@ -158,7 +182,7 @@ namespace InterfaceLocalizer.Classes
                         doc.Root.Add(el);                       
                     }                                        
                 }
-                doc.Save(engPath + file);            
+                doc.Save(path + file);            
             }
         }
     

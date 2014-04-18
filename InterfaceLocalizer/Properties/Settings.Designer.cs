@@ -25,7 +25,7 @@ namespace InterfaceLocalizer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\StalkerOnline\\res\\local\\")]
         public string PathToFiles {
             get {
                 return ((string)(this["PathToFiles"]));

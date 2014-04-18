@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PathToFiles" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">d:\StalkerOnline\res\local\</Value>
     </Setting>
     <Setting Name="CheckedFiles" Type="System.String" Scope="User">
       <Value Profile="(Default)" />

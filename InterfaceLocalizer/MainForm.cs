@@ -17,9 +17,7 @@ namespace InterfaceLocalizer
 {
     public partial class MainForm : Form
     {
-        CDataManager dataManager = new CDataManager();        
-        string path;
-
+        CDataManager dataManager = new CDataManager();
 
         public MainForm()
         {
@@ -30,15 +28,21 @@ namespace InterfaceLocalizer
         {
             CFileList.checkedFiles.Clear();
             CFileList.allFiles.Clear();
-            string path = Properties.Settings.Default.PathToFiles;
-            string check = Properties.Settings.Default.CheckedFiles;
-            string[] fileArray = check.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-            foreach (string file in fileArray)
-                CFileList.checkedFiles.Add(file);
+            try
+            {
+                string path = Properties.Settings.Default.PathToFiles;
+                string check = Properties.Settings.Default.CheckedFiles;
+                string[] fileArray = check.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string file in fileArray)
+                    CFileList.checkedFiles.Add(file);
 
-            IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path + "\\Russian\\", "*.xml", SearchOption.TopDirectoryOnly);
-            foreach (string filepath in files)
-                CFileList.allFiles.Add(CFileList.getFilenameFromPath(filepath));
+                IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path + "\\Russian\\", "*.xml", SearchOption.TopDirectoryOnly);
+                foreach (string filepath in files)
+                    CFileList.allFiles.Add(CFileList.getFilenameFromPath(filepath));
+            }
+            catch {
+                MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение");
+            }
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)
@@ -124,7 +128,14 @@ namespace InterfaceLocalizer
 
         private void cmbSaveChecked_Click(object sender, EventArgs e)
         {
-            dataManager.saveDataToFile();
+            dataManager.updateTextsFromGridView(gridViewTranslation);
+            dataManager.saveDataToFile(true);
+        }
+
+        private void cmbSaveRus_Click(object sender, EventArgs e)
+        {
+            dataManager.updateTextsFromGridView(gridViewTranslation);
+            dataManager.saveDataToFile(false);
         }
 
 
