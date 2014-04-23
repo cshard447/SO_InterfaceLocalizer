@@ -122,6 +122,8 @@
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "Настройки";
             this.ThemeName = "ControlDefault";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).EndInit();

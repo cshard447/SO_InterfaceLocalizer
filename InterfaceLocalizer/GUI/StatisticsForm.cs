@@ -34,6 +34,8 @@ namespace InterfaceLocalizer.GUI
         private void StatisticsForm_Load(object sender, EventArgs e)
         {
             rbChecked.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
+            this.Left = Properties.Settings.Default.StatsFormLeft;
+            this.Top = Properties.Settings.Default.StatsFormTop;
         }
 
         private void rbTotal_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
@@ -92,6 +94,13 @@ namespace InterfaceLocalizer.GUI
             engSymbols = 0;
             nonLocalizedPhrases = 0;
             nonLocalizedSymbols = 0;         
+        }
+
+        private void StatisticsForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Properties.Settings.Default.StatsFormLeft = this.Left;
+            Properties.Settings.Default.StatsFormTop = this.Top;
+            Properties.Settings.Default.Save();
         }
     }
 }

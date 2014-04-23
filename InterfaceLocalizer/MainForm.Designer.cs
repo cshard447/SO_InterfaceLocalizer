@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor3 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor2 = new Telerik.WinControls.Data.SortDescriptor();
             this.mainMenu = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
@@ -47,8 +47,8 @@
             this.cmbColumnsHide = new Telerik.WinControls.UI.CommandBarButton();
             this.cmlListedItems = new Telerik.WinControls.UI.CommandBarLabel();
             this.cmbSaveEng = new Telerik.WinControls.UI.CommandBarButton();
-            this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             this.cmbSaveRus = new Telerik.WinControls.UI.CommandBarButton();
+            this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -101,7 +101,7 @@
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
             this.commandBarRowElement1});
-            this.commandBarTranslation.Size = new System.Drawing.Size(887, 70);
+            this.commandBarTranslation.Size = new System.Drawing.Size(887, 45);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
@@ -127,7 +127,7 @@
             // 
             this.cmbShowData.AccessibleDescription = "Показать данные";
             this.cmbShowData.AccessibleName = "Показать данные";
-            this.cmbShowData.DisplayName = "Показать данные";
+            this.cmbShowData.DisplayName = "Показать все данные";
             this.cmbShowData.DrawText = true;
             this.cmbShowData.Image = ((System.Drawing.Image)(resources.GetObject("cmbShowData.Image")));
             this.cmbShowData.Name = "cmbShowData";
@@ -141,7 +141,7 @@
             // 
             this.cmbShowUndoneData.AccessibleDescription = "Показать неготовые";
             this.cmbShowUndoneData.AccessibleName = "Показать неготовые";
-            this.cmbShowUndoneData.DisplayName = "commandBarButton1";
+            this.cmbShowUndoneData.DisplayName = "Показать неготовые данные";
             this.cmbShowUndoneData.DrawText = true;
             this.cmbShowUndoneData.Image = ((System.Drawing.Image)(resources.GetObject("cmbShowUndoneData.Image")));
             this.cmbShowUndoneData.Name = "cmbShowUndoneData";
@@ -174,7 +174,7 @@
             // 
             this.cmbSaveEng.AccessibleDescription = "Сохранить";
             this.cmbSaveEng.AccessibleName = "Сохранить";
-            this.cmbSaveEng.DisplayName = "Сохранить данные";
+            this.cmbSaveEng.DisplayName = "Сохранить Eng";
             this.cmbSaveEng.DrawText = true;
             this.cmbSaveEng.Image = ((System.Drawing.Image)(resources.GetObject("cmbSaveEng.Image")));
             this.cmbSaveEng.Name = "cmbSaveEng";
@@ -182,6 +182,20 @@
             this.cmbSaveEng.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmbSaveEng.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.cmbSaveEng.Click += new System.EventHandler(this.cmbSaveChecked_Click);
+            // 
+            // cmbSaveRus
+            // 
+            this.cmbSaveRus.AccessibleDescription = "Сохранить Rus";
+            this.cmbSaveRus.AccessibleName = "Сохранить Rus";
+            this.cmbSaveRus.DisplayName = "Сохранить Rus";
+            this.cmbSaveRus.DrawText = true;
+            this.cmbSaveRus.Image = ((System.Drawing.Image)(resources.GetObject("cmbSaveRus.Image")));
+            this.cmbSaveRus.Name = "cmbSaveRus";
+            this.cmbSaveRus.Text = "Сохранить Rus";
+            this.cmbSaveRus.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.cmbSaveRus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmbSaveRus.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.cmbSaveRus.Click += new System.EventHandler(this.cmbSaveRus_Click);
             // 
             // gridViewTranslation
             // 
@@ -192,64 +206,50 @@
             this.gridViewTranslation.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.gridViewTranslation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridViewTranslation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewTranslation.Location = new System.Drawing.Point(0, 90);
+            this.gridViewTranslation.Location = new System.Drawing.Point(0, 65);
             // 
             // gridViewTranslation
             // 
             this.gridViewTranslation.MasterTemplate.AllowAddNewRow = false;
             this.gridViewTranslation.MasterTemplate.AllowColumnReorder = false;
             this.gridViewTranslation.MasterTemplate.AllowDeleteRow = false;
-            gridViewTextBoxColumn11.EnableExpressionEditor = false;
-            gridViewTextBoxColumn11.HeaderText = "ID";
-            gridViewTextBoxColumn11.Name = "columnID";
-            gridViewTextBoxColumn11.ReadOnly = true;
-            gridViewTextBoxColumn12.EnableExpressionEditor = false;
-            gridViewTextBoxColumn12.HeaderText = "Имя файла";
-            gridViewTextBoxColumn12.Name = "columnFileName";
-            gridViewTextBoxColumn12.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
-            gridViewTextBoxColumn12.Width = 93;
-            gridViewTextBoxColumn13.EnableExpressionEditor = false;
-            gridViewTextBoxColumn13.HeaderText = "Теги";
-            gridViewTextBoxColumn13.Name = "columnTags";
-            gridViewTextBoxColumn13.Width = 117;
-            gridViewTextBoxColumn14.EnableExpressionEditor = false;
-            gridViewTextBoxColumn14.HeaderText = "Русский";
-            gridViewTextBoxColumn14.Name = "columnRussianPhrase";
-            gridViewTextBoxColumn14.Width = 300;
-            gridViewTextBoxColumn15.EnableExpressionEditor = false;
-            gridViewTextBoxColumn15.HeaderText = "Английский";
-            gridViewTextBoxColumn15.Name = "columnEnglishPhrase";
-            gridViewTextBoxColumn15.Width = 300;
+            gridViewTextBoxColumn6.EnableExpressionEditor = false;
+            gridViewTextBoxColumn6.HeaderText = "ID";
+            gridViewTextBoxColumn6.Name = "columnID";
+            gridViewTextBoxColumn6.ReadOnly = true;
+            gridViewTextBoxColumn7.EnableExpressionEditor = false;
+            gridViewTextBoxColumn7.HeaderText = "Имя файла";
+            gridViewTextBoxColumn7.Name = "columnFileName";
+            gridViewTextBoxColumn7.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            gridViewTextBoxColumn7.Width = 93;
+            gridViewTextBoxColumn8.EnableExpressionEditor = false;
+            gridViewTextBoxColumn8.HeaderText = "Теги";
+            gridViewTextBoxColumn8.Name = "columnTags";
+            gridViewTextBoxColumn8.Width = 117;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.HeaderText = "Русский";
+            gridViewTextBoxColumn9.Name = "columnRussianPhrase";
+            gridViewTextBoxColumn9.Width = 300;
+            gridViewTextBoxColumn10.EnableExpressionEditor = false;
+            gridViewTextBoxColumn10.HeaderText = "Английский";
+            gridViewTextBoxColumn10.Name = "columnEnglishPhrase";
+            gridViewTextBoxColumn10.Width = 300;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn11,
-            gridViewTextBoxColumn12,
-            gridViewTextBoxColumn13,
-            gridViewTextBoxColumn14,
-            gridViewTextBoxColumn15});
+            gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9,
+            gridViewTextBoxColumn10});
             this.gridViewTranslation.MasterTemplate.EnableGrouping = false;
-            sortDescriptor3.PropertyName = "columnFileName";
+            sortDescriptor2.PropertyName = "columnFileName";
             this.gridViewTranslation.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor3});
+            sortDescriptor2});
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(887, 564);
+            this.gridViewTranslation.Size = new System.Drawing.Size(887, 589);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
-            // 
-            // cmbSaveRus
-            // 
-            this.cmbSaveRus.AccessibleDescription = "Сохранить Rus";
-            this.cmbSaveRus.AccessibleName = "Сохранить Rus";
-            this.cmbSaveRus.DisplayName = "commandBarButton1";
-            this.cmbSaveRus.DrawText = true;
-            this.cmbSaveRus.Image = ((System.Drawing.Image)(resources.GetObject("cmbSaveRus.Image")));
-            this.cmbSaveRus.Name = "cmbSaveRus";
-            this.cmbSaveRus.Text = "Сохранить Rus";
-            this.cmbSaveRus.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.cmbSaveRus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.cmbSaveRus.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.cmbSaveRus.Click += new System.EventHandler(this.cmbSaveRus_Click);
             // 
             // MainForm
             // 
@@ -261,6 +261,7 @@
             this.Controls.Add(this.mainMenu);
             this.Name = "MainForm";
             this.Text = "Локализация интерфейса";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).EndInit();

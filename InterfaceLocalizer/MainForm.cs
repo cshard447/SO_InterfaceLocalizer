@@ -26,6 +26,8 @@ namespace InterfaceLocalizer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            LoadSettings();
+
             CFileList.checkedFiles.Clear();
             CFileList.allFiles.Clear();
             try
@@ -121,8 +123,8 @@ namespace InterfaceLocalizer
             }
             else 
             {
-                gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width = 300;
-                gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width = 300;            
+                gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width = Properties.Settings.Default.ColRusWidth;
+                gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width = Properties.Settings.Default.ColEngWidth;
             }
         }
 
@@ -136,6 +138,42 @@ namespace InterfaceLocalizer
         {
             dataManager.updateTextsFromGridView(gridViewTranslation);
             dataManager.saveDataToFile(false);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            Properties.Settings.Default.MainFromTop = this.Top;
+            Properties.Settings.Default.MainFormLeft = this.Left;
+            Properties.Settings.Default.MainFormHeight = this.Height;
+            Properties.Settings.Default.MainFormWidth = this.Width;
+            Properties.Settings.Default.ServiceColumnsVisible = gridViewTranslation.Columns["columnID"].IsVisible;
+            Properties.Settings.Default.ColIDWidth = gridViewTranslation.Columns["columnID"].Width;
+            Properties.Settings.Default.ColFilenameWidth = gridViewTranslation.Columns["columnFilename"].Width;
+            Properties.Settings.Default.ColTagsWidth = gridViewTranslation.Columns["columnTags"].Width;
+            Properties.Settings.Default.ColRusWidth = gridViewTranslation.Columns["columnRussianPhrase"].Width;
+            Properties.Settings.Default.ColEngWidth = gridViewTranslation.Columns["columnEnglishPhrase"].Width;
+            Properties.Settings.Default.Save();
+        }
+
+        private void LoadSettings()
+        {
+            this.Top = Properties.Settings.Default.MainFromTop;
+            this.Left = Properties.Settings.Default.MainFormLeft;
+            this.Height = Properties.Settings.Default.MainFormHeight;
+            this.Width = Properties.Settings.Default.MainFormWidth;
+            gridViewTranslation.Columns["columnID"].IsVisible = Properties.Settings.Default.ServiceColumnsVisible;
+            gridViewTranslation.Columns["columnFilename"].IsVisible = Properties.Settings.Default.ServiceColumnsVisible;
+            gridViewTranslation.Columns["columnTags"].IsVisible = Properties.Settings.Default.ServiceColumnsVisible;
+            gridViewTranslation.Columns["columnID"].Width = Properties.Settings.Default.ColIDWidth;
+            gridViewTranslation.Columns["columnFilename"].Width = Properties.Settings.Default.ColFilenameWidth;
+            gridViewTranslation.Columns["columnTags"].Width = Properties.Settings.Default.ColTagsWidth;
+            gridViewTranslation.Columns["columnRussianPhrase"].Width = Properties.Settings.Default.ColRusWidth;
+            gridViewTranslation.Columns["columnEnglishPhrase"].Width = Properties.Settings.Default.ColEngWidth;
         }
 
 

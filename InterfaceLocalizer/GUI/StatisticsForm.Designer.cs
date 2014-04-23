@@ -90,6 +90,7 @@
             this.RootElement.ApplyShapeToControl = true;
             this.Text = "Статистика";
             this.ThemeName = "ControlDefault";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StatisticsForm_FormClosed);
             this.Load += new System.EventHandler(this.StatisticsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lStats)).EndInit();
