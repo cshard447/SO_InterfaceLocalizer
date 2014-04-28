@@ -155,34 +155,60 @@ namespace InterfaceLocalizer.Classes
                         continue;
 
                     Stack<string> copy = new Stack<string>(text.tags);
-                    copy = CFileList.invertStack(copy);                                                            
-
-                    string root = copy.Pop();
-                    string chapter = copy.Pop();
-                    string item = copy.Pop();
+                    copy = CFileList.invertStack(copy);
                     string value;
                     if (english)
                         value = text.engPhrase;
                     else
                         value = text.phrase;
 
-                    if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter))
+                    if (copy.Count == 3)
                     {
-                        if (doc.Root.Element(chapter).Descendants().Any(tag2 => tag2.Name == item))
-                            doc.Root.Element(chapter).Element(item).Value = value;
+                        string root = copy.Pop();
+                        string chapter = copy.Pop();
+                        string item = copy.Pop();
+
+                        if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter))
+                        {
+                            if (doc.Root.Element(chapter).Descendants().Any(tag2 => tag2.Name == item))
+                                doc.Root.Element(chapter).Element(item).Value = value;
+                            else
+                            {
+                                XElement el = new XElement(item, value);
+                                doc.Root.Element(chapter).Add(el);
+                            }
+                        }
+                        else
+                        {
+                            XElement el = new XElement(chapter, new XElement(item, value));
+                            doc.Root.Add(el);
+                        }
+                    }
+                    else if (copy.Count == 2)
+                    {
+                        string root = copy.Pop();
+                        string item = copy.Pop();
+
+                        if (doc.Root.Descendants().Any(tag2 => tag2.Name == item))
+                            doc.Root.Element(item).Value = value;
                         else
                         {
                             XElement el = new XElement(item, value);
-                            doc.Root.Element(chapter).Add(el);
-                        }
+                            doc.Root.Add(el);
+                        }                    
                     }
-                    else
-                    {
-                        XElement el = new XElement(chapter, new XElement(item, value));
-                        doc.Root.Add(el);                       
-                    }                                        
                 }
-                doc.Save(path + file);            
+
+                System.Xml.XmlWriterSettings settings = new System.Xml.XmlWriterSettings();
+                settings.Encoding = new UTF8Encoding(false);
+                settings.Indent = true;
+                settings.OmitXmlDeclaration = true;
+                settings.NewLineOnAttributes = true;
+                using (System.Xml.XmlWriter w = System.Xml.XmlWriter.Create(path + file, settings))
+                {
+                    doc.Save(w);
+                } 
+                //doc.Save(path + file);
             }
         }
     
