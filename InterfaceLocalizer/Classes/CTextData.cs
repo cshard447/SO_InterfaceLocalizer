@@ -63,6 +63,7 @@ namespace InterfaceLocalizer.Classes
             XmlTextReader reader = new XmlTextReader (rusPath);
             XDocument engDoc = new XDocument();
             engDoc = XDocument.Load(engPath);
+            bool gotten = false;
             
             while (reader.Read())  
             {
@@ -70,17 +71,30 @@ namespace InterfaceLocalizer.Classes
                 {
                     case XmlNodeType.Element: // Узел является элементом.
                         tags.Push(reader.Name);
+                        if (reader.IsEmptyElement)
+                        {
+                            eng = "";
+                            Stack<string> copy = new Stack<string>(tags.ToArray());
+                            //texts.Add(new CTextData(phrase, eng, filename, copy));
+                            textsDict.Add(id++, new CTextData(phrase, eng, filename, copy));
+                            phrase = "";
+                            eng = "";
+                            tags.Pop();                            
+                        }
                         break;
                     case XmlNodeType.Text: // Вывести текст в каждом элементе.
                         phrase = reader.Value.Trim();
+                        gotten = true;
                         break;
                     case XmlNodeType.EndElement: // Вывести конец элемента.
-                        if (phrase != "")
+                        //if (phrase != "")
+                        if (gotten)
                         {
                             eng = getValueFromXml(engDoc, tags);
                             Stack<string> copy = new Stack<string>(tags.ToArray());                            
                             //texts.Add(new CTextData(phrase, eng, filename, copy));
                             textsDict.Add(id++, new CTextData(phrase, eng, filename, copy));
+                            gotten = false;
                             phrase = "";
                             eng = "";
                         }
@@ -136,11 +150,9 @@ namespace InterfaceLocalizer.Classes
 
         public void saveDataToFile(bool english)
         {
-            string path;
-            if (english)
-                path = Properties.Settings.Default.PathToFiles + "\\English\\";
-            else
-                path = Properties.Settings.Default.PathToFiles + "\\Russian\\";
+            string path = Properties.Settings.Default.PathToFiles;
+            path += (english) ? ("\\English\\") : ("\\Russian\\");
+
             foreach (string file in CFileList.checkedFiles)
             {
                 XDocument doc = new XDocument();                
@@ -156,12 +168,8 @@ namespace InterfaceLocalizer.Classes
 
                     Stack<string> copy = new Stack<string>(text.tags);
                     copy = CFileList.invertStack(copy);
-                    string value;
-                    if (english)
-                        value = text.engPhrase;
-                    else
-                        value = text.phrase;
-
+                    string value = (english) ? (text.engPhrase) : (text.phrase);
+                    
                     if (copy.Count == 3)
                     {
                         string root = copy.Pop();
@@ -169,36 +177,18 @@ namespace InterfaceLocalizer.Classes
                         string item = copy.Pop();
 
                         if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter))
-                        {
-                            if (doc.Root.Element(chapter).Descendants().Any(tag2 => tag2.Name == item))
-                                doc.Root.Element(chapter).Element(item).Value = value;
-                            else
-                            {
-                                XElement el = new XElement(item, value);
-                                doc.Root.Element(chapter).Add(el);
-                            }
-                        }
+                            doc.Root.Element(chapter).Add(getXElement(item, value));
                         else
-                        {
-                            XElement el = new XElement(chapter, new XElement(item, value));
-                            doc.Root.Add(el);
-                        }
+                            doc.Root.Add(new XElement(chapter, getXElement(item, value)));
                     }
                     else if (copy.Count == 2)
                     {
                         string root = copy.Pop();
                         string item = copy.Pop();
-
-                        if (doc.Root.Descendants().Any(tag2 => tag2.Name == item))
-                            doc.Root.Element(item).Value = value;
-                        else
-                        {
-                            XElement el = new XElement(item, value);
-                            doc.Root.Add(el);
-                        }                    
+                        doc.Root.Add( getXElement(item,value) );
                     }
                 }
-
+                
                 System.Xml.XmlWriterSettings settings = new System.Xml.XmlWriterSettings();
                 settings.Encoding = new UTF8Encoding(false);
                 settings.Indent = true;
@@ -210,6 +200,16 @@ namespace InterfaceLocalizer.Classes
                 } 
                 //doc.Save(path + file);
             }
+        }
+
+        private XElement getXElement(string item, string value)
+        {
+            XElement el;
+            if (value != "")
+                el = new XElement(item, value);
+            else 
+                el = new XElement(item);
+            return el;
         }
     
     }

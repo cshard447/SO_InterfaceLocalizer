@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Xml;
+using System.Xml.Linq;
 using System.Windows.Forms;
 using System.ComponentModel;
 using System.Collections.Generic;
@@ -42,7 +44,8 @@ namespace InterfaceLocalizer
                 foreach (string filepath in files)
                     CFileList.allFiles.Add(CFileList.getFilenameFromPath(filepath));
             }
-            catch {
+            catch
+            {
                 MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение");
             }
         }
@@ -67,7 +70,7 @@ namespace InterfaceLocalizer
             foreach (string file in CFileList.checkedFiles)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CTextData> textDict = dataManager.getTextsDict();            
+            Dictionary<int, CTextData> textDict = dataManager.getTextsDict();
             foreach (int id in textDict.Keys)
             {
                 addDataToGridView(id, textDict[id]);
@@ -83,7 +86,7 @@ namespace InterfaceLocalizer
             foreach (string file in CFileList.checkedFiles)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CTextData> textDict = dataManager.getTextsDict(); 
+            Dictionary<int, CTextData> textDict = dataManager.getTextsDict();
             foreach (int id in textDict.Keys)
             {
                 if (textDict[id].engPhrase == "<NO DATA>" || textDict[id].engPhrase == "")
@@ -108,7 +111,7 @@ namespace InterfaceLocalizer
             values[2] = temp;
             values[3] = td.phrase;
             values[4] = td.engPhrase;
-            gridViewTranslation.Rows.Add(values);        
+            gridViewTranslation.Rows.Add(values);
         }
 
         private void cmbColumnsHide_Click(object sender, EventArgs e)
@@ -121,7 +124,7 @@ namespace InterfaceLocalizer
                 gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width / 2;
                 gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width / 2;
             }
-            else 
+            else
             {
                 gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width = Properties.Settings.Default.ColRusWidth;
                 gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width = Properties.Settings.Default.ColEngWidth;
@@ -175,7 +178,6 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnRussianPhrase"].Width = Properties.Settings.Default.ColRusWidth;
             gridViewTranslation.Columns["columnEnglishPhrase"].Width = Properties.Settings.Default.ColEngWidth;
         }
-
 
     }
 }
