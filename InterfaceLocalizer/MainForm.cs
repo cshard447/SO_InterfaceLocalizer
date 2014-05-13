@@ -71,10 +71,12 @@ namespace InterfaceLocalizer
                 dataManager.addFileToManager(file);
 
             Dictionary<int, CTextData> textDict = dataManager.getTextsDict();
+
+            gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
-            {
                 addDataToGridView(id, textDict[id]);
-            }
+
+            gridViewTranslation.EndUpdate();
             cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
         }
 
@@ -87,6 +89,7 @@ namespace InterfaceLocalizer
                 dataManager.addFileToManager(file);
 
             Dictionary<int, CTextData> textDict = dataManager.getTextsDict();
+            gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
             {
                 if (textDict[id].engPhrase == "<NO DATA>" || textDict[id].engPhrase == "")
@@ -94,6 +97,7 @@ namespace InterfaceLocalizer
                     addDataToGridView(id, textDict[id]);
                 }
             }
+            gridViewTranslation.EndUpdate();
             cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
         }
 
@@ -111,7 +115,7 @@ namespace InterfaceLocalizer
             values[2] = temp;
             values[3] = td.phrase;
             values[4] = td.engPhrase;
-            gridViewTranslation.Rows.Add(values);
+            gridViewTranslation.Rows.Add(values);            
         }
 
         private void cmbColumnsHide_Click(object sender, EventArgs e)
