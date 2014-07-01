@@ -37,6 +37,16 @@ namespace InterfaceLocalizer.Classes
                 result += str + ";";
             return result;
         }
+        public static List<string> getListFromString(string value)
+        {
+            List<string> result = new List<string>();
+            string []arr = value.Split(';');
+            foreach (string str in arr)
+            {
+                result.Add(str);
+            }
+            return result;
+        }
         
         public static Stack<string> invertStack(Stack<string> stack)
         {

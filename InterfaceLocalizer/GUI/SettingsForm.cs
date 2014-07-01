@@ -26,9 +26,10 @@ namespace InterfaceLocalizer.GUI
             InitializeComponent();
             path = Properties.Settings.Default.PathToFiles;
             bePathToFiles.Value = Properties.Settings.Default.PathToFiles;
+            List<string> filenames = CFileList.getListFromString(Properties.Settings.Default.CheckedFiles);
             foreach (ListViewDataItem item in lvFilesList.Items)
             {
-                if (Properties.Settings.Default.CheckedFiles.Contains(item.Text))
+                if (filenames.Contains(item.Text))
                     item.CheckState = Telerik.WinControls.Enumerations.ToggleState.On;
             }
         }
@@ -50,9 +51,11 @@ namespace InterfaceLocalizer.GUI
                 return;
             }
 
-            files = System.IO.Directory.EnumerateFiles(rusPath, "*.xml", SearchOption.TopDirectoryOnly);
+            files = System.IO.Directory.EnumerateFiles(rusPath, "*.xml", SearchOption.TopDirectoryOnly);            
             foreach (string filepath in files)
             {
+                if (CFileList.getFilenameFromPath(filepath) == "soCheckBox.xml")    // костыль, так как файл содержит только пустую строку
+                    continue;
                 lvFilesList.Items.Add(CFileList.getFilenameFromPath(filepath));
                 fileList.Add(CFileList.getFilenameFromPath(filepath));
                 count++;

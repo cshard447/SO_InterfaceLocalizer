@@ -159,7 +159,7 @@ namespace InterfaceLocalizer.Classes
                 doc = XDocument.Load(path + file);                
                 IEnumerable<XElement> del = doc.Root.Descendants().ToList();
                 del.Remove();
-                doc.Save(file);
+                doc.Save(path + file);
                 
                 foreach (CTextData text in textsDict.Values)
                 {

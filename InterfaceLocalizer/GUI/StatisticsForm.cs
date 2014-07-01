@@ -61,12 +61,14 @@ namespace InterfaceLocalizer.GUI
             foreach (CTextData text in texts.Values)
             {
                 symbolsCount += text.phrase.Length;
-                engSymbols += text.engPhrase.Length;
                 if (text.engPhrase == "<NO DATA>" || text.engPhrase == "")
                 {
                     nonLocalizedPhrases++;
                     nonLocalizedSymbols += text.phrase.Length;
                 }
+                //else
+                    engSymbols += text.engPhrase.Length;
+
             }
             showStats();
         }
