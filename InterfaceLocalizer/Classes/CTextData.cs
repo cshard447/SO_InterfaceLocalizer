@@ -176,7 +176,7 @@ namespace InterfaceLocalizer.Classes
                         string chapter = copy.Pop();
                         string item = copy.Pop();
 
-                        if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter))
+                        if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter && tag1.Descendants().Any()))
                             doc.Root.Element(chapter).Add(getXElement(item, value));
                         else
                             doc.Root.Add(new XElement(chapter, getXElement(item, value)));
