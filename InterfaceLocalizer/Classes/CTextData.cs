@@ -11,17 +11,17 @@ using System.Collections.Generic;
 
 namespace InterfaceLocalizer.Classes
 {
-    public class CTextData
+    public class CXmlData
     {
         public string phrase;
         public string engPhrase;
         public string filename;
         public Stack<string> tags;
 
-        public CTextData()
+        public CXmlData()
         {         
         }
-        public CTextData(string _phrase, string _eng, string _filename, Stack<string> _tags)
+        public CXmlData(string _phrase, string _eng, string _filename, Stack<string> _tags)
         {
             phrase = _phrase;
             filename = _filename;
@@ -33,7 +33,7 @@ namespace InterfaceLocalizer.Classes
 
     public class CDataManager
     {
-        private Dictionary<int, CTextData> textsDict = new Dictionary<int, CTextData>();
+        private Dictionary<int, CXmlData> textsDict = new Dictionary<int, CXmlData>();
         int id = 0;
         
         public CDataManager()
@@ -41,7 +41,7 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
  
-        public Dictionary<int, CTextData> getTextsDict()
+        public Dictionary<int, CXmlData> getTextsDict()
         {
             return textsDict;
         }
@@ -75,8 +75,8 @@ namespace InterfaceLocalizer.Classes
                         {
                             eng = "";
                             Stack<string> copy = new Stack<string>(tags.ToArray());
-                            //texts.Add(new CTextData(phrase, eng, filename, copy));
-                            textsDict.Add(id++, new CTextData(phrase, eng, filename, copy));
+                            //texts.Add(new CXmlData(phrase, eng, filename, copy));
+                            textsDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
                             phrase = "";
                             eng = "";
                             tags.Pop();                            
@@ -92,8 +92,8 @@ namespace InterfaceLocalizer.Classes
                         {
                             eng = getValueFromXml(engDoc, tags);
                             Stack<string> copy = new Stack<string>(tags.ToArray());                            
-                            //texts.Add(new CTextData(phrase, eng, filename, copy));
-                            textsDict.Add(id++, new CTextData(phrase, eng, filename, copy));
+                            //texts.Add(new CXmlData(phrase, eng, filename, copy));
+                            textsDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
                             gotten = false;
                             phrase = "";
                             eng = "";
@@ -161,7 +161,7 @@ namespace InterfaceLocalizer.Classes
                 del.Remove();
                 doc.Save(path + file);
                 
-                foreach (CTextData text in textsDict.Values)
+                foreach (CXmlData text in textsDict.Values)
                 {
                     if (text.filename != file)
                         continue;

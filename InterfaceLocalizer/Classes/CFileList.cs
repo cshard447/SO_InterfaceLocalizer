@@ -10,18 +10,9 @@ namespace InterfaceLocalizer.Classes
     {
         public static List<string> allFiles = new List<string>();
         public static List<string> checkedFiles = new List<string>();
+        public static List<string> allGossipFiles = new List<string>();
+        public static List<string> checkedGossipFiles = new List<string>();
 
-        /*
-        public static void setAllFilesList(List<string> files)
-        {
-            allFiles = files;
-        }
-
-        public static void setCheckedFilesList(List<string> files)
-        {
-            checkedFiles = files;
-        }
-         * */
         public static string getFilenameFromPath(string path)
         {
             string filename = "";

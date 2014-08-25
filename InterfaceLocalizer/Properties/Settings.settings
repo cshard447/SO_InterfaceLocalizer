@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="PathToFiles" Type="System.String" Scope="User">
-      <Value Profile="(Default)">d:\StalkerOnline\res\local\</Value>
+      <Value Profile="(Default)">d:\GitRepos\stalker-online\res\local\</Value>
     </Setting>
     <Setting Name="CheckedFiles" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -49,6 +49,12 @@
     </Setting>
     <Setting Name="StatsFormTop" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="PathToGossip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">d:\GitRepos\stalker-online\res\scripts\base\data\</Value>
+    </Setting>
+    <Setting Name="CheckedGossipFiles" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -70,7 +70,7 @@ namespace InterfaceLocalizer
             foreach (string file in CFileList.checkedFiles)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CTextData> textDict = dataManager.getTextsDict();
+            Dictionary<int, CXmlData> textDict = dataManager.getTextsDict();
 
             gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
@@ -88,7 +88,7 @@ namespace InterfaceLocalizer
             foreach (string file in CFileList.checkedFiles)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CTextData> textDict = dataManager.getTextsDict();
+            Dictionary<int, CXmlData> textDict = dataManager.getTextsDict();
             gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
             {
@@ -101,7 +101,7 @@ namespace InterfaceLocalizer
             cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
         }
 
-        private void addDataToGridView(int id, CTextData td)
+        private void addDataToGridView(int id, CXmlData td)
         {
             Stack<string> copy = new Stack<string>(td.tags);
             copy = CFileList.invertStack(copy);

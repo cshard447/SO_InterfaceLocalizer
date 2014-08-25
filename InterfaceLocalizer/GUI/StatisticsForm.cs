@@ -56,9 +56,9 @@ namespace InterfaceLocalizer.GUI
             foreach (string file in fileList)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CTextData> texts = dataManager.getTextsDict();
+            Dictionary<int, CXmlData> texts = dataManager.getTextsDict();
             phrasesCount = texts.Count;
-            foreach (CTextData text in texts.Values)
+            foreach (CXmlData text in texts.Values)
             {
                 symbolsCount += text.phrase.Length;
                 if (text.engPhrase == "<NO DATA>" || text.engPhrase == "")

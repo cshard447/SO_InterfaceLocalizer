@@ -25,7 +25,7 @@ namespace InterfaceLocalizer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("d:\\StalkerOnline\\res\\local\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\GitRepos\\stalker-online\\res\\local\\")]
         public string PathToFiles {
             get {
                 return ((string)(this["PathToFiles"]));
@@ -212,6 +212,30 @@ namespace InterfaceLocalizer.Properties {
             }
             set {
                 this["StatsFormTop"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("d:\\GitRepos\\stalker-online\\res\\scripts\\base\\data\\")]
+        public string PathToGossip {
+            get {
+                return ((string)(this["PathToGossip"]));
+            }
+            set {
+                this["PathToGossip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CheckedGossipFiles {
+            get {
+                return ((string)(this["CheckedGossipFiles"]));
+            }
+            set {
+                this["CheckedGossipFiles"] = value;
             }
         }
     }
