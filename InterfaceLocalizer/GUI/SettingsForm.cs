@@ -73,10 +73,10 @@ namespace InterfaceLocalizer.GUI
             files = System.IO.Directory.EnumerateFiles(rusPath, "*.xml", SearchOption.TopDirectoryOnly);            
             foreach (string filepath in files)
             {
-                if (CFileList.getFilenameFromPath(filepath) == "soCheckBox.xml")    // костыль, так как файл содержит только пустую строку
+                if (Path.GetFileName(filepath) == "soCheckBox.xml")    // костыль, так как файл содержит только пустую строку
                     continue;
-                lvFilesList.Items.Add(CFileList.getFilenameFromPath(filepath));
-                fileList.Add(CFileList.getFilenameFromPath(filepath));
+                lvFilesList.Items.Add(Path.GetFileName(filepath));
+                fileList.Add(Path.GetFileName(filepath));
                 count++;
             }
 
@@ -103,8 +103,8 @@ namespace InterfaceLocalizer.GUI
             gossipFiles = System.IO.Directory.EnumerateFiles(rusPath, "*.txt", SearchOption.TopDirectoryOnly);
             foreach (string filepath in gossipFiles)
             {
-                lvGossipList.Items.Add(CFileList.getFilenameFromPath(filepath));
-                gossipFileList.Add(CFileList.getFilenameFromPath(filepath));
+                lvGossipList.Items.Add(Path.GetFileName(filepath));
+                gossipFileList.Add(Path.GetFileName(filepath));
                 gossipCount++;
             }
 

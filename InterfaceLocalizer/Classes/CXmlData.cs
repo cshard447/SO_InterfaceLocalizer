@@ -11,16 +11,13 @@ using System.Collections.Generic;
 
 namespace InterfaceLocalizer.Classes
 {
-    public class CXmlData
+    public class CXmlData : ITranslatable
     {
-        public string phrase;
-        public string engPhrase;
-        public string filename;
-        public Stack<string> tags;
+        private string phrase;
+        private string engPhrase;
+        private string filename;
+        private Stack<string> tags;
 
-        public CXmlData()
-        {         
-        }
         public CXmlData(string _phrase, string _eng, string _filename, Stack<string> _tags)
         {
             phrase = _phrase;
@@ -28,6 +25,46 @@ namespace InterfaceLocalizer.Classes
             tags = new Stack<string>();
             tags = _tags;
             engPhrase = _eng;
+        }
+
+        public string getRusData()
+        {
+            return phrase;
+        }
+
+        public string getEngData()
+        {
+            return engPhrase;
+        }
+
+        public string getFilename()
+        {
+            return filename;
+        }
+
+        public string getTagsString()
+        {
+            Stack<string> copy = new Stack<string>(tags);
+            copy = CFileList.invertStack(copy);
+            StringBuilder temp = new StringBuilder("");
+            while (copy.Count != 0)
+                temp.Append( copy.Pop() + " -> " );
+            return temp.ToString();
+        }
+
+        public void setRusData(string rusData)
+        {
+            phrase = rusData;
+        }
+
+        public void setEngData(string engData)
+        {
+            engPhrase = engData;
+        }
+
+        public Stack<string> getTags()
+        {
+            return tags;
         }
     }
 
@@ -140,11 +177,11 @@ namespace InterfaceLocalizer.Classes
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                if (xmlDict[id].filename != filename)
+                if (xmlDict[id].getFilename() != filename)
                     throw new System.ArgumentException("Имена файлов не совпадают!");
 
-                xmlDict[id].phrase = rus;
-                xmlDict[id].engPhrase = eng;
+                xmlDict[id].setRusData(rus);
+                xmlDict[id].setEngData(eng);
             }            
         }
 
@@ -163,12 +200,12 @@ namespace InterfaceLocalizer.Classes
                 
                 foreach (CXmlData text in xmlDict.Values)
                 {
-                    if (text.filename != file)
+                    if (text.getFilename() != file)
                         continue;
 
-                    Stack<string> copy = new Stack<string>(text.tags);
+                    Stack<string> copy = new Stack<string>(text.getTags());
                     copy = CFileList.invertStack(copy);
-                    string value = (english) ? (text.engPhrase) : (text.phrase);
+                    string value = (english) ? (text.getEngData()) : (text.getRusData());
                     
                     if (copy.Count == 3)
                     {

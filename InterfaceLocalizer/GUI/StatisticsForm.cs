@@ -60,14 +60,14 @@ namespace InterfaceLocalizer.GUI
             phrasesCount = texts.Count;
             foreach (CXmlData text in texts.Values)
             {
-                symbolsCount += text.phrase.Length;
-                if (text.engPhrase == "<NO DATA>" || text.engPhrase == "")
+                symbolsCount += text.getRusData().Length;
+                if (text.getEngData() == "<NO DATA>" || text.getEngData() == "")
                 {
                     nonLocalizedPhrases++;
-                    nonLocalizedSymbols += text.phrase.Length;
+                    nonLocalizedSymbols += text.getRusData().Length;
                 }
                 //else
-                    engSymbols += text.engPhrase.Length;
+                    engSymbols += text.getEngData().Length;
 
             }
             showStats();

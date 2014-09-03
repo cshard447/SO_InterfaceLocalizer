@@ -34,43 +34,30 @@ namespace InterfaceLocalizer
         {
             LoadSettings();
 
-            CFileList.checkedFiles.Clear();
-            CFileList.allFiles.Clear();
+            LoadData(Properties.Settings.Default.PathToFiles + "\\Russian\\", Properties.Settings.Default.CheckedFiles, "*.xml",
+                    ref CFileList.allFiles, ref CFileList.checkedFiles);
+            LoadData(Properties.Settings.Default.PathToGossip, Properties.Settings.Default.CheckedGossipFiles, "*.txt",
+                    ref CFileList.allGossipFiles, ref CFileList.checkedGossipFiles);
+        }
+
+        private void LoadData(string path, string check, string mask, ref List<string> allFiles, ref List<string> checkedFiles)
+        {
+            allFiles.Clear();
+            checkedFiles.Clear();
             try
             {
-                string path = Properties.Settings.Default.PathToFiles;
-                string check = Properties.Settings.Default.CheckedFiles;
                 string[] fileArray = check.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 foreach (string file in fileArray)
-                    CFileList.checkedFiles.Add(file);
+                    checkedFiles.Add(file);
 
-                IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path + "\\Russian\\", "*.xml", SearchOption.TopDirectoryOnly);
+                IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path, mask, SearchOption.TopDirectoryOnly);
                 foreach (string filepath in files)
-                    CFileList.allFiles.Add(CFileList.getFilenameFromPath(filepath));
+                    allFiles.Add(Path.GetFileName(filepath));
             }
             catch
             {
-                MessageBox.Show("Задайте путь к каталогу c интерфейсами в настройках", "Предупреждение");
-            }
-
-            CFileList.allGossipFiles.Clear();
-            CFileList.checkedGossipFiles.Clear();
-            try
-            {
-                string path = Properties.Settings.Default.PathToGossip;
-                string check = Properties.Settings.Default.CheckedGossipFiles;
-                string[] fileArray = check.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string file in fileArray)
-                    CFileList.checkedGossipFiles.Add(file);
-
-                IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path, "*.txt", SearchOption.TopDirectoryOnly);
-                foreach (string filepath in files)
-                    CFileList.allGossipFiles.Add(CFileList.getFilenameFromPath(filepath));
-            }
-            catch
-            {
-                MessageBox.Show("Задайте путь к каталогу со слухами в настройках", "Предупреждение");
-            }
+                MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение");
+            }        
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)
@@ -97,6 +84,7 @@ namespace InterfaceLocalizer
 
                 Dictionary<int, CXmlData> textDict = dataManager.getXmlDict();
 
+                gridViewTranslation.Columns["columnTags"].IsVisible = true;
                 gridViewTranslation.BeginUpdate();
                 foreach (int id in textDict.Keys)
                     addDataToGridView(id, textDict[id]);
@@ -111,18 +99,10 @@ namespace InterfaceLocalizer
                 foreach (string file in CFileList.checkedGossipFiles)
                     textManager.addFileToManager(file);
 
-                Dictionary<int, CTextData> textDict = textManager.getTextDict();
+                Dictionary<int, CTextData> textDict = textManager.getTextDict();                
                 gridViewTranslation.BeginUpdate();
                 foreach (int id in textDict.Keys)
-                {
-                    object[] values = new object[5];
-                    values[0] = id;
-                    values[1] = textDict[id].filename;
-                    values[2] = "";
-                    values[3] = textDict[id].rusText;
-                    values[4] = textDict[id].engText;
-                    gridViewTranslation.Rows.Add(values);
-                }
+                    addDataToGridView(id, textDict[id]);
 
                 gridViewTranslation.EndUpdate();
                 cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
@@ -141,7 +121,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
             {
-                if (textDict[id].engPhrase == "<NO DATA>" || textDict[id].engPhrase == "")
+                if (textDict[id].getEngData() == "<NO DATA>" || textDict[id].getEngData() == "")
                 {
                     addDataToGridView(id, textDict[id]);
                 }
@@ -150,20 +130,14 @@ namespace InterfaceLocalizer
             cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
         }
 
-        private void addDataToGridView(int id, CXmlData td)
+        private void addDataToGridView(int id, ITranslatable data)
         {
-            Stack<string> copy = new Stack<string>(td.tags);
-            copy = CFileList.invertStack(copy);
-            string temp = "";
-            while (copy.Count != 0)
-                temp += copy.Pop() + " -> ";
-
             object[] values = new object[5];
             values[0] = id.ToString();
-            values[1] = CFileList.getFilenameFromPath(td.filename);
-            values[2] = temp;
-            values[3] = td.phrase;
-            values[4] = td.engPhrase;
+            values[1] = Path.GetFileName(data.getFilename());
+            values[2] = data.getTagsString();
+            values[3] = data.getRusData();
+            values[4] = data.getEngData();
             gridViewTranslation.Rows.Add(values);
         }
 
@@ -238,7 +212,23 @@ namespace InterfaceLocalizer
             if (workMode == WorkMode.interfaces)
                 lMode.Text = "Interfaces";
             else if (workMode == WorkMode.gossip)
+            {
                 lMode.Text = "Gossip";
+                SetGossipView();
+            }
+        }
+        private void SetGossipView()
+        {
+            gridViewTranslation.Columns["columnTags"].IsVisible = false;
+            gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnEnglishPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.AutoSizeRows = true;
+            //gridViewTranslation.Columns["columnRussianPhrase"].StretchVertically = true;
+            //gridViewTranslation.Columns["columnRussianPhrase"].AutoSizeMode = Telerik.WinControls.UI.BestFitColumnMode.DisplayedCells;
+            //gridViewTranslation.AllowAutoSizeColumns = true;
+            //gridViewTranslation.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;        
         }
 
     }

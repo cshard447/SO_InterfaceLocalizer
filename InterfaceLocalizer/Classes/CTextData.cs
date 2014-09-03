@@ -1,26 +1,58 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Telerik.WinControls.UI;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace InterfaceLocalizer.Classes
 {
-    class CTextData
+    class CTextData : ITranslatable
     {
-        public string filename;
-        public string rusText;
-        public string engText;
-        public CTextData()
-        {         
-        }
+        private string filename;
+        private string rusText;
+        private string engText;
 
         public CTextData(string _filename, string _rusText, string _engText)
         {
             filename = _filename;
             rusText = _rusText;
             engText = _engText;
+        }
+
+        public string getRusData()
+        {
+            return rusText;
+        }
+
+        public string getEngData()
+        {
+            return engText;
+        }
+
+        public string getFilename()
+        {
+            return filename;
+        }
+
+        public string getTagsString()
+        {
+            return "";
+        }
+
+        public void setRusData(string rusData)
+        {
+            rusText = rusData;
+        }
+
+        public void setEngData(string engData)
+        {
+            engText = engData;
+        }
+        public Stack<string> getTags()
+        {
+            return new Stack<string>();
         }
     }
 
@@ -49,12 +81,36 @@ namespace InterfaceLocalizer.Classes
             string rusPath = Properties.Settings.Default.PathToGossip + filename;
             string engPath = Properties.Settings.Default.PathToGossip + @"\English\" + filename;
 
-            //FileStream rusFile = File.Open(rusPath, FileMode.Open);
-            string test = File.ReadAllText(rusPath);
-
-            textDict.Add(id, new CTextData(filename, test, "test"));
+            string rus = File.ReadAllText(rusPath);
+            string eng = File.ReadAllText(engPath);
+            textDict.Add(id, new CTextData(filename, rus, eng));
             id++;
-            //rusFile.Close();
+        }
+
+        public void updateTextsFromGridView(RadGridView gridView)
+        {
+            for (int row = 0; row < gridView.RowCount; row++)
+            {
+                int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
+                string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
+                string rus = gridView.Rows[row].Cells["columnRussianPhrase"].Value.ToString();
+                string eng = gridView.Rows[row].Cells["columnEnglishPhrase"].Value.ToString();
+
+                if (!textDict.ContainsKey(id))
+                    throw new System.ArgumentException("Фразы с таким ID не существует!");
+
+                if (textDict[id].getFilename() != filename)
+                    throw new System.ArgumentException("Имена файлов не совпадают!");
+
+                textDict[id].setRusData(rus);
+                textDict[id].setEngData(eng);
+            }
+        }
+
+        public void saveDataToFile(bool english)
+        {
+            string path = Properties.Settings.Default.PathToGossip;
+            path += (english) ? (@"\English\") : ("");
         }
     
     }

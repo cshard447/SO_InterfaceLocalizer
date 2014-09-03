@@ -13,14 +13,6 @@ namespace InterfaceLocalizer.Classes
         public static List<string> allGossipFiles = new List<string>();
         public static List<string> checkedGossipFiles = new List<string>();
 
-        public static string getFilenameFromPath(string path)
-        {
-            string filename = "";
-            int last = path.LastIndexOf("\\");
-            filename = path.Substring(last + 1);
-            return filename;
-        }
-
         public static string getListAsString(List<string> list)
         {
             string result = "";
