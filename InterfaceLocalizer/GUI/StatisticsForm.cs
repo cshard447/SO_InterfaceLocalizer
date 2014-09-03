@@ -56,7 +56,7 @@ namespace InterfaceLocalizer.GUI
             foreach (string file in fileList)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CXmlData> texts = dataManager.getTextsDict();
+            Dictionary<int, CXmlData> texts = dataManager.getXmlDict();
             phrasesCount = texts.Count;
             foreach (CXmlData text in texts.Values)
             {

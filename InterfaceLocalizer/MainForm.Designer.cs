@@ -40,8 +40,8 @@
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemStatistics = new Telerik.WinControls.UI.RadMenuItem();
             this.commandBarTranslation = new Telerik.WinControls.UI.RadCommandBar();
-            this.commandBarRowElement1 = new Telerik.WinControls.UI.CommandBarRowElement();
-            this.commandBarStripElement = new Telerik.WinControls.UI.CommandBarStripElement();
+            this.cmbRow = new Telerik.WinControls.UI.CommandBarRowElement();
+            this.cmbStripButtons = new Telerik.WinControls.UI.CommandBarStripElement();
             this.cmbShowData = new Telerik.WinControls.UI.CommandBarButton();
             this.cmbShowUndoneData = new Telerik.WinControls.UI.CommandBarButton();
             this.cmbColumnsHide = new Telerik.WinControls.UI.CommandBarButton();
@@ -49,6 +49,8 @@
             this.cmbSaveEng = new Telerik.WinControls.UI.CommandBarButton();
             this.cmbSaveRus = new Telerik.WinControls.UI.CommandBarButton();
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
+            this.cmbStripMode = new Telerik.WinControls.UI.CommandBarStripElement();
+            this.lMode = new Telerik.WinControls.UI.CommandBarLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -100,28 +102,30 @@
             this.commandBarTranslation.Location = new System.Drawing.Point(0, 20);
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
-            this.commandBarRowElement1});
-            this.commandBarTranslation.Size = new System.Drawing.Size(887, 45);
+            this.cmbRow});
+            this.commandBarTranslation.Size = new System.Drawing.Size(887, 43);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
-            // commandBarRowElement1
+            // cmbRow
             // 
-            this.commandBarRowElement1.MinSize = new System.Drawing.Size(25, 25);
-            this.commandBarRowElement1.Strips.AddRange(new Telerik.WinControls.UI.CommandBarStripElement[] {
-            this.commandBarStripElement});
+            this.cmbRow.MinSize = new System.Drawing.Size(25, 25);
+            this.cmbRow.Strips.AddRange(new Telerik.WinControls.UI.CommandBarStripElement[] {
+            this.cmbStripButtons,
+            this.cmbStripMode});
+            this.cmbRow.Text = "";
             // 
-            // commandBarStripElement
+            // cmbStripButtons
             // 
-            this.commandBarStripElement.DisplayName = "Полоса управления";
-            this.commandBarStripElement.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] {
+            this.cmbStripButtons.DisplayName = "Полоса управления";
+            this.cmbStripButtons.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] {
             this.cmbShowData,
             this.cmbShowUndoneData,
             this.cmbColumnsHide,
             this.cmlListedItems,
             this.cmbSaveEng,
             this.cmbSaveRus});
-            this.commandBarStripElement.Name = "commandBarStripElement1";
+            this.cmbStripButtons.Name = "commandBarStripElement1";
             // 
             // cmbShowData
             // 
@@ -206,7 +210,7 @@
             this.gridViewTranslation.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.gridViewTranslation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridViewTranslation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewTranslation.Location = new System.Drawing.Point(0, 65);
+            this.gridViewTranslation.Location = new System.Drawing.Point(0, 63);
             // 
             // gridViewTranslation
             // 
@@ -247,9 +251,26 @@
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(887, 589);
+            this.gridViewTranslation.Size = new System.Drawing.Size(887, 591);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
+            // 
+            // cmbStripMode
+            // 
+            this.cmbStripMode.DisplayName = "commandBarStripElement1";
+            this.cmbStripMode.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] {
+            this.lMode});
+            this.cmbStripMode.Name = "commandBarStripElement1";
+            // 
+            // lMode
+            // 
+            this.lMode.AccessibleDescription = "TestText";
+            this.lMode.AccessibleName = "TestText";
+            this.lMode.DisplayName = "Режим работы";
+            this.lMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lMode.Name = "lMode";
+            this.lMode.Text = "TestText";
+            this.lMode.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             // 
             // MainForm
             // 
@@ -261,6 +282,7 @@
             this.Controls.Add(this.mainMenu);
             this.Name = "MainForm";
             this.Text = "Локализация интерфейса";
+            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).EndInit();
@@ -278,8 +300,8 @@
         private Telerik.WinControls.UI.RadMenuItem menuItemMain;
         private Telerik.WinControls.UI.RadMenuItem menuItemSettings;
         private Telerik.WinControls.UI.RadCommandBar commandBarTranslation;
-        private Telerik.WinControls.UI.CommandBarRowElement commandBarRowElement1;
-        private Telerik.WinControls.UI.CommandBarStripElement commandBarStripElement;
+        private Telerik.WinControls.UI.CommandBarRowElement cmbRow;
+        private Telerik.WinControls.UI.CommandBarStripElement cmbStripButtons;
         private Telerik.WinControls.UI.RadGridView gridViewTranslation;
         private Telerik.WinControls.UI.CommandBarButton cmbShowData;
         private Telerik.WinControls.UI.CommandBarButton cmbColumnsHide;
@@ -288,6 +310,8 @@
         private Telerik.WinControls.UI.CommandBarButton cmbShowUndoneData;
         private Telerik.WinControls.UI.CommandBarButton cmbSaveEng;
         private Telerik.WinControls.UI.CommandBarButton cmbSaveRus;
+        private Telerik.WinControls.UI.CommandBarStripElement cmbStripMode;
+        private Telerik.WinControls.UI.CommandBarLabel lMode;
     }
 }
 

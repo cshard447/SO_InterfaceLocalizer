@@ -32,37 +32,37 @@
             this.lCheckedCount = new Telerik.WinControls.UI.RadLabel();
             this.pvSettings = new Telerik.WinControls.UI.RadPageView();
             this.pageInterface = new Telerik.WinControls.UI.RadPageViewPage();
-            this.pageGossip = new Telerik.WinControls.UI.RadPageViewPage();
             this.cbSelectAll = new Telerik.WinControls.UI.RadCheckBox();
             this.lvFilesList = new Telerik.WinControls.UI.RadListView();
             this.bePathToFiles = new Telerik.WinControls.UI.RadBrowseEditor();
             this.lPathInfo = new Telerik.WinControls.UI.RadLabel();
             this.bOK = new Telerik.WinControls.UI.RadButton();
+            this.pageGossip = new Telerik.WinControls.UI.RadPageViewPage();
+            this.lGossipChecked = new Telerik.WinControls.UI.RadLabel();
+            this.lGossipFound = new Telerik.WinControls.UI.RadLabel();
             this.cbSelectAllGossip = new Telerik.WinControls.UI.RadCheckBox();
             this.lvGossipList = new Telerik.WinControls.UI.RadListView();
             this.bePathToGossip = new Telerik.WinControls.UI.RadBrowseEditor();
             this.lPathToGossip = new Telerik.WinControls.UI.RadLabel();
             this.bOkGossip = new Telerik.WinControls.UI.RadButton();
-            this.lGossipChecked = new Telerik.WinControls.UI.RadLabel();
-            this.lGossipFound = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.lFileCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pvSettings)).BeginInit();
             this.pvSettings.SuspendLayout();
             this.pageInterface.SuspendLayout();
-            this.pageGossip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathInfo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).BeginInit();
+            this.pageGossip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lGossipChecked)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lGossipFound)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAllGossip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvGossipList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToGossip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathToGossip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOkGossip)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lGossipChecked)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lGossipFound)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -86,7 +86,7 @@
             this.pvSettings.Controls.Add(this.pageGossip);
             this.pvSettings.Location = new System.Drawing.Point(12, 12);
             this.pvSettings.Name = "pvSettings";
-            this.pvSettings.SelectedPage = this.pageGossip;
+            this.pvSettings.SelectedPage = this.pageInterface;
             this.pvSettings.Size = new System.Drawing.Size(356, 531);
             this.pvSettings.TabIndex = 9;
             this.pvSettings.Text = "radPageView1";
@@ -105,21 +105,6 @@
             this.pageInterface.Name = "pageInterface";
             this.pageInterface.Size = new System.Drawing.Size(335, 483);
             this.pageInterface.Text = "Интерфейсы";
-            // 
-            // pageGossip
-            // 
-// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
-            this.pageGossip.Controls.Add(this.lGossipChecked);
-            this.pageGossip.Controls.Add(this.lGossipFound);
-            this.pageGossip.Controls.Add(this.cbSelectAllGossip);
-            this.pageGossip.Controls.Add(this.lvGossipList);
-            this.pageGossip.Controls.Add(this.bePathToGossip);
-            this.pageGossip.Controls.Add(this.lPathToGossip);
-            this.pageGossip.Controls.Add(this.bOkGossip);
-            this.pageGossip.Location = new System.Drawing.Point(10, 37);
-            this.pageGossip.Name = "pageGossip";
-            this.pageGossip.Size = new System.Drawing.Size(335, 483);
-            this.pageGossip.Text = "Слухи";
             // 
             // cbSelectAll
             // 
@@ -165,6 +150,35 @@
             this.bOK.Text = "ОК";
             this.bOK.Click += new System.EventHandler(this.bOK_Click);
             // 
+            // pageGossip
+            // 
+// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
+            this.pageGossip.Controls.Add(this.lGossipChecked);
+            this.pageGossip.Controls.Add(this.lGossipFound);
+            this.pageGossip.Controls.Add(this.cbSelectAllGossip);
+            this.pageGossip.Controls.Add(this.lvGossipList);
+            this.pageGossip.Controls.Add(this.bePathToGossip);
+            this.pageGossip.Controls.Add(this.lPathToGossip);
+            this.pageGossip.Controls.Add(this.bOkGossip);
+            this.pageGossip.Location = new System.Drawing.Point(10, 37);
+            this.pageGossip.Name = "pageGossip";
+            this.pageGossip.Size = new System.Drawing.Size(335, 483);
+            this.pageGossip.Text = "Слухи";
+            // 
+            // lGossipChecked
+            // 
+            this.lGossipChecked.Location = new System.Drawing.Point(11, 424);
+            this.lGossipChecked.Name = "lGossipChecked";
+            this.lGossipChecked.Size = new System.Drawing.Size(2, 2);
+            this.lGossipChecked.TabIndex = 20;
+            // 
+            // lGossipFound
+            // 
+            this.lGossipFound.Location = new System.Drawing.Point(11, 400);
+            this.lGossipFound.Name = "lGossipFound";
+            this.lGossipFound.Size = new System.Drawing.Size(2, 2);
+            this.lGossipFound.TabIndex = 19;
+            // 
             // cbSelectAllGossip
             // 
             this.cbSelectAllGossip.Location = new System.Drawing.Point(200, 400);
@@ -208,20 +222,6 @@
             this.bOkGossip.Text = "ОК";
             this.bOkGossip.Click += new System.EventHandler(this.bOkGossip_Click);
             // 
-            // lGossipChecked
-            // 
-            this.lGossipChecked.Location = new System.Drawing.Point(11, 424);
-            this.lGossipChecked.Name = "lGossipChecked";
-            this.lGossipChecked.Size = new System.Drawing.Size(2, 2);
-            this.lGossipChecked.TabIndex = 20;
-            // 
-            // lGossipFound
-            // 
-            this.lGossipFound.Location = new System.Drawing.Point(11, 400);
-            this.lGossipFound.Name = "lGossipFound";
-            this.lGossipFound.Size = new System.Drawing.Size(2, 2);
-            this.lGossipFound.TabIndex = 19;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,20 +243,20 @@
             this.pvSettings.ResumeLayout(false);
             this.pageInterface.ResumeLayout(false);
             this.pageInterface.PerformLayout();
-            this.pageGossip.ResumeLayout(false);
-            this.pageGossip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToFiles)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathInfo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOK)).EndInit();
+            this.pageGossip.ResumeLayout(false);
+            this.pageGossip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lGossipChecked)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lGossipFound)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAllGossip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvGossipList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bePathToGossip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathToGossip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOkGossip)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lGossipChecked)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lGossipFound)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 

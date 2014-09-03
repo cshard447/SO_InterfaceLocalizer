@@ -29,6 +29,10 @@ namespace InterfaceLocalizer.GUI
         public SettingsForm()
         {
             InitializeComponent();
+            if (Properties.Settings.Default.WorkMode == (int) WorkMode.interfaces)
+                pvSettings.SelectedPage = pageInterface;
+            else if (Properties.Settings.Default.WorkMode == (int)WorkMode.gossip)
+                pvSettings.SelectedPage = pageGossip;
             // иниициализируем данные об интерфейсах
             path = Properties.Settings.Default.PathToFiles;
             bePathToFiles.Value = Properties.Settings.Default.PathToFiles;
@@ -119,6 +123,7 @@ namespace InterfaceLocalizer.GUI
 
             CFileList.allFiles = fileList;
             CFileList.checkedFiles = checkedFiles;
+            Properties.Settings.Default.WorkMode = (int) WorkMode.interfaces;
             this.Close();
         }
 
@@ -134,6 +139,7 @@ namespace InterfaceLocalizer.GUI
 
             CFileList.allGossipFiles = fileList;
             CFileList.checkedGossipFiles = checkedFiles;
+            Properties.Settings.Default.WorkMode = (int) WorkMode.gossip;
             this.Close();
         }
 

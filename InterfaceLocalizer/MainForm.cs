@@ -17,9 +17,13 @@ using InterfaceLocalizer.Properties;
 
 namespace InterfaceLocalizer
 {
+    enum WorkMode { interfaces = 0, gossip = 1};
+
     public partial class MainForm : Form
     {
         CDataManager dataManager = new CDataManager();
+        CTextManager textManager = new CTextManager();
+        private WorkMode workMode;
 
         public MainForm()
         {
@@ -46,7 +50,26 @@ namespace InterfaceLocalizer
             }
             catch
             {
-                MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение");
+                MessageBox.Show("Задайте путь к каталогу c интерфейсами в настройках", "Предупреждение");
+            }
+
+            CFileList.allGossipFiles.Clear();
+            CFileList.checkedGossipFiles.Clear();
+            try
+            {
+                string path = Properties.Settings.Default.PathToGossip;
+                string check = Properties.Settings.Default.CheckedGossipFiles;
+                string[] fileArray = check.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string file in fileArray)
+                    CFileList.checkedGossipFiles.Add(file);
+
+                IEnumerable<string> files = System.IO.Directory.EnumerateFiles(path, "*.txt", SearchOption.TopDirectoryOnly);
+                foreach (string filepath in files)
+                    CFileList.allGossipFiles.Add(CFileList.getFilenameFromPath(filepath));
+            }
+            catch
+            {
+                MessageBox.Show("Задайте путь к каталогу со слухами в настройках", "Предупреждение");
             }
         }
 
@@ -64,20 +87,46 @@ namespace InterfaceLocalizer
 
         private void cmbShowData_Click(object sender, EventArgs e)
         {
-            dataManager.clearAllData();
-            gridViewTranslation.Rows.Clear();
+            if (workMode == WorkMode.interfaces)
+            {
+                dataManager.clearAllData();
+                gridViewTranslation.Rows.Clear();
 
-            foreach (string file in CFileList.checkedFiles)
-                dataManager.addFileToManager(file);
+                foreach (string file in CFileList.checkedFiles)
+                    dataManager.addFileToManager(file);
 
-            Dictionary<int, CXmlData> textDict = dataManager.getTextsDict();
+                Dictionary<int, CXmlData> textDict = dataManager.getXmlDict();
 
-            gridViewTranslation.BeginUpdate();
-            foreach (int id in textDict.Keys)
-                addDataToGridView(id, textDict[id]);
+                gridViewTranslation.BeginUpdate();
+                foreach (int id in textDict.Keys)
+                    addDataToGridView(id, textDict[id]);
 
-            gridViewTranslation.EndUpdate();
-            cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
+                gridViewTranslation.EndUpdate();
+                cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
+            }
+            else if (workMode == WorkMode.gossip)
+            {
+                textManager.clearAllData();
+                gridViewTranslation.Rows.Clear();
+                foreach (string file in CFileList.checkedGossipFiles)
+                    textManager.addFileToManager(file);
+
+                Dictionary<int, CTextData> textDict = textManager.getTextDict();
+                gridViewTranslation.BeginUpdate();
+                foreach (int id in textDict.Keys)
+                {
+                    object[] values = new object[5];
+                    values[0] = id;
+                    values[1] = textDict[id].filename;
+                    values[2] = "";
+                    values[3] = textDict[id].rusText;
+                    values[4] = textDict[id].engText;
+                    gridViewTranslation.Rows.Add(values);
+                }
+
+                gridViewTranslation.EndUpdate();
+                cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
+            }
         }
 
         private void cmbShowUndoneData_Click(object sender, EventArgs e)
@@ -88,7 +137,7 @@ namespace InterfaceLocalizer
             foreach (string file in CFileList.checkedFiles)
                 dataManager.addFileToManager(file);
 
-            Dictionary<int, CXmlData> textDict = dataManager.getTextsDict();
+            Dictionary<int, CXmlData> textDict = dataManager.getXmlDict();
             gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
             {
@@ -115,7 +164,7 @@ namespace InterfaceLocalizer
             values[2] = temp;
             values[3] = td.phrase;
             values[4] = td.engPhrase;
-            gridViewTranslation.Rows.Add(values);            
+            gridViewTranslation.Rows.Add(values);
         }
 
         private void cmbColumnsHide_Click(object sender, EventArgs e)
@@ -181,6 +230,15 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnTags"].Width = Properties.Settings.Default.ColTagsWidth;
             gridViewTranslation.Columns["columnRussianPhrase"].Width = Properties.Settings.Default.ColRusWidth;
             gridViewTranslation.Columns["columnEnglishPhrase"].Width = Properties.Settings.Default.ColEngWidth;
+        }
+
+        private void MainForm_Activated(object sender, EventArgs e)
+        {
+            workMode = (WorkMode) Properties.Settings.Default.WorkMode;
+            if (workMode == WorkMode.interfaces)
+                lMode.Text = "Interfaces";
+            else if (workMode == WorkMode.gossip)
+                lMode.Text = "Gossip";
         }
 
     }
