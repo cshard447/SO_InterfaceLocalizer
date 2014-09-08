@@ -84,7 +84,6 @@ namespace InterfaceLocalizer
 
                 Dictionary<int, CXmlData> textDict = dataManager.getXmlDict();
 
-                gridViewTranslation.Columns["columnTags"].IsVisible = true;
                 gridViewTranslation.BeginUpdate();
                 foreach (int id in textDict.Keys)
                     addDataToGridView(id, textDict[id]);
@@ -160,14 +159,30 @@ namespace InterfaceLocalizer
 
         private void cmbSaveChecked_Click(object sender, EventArgs e)
         {
-            dataManager.updateTextsFromGridView(gridViewTranslation);
-            dataManager.saveDataToFile(true);
+            if (workMode == WorkMode.interfaces)
+            {
+                dataManager.updateTextsFromGridView(gridViewTranslation);
+                dataManager.saveDataToFile(true);
+            }
+            else if (workMode == WorkMode.gossip)
+            {
+                textManager.updateTextsFromGridView(gridViewTranslation);
+                textManager.saveDataToFile(true);
+            }
         }
 
         private void cmbSaveRus_Click(object sender, EventArgs e)
         {
-            dataManager.updateTextsFromGridView(gridViewTranslation);
-            dataManager.saveDataToFile(false);
+            if (workMode == WorkMode.interfaces)
+            {
+                dataManager.updateTextsFromGridView(gridViewTranslation);
+                dataManager.saveDataToFile(false);
+            }
+            else if (workMode == WorkMode.gossip)
+            {
+                textManager.updateTextsFromGridView(gridViewTranslation);
+                textManager.saveDataToFile(false);
+            }
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -210,16 +225,40 @@ namespace InterfaceLocalizer
         {
             workMode = (WorkMode) Properties.Settings.Default.WorkMode;
             if (workMode == WorkMode.interfaces)
+            {
                 lMode.Text = "Interfaces";
+                SetInterfacesView();
+            }
             else if (workMode == WorkMode.gossip)
             {
                 lMode.Text = "Gossip";
                 SetGossipView();
             }
         }
+
+        private void SetInterfacesView()
+        {
+            gridViewTranslation.Columns["columnID"].IsVisible = true;
+            gridViewTranslation.Columns["columnTags"].IsVisible = true;
+            gridViewTranslation.Columns["columnFilename"].IsVisible = true;
+            //cmbColumnsHide_Click(null, null);
+            gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnEnglishPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.AutoSizeRows = true;
+            //gridViewTranslation.Columns["columnRussianPhrase"].StretchVertically = true;
+            //gridViewTranslation.Columns["columnRussianPhrase"].AutoSizeMode = Telerik.WinControls.UI.BestFitColumnMode.DisplayedCells;
+            //gridViewTranslation.AllowAutoSizeColumns = true;
+            //gridViewTranslation.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;        
+        }
+
         private void SetGossipView()
         {
+            gridViewTranslation.Columns["columnID"].IsVisible = false;
             gridViewTranslation.Columns["columnTags"].IsVisible = false;
+            gridViewTranslation.Columns["columnFilename"].IsVisible = false;
+            //cmbColumnsHide_Click(null, null);
             gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;

@@ -110,7 +110,17 @@ namespace InterfaceLocalizer.Classes
         public void saveDataToFile(bool english)
         {
             string path = Properties.Settings.Default.PathToGossip;
-            path += (english) ? (@"\English\") : ("");
+            path += (english) ? (@"English\") : ("");
+            
+            //foreach (string file in CFileList.checkedGossipFiles)
+            //{
+            foreach (CTextData text in textDict.Values)
+            {
+                string value = (english) ? (text.getEngData()) : (text.getRusData());
+                string file = path + text.getFilename();
+                File.WriteAllText(file, value, Encoding.UTF8);
+            }
+            //}
         }
     
     }

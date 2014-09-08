@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn15 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor3 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor2 = new Telerik.WinControls.Data.SortDescriptor();
             this.mainMenu = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
@@ -234,38 +234,43 @@
             this.gridViewTranslation.MasterTemplate.AllowAddNewRow = false;
             this.gridViewTranslation.MasterTemplate.AllowColumnReorder = false;
             this.gridViewTranslation.MasterTemplate.AllowDeleteRow = false;
-            gridViewTextBoxColumn11.EnableExpressionEditor = false;
-            gridViewTextBoxColumn11.HeaderText = "ID";
-            gridViewTextBoxColumn11.Name = "columnID";
-            gridViewTextBoxColumn11.ReadOnly = true;
-            gridViewTextBoxColumn12.EnableExpressionEditor = false;
-            gridViewTextBoxColumn12.HeaderText = "Имя файла";
-            gridViewTextBoxColumn12.Name = "columnFileName";
-            gridViewTextBoxColumn12.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
-            gridViewTextBoxColumn12.Width = 93;
-            gridViewTextBoxColumn13.EnableExpressionEditor = false;
-            gridViewTextBoxColumn13.HeaderText = "Теги";
-            gridViewTextBoxColumn13.Name = "columnTags";
-            gridViewTextBoxColumn13.Width = 117;
-            gridViewTextBoxColumn14.EnableExpressionEditor = false;
-            gridViewTextBoxColumn14.HeaderText = "Русский";
-            gridViewTextBoxColumn14.MaxLength = 100000;
-            gridViewTextBoxColumn14.Name = "columnRussianPhrase";
-            gridViewTextBoxColumn14.Width = 300;
-            gridViewTextBoxColumn15.EnableExpressionEditor = false;
-            gridViewTextBoxColumn15.HeaderText = "Английский";
-            gridViewTextBoxColumn15.Name = "columnEnglishPhrase";
-            gridViewTextBoxColumn15.Width = 300;
+            gridViewTextBoxColumn6.EnableExpressionEditor = false;
+            gridViewTextBoxColumn6.HeaderText = "ID";
+            gridViewTextBoxColumn6.Name = "columnID";
+            gridViewTextBoxColumn6.ReadOnly = true;
+            gridViewTextBoxColumn7.EnableExpressionEditor = false;
+            gridViewTextBoxColumn7.HeaderText = "Имя файла";
+            gridViewTextBoxColumn7.Name = "columnFileName";
+            gridViewTextBoxColumn7.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            gridViewTextBoxColumn7.Width = 93;
+            gridViewTextBoxColumn8.EnableExpressionEditor = false;
+            gridViewTextBoxColumn8.HeaderText = "Теги";
+            gridViewTextBoxColumn8.Name = "columnTags";
+            gridViewTextBoxColumn8.Width = 117;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.HeaderText = "Русский";
+            gridViewTextBoxColumn9.MaxLength = 100000;
+            gridViewTextBoxColumn9.Multiline = true;
+            gridViewTextBoxColumn9.Name = "columnRussianPhrase";
+            gridViewTextBoxColumn9.StretchVertically = false;
+            gridViewTextBoxColumn9.Width = 300;
+            gridViewTextBoxColumn10.EnableExpressionEditor = false;
+            gridViewTextBoxColumn10.HeaderText = "Английский";
+            gridViewTextBoxColumn10.Multiline = true;
+            gridViewTextBoxColumn10.Name = "columnEnglishPhrase";
+            gridViewTextBoxColumn10.Width = 300;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn11,
-            gridViewTextBoxColumn12,
-            gridViewTextBoxColumn13,
-            gridViewTextBoxColumn14,
-            gridViewTextBoxColumn15});
+            gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9,
+            gridViewTextBoxColumn10});
             this.gridViewTranslation.MasterTemplate.EnableGrouping = false;
-            sortDescriptor3.PropertyName = "columnFileName";
+            this.gridViewTranslation.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
+            sortDescriptor2.PropertyName = "columnFileName";
             this.gridViewTranslation.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor3});
+            sortDescriptor2});
+            this.gridViewTranslation.MasterTemplate.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow;
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
