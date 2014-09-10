@@ -24,6 +24,7 @@ namespace InterfaceLocalizer
         CDataManager dataManager = new CDataManager();
         CTextManager textManager = new CTextManager();
         private WorkMode workMode;
+        private bool showInfo;
 
         public MainForm()
         {
@@ -133,10 +134,12 @@ namespace InterfaceLocalizer
 
         private void cmbColumnsHide_Click(object sender, EventArgs e)
         {
-            gridViewTranslation.Columns["columnFileName"].IsVisible = !gridViewTranslation.Columns["columnFileName"].IsVisible;
-            gridViewTranslation.Columns["columnTags"].IsVisible = !gridViewTranslation.Columns["columnTags"].IsVisible;
-            gridViewTranslation.Columns["columnID"].IsVisible = !gridViewTranslation.Columns["columnID"].IsVisible;
-            if (!gridViewTranslation.Columns["columnFileName"].IsVisible)
+            showInfo = gridViewTranslation.Columns["columnTags"].IsVisible;     // get the visibility state
+            showInfo = !showInfo;       // change the state of visibility
+            gridViewTranslation.Columns["columnFileName"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
+            if (!showInfo)
             {
                 gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width / 2;
                 gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width / 2;
@@ -218,9 +221,9 @@ namespace InterfaceLocalizer
         private void SetInterfacesView()
         {
             lMode.Text = "Interfaces";
-            gridViewTranslation.Columns["columnID"].IsVisible = true;
-            gridViewTranslation.Columns["columnTags"].IsVisible = true;
-            gridViewTranslation.Columns["columnFilename"].IsVisible = true;
+            gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             //cmbColumnsHide_Click(null, null);
             gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
