@@ -56,9 +56,9 @@ namespace InterfaceLocalizer.Classes
         }
     }
 
-    class CTextManager
+    class CTextManager : IManager
     {
-        private Dictionary<int, CTextData> textDict = new Dictionary<int, CTextData>();
+        private Dictionary<int, ITranslatable> textDict = new Dictionary<int, ITranslatable>();
         int id = 0;
 
         public CTextManager()
@@ -66,10 +66,11 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, CTextData> getTextDict()
+        public Dictionary<int, ITranslatable> getFullDictionary()
         {
             return textDict;
         }
+
         public void clearAllData()
         {
             textDict.Clear();
@@ -87,7 +88,7 @@ namespace InterfaceLocalizer.Classes
             id++;
         }
 
-        public void updateTextsFromGridView(RadGridView gridView)
+        public void updateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
@@ -122,6 +123,6 @@ namespace InterfaceLocalizer.Classes
             }
             //}
         }
-    
+
     }
 }

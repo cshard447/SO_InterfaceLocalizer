@@ -68,17 +68,17 @@ namespace InterfaceLocalizer.Classes
         }
     }
 
-    public class CDataManager
+    class CDataManager : IManager
     {
-        private Dictionary<int, CXmlData> xmlDict = new Dictionary<int, CXmlData>();
+        private Dictionary<int, ITranslatable> xmlDict = new Dictionary<int, ITranslatable>();
         int id = 0;
         
         public CDataManager()
         {
             id = 0;
         }
- 
-        public Dictionary<int, CXmlData> getXmlDict()
+
+        public Dictionary<int, ITranslatable> getFullDictionary()
         {
             return xmlDict;
         }
@@ -164,7 +164,7 @@ namespace InterfaceLocalizer.Classes
             return result;        
         }
 
-        public void updateTextsFromGridView(RadGridView gridView)
+        public void updateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
@@ -248,6 +248,6 @@ namespace InterfaceLocalizer.Classes
                 el = new XElement(item);
             return el;
         }
-    
+
     }
 }
