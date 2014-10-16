@@ -51,6 +51,7 @@
             this.cmbStripMode = new Telerik.WinControls.UI.CommandBarStripElement();
             this.lMode = new Telerik.WinControls.UI.CommandBarLabel();
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
+            this.SpellChecker = new Telerik.WinControls.UI.RadSpellChecker();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -278,6 +279,8 @@
             this.gridViewTranslation.Size = new System.Drawing.Size(887, 589);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
+            this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);
+            this.gridViewTranslation.CellValidating += new Telerik.WinControls.UI.CellValidatingEventHandler(this.gridViewTranslation_CellValidating);
             // 
             // MainForm
             // 
@@ -319,6 +322,7 @@
         private Telerik.WinControls.UI.CommandBarButton cmbSaveRus;
         private Telerik.WinControls.UI.CommandBarStripElement cmbStripMode;
         private Telerik.WinControls.UI.CommandBarLabel lMode;
+        private Telerik.WinControls.UI.RadSpellChecker SpellChecker;
     }
 }
 

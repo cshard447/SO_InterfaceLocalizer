@@ -7,8 +7,11 @@ using System.Drawing;
 using System.Xml;
 using System.Xml.Linq;
 using System.Windows.Forms;
+using System.Globalization;
 using System.ComponentModel;
 using System.Collections.Generic;
+using Telerik.WinControls.UI;
+using Telerik.WinControls.RichTextBox.Proofing;
 
 using InterfaceLocalizer.GUI;
 using InterfaceLocalizer.Classes;
@@ -25,6 +28,9 @@ namespace InterfaceLocalizer
         CTextManager textManager = new CTextManager();
         private WorkMode workMode;
         private bool showInfo;
+        private string correctedValue = String.Empty;
+        //IControlSpellChecker gridviewControlSpellChecker;
+        //DocumentSpellChecker documentSpellChecker;
 
         public MainForm()
         {
@@ -39,6 +45,11 @@ namespace InterfaceLocalizer
                     ref CFileList.allFiles, ref CFileList.checkedFiles);
             LoadData(Properties.Settings.Default.PathToGossip, Properties.Settings.Default.CheckedGossipFiles, "*.txt",
                     ref CFileList.allGossipFiles, ref CFileList.checkedGossipFiles);
+
+            //gridviewControlSpellChecker = SpellChecker.GetControlSpellChecker(typeof(RadTextBox));
+            //documentSpellChecker = gridviewControlSpellChecker.SpellChecker as DocumentSpellChecker;
+            //documentSpellChecker.AddDictionary(new CRussianDict(), RussianCulture);
+            //documentSpellChecker.SpellCheckingCulture = RussianCulture;
         }
 
         private void LoadData(string path, string check, string mask, ref List<string> allFiles, ref List<string> checkedFiles)
@@ -250,5 +261,23 @@ namespace InterfaceLocalizer
             //gridViewTranslation.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;        
         }
 
+        private void gridViewTranslation_CellValidating(object sender, Telerik.WinControls.UI.CellValidatingEventArgs e)
+        {
+            RadTextBoxEditor editor = e.ActiveEditor as RadTextBoxEditor;
+            if (editor != null)
+            {
+                RadTextBoxEditorElement element = editor.EditorElement as RadTextBoxEditorElement;
+                SpellChecker.Check(element.TextBoxItem.HostedControl);
+                correctedValue = e.ActiveEditor.Value.ToString();
+            }
+            
+        }
+
+        private void gridViewTranslation_CellEndEdit(object sender, GridViewCellEventArgs e)
+        {
+            gridViewTranslation.CurrentCell.Value = correctedValue;
+        }
+
+        private static readonly CultureInfo RussianCulture = CultureInfo.GetCultureInfo("ru-RU");
     }
 }

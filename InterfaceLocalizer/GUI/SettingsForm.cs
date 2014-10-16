@@ -3,6 +3,7 @@ using System.IO;
 using System.Data;
 using System.Text;
 using System.Drawing;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
@@ -70,7 +71,10 @@ namespace InterfaceLocalizer.GUI
                 return;
             }
 
-            files = System.IO.Directory.EnumerateFiles(rusPath, "*.xml", SearchOption.TopDirectoryOnly);            
+            //files = System.IO.Directory.EnumerateFiles(rusPath, "*.xml", SearchOption.TopDirectoryOnly);
+            string[] extensions = { "*.json", "*.xml" };
+            files = (extensions.AsParallel().SelectMany(searchPattern => Directory.EnumerateFiles(rusPath, searchPattern)));
+
             foreach (string filepath in files)
             {
                 if (Path.GetFileName(filepath) == "soCheckBox.xml")    // костыль, так как файл содержит только пустую строку

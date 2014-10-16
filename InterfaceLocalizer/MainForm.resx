@@ -168,4 +168,7 @@
         12PqiA2QvU7nuybcQfPzbLT2T3Ccj/QHkqxVwPEA9CAAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="SpellChecker.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

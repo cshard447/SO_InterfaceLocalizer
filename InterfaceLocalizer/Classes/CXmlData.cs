@@ -3,10 +3,14 @@ using System.IO;
 using System.Xml;
 using System.Linq;
 using System.Text;
+
 using System.Xml.Linq;
+using System.Data.Common;
 using System.Threading.Tasks;
 using Telerik.WinControls.UI;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
+using System.Web.Helpers;
 
 
 namespace InterfaceLocalizer.Classes
@@ -90,21 +94,61 @@ namespace InterfaceLocalizer.Classes
         }
 
         public void addFileToManager(string filename)
-        {   
-            string phrase = "";
-            string eng = "";
+        {
+            string ext = Path.GetExtension(filename);
+            if (ext == ".xml")
+                addXmlToManager(filename);
+            else if (ext == ".json")
+                addJsonToManager(filename);
+        }
 
-            Stack<string> tags = new Stack<string>();
+        public void addXmlToManager(string filename)
+        {
             string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
             string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
-            XmlTextReader reader = new XmlTextReader (rusPath);
+            //XmlTextReader reader = new XmlTextReader(rusPath);
+            XmlReader reader = new XmlTextReader(rusPath);
             XDocument engDoc = new XDocument();
             engDoc = XDocument.Load(engPath);
+            parseXmlFile(reader, engDoc, filename);
+        }
+
+        public void addJsonToManager(string filename)
+        {
+            string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
+            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
+            System.IO.Stream stream;
+
+            // preparing russian file to xml
+            stream = File.Open(rusPath, FileMode.Open);
+            var jsonReader = JsonReaderWriterFactory.CreateJsonReader(stream, new System.Xml.XmlDictionaryReaderQuotas());
+            XElement root = XElement.Load(jsonReader);
+            XDocument doc = new XDocument();
+            doc.Add(root);
+            XmlReader reader = doc.CreateReader();
+            stream.Close();
+
+            // preparing english file to xml;
+            stream = File.Open(engPath, FileMode.Open);
+            jsonReader = JsonReaderWriterFactory.CreateJsonReader(stream, new System.Xml.XmlDictionaryReaderQuotas());
+            root = XElement.Load(jsonReader);
+            XDocument engDoc = new XDocument();
+            engDoc.Add(root);
+            stream.Close();
+
+            parseXmlFile(reader, engDoc, filename);
+        }
+
+        private void parseXmlFile(XmlReader reader, XDocument engDoc, string filename)
+        {
+            string phrase = "";
+            string eng = "";
+            Stack<string> tags = new Stack<string>();
             bool gotten = false;
-            
-            while (reader.Read())  
+
+            while (reader.Read())
             {
-                switch (reader.NodeType)  
+                switch (reader.NodeType)
                 {
                     case XmlNodeType.Element: // Узел является элементом.
                         tags.Push(reader.Name);
@@ -116,7 +160,7 @@ namespace InterfaceLocalizer.Classes
                             xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
                             phrase = "";
                             eng = "";
-                            tags.Pop();                            
+                            tags.Pop();
                         }
                         break;
                     case XmlNodeType.Text: // Вывести текст в каждом элементе.
@@ -128,7 +172,7 @@ namespace InterfaceLocalizer.Classes
                         if (gotten)
                         {
                             eng = getValueFromXml(engDoc, tags);
-                            Stack<string> copy = new Stack<string>(tags.ToArray());                            
+                            Stack<string> copy = new Stack<string>(tags.ToArray());
                             //texts.Add(new CXmlData(phrase, eng, filename, copy));
                             xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
                             gotten = false;
@@ -138,7 +182,8 @@ namespace InterfaceLocalizer.Classes
                         tags.Pop();
                         break;
                 }
-            }
+            }        
+        
         }
 
         public string getValueFromXml(XDocument doc, Stack<string> tags)
