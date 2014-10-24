@@ -234,15 +234,27 @@ namespace InterfaceLocalizer.Classes
         {
             string path = Properties.Settings.Default.PathToFiles;
             path += (english) ? ("\\English\\") : ("\\Russian\\");
-
+            bool json = false;
             foreach (string file in CFileList.checkedFiles)
             {
-                XDocument doc = new XDocument();                
-                doc = XDocument.Load(path + file);                
-                IEnumerable<XElement> del = doc.Root.Descendants().ToList();
-                del.Remove();
-                doc.Save(path + file);
-                
+                XDocument doc = new XDocument();
+                if (Path.GetExtension(file) == ".json")
+                {
+                    json = true;
+                    XElement el = new XElement("root");
+                    doc.Add(el);
+                }
+                else 
+                    json = false;
+
+                if (!json)
+                {
+                    doc = XDocument.Load(path + file);
+                    IEnumerable<XElement> del = doc.Root.Descendants().ToList();
+                    del.Remove();
+                    doc.Save(path + file);
+                }
+
                 foreach (CXmlData text in xmlDict.Values)
                 {
                     if (text.getFilename() != file)
@@ -270,18 +282,53 @@ namespace InterfaceLocalizer.Classes
                         doc.Root.Add( getXElement(item,value) );
                     }
                 }
-                
-                System.Xml.XmlWriterSettings settings = new System.Xml.XmlWriterSettings();
-                settings.Encoding = new UTF8Encoding(false);
-                settings.Indent = true;
-                settings.OmitXmlDeclaration = true;
-                settings.NewLineOnAttributes = true;
-                using (System.Xml.XmlWriter w = System.Xml.XmlWriter.Create(path + file, settings))
+
+                if (json)
                 {
-                    doc.Save(w);
-                } 
+                    saveDataToJsonFile(english, file, doc);
+                    continue;
+                }
+                else
+                {
+                    System.Xml.XmlWriterSettings settings = new System.Xml.XmlWriterSettings();
+                    settings.Encoding = new UTF8Encoding(false);
+                    settings.Indent = true;
+                    settings.OmitXmlDeclaration = true;
+                    settings.NewLineOnAttributes = true;
+                    using (System.Xml.XmlWriter w = System.Xml.XmlWriter.Create(path + file, settings))
+                    {
+                        doc.Save(w);
+                    }
+                }
                 //doc.Save(path + file);
             }
+        }
+
+        private void saveDataToJsonFile(bool english, string filename, XDocument doc)
+        {
+            string path = Properties.Settings.Default.PathToFiles;
+            path += (english) ? ("\\English\\") : ("\\Russian\\");
+
+            System.IO.Stream stream;
+            stream = File.Open(path + filename, FileMode.Create);
+            var jsonWriter = JsonReaderWriterFactory.CreateJsonWriter(stream, Encoding.UTF8, true, true);
+            jsonWriter.WriteStartDocument();
+            jsonWriter.WriteStartElement("root");
+            jsonWriter.WriteAttributeString("type", "object");
+
+            IEnumerable<XElement> elements = doc.Root.Elements().ToList();
+            foreach (XElement chapter in elements)
+            {
+                jsonWriter.WriteStartElement(chapter.Name.ToString());
+                jsonWriter.WriteAttributeString("type", "object");
+                foreach (XElement element in elements.Descendants())
+                {
+                    jsonWriter.WriteElementString(element.Name.ToString(), element.GetDefaultNamespace().ToString(), element.Value);
+                }
+            }
+            jsonWriter.WriteEndDocument();
+            jsonWriter.Flush();
+            stream.Close();
         }
 
         private XElement getXElement(string item, string value)
