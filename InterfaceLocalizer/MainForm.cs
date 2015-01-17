@@ -165,8 +165,8 @@ namespace InterfaceLocalizer
             }
             else
             {
-                gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width = Properties.Settings.Default.ColRusWidth;
-                gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width = Properties.Settings.Default.ColEngWidth;
+                gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width = appSettings.ColRusWidth;
+                gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width = appSettings.ColEngWidth;
             }
         }
 

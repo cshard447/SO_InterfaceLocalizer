@@ -180,24 +180,24 @@ namespace InterfaceLocalizer.Classes
 
         private int checkSize(int size)
         {
-            if (size > 50 && size < 2000)
+            if (size > 200 && size < 2500)
                 return size;
             else
                 return 400;
         }
         private int checkLocation(int location)
         {
-            if (location > 0 && location < 1000)
+            if (location >= 0 && location < 1500)
                 return location;
             else
                 return 50;
         }
         private int checkColumnWidth(int width)
         {
-            if (width > 10 && width < 500)
+            if (width > 10 && width < 1000)
                 return width;
             else
-                return 50;
+                return 100;
         }
         private string checkPath(string path)
         {
