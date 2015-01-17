@@ -167,13 +167,13 @@ namespace InterfaceLocalizer.GUI
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            this.Left = Properties.Settings.Default.SettingsFromLeft;
+            this.Left = Properties.Settings.Default.SettingsFormLeft;
             this.Top = Properties.Settings.Default.SettingsFormTop;
         }
 
         private void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-             Properties.Settings.Default.SettingsFromLeft = this.Left;
+             Properties.Settings.Default.SettingsFormLeft = this.Left;
              Properties.Settings.Default.SettingsFormTop = this.Top;
              Properties.Settings.Default.Save();
         }

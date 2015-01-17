@@ -83,6 +83,9 @@
             this.Controls.Add(this.rbTotal);
             this.Controls.Add(this.lStats);
             this.Controls.Add(this.bOK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "StatisticsForm";
             // 
             // 

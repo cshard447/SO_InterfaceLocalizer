@@ -57,6 +57,7 @@
     <Reference Include="TelerikData, Version=2013.1.220.40, Culture=neutral, PublicKeyToken=5bb2a467cbec794e, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\AppSettings.cs" />
     <Compile Include="Classes\CFileList.cs" />
     <Compile Include="Classes\CRussianDict.cs" />
     <Compile Include="Classes\CTextData.cs" />
@@ -101,7 +102,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="Properties\ru-RU.tdf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -111,6 +111,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Properties\ru-RU.tdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

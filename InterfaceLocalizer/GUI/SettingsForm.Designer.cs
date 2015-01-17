@@ -86,10 +86,12 @@
             this.pvSettings.Controls.Add(this.pageGossip);
             this.pvSettings.Location = new System.Drawing.Point(12, 12);
             this.pvSettings.Name = "pvSettings";
-            this.pvSettings.SelectedPage = this.pageInterface;
+            this.pvSettings.SelectedPage = this.pageGossip;
             this.pvSettings.Size = new System.Drawing.Size(356, 531);
             this.pvSettings.TabIndex = 9;
-            this.pvSettings.Text = "radPageView1";
+            this.pvSettings.Text = "pageViewSettings";
+            ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pvSettings.GetChildAt(0))).StripButtons = Telerik.WinControls.UI.StripViewButtons.Scroll;
+            ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pvSettings.GetChildAt(0))).EnsureSelectedItemVisible = true;
             // 
             // pageInterface
             // 
@@ -101,9 +103,9 @@
             this.pageInterface.Controls.Add(this.bePathToFiles);
             this.pageInterface.Controls.Add(this.lPathInfo);
             this.pageInterface.Controls.Add(this.bOK);
-            this.pageInterface.Location = new System.Drawing.Point(10, 37);
+            this.pageInterface.Location = new System.Drawing.Point(305, 4);
             this.pageInterface.Name = "pageInterface";
-            this.pageInterface.Size = new System.Drawing.Size(335, 483);
+            this.pageInterface.Size = new System.Drawing.Size(47, 523);
             this.pageInterface.Text = "Интерфейсы";
             // 
             // cbSelectAll
@@ -228,6 +230,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 555);
             this.Controls.Add(this.pvSettings);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SettingsForm";
             // 
             // 

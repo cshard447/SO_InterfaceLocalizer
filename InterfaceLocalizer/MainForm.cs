@@ -26,6 +26,7 @@ namespace InterfaceLocalizer
     {
         CDataManager dataManager = new CDataManager();
         CTextManager textManager = new CTextManager();
+        AppSettings appSettings;
         private WorkMode workMode;
         private bool showInfo;
         private string correctedValue = String.Empty;
@@ -39,13 +40,20 @@ namespace InterfaceLocalizer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            LoadSettings();
+            try
+            {
+                appSettings = new AppSettings();
+                LoadSettings();
 
-            LoadData(Properties.Settings.Default.PathToFiles + "\\Russian\\", Properties.Settings.Default.CheckedFiles, "*.xml",
-                    ref CFileList.allFiles, ref CFileList.checkedFiles);
-            LoadData(Properties.Settings.Default.PathToGossip, Properties.Settings.Default.CheckedGossipFiles, "*.txt",
-                    ref CFileList.allGossipFiles, ref CFileList.checkedGossipFiles);
-
+                LoadData(appSettings.PathToFiles + "\\Russian\\", appSettings.CheckedFiles, "*.xml",
+                        ref CFileList.allFiles, ref CFileList.checkedFiles);
+                LoadData(appSettings.PathToGossip, appSettings.CheckedGossipFiles, "*.txt",
+                        ref CFileList.allGossipFiles, ref CFileList.checkedGossipFiles);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка загрузки настроек. Перезапустите приложение", "Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //gridviewControlSpellChecker = SpellChecker.GetControlSpellChecker(typeof(RadTextBox));
             //documentSpellChecker = gridviewControlSpellChecker.SpellChecker as DocumentSpellChecker;
             //documentSpellChecker.AddDictionary(new CRussianDict(), RussianCulture);
@@ -68,7 +76,7 @@ namespace InterfaceLocalizer
             }
             catch
             {
-                MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение");
+                MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }        
         }
 
@@ -191,33 +199,33 @@ namespace InterfaceLocalizer
 
         private void SaveSettings()
         {
-            Properties.Settings.Default.MainFromTop = this.Top;
-            Properties.Settings.Default.MainFormLeft = this.Left;
-            Properties.Settings.Default.MainFormHeight = this.Height;
-            Properties.Settings.Default.MainFormWidth = this.Width;
-            Properties.Settings.Default.ServiceColumnsVisible = gridViewTranslation.Columns["columnID"].IsVisible;
-            Properties.Settings.Default.ColIDWidth = gridViewTranslation.Columns["columnID"].Width;
-            Properties.Settings.Default.ColFilenameWidth = gridViewTranslation.Columns["columnFilename"].Width;
-            Properties.Settings.Default.ColTagsWidth = gridViewTranslation.Columns["columnTags"].Width;
-            Properties.Settings.Default.ColRusWidth = gridViewTranslation.Columns["columnRussianPhrase"].Width;
-            Properties.Settings.Default.ColEngWidth = gridViewTranslation.Columns["columnEnglishPhrase"].Width;
-            Properties.Settings.Default.Save();
+            appSettings.MainFormTop = this.Top;
+            appSettings.MainFormLeft = this.Left;
+            appSettings.MainFormHeight = this.Height;
+            appSettings.MainFormWidth = this.Width;
+            appSettings.ServiceColumnsVisible = gridViewTranslation.Columns["columnID"].IsVisible;
+            appSettings.ColIDWidth = gridViewTranslation.Columns["columnID"].Width;
+            appSettings.ColFilenameWidth = gridViewTranslation.Columns["columnFilename"].Width;
+            appSettings.ColTagsWidth = gridViewTranslation.Columns["columnTags"].Width;
+            appSettings.ColRusWidth = gridViewTranslation.Columns["columnRussianPhrase"].Width;
+            appSettings.ColEngWidth = gridViewTranslation.Columns["columnEnglishPhrase"].Width;
+            appSettings.SaveSettings();
         }
 
         private void LoadSettings()
         {
-            this.Top = Properties.Settings.Default.MainFromTop;
-            this.Left = Properties.Settings.Default.MainFormLeft;
-            this.Height = Properties.Settings.Default.MainFormHeight;
-            this.Width = Properties.Settings.Default.MainFormWidth;
-            gridViewTranslation.Columns["columnID"].IsVisible = Properties.Settings.Default.ServiceColumnsVisible;
-            gridViewTranslation.Columns["columnFilename"].IsVisible = Properties.Settings.Default.ServiceColumnsVisible;
-            gridViewTranslation.Columns["columnTags"].IsVisible = Properties.Settings.Default.ServiceColumnsVisible;
-            gridViewTranslation.Columns["columnID"].Width = Properties.Settings.Default.ColIDWidth;
-            gridViewTranslation.Columns["columnFilename"].Width = Properties.Settings.Default.ColFilenameWidth;
-            gridViewTranslation.Columns["columnTags"].Width = Properties.Settings.Default.ColTagsWidth;
-            gridViewTranslation.Columns["columnRussianPhrase"].Width = Properties.Settings.Default.ColRusWidth;
-            gridViewTranslation.Columns["columnEnglishPhrase"].Width = Properties.Settings.Default.ColEngWidth;
+            this.Top = appSettings.MainFormTop;
+            this.Left = appSettings.MainFormLeft;
+            this.Height = appSettings.MainFormHeight;
+            this.Width = appSettings.MainFormWidth;
+            gridViewTranslation.Columns["columnID"].IsVisible = appSettings.ServiceColumnsVisible;
+            gridViewTranslation.Columns["columnFilename"].IsVisible = appSettings.ServiceColumnsVisible;
+            gridViewTranslation.Columns["columnTags"].IsVisible = appSettings.ServiceColumnsVisible;
+            gridViewTranslation.Columns["columnID"].Width = appSettings.ColIDWidth;
+            gridViewTranslation.Columns["columnFilename"].Width = appSettings.ColFilenameWidth;
+            gridViewTranslation.Columns["columnTags"].Width = appSettings.ColTagsWidth;
+            gridViewTranslation.Columns["columnRussianPhrase"].Width = appSettings.ColRusWidth;
+            gridViewTranslation.Columns["columnEnglishPhrase"].Width = appSettings.ColEngWidth;
         }
 
         private void MainForm_Activated(object sender, EventArgs e)
@@ -270,7 +278,6 @@ namespace InterfaceLocalizer
                 SpellChecker.Check(element.TextBoxItem.HostedControl);
                 correctedValue = e.ActiveEditor.Value.ToString();
             }
-            
         }
 
         private void gridViewTranslation_CellEndEdit(object sender, GridViewCellEventArgs e)
