@@ -14,6 +14,7 @@ namespace InterfaceLocalizer.GUI
 {
     public partial class StatisticsForm : Telerik.WinControls.UI.RadForm
     {
+        AppSettings appSettings;
         int filesCount = 0;
         int phrasesCount = 0;
         int symbolsCount =0 ;
@@ -21,9 +22,10 @@ namespace InterfaceLocalizer.GUI
         int nonLocalizedPhrases = 0;
         int nonLocalizedSymbols = 0;
 
-        public StatisticsForm()
+        public StatisticsForm(AppSettings _appSettings)
         {
             InitializeComponent();
+            appSettings = _appSettings;
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -34,8 +36,8 @@ namespace InterfaceLocalizer.GUI
         private void StatisticsForm_Load(object sender, EventArgs e)
         {
             rbChecked.ToggleState = Telerik.WinControls.Enumerations.ToggleState.On;
-            this.Left = Properties.Settings.Default.StatsFormLeft;
-            this.Top = Properties.Settings.Default.StatsFormTop;
+            this.Left = appSettings.StatsFormLeft;
+            this.Top = appSettings.StatsFormTop;
         }
 
         private void rbTotal_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
@@ -100,9 +102,9 @@ namespace InterfaceLocalizer.GUI
 
         private void StatisticsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Properties.Settings.Default.StatsFormLeft = this.Left;
-            Properties.Settings.Default.StatsFormTop = this.Top;
-            Properties.Settings.Default.Save();
+            appSettings.StatsFormLeft = this.Left;
+            appSettings.StatsFormTop = this.Top;
+            appSettings.SaveSettings();
         }
     }
 }

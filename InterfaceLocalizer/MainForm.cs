@@ -82,13 +82,13 @@ namespace InterfaceLocalizer
 
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
-            SettingsForm sf = new SettingsForm();
+            SettingsForm sf = new SettingsForm(appSettings);
             sf.Show();
         }
 
         private void menuItemStatistics_Click(object sender, EventArgs e)
         {
-            StatisticsForm sf = new StatisticsForm();
+            StatisticsForm sf = new StatisticsForm(appSettings);
             sf.Show();
         }
 

@@ -9,7 +9,7 @@ using InterfaceLocalizer.Properties;
 
 namespace InterfaceLocalizer.Classes
 {
-    class AppSettings
+    public class AppSettings
     {
         private int mainFormTop;
         private int mainFormLeft;
@@ -23,6 +23,8 @@ namespace InterfaceLocalizer.Classes
         private bool serviceColumnsVisible;
         private int settingsFormTop;
         private int settingsFormLeft;
+        private int statsFormTop;
+        private int statsFormLeft;
         private string pathToFiles;
         private string checkedFiles;
         private string checkedGossipFiles;
@@ -88,6 +90,17 @@ namespace InterfaceLocalizer.Classes
             get { return checkLocation(settingsFormTop); }
             set { settingsFormTop = checkLocation(value); }
         }
+        public int StatsFormLeft
+        {
+            get { return checkLocation(statsFormLeft); }
+            set { statsFormLeft = checkLocation(value); }
+        }
+        public int StatsFormTop
+        {
+            get { return checkLocation(statsFormTop); }
+            set { statsFormTop = checkLocation(value); }
+        }
+        
         
 	    public string PathToFiles
 	    {
@@ -127,14 +140,15 @@ namespace InterfaceLocalizer.Classes
             ColEngWidth = Properties.Settings.Default.ColEngWidth;
 
             ServiceColumnsVisible = Properties.Settings.Default.ServiceColumnsVisible;
+            SettingsFormLeft = Properties.Settings.Default.SettingsFormLeft;
+            SettingsFormTop = Properties.Settings.Default.SettingsFormTop;
+            StatsFormLeft = Properties.Settings.Default.StatsFormLeft;
+            StatsFormTop = Properties.Settings.Default.StatsFormTop;
 
             PathToFiles = Properties.Settings.Default.PathToFiles;
             CheckedFiles = Properties.Settings.Default.CheckedFiles;
             PathToGossip = Properties.Settings.Default.PathToGossip;
             CheckedGossipFiles = Properties.Settings.Default.CheckedGossipFiles;
-
-            SettingsFormLeft = Properties.Settings.Default.SettingsFormLeft;
-            SettingsFormTop = Properties.Settings.Default.SettingsFormTop;
         }
 
         public void SaveSettings()
@@ -153,10 +167,12 @@ namespace InterfaceLocalizer.Classes
             Properties.Settings.Default.ServiceColumnsVisible = ServiceColumnsVisible;
             Properties.Settings.Default.SettingsFormLeft = SettingsFormLeft;
             Properties.Settings.Default.SettingsFormTop = SettingsFormTop;
+            Properties.Settings.Default.StatsFormLeft =  StatsFormLeft;
+            Properties.Settings.Default.StatsFormTop = StatsFormTop;
 
             Properties.Settings.Default.PathToFiles = PathToFiles;
             Properties.Settings.Default.CheckedFiles = CheckedFiles;
-            Properties.Settings.Default.CheckedFiles = PathToGossip;
+            Properties.Settings.Default.PathToGossip = PathToGossip;
             Properties.Settings.Default.CheckedGossipFiles = CheckedGossipFiles;
 
             Properties.Settings.Default.Save();

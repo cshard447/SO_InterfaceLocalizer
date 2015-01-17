@@ -17,6 +17,7 @@ namespace InterfaceLocalizer.GUI
 {
     public partial class SettingsForm : Telerik.WinControls.UI.RadForm
     {
+        AppSettings appSettings;
         string path;
         IEnumerable<string> files;
         List<string> fileList = new List<string>();
@@ -27,26 +28,27 @@ namespace InterfaceLocalizer.GUI
         List<string> gossipFileList = new List<string>();
         int gossipCount = 0;
 
-        public SettingsForm()
+        public SettingsForm(AppSettings _appSettings)
         {
             InitializeComponent();
+            appSettings = _appSettings;
             if (Properties.Settings.Default.WorkMode == (int) WorkMode.interfaces)
                 pvSettings.SelectedPage = pageInterface;
             else if (Properties.Settings.Default.WorkMode == (int)WorkMode.gossip)
                 pvSettings.SelectedPage = pageGossip;
             // иниициализируем данные об интерфейсах
-            path = Properties.Settings.Default.PathToFiles;
-            bePathToFiles.Value = Properties.Settings.Default.PathToFiles;
-            List<string> filenames = CFileList.getListFromString(Properties.Settings.Default.CheckedFiles);
+            path = appSettings.PathToFiles;
+            bePathToFiles.Value = appSettings.PathToFiles;
+            List<string> filenames = CFileList.getListFromString(appSettings.CheckedFiles);
             foreach (ListViewDataItem item in lvFilesList.Items)
             {
                 if (filenames.Contains(item.Text))
                     item.CheckState = Telerik.WinControls.Enumerations.ToggleState.On;
             }
             
-            gossipPath = Properties.Settings.Default.PathToGossip;
-            bePathToGossip.Value = Properties.Settings.Default.PathToGossip;
-            List<string> gossipFilenames = CFileList.getListFromString(Properties.Settings.Default.CheckedGossipFiles);
+            gossipPath = appSettings.PathToGossip;
+            bePathToGossip.Value = appSettings.PathToGossip;
+            List<string> gossipFilenames = CFileList.getListFromString(appSettings.CheckedGossipFiles);
             foreach (ListViewDataItem item in lvGossipList.Items)
             {
                 if (gossipFilenames.Contains(item.Text))
@@ -120,10 +122,10 @@ namespace InterfaceLocalizer.GUI
             List<string> checkedFiles = new List<string>();
             foreach (ListViewDataItem item in lvFilesList.CheckedItems)
                 checkedFiles.Add(item.Text);
-            
-            Properties.Settings.Default.PathToFiles = path;
-            Properties.Settings.Default.CheckedFiles = CFileList.getListAsString(checkedFiles);
-            Properties.Settings.Default.Save();
+
+            appSettings.PathToFiles = path;
+            appSettings.CheckedFiles = CFileList.getListAsString(checkedFiles);
+            appSettings.SaveSettings();
 
             CFileList.allFiles = fileList;
             CFileList.checkedFiles = checkedFiles;
@@ -137,9 +139,9 @@ namespace InterfaceLocalizer.GUI
             foreach (ListViewDataItem item in lvGossipList.CheckedItems)
                 checkedFiles.Add(item.Text);
 
-            Properties.Settings.Default.PathToGossip = gossipPath;
-            Properties.Settings.Default.CheckedGossipFiles = CFileList.getListAsString(checkedFiles);
-            Properties.Settings.Default.Save();
+            appSettings.PathToGossip = gossipPath;
+            appSettings.CheckedGossipFiles = CFileList.getListAsString(checkedFiles);
+            appSettings.SaveSettings();
 
             CFileList.allGossipFiles = fileList;
             CFileList.checkedGossipFiles = checkedFiles;
@@ -167,15 +169,15 @@ namespace InterfaceLocalizer.GUI
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            this.Left = Properties.Settings.Default.SettingsFormLeft;
-            this.Top = Properties.Settings.Default.SettingsFormTop;
+            this.Left = appSettings.SettingsFormLeft;
+            this.Top = appSettings.SettingsFormTop;
         }
 
         private void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-             Properties.Settings.Default.SettingsFormLeft = this.Left;
-             Properties.Settings.Default.SettingsFormTop = this.Top;
-             Properties.Settings.Default.Save();
+            appSettings.SettingsFormLeft = this.Left;
+            appSettings.SettingsFormTop = this.Top;
+            appSettings.SaveSettings();
         }
 
     }
