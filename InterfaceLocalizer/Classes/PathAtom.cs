@@ -109,7 +109,6 @@ namespace InterfaceLocalizer.Classes
             while (copy.Count > 0)
             {
                 result.Add(copy.Pop().getAtom());
-                //result.SetValue(copy.Pop().getAtom());
             }
             return result;
         }
