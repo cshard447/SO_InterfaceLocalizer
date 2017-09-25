@@ -226,6 +226,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnTags"].Width = appSettings.ColTagsWidth;
             gridViewTranslation.Columns["columnRussianPhrase"].Width = appSettings.ColRusWidth;
             gridViewTranslation.Columns["columnEnglishPhrase"].Width = appSettings.ColEngWidth;
+            showInfo = appSettings.ServiceColumnsVisible;
         }
 
         private void MainForm_Activated(object sender, EventArgs e)

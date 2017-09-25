@@ -102,7 +102,7 @@ namespace InterfaceLocalizer.Classes
                 addJsonToManager(filename);
         }
 
-        public void addXmlToManager(string filename)
+        private void addXmlToManager(string filename)
         {
             string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
             string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
@@ -113,7 +113,7 @@ namespace InterfaceLocalizer.Classes
             parseXmlFile(reader, engDoc, filename);
         }
 
-        public void addJsonToManager(string filename)
+        private void addJsonToManager(string filename)
         {
             string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
             string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
@@ -143,6 +143,7 @@ namespace InterfaceLocalizer.Classes
         {
             string phrase = "";
             string eng = "";
+            //String attr = "";
             Stack<string> tags = new Stack<string>();
             bool gotten = false;
 
@@ -152,32 +153,38 @@ namespace InterfaceLocalizer.Classes
                 {
                     case XmlNodeType.Element: // Узел является элементом.
                         tags.Push(reader.Name);
+                        /*if (reader.HasAttributes)
+                        {
+                            attr = reader.GetAttribute(0);
+                            tags.Push(attr);
+                        }*/
                         if (reader.IsEmptyElement)
                         {
                             eng = "";
                             Stack<string> copy = new Stack<string>(tags.ToArray());
-                            //texts.Add(new CXmlData(phrase, eng, filename, copy));
                             xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
                             phrase = "";
                             eng = "";
                             tags.Pop();
                         }
                         break;
-                    case XmlNodeType.Text: // Вывести текст в каждом элементе.
+
+                    case XmlNodeType.Text: // Нашли текст в элементе, сохраняем его
                         phrase = reader.Value.Trim();
                         gotten = true;
                         break;
-                    case XmlNodeType.EndElement: // Вывести конец элемента.
-                        //if (phrase != "")
+
+                    case XmlNodeType.EndElement: // Нашли конец элемента, сохраняем данные в словарь
                         if (gotten)
                         {
                             eng = getValueFromXml(engDoc, tags);
                             Stack<string> copy = new Stack<string>(tags.ToArray());
-                            //texts.Add(new CXmlData(phrase, eng, filename, copy));
                             xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
                             gotten = false;
                             phrase = "";
                             eng = "";
+                            /*if (!String.IsNullOrEmpty(attr))
+                                tags.Pop();*/
                         }
                         tags.Pop();
                         break;
@@ -186,7 +193,7 @@ namespace InterfaceLocalizer.Classes
         
         }
 
-        public string getValueFromXml(XDocument doc, Stack<string> tags)
+        private string getValueFromXml(XDocument doc, Stack<string> tags)
         {
             string result = "";
             //Stack<string> ntags = invertStack(copy);            
