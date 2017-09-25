@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceLocalizer.Classes
 {
+
     public class CFileList
     {
         public static List<string> allFiles = new List<string>();
@@ -30,14 +31,6 @@ namespace InterfaceLocalizer.Classes
             }
             return result;
         }
-        
-        public static Stack<string> invertStack(Stack<string> stack)
-        {
-            Stack<string> result = new Stack<string>(stack);
-            //while (stack.Count > 0)
-            //    result.Push(stack.Pop());
-            return result;
-        }
-          
     }
+
 }

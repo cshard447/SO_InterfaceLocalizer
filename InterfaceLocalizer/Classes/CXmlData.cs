@@ -21,6 +21,7 @@ namespace InterfaceLocalizer.Classes
         private string engPhrase;
         private string filename;
         private Stack<string> tags;
+        private XmlPath newPath;
 
         public CXmlData(string _phrase, string _eng, string _filename, Stack<string> _tags)
         {
@@ -28,6 +29,15 @@ namespace InterfaceLocalizer.Classes
             filename = _filename;
             tags = new Stack<string>();
             tags = _tags;
+            newPath = new XmlPath();
+            engPhrase = _eng;
+        }
+
+        public CXmlData(string _phrase, string _eng, string _filename, XmlPath _path)
+        {
+            phrase = _phrase;
+            filename = _filename;
+            newPath = new XmlPath(_path);
             engPhrase = _eng;
         }
 
@@ -48,12 +58,14 @@ namespace InterfaceLocalizer.Classes
 
         public string getTagsString()
         {
-            Stack<string> copy = new Stack<string>(tags);
-            copy = CFileList.invertStack(copy);
+            /*Stack<string> copy = new Stack<string>(tags);
+            copy = GenericTest<string>.invertStack(copy);
             StringBuilder temp = new StringBuilder("");
             while (copy.Count != 0)
                 temp.Append( copy.Pop() + " -> " );
-            return temp.ToString();
+            return temp.ToString();*/
+            newPath.InvertIt();
+            return newPath.getPathAsString();
         }
 
         public void setRusData(string rusData)
@@ -70,6 +82,7 @@ namespace InterfaceLocalizer.Classes
         {
             return tags;
         }
+        
     }
 
     class CDataManager : IManager
@@ -143,8 +156,9 @@ namespace InterfaceLocalizer.Classes
         {
             string phrase = "";
             string eng = "";
-            //String attr = "";
+            String attr = "";
             Stack<string> tags = new Stack<string>();
+            XmlPath myPath = new XmlPath();
             bool gotten = false;
 
             while (reader.Read())
@@ -152,12 +166,10 @@ namespace InterfaceLocalizer.Classes
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element: // Узел является элементом.
-                        tags.Push(reader.Name);
-                        /*if (reader.HasAttributes)
-                        {
+                        if (reader.HasAttributes)
                             attr = reader.GetAttribute(0);
-                            tags.Push(attr);
-                        }*/
+                        tags.Push(reader.Name);                        
+                        myPath.Push(new PathAtom(reader.Name, attr));
                         if (reader.IsEmptyElement)
                         {
                             eng = "";
@@ -177,14 +189,18 @@ namespace InterfaceLocalizer.Classes
                     case XmlNodeType.EndElement: // Нашли конец элемента, сохраняем данные в словарь
                         if (gotten)
                         {
-                            eng = getValueFromXml(engDoc, tags);
-                            Stack<string> copy = new Stack<string>(tags.ToArray());
-                            xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
+                            //eng = getValueFromXml(engDoc, tags);
+                            //Stack<string> copy = new Stack<string>(tags.ToArray());
+                            //xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
+                            
+                            XmlPath cpy = new XmlPath(myPath);
+                            eng = getValueFromXml(engDoc, cpy);
+                            xmlDict.Add(id++, new CXmlData(phrase, eng, filename, myPath));
+                            myPath.Pop();
                             gotten = false;
                             phrase = "";
                             eng = "";
-                            /*if (!String.IsNullOrEmpty(attr))
-                                tags.Pop();*/
+                            attr = "";
                         }
                         tags.Pop();
                         break;
@@ -193,7 +209,44 @@ namespace InterfaceLocalizer.Classes
         
         }
 
-        private string getValueFromXml(XDocument doc, Stack<string> tags)
+        private string getValueFromXml(XDocument doc, XmlPath path)
+        {
+            string result = "";
+            //XElement elem = path.getPathAsElement();
+
+            //path.InvertIt();
+
+            try
+            {
+                
+                //XElement step1 = doc.Element(elem.Name);
+
+                XName temp = path.Pop().getAtom().Name;
+                XElement try1 = doc.Element(temp);
+
+                XAttribute temp2 = path.Pop().getAtom().Attribute("name");
+                XElement try2 = try1.Descendants().Where( x => (string)x.Attribute("name") == temp2.Value.ToString()).Single();
+                result = try2.Value.ToString();
+                //if (step1.HasAttributes)
+                 //   step2 = step1.Descendants().Where(x => (string)x.Attribute("name") == step1.Attribute("name")).FirstOrDefault();
+
+                //XElement step3 = step1.Element(
+                /*if (ntags.Count == 1)
+                    result = doc.Element(ntags.Pop()).Value.ToString();
+                else if (ntags.Count == 2)
+                    result = doc.Element(ntags.Pop()).Element(ntags.Pop()).Value.ToString();
+                else if (ntags.Count == 3)
+                    result = doc.Element(ntags.Pop()).Element(ntags.Pop()).Element(ntags.Pop()).Value.ToString();*/
+            }
+            catch
+            {
+                result = "<NO DATA>";
+            }
+            result = result.Trim();
+            return result;
+        }
+
+        /*private string getValueFromXml(XDocument doc, Stack<string> tags)
         {
             string result = "";
             //Stack<string> ntags = invertStack(copy);            
@@ -214,7 +267,7 @@ namespace InterfaceLocalizer.Classes
             }
             result = result.Trim();
             return result;        
-        }
+        }*/
 
         public void updateDataFromGridView(RadGridView gridView)
         {
@@ -268,7 +321,7 @@ namespace InterfaceLocalizer.Classes
                         continue;
 
                     Stack<string> copy = new Stack<string>(text.getTags());
-                    copy = CFileList.invertStack(copy);
+                    copy = GenericTest<string>.invertStack(copy);
                     string value = (english) ? (text.getEngData()) : (text.getRusData());
                     
                     if (copy.Count == 3)
