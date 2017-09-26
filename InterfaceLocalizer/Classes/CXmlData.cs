@@ -150,7 +150,6 @@ namespace InterfaceLocalizer.Classes
         {
             string phrase = "";
             string eng = "";
-            String attr = "";
             Stack<string> tags = new Stack<string>();
             XmlPath myPath = new XmlPath();
             bool gotten = false;
@@ -160,10 +159,9 @@ namespace InterfaceLocalizer.Classes
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element: // Узел является элементом.
-                        if (reader.HasAttributes)
-                            attr = reader.GetAttribute(0);
-                        tags.Push(reader.Name);                        
-                        myPath.Push(new PathAtom(reader.Name, attr));
+                        tags.Push(reader.Name);
+                        String tempAttr = (reader.HasAttributes) ? (reader.GetAttribute(0)) : ("");
+                        myPath.Push(new PathAtom(reader.Name, tempAttr));
                         if (reader.IsEmptyElement)
                         {
                             eng = "";
@@ -183,20 +181,15 @@ namespace InterfaceLocalizer.Classes
                     case XmlNodeType.EndElement: // Нашли конец элемента, сохраняем данные в словарь
                         if (gotten)
                         {
-                            //eng = getValueFromXml(engDoc, tags);
-                            //Stack<string> copy = new Stack<string>(tags.ToArray());
-                            //xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
-                            
                             XmlPath cpy = new XmlPath(myPath);
                             eng = getValueFromXml(engDoc, cpy);
                             xmlDict.Add(id++, new CXmlData(phrase, eng, filename, myPath));
-                            myPath.Pop();
                             gotten = false;
                             phrase = "";
                             eng = "";
-                            attr = "";
                         }
                         tags.Pop();
+                        myPath.Pop();
                         break;
                 }
             }        
