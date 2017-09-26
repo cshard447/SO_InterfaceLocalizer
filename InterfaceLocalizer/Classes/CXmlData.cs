@@ -113,7 +113,6 @@ namespace InterfaceLocalizer.Classes
         {
             string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
             string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
-            //XmlTextReader reader = new XmlTextReader(rusPath);
             XmlReader reader = new XmlTextReader(rusPath);
             XDocument engDoc = new XDocument();
             engDoc = XDocument.Load(engPath);
@@ -150,7 +149,6 @@ namespace InterfaceLocalizer.Classes
         {
             string phrase = "";
             string eng = "";
-            Stack<string> tags = new Stack<string>();
             XmlPath myPath = new XmlPath();
             bool gotten = false;
 
@@ -159,7 +157,6 @@ namespace InterfaceLocalizer.Classes
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element: // Узел является элементом.
-                        tags.Push(reader.Name);
                         String tempAttr = (reader.HasAttributes) ? (reader.GetAttribute(0)) : ("");
                         myPath.Push(new PathAtom(reader.Name, tempAttr));
                         if (reader.IsEmptyElement)
@@ -187,7 +184,6 @@ namespace InterfaceLocalizer.Classes
                             phrase = "";
                             eng = "";
                         }
-                        tags.Pop();
                         myPath.Pop();
                         break;
                 }
@@ -198,25 +194,20 @@ namespace InterfaceLocalizer.Classes
         private string getValueFromXml(XDocument doc, XmlPath path)
         {
             string result = "";
-
             try
             {
-                XName temp = path.Pop().getAtom().Name;
-                XElement try1 = doc.Element(temp);
+                XElement step1 = path.Pop().getAtom(); ;
+                IEnumerable<XElement> try1 = doc.Elements(step1.Name);
 
-                XAttribute temp2 = path.Pop().getAtom().Attribute("name");
-                XElement try2 = try1.Descendants().Where( x => (string)x.Attribute("name") == temp2.Value.ToString()).Single();
-                result = try2.Value.ToString();
-                //if (step1.HasAttributes)
-                 //   step2 = step1.Descendants().Where(x => (string)x.Attribute("name") == step1.Attribute("name")).FirstOrDefault();
+                while (path.Count() > 0)
+                {
+                    step1 = path.Pop().getAtom();
+                    try1 = try1.Elements(step1.Name);
+                    if (step1.HasAttributes)
+                        try1 = try1.Where(x => (string)x.Attribute("name") == step1.Attribute("name").Value.ToString());
+                }
 
-                //XElement step3 = step1.Element(
-                /*if (ntags.Count == 1)
-                    result = doc.Element(ntags.Pop()).Value.ToString();
-                else if (ntags.Count == 2)
-                    result = doc.Element(ntags.Pop()).Element(ntags.Pop()).Value.ToString();
-                else if (ntags.Count == 3)
-                    result = doc.Element(ntags.Pop()).Element(ntags.Pop()).Element(ntags.Pop()).Value.ToString();*/
+                result = try1.First().Value.ToString();
             }
             catch
             {

@@ -91,6 +91,11 @@ namespace InterfaceLocalizer.Classes
             path = GenericTest<PathAtom>.invertStack(path);
         }
 
+        public int Count()
+        {
+            return path.Count();
+        }
+
         public string getPathAsString()
         {
             Stack<PathAtom> copy = new Stack<PathAtom>(path);
