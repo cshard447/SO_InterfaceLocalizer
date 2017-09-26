@@ -165,11 +165,10 @@ namespace InterfaceLocalizer.Classes
                         if (reader.IsEmptyElement)
                         {
                             eng = "";
-                            Stack<string> copy = new Stack<string>(tags.ToArray());
-                            xmlDict.Add(id++, new CXmlData(phrase, eng, filename, copy));
+                            xmlDict.Add(id++, new CXmlData(phrase, eng, filename, myPath));
                             phrase = "";
                             eng = "";
-                            tags.Pop();
+                            myPath.Pop();
                         }
                         break;
 
