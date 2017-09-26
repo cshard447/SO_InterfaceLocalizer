@@ -204,7 +204,7 @@ namespace InterfaceLocalizer.Classes
                     step1 = path.Pop().getAtom();
                     try1 = try1.Elements(step1.Name);
                     if (step1.HasAttributes)
-                        try1 = try1.Where(x => (string)x.Attribute("name") == step1.Attribute("name").Value.ToString());
+                        try1 = try1.Where(x => (string)x.Attribute("name") == step1.Attribute("name").Value.ToString()).ToArray();
                 }
 
                 result = try1.First().Value.ToString();
