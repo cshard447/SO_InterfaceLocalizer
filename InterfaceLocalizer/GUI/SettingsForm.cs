@@ -39,7 +39,7 @@ namespace InterfaceLocalizer.GUI
             // иниициализируем данные об интерфейсах
             path = appSettings.PathToFiles;
             bePathToFiles.Value = appSettings.PathToFiles;
-            List<string> filenames = CFileList.getListFromString(appSettings.CheckedFiles);
+            List<string> filenames = CFileList.GetListFromString(appSettings.CheckedFiles);
             foreach (ListViewDataItem item in lvFilesList.Items)
             {
                 if (filenames.Contains(item.Text))
@@ -48,7 +48,7 @@ namespace InterfaceLocalizer.GUI
             
             gossipPath = appSettings.PathToGossip;
             bePathToGossip.Value = appSettings.PathToGossip;
-            List<string> gossipFilenames = CFileList.getListFromString(appSettings.CheckedGossipFiles);
+            List<string> gossipFilenames = CFileList.GetListFromString(appSettings.CheckedGossipFiles);
             foreach (ListViewDataItem item in lvGossipList.Items)
             {
                 if (gossipFilenames.Contains(item.Text))
@@ -124,11 +124,11 @@ namespace InterfaceLocalizer.GUI
                 checkedFiles.Add(item.Text);
 
             appSettings.PathToFiles = path;
-            appSettings.CheckedFiles = CFileList.getListAsString(checkedFiles);
+            appSettings.CheckedFiles = CFileList.GetListAsString(checkedFiles);
             appSettings.SaveSettings();
 
-            CFileList.allFiles = fileList;
-            CFileList.checkedFiles = checkedFiles;
+            CFileList.AllFiles = fileList;
+            CFileList.CheckedFiles = checkedFiles;
             Properties.Settings.Default.WorkMode = (int) WorkMode.interfaces;
             this.Close();
         }
@@ -140,11 +140,11 @@ namespace InterfaceLocalizer.GUI
                 checkedFiles.Add(item.Text);
 
             appSettings.PathToGossip = gossipPath;
-            appSettings.CheckedGossipFiles = CFileList.getListAsString(checkedFiles);
+            appSettings.CheckedGossipFiles = CFileList.GetListAsString(checkedFiles);
             appSettings.SaveSettings();
 
-            CFileList.allGossipFiles = fileList;
-            CFileList.checkedGossipFiles = checkedFiles;
+            CFileList.AllGossipFiles = fileList;
+            CFileList.CheckedGossipFiles = checkedFiles;
             Properties.Settings.Default.WorkMode = (int) WorkMode.gossip;
             this.Close();
         }

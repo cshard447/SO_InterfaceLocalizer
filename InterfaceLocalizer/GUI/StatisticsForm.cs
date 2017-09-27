@@ -42,12 +42,12 @@ namespace InterfaceLocalizer.GUI
 
         private void rbTotal_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            calcStats(CFileList.allFiles);
+            calcStats(CFileList.AllFiles);
         }
 
         private void rbChecked_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            calcStats(CFileList.checkedFiles);
+            calcStats(CFileList.CheckedFiles);
         }
 
         private void calcStats(List<string> fileList)
@@ -56,20 +56,20 @@ namespace InterfaceLocalizer.GUI
             CDataManager dataManager = new CDataManager();
             filesCount = fileList.Count;
             foreach (string file in fileList)
-                dataManager.addFileToManager(file);
+                dataManager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> texts = dataManager.getFullDictionary();
+            Dictionary<int, ITranslatable> texts = dataManager.GetFullDictionary();
             phrasesCount = texts.Count;
             foreach (CXmlData text in texts.Values)
             {
-                symbolsCount += text.getRusData().Length;
-                if (text.getEngData() == "<NO DATA>" || text.getEngData() == "")
+                symbolsCount += text.GetRusData().Length;
+                if (text.GetEngData() == "<NO DATA>" || text.GetEngData() == "")
                 {
                     nonLocalizedPhrases++;
-                    nonLocalizedSymbols += text.getRusData().Length;
+                    nonLocalizedSymbols += text.GetRusData().Length;
                 }
                 //else
-                    engSymbols += text.getEngData().Length;
+                    engSymbols += text.GetEngData().Length;
 
             }
             showStats();

@@ -38,38 +38,38 @@ namespace InterfaceLocalizer.Classes
             engPhrase = _eng;
         }
 
-        public string getRusData()
+        public string GetRusData()
         {
             return phrase;
         }
 
-        public string getEngData()
+        public string GetEngData()
         {
             return engPhrase;
         }
 
-        public string getFilename()
+        public string GetFilename()
         {
             return filename;
         }
 
-        public string getTagsString()
+        public string GetPathString()
         {
             xmlPath.InvertIt();
-            return xmlPath.getPathAsString();
+            return xmlPath.GetPathAsString();
         }
 
-        public void setRusData(string rusData)
+        public void SetRusData(string rusData)
         {
             phrase = rusData;
         }
 
-        public void setEngData(string engData)
+        public void SetEngData(string engData)
         {
             engPhrase = engData;
         }
 
-        public Stack<string> getTags()
+        public Stack<string> GetTags()
         {
             //* this function is obsolete and doesn't work
             Stack<string> temp = new Stack<string>();
@@ -89,18 +89,18 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, ITranslatable> getFullDictionary()
+        public Dictionary<int, ITranslatable> GetFullDictionary()
         {
             return xmlDict;
         }
 
-        public void clearAllData()
+        public void ClearAllData()
         {
             xmlDict.Clear();
             id = 0;
         }
 
-        public void addFileToManager(string filename)
+        public void AddFileToManager(string filename)
         {
             string ext = Path.GetExtension(filename);
             if (ext == ".xml")
@@ -196,12 +196,12 @@ namespace InterfaceLocalizer.Classes
             string result = "";
             try
             {
-                XElement step1 = path.Pop().getAtom(); ;
+                XElement step1 = path.Pop().GetAtom(); ;
                 IEnumerable<XElement> try1 = doc.Elements(step1.Name);
 
                 while (path.Count() > 0)
                 {
-                    step1 = path.Pop().getAtom();
+                    step1 = path.Pop().GetAtom();
                     try1 = try1.Elements(step1.Name);
                     if (step1.HasAttributes)
                         try1 = try1.Where(x => (string)x.Attribute("name") == step1.Attribute("name").Value.ToString()).ToArray();
@@ -220,7 +220,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        public void updateDataFromGridView(RadGridView gridView)
+        public void UpdateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
@@ -233,20 +233,20 @@ namespace InterfaceLocalizer.Classes
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                if (xmlDict[id].getFilename() != filename)
+                if (xmlDict[id].GetFilename() != filename)
                     throw new System.ArgumentException("Имена файлов не совпадают!");
 
-                xmlDict[id].setRusData(rus);
-                xmlDict[id].setEngData(eng);
+                xmlDict[id].SetRusData(rus);
+                xmlDict[id].SetEngData(eng);
             }            
         }
 
-        public void saveDataToFile(bool english)
+        public void SaveDataToFile(bool english)
         {
             string path = Properties.Settings.Default.PathToFiles;
             path += (english) ? ("\\English\\") : ("\\Russian\\");
             bool json = false;
-            foreach (string file in CFileList.checkedFiles)
+            foreach (string file in CFileList.CheckedFiles)
             {
                 XDocument doc = new XDocument();
                 if (Path.GetExtension(file) == ".json")
@@ -268,12 +268,12 @@ namespace InterfaceLocalizer.Classes
 
                 foreach (CXmlData text in xmlDict.Values)
                 {
-                    if (text.getFilename() != file)
+                    if (text.GetFilename() != file)
                         continue;
 
-                    Stack<string> copy = new Stack<string>(text.getTags());
-                    copy = GenericTest<string>.invertStack(copy);
-                    string value = (english) ? (text.getEngData()) : (text.getRusData());
+                    Stack<string> copy = new Stack<string>(text.GetTags());
+                    copy = GenericStack<string>.InvertStack(copy);
+                    string value = (english) ? (text.GetEngData()) : (text.GetRusData());
                     
                     if (copy.Count == 3)
                     {

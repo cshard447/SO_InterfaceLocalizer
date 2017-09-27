@@ -9,21 +9,22 @@ namespace InterfaceLocalizer.Classes
 {
     interface ITranslatable
     {
-        string getRusData();
-        string getEngData();
-        string getFilename();
-        string getTagsString();
-        void setRusData(string rusData);
-        void setEngData(string engData);
-        Stack<string> getTags();
+        string GetRusData();
+        string GetEngData();
+        string GetFilename();
+        string GetPathString();
+        void SetRusData(string rusData);
+        void SetEngData(string engData);
+        [System.Obsolete("Method is no longer due to transition to XmlPath class")]
+        Stack<string> GetTags();
     }
 
     interface IManager
     {
-        Dictionary<int, ITranslatable> getFullDictionary();
-        void clearAllData();
-        void addFileToManager(string filename);
-        void updateDataFromGridView(RadGridView gridView);
-        void saveDataToFile(bool english);
+        Dictionary<int, ITranslatable> GetFullDictionary();
+        void ClearAllData();
+        void AddFileToManager(string filename);
+        void UpdateDataFromGridView(RadGridView gridView);
+        void SaveDataToFile(bool english);
     }
 }

@@ -10,9 +10,9 @@ using System.Xml.Linq;
 namespace InterfaceLocalizer.Classes
 {
 
-    public class GenericTest<T>
+    public class GenericStack<T>
     {
-        public static Stack<T> invertStack(Stack<T> stack)
+        public static Stack<T> InvertStack(Stack<T> stack)
         {
             Stack<T> result = new Stack<T>(stack);
             return result;
@@ -23,14 +23,8 @@ namespace InterfaceLocalizer.Classes
 
     public class PathAtom : IFormattable
     {
-        string name;
-        string attribute;
-
-        public PathAtom(string _name)
-        {
-            name = _name;
-            attribute = "";
-        }
+        private string name;
+        private string attribute;
 
         public PathAtom(string _name, string _attribute)
         {
@@ -51,7 +45,7 @@ namespace InterfaceLocalizer.Classes
             return "_";
         }
 
-        public XElement getAtom()
+        public XElement GetAtom()
         { 
             XElement elem = new XElement(name);
             if (!String.IsNullOrEmpty(attribute))
@@ -64,7 +58,7 @@ namespace InterfaceLocalizer.Classes
 
     public class XmlPath
     {
-        Stack<PathAtom> path;
+        private Stack<PathAtom> path;
 
         public XmlPath()
         {
@@ -88,7 +82,7 @@ namespace InterfaceLocalizer.Classes
 
         public void InvertIt()
         {
-            path = GenericTest<PathAtom>.invertStack(path);
+            path = GenericStack<PathAtom>.InvertStack(path);
         }
 
         public int Count()
@@ -96,25 +90,24 @@ namespace InterfaceLocalizer.Classes
             return path.Count();
         }
 
-        public string getPathAsString()
+        public string GetPathAsString()
         {
             Stack<PathAtom> copy = new Stack<PathAtom>(path);
-            copy = GenericTest<PathAtom>.invertStack(path);
-            StringBuilder temp = new StringBuilder("");
+            copy = GenericStack<PathAtom>.InvertStack(path);
+            StringBuilder result = new StringBuilder("");
             while (copy.Count != 0)
-                temp.Append(copy.Pop().ToString() + " -> ");
-            return temp.ToString();
+                result.Append(copy.Pop().ToString() + " -> ");
+            return result.ToString();
         }
 
-        public XElement getPathAsElement()
+        public XElement GetPathAsElement()
         {
             Stack<PathAtom> copy = new Stack<PathAtom>(path);
-            copy = GenericTest<PathAtom>.invertStack(path);            
-            XElement result = new XElement(copy.Pop().getAtom());
+            copy = GenericStack<PathAtom>.InvertStack(path);            
+            XElement result = new XElement(copy.Pop().GetAtom());
             while (copy.Count > 0)
-            {
-                result.Add(copy.Pop().getAtom());
-            }
+                result.Add(copy.Pop().GetAtom());
+
             return result;
         }
     }

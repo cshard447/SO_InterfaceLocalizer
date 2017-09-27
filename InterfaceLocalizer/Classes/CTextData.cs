@@ -21,36 +21,36 @@ namespace InterfaceLocalizer.Classes
             engText = _engText;
         }
 
-        public string getRusData()
+        public string GetRusData()
         {
             return rusText;
         }
 
-        public string getEngData()
+        public string GetEngData()
         {
             return engText;
         }
 
-        public string getFilename()
+        public string GetFilename()
         {
             return filename;
         }
 
-        public string getTagsString()
+        public string GetPathString()
         {
             return "";
         }
 
-        public void setRusData(string rusData)
+        public void SetRusData(string rusData)
         {
             rusText = rusData;
         }
 
-        public void setEngData(string engData)
+        public void SetEngData(string engData)
         {
             engText = engData;
         }
-        public Stack<string> getTags()
+        public Stack<string> GetTags()
         {
             return new Stack<string>();
         }
@@ -66,18 +66,18 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, ITranslatable> getFullDictionary()
+        public Dictionary<int, ITranslatable> GetFullDictionary()
         {
             return textDict;
         }
 
-        public void clearAllData()
+        public void ClearAllData()
         {
             textDict.Clear();
             id = 0;
         }
 
-        public void addFileToManager(string filename)
+        public void AddFileToManager(string filename)
         {
             string rusPath = Properties.Settings.Default.PathToGossip + filename;
             string engPath = Properties.Settings.Default.PathToGossip + @"\English\" + filename;
@@ -88,7 +88,7 @@ namespace InterfaceLocalizer.Classes
             id++;
         }
 
-        public void updateDataFromGridView(RadGridView gridView)
+        public void UpdateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
@@ -100,28 +100,25 @@ namespace InterfaceLocalizer.Classes
                 if (!textDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                if (textDict[id].getFilename() != filename)
+                if (textDict[id].GetFilename() != filename)
                     throw new System.ArgumentException("Имена файлов не совпадают!");
 
-                textDict[id].setRusData(rus);
-                textDict[id].setEngData(eng);
+                textDict[id].SetRusData(rus);
+                textDict[id].SetEngData(eng);
             }
         }
 
-        public void saveDataToFile(bool english)
+        public void SaveDataToFile(bool english)
         {
             string path = Properties.Settings.Default.PathToGossip;
             path += (english) ? (@"English\") : ("");
             
-            //foreach (string file in CFileList.checkedGossipFiles)
-            //{
             foreach (CTextData text in textDict.Values)
             {
-                string value = (english) ? (text.getEngData()) : (text.getRusData());
-                string file = path + text.getFilename();
+                string value = (english) ? (text.GetEngData()) : (text.GetRusData());
+                string file = path + text.GetFilename();
                 File.WriteAllText(file, value, Encoding.UTF8);
             }
-            //}
         }
 
     }

@@ -46,9 +46,9 @@ namespace InterfaceLocalizer
                 LoadSettings();
 
                 LoadData(appSettings.PathToFiles + "\\Russian\\", appSettings.CheckedFiles, "*.xml",
-                        ref CFileList.allFiles, ref CFileList.checkedFiles);
+                        ref CFileList.AllFiles, ref CFileList.CheckedFiles);
                 LoadData(appSettings.PathToGossip, appSettings.CheckedGossipFiles, "*.txt",
-                        ref CFileList.allGossipFiles, ref CFileList.checkedGossipFiles);
+                        ref CFileList.AllGossipFiles, ref CFileList.CheckedGossipFiles);
             }
             catch (Exception)
             {
@@ -95,19 +95,19 @@ namespace InterfaceLocalizer
         private void cmbShowData_Click(object sender, EventArgs e)
         {
             if (workMode == WorkMode.interfaces)
-                ShowDataOnGrid(dataManager, CFileList.checkedFiles);
+                ShowDataOnGrid(dataManager, CFileList.CheckedFiles);
             else if (workMode == WorkMode.gossip)
-                ShowDataOnGrid(textManager, CFileList.checkedGossipFiles);
+                ShowDataOnGrid(textManager, CFileList.CheckedGossipFiles);
         }
 
         private void ShowDataOnGrid(IManager manager, List<string> source)
         {
-            manager.clearAllData();
+            manager.ClearAllData();
             gridViewTranslation.Rows.Clear();
             foreach (string file in source)
-                manager.addFileToManager(file);
+                manager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> textDict = manager.getFullDictionary();
+            Dictionary<int, ITranslatable> textDict = manager.GetFullDictionary();
             gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
                 addDataToGridView(id, textDict[id]);
@@ -120,17 +120,17 @@ namespace InterfaceLocalizer
         {
             if (workMode == WorkMode.interfaces)
             {
-                dataManager.clearAllData();
+                dataManager.ClearAllData();
                 gridViewTranslation.Rows.Clear();
 
-                foreach (string file in CFileList.checkedFiles)
-                    dataManager.addFileToManager(file);
+                foreach (string file in CFileList.CheckedFiles)
+                    dataManager.AddFileToManager(file);
 
-                Dictionary<int, ITranslatable> textDict = dataManager.getFullDictionary();
+                Dictionary<int, ITranslatable> textDict = dataManager.GetFullDictionary();
                 gridViewTranslation.BeginUpdate();
                 foreach (int id in textDict.Keys)
                 {
-                    if (textDict[id].getEngData() == "<NO DATA>" || textDict[id].getEngData() == "")
+                    if (textDict[id].GetEngData() == "<NO DATA>" || textDict[id].GetEngData() == "")
                     {
                         addDataToGridView(id, textDict[id]);
                     }
@@ -144,10 +144,10 @@ namespace InterfaceLocalizer
         {
             object[] values = new object[5];
             values[0] = id.ToString();
-            values[1] = Path.GetFileName(data.getFilename());
-            values[2] = data.getTagsString();
-            values[3] = data.getRusData();
-            values[4] = data.getEngData();
+            values[1] = Path.GetFileName(data.GetFilename());
+            values[2] = data.GetPathString();
+            values[3] = data.GetRusData();
+            values[4] = data.GetEngData();
             gridViewTranslation.Rows.Add(values);
         }
 
@@ -170,7 +170,7 @@ namespace InterfaceLocalizer
             }
         }
 
-        private void cmbSaveChecked_Click(object sender, EventArgs e)
+        private void cmbSaveEng_Click(object sender, EventArgs e)
         {
             if (workMode == WorkMode.interfaces)
                 SaveDataToFile(dataManager, true);
@@ -188,8 +188,8 @@ namespace InterfaceLocalizer
 
         private void SaveDataToFile(IManager manager, bool englishData)
         {
-            manager.updateDataFromGridView(gridViewTranslation);
-            manager.saveDataToFile(englishData);
+            manager.UpdateDataFromGridView(gridViewTranslation);
+            manager.SaveDataToFile(englishData);
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -244,7 +244,6 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
-            //cmbColumnsHide_Click(null, null);
             gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;
@@ -258,16 +257,11 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = false;
             gridViewTranslation.Columns["columnTags"].IsVisible = false;
             gridViewTranslation.Columns["columnFilename"].IsVisible = false;
-            //cmbColumnsHide_Click(null, null);
             gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnEnglishPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
-            //gridViewTranslation.Columns["columnRussianPhrase"].StretchVertically = true;
-            //gridViewTranslation.Columns["columnRussianPhrase"].AutoSizeMode = Telerik.WinControls.UI.BestFitColumnMode.DisplayedCells;
-            //gridViewTranslation.AllowAutoSizeColumns = true;
-            //gridViewTranslation.AutoSizeColumnsMode = Telerik.WinControls.UI.GridViewAutoSizeColumnsMode.Fill;        
         }
 
         private void gridViewTranslation_CellValidating(object sender, Telerik.WinControls.UI.CellValidatingEventArgs e)

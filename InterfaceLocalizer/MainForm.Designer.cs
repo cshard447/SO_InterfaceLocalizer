@@ -104,7 +104,7 @@
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
             this.cmbRow});
-            this.commandBarTranslation.Size = new System.Drawing.Size(887, 45);
+            this.commandBarTranslation.Size = new System.Drawing.Size(887, 70);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
@@ -186,7 +186,7 @@
             this.cmbSaveEng.Text = "Сохранить Eng";
             this.cmbSaveEng.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmbSaveEng.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.cmbSaveEng.Click += new System.EventHandler(this.cmbSaveChecked_Click);
+            this.cmbSaveEng.Click += new System.EventHandler(this.cmbSaveEng_Click);
             // 
             // cmbSaveRus
             // 
@@ -228,7 +228,7 @@
             this.gridViewTranslation.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.gridViewTranslation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridViewTranslation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewTranslation.Location = new System.Drawing.Point(0, 65);
+            this.gridViewTranslation.Location = new System.Drawing.Point(0, 90);
             // 
             // gridViewTranslation
             // 
@@ -276,7 +276,7 @@
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(887, 589);
+            this.gridViewTranslation.Size = new System.Drawing.Size(887, 564);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
             this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);
