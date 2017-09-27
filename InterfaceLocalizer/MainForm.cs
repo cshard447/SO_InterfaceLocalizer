@@ -203,6 +203,7 @@ namespace InterfaceLocalizer
             appSettings.MainFormLeft = this.Left;
             appSettings.MainFormHeight = this.Height;
             appSettings.MainFormWidth = this.Width;
+            appSettings.SpellCheckCompleteBox = menuItemCompleteMessage.IsChecked;
             appSettings.ServiceColumnsVisible = gridViewTranslation.Columns["columnID"].IsVisible;
             appSettings.ColIDWidth = gridViewTranslation.Columns["columnID"].Width;
             appSettings.ColFilenameWidth = gridViewTranslation.Columns["columnFilename"].Width;
@@ -218,6 +219,7 @@ namespace InterfaceLocalizer
             this.Left = appSettings.MainFormLeft;
             this.Height = appSettings.MainFormHeight;
             this.Width = appSettings.MainFormWidth;
+            
             gridViewTranslation.Columns["columnID"].IsVisible = appSettings.ServiceColumnsVisible;
             gridViewTranslation.Columns["columnFilename"].IsVisible = appSettings.ServiceColumnsVisible;
             gridViewTranslation.Columns["columnTags"].IsVisible = appSettings.ServiceColumnsVisible;
@@ -227,6 +229,8 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnRussianPhrase"].Width = appSettings.ColRusWidth;
             gridViewTranslation.Columns["columnEnglishPhrase"].Width = appSettings.ColEngWidth;
             showInfo = appSettings.ServiceColumnsVisible;
+            menuItemCompleteMessage.IsChecked = appSettings.SpellCheckCompleteBox;
+            SpellChecker.EnableCompleteMessageBox = appSettings.SpellCheckCompleteBox;
         }
 
         private void MainForm_Activated(object sender, EventArgs e)
@@ -281,5 +285,10 @@ namespace InterfaceLocalizer
         }
 
         private static readonly CultureInfo RussianCulture = CultureInfo.GetCultureInfo("ru-RU");
+
+        private void menuItemCompleteMessage_Click(object sender, EventArgs e)
+        {
+            SpellChecker.EnableCompleteMessageBox = !SpellChecker.EnableCompleteMessageBox;
+        }
     }
 }

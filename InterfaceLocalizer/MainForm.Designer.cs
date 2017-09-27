@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor1 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor2 = new Telerik.WinControls.Data.SortDescriptor();
             this.mainMenu = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
@@ -52,6 +52,8 @@
             this.lMode = new Telerik.WinControls.UI.CommandBarLabel();
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             this.SpellChecker = new Telerik.WinControls.UI.RadSpellChecker();
+            this.menuItemSpellCheck = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemCompleteMessage = new Telerik.WinControls.UI.RadMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -61,7 +63,8 @@
             // mainMenu
             // 
             this.mainMenu.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.menuItemMain});
+            this.menuItemMain,
+            this.menuItemSpellCheck});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(887, 20);
@@ -104,7 +107,7 @@
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
             this.cmbRow});
-            this.commandBarTranslation.Size = new System.Drawing.Size(887, 70);
+            this.commandBarTranslation.Size = new System.Drawing.Size(887, 45);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
@@ -228,59 +231,79 @@
             this.gridViewTranslation.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.gridViewTranslation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridViewTranslation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewTranslation.Location = new System.Drawing.Point(0, 90);
+            this.gridViewTranslation.Location = new System.Drawing.Point(0, 65);
             // 
             // gridViewTranslation
             // 
             this.gridViewTranslation.MasterTemplate.AllowAddNewRow = false;
             this.gridViewTranslation.MasterTemplate.AllowColumnReorder = false;
             this.gridViewTranslation.MasterTemplate.AllowDeleteRow = false;
-            gridViewTextBoxColumn1.EnableExpressionEditor = false;
-            gridViewTextBoxColumn1.HeaderText = "ID";
-            gridViewTextBoxColumn1.Name = "columnID";
-            gridViewTextBoxColumn1.ReadOnly = true;
-            gridViewTextBoxColumn2.EnableExpressionEditor = false;
-            gridViewTextBoxColumn2.HeaderText = "Имя файла";
-            gridViewTextBoxColumn2.Name = "columnFileName";
-            gridViewTextBoxColumn2.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
-            gridViewTextBoxColumn2.Width = 93;
-            gridViewTextBoxColumn3.EnableExpressionEditor = false;
-            gridViewTextBoxColumn3.HeaderText = "Теги";
-            gridViewTextBoxColumn3.Name = "columnTags";
-            gridViewTextBoxColumn3.Width = 117;
-            gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.HeaderText = "Русский";
-            gridViewTextBoxColumn4.MaxLength = 100000;
-            gridViewTextBoxColumn4.Multiline = true;
-            gridViewTextBoxColumn4.Name = "columnRussianPhrase";
-            gridViewTextBoxColumn4.StretchVertically = false;
-            gridViewTextBoxColumn4.Width = 300;
-            gridViewTextBoxColumn5.EnableExpressionEditor = false;
-            gridViewTextBoxColumn5.HeaderText = "Английский";
-            gridViewTextBoxColumn5.Multiline = true;
-            gridViewTextBoxColumn5.Name = "columnEnglishPhrase";
-            gridViewTextBoxColumn5.Width = 300;
+            gridViewTextBoxColumn6.EnableExpressionEditor = false;
+            gridViewTextBoxColumn6.HeaderText = "ID";
+            gridViewTextBoxColumn6.Name = "columnID";
+            gridViewTextBoxColumn6.ReadOnly = true;
+            gridViewTextBoxColumn7.EnableExpressionEditor = false;
+            gridViewTextBoxColumn7.HeaderText = "Имя файла";
+            gridViewTextBoxColumn7.Name = "columnFileName";
+            gridViewTextBoxColumn7.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            gridViewTextBoxColumn7.Width = 93;
+            gridViewTextBoxColumn8.EnableExpressionEditor = false;
+            gridViewTextBoxColumn8.HeaderText = "Теги";
+            gridViewTextBoxColumn8.Name = "columnTags";
+            gridViewTextBoxColumn8.Width = 117;
+            gridViewTextBoxColumn9.EnableExpressionEditor = false;
+            gridViewTextBoxColumn9.HeaderText = "Русский";
+            gridViewTextBoxColumn9.MaxLength = 100000;
+            gridViewTextBoxColumn9.Multiline = true;
+            gridViewTextBoxColumn9.Name = "columnRussianPhrase";
+            gridViewTextBoxColumn9.StretchVertically = false;
+            gridViewTextBoxColumn9.Width = 300;
+            gridViewTextBoxColumn10.EnableExpressionEditor = false;
+            gridViewTextBoxColumn10.HeaderText = "Английский";
+            gridViewTextBoxColumn10.Multiline = true;
+            gridViewTextBoxColumn10.Name = "columnEnglishPhrase";
+            gridViewTextBoxColumn10.Width = 300;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn1,
-            gridViewTextBoxColumn2,
-            gridViewTextBoxColumn3,
-            gridViewTextBoxColumn4,
-            gridViewTextBoxColumn5});
+            gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8,
+            gridViewTextBoxColumn9,
+            gridViewTextBoxColumn10});
             this.gridViewTranslation.MasterTemplate.EnableFiltering = true;
             this.gridViewTranslation.MasterTemplate.EnableGrouping = false;
             this.gridViewTranslation.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
-            sortDescriptor1.PropertyName = "columnFileName";
+            sortDescriptor2.PropertyName = "columnFileName";
             this.gridViewTranslation.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor1});
+            sortDescriptor2});
             this.gridViewTranslation.MasterTemplate.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow;
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(887, 564);
+            this.gridViewTranslation.Size = new System.Drawing.Size(887, 589);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
             this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);
             this.gridViewTranslation.CellValidating += new Telerik.WinControls.UI.CellValidatingEventHandler(this.gridViewTranslation_CellValidating);
+            // 
+            // menuItemSpellCheck
+            // 
+            this.menuItemSpellCheck.AccessibleDescription = "Правописание";
+            this.menuItemSpellCheck.AccessibleName = "Правописание";
+            this.menuItemSpellCheck.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.menuItemCompleteMessage});
+            this.menuItemSpellCheck.Name = "menuItemSpellCheck";
+            this.menuItemSpellCheck.Text = "Правописание";
+            this.menuItemSpellCheck.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
+            // menuItemCompleteMessage
+            // 
+            this.menuItemCompleteMessage.AccessibleDescription = "menuItemCompleteMessage";
+            this.menuItemCompleteMessage.AccessibleName = "menuItemCompleteMessage";
+            this.menuItemCompleteMessage.CheckOnClick = true;
+            this.menuItemCompleteMessage.Name = "menuItemCompleteMessage";
+            this.menuItemCompleteMessage.Text = "Подтверждение";
+            this.menuItemCompleteMessage.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemCompleteMessage.Click += new System.EventHandler(this.menuItemCompleteMessage_Click);
             // 
             // MainForm
             // 
@@ -323,6 +346,8 @@
         private Telerik.WinControls.UI.CommandBarStripElement cmbStripMode;
         private Telerik.WinControls.UI.CommandBarLabel lMode;
         private Telerik.WinControls.UI.RadSpellChecker SpellChecker;
+        private Telerik.WinControls.UI.RadMenuItem menuItemSpellCheck;
+        private Telerik.WinControls.UI.RadMenuItem menuItemCompleteMessage;
     }
 }
 

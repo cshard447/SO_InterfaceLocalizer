@@ -29,6 +29,7 @@ namespace InterfaceLocalizer.Classes
         private string checkedFiles;
         private string checkedGossipFiles;
         private string pathToGossip;
+        private bool spellCheckCompleteBox;
 
         public int MainFormTop
         {
@@ -126,6 +127,13 @@ namespace InterfaceLocalizer.Classes
 		    set { checkedGossipFiles = value;}
 	    }
 
+        public bool SpellCheckCompleteBox
+        {
+            get { return spellCheckCompleteBox; }
+            set { spellCheckCompleteBox = value; }
+        }
+
+
         public AppSettings()
         {
             MainFormTop = Properties.Settings.Default.MainFormTop;
@@ -149,6 +157,7 @@ namespace InterfaceLocalizer.Classes
             CheckedFiles = Properties.Settings.Default.CheckedFiles;
             PathToGossip = Properties.Settings.Default.PathToGossip;
             CheckedGossipFiles = Properties.Settings.Default.CheckedGossipFiles;
+            SpellCheckCompleteBox = Properties.Settings.Default.SpellCheckCompleteBox;
         }
 
         public void SaveSettings()
@@ -174,6 +183,7 @@ namespace InterfaceLocalizer.Classes
             Properties.Settings.Default.CheckedFiles = CheckedFiles;
             Properties.Settings.Default.PathToGossip = PathToGossip;
             Properties.Settings.Default.CheckedGossipFiles = CheckedGossipFiles;
+            Properties.Settings.Default.SpellCheckCompleteBox = SpellCheckCompleteBox;
 
             Properties.Settings.Default.Save();
         }
