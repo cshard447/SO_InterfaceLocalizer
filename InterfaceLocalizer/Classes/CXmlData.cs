@@ -205,6 +205,9 @@ namespace InterfaceLocalizer.Classes
                     try1 = try1.Elements(step1.Name);
                     if (step1.HasAttributes)
                         try1 = try1.Where(x => (string)x.Attribute("name") == step1.Attribute("name").Value.ToString()).ToArray();
+                    else
+                        try1 = try1.Where(x => x.HasAttributes == false).ToArray();
+                        //try1 = try1.Where(x => x.Attributes().Count() == 0).ToArray();                        
                 }
 
                 result = try1.First().Value.ToString();
