@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using System.Threading.Tasks;
 using Telerik.WinControls.UI;
 
@@ -15,8 +16,7 @@ namespace InterfaceLocalizer.Classes
         string GetPathString();
         void SetRusData(string rusData);
         void SetEngData(string engData);
-        [System.Obsolete("Method is no longer due to transition to XmlPath class")]
-        Stack<string> GetTags();
+        XElement GetPath();
     }
 
     interface IManager

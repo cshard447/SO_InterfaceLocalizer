@@ -103,10 +103,14 @@ namespace InterfaceLocalizer.Classes
         public XElement GetPathAsElement()
         {
             Stack<PathAtom> copy = new Stack<PathAtom>(path);
-            copy = GenericStack<PathAtom>.InvertStack(path);            
+            copy = GenericStack<PathAtom>.InvertStack(path);
             XElement result = new XElement(copy.Pop().GetAtom());
+            XElement child = result;
             while (copy.Count > 0)
-                result.Add(copy.Pop().GetAtom());
+            {
+                child.Add(copy.Pop().GetAtom());
+                child = child.Descendants().First();
+            }
 
             return result;
         }

@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using Telerik.WinControls.UI;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -50,9 +51,10 @@ namespace InterfaceLocalizer.Classes
         {
             engText = engData;
         }
-        public Stack<string> GetTags()
+
+        public XElement GetPath()
         {
-            return new Stack<string>();
+            return new XElement("test");
         }
     }
 

@@ -22,14 +22,6 @@ namespace InterfaceLocalizer.Classes
         private string filename;
         private XmlPath xmlPath;
 
-        public CXmlData(string _phrase, string _eng, string _filename, Stack<string> _tags)
-        {
-            phrase = _phrase;
-            filename = _filename;
-            xmlPath = new XmlPath();
-            engPhrase = _eng;
-        }
-
         public CXmlData(string _phrase, string _eng, string _filename, XmlPath _path)
         {
             phrase = _phrase;
@@ -69,12 +61,9 @@ namespace InterfaceLocalizer.Classes
             engPhrase = engData;
         }
 
-        public Stack<string> GetTags()
+        public XElement GetPath()
         {
-            //* this function is obsolete and doesn't work
-            Stack<string> temp = new Stack<string>();
-            temp.Push(xmlPath.Pop().ToString());
-            return temp;
+            return xmlPath.GetPathAsElement();
         }
                 
     }
@@ -270,28 +259,20 @@ namespace InterfaceLocalizer.Classes
                 {
                     if (text.GetFilename() != file)
                         continue;
-
-                    Stack<string> copy = new Stack<string>(text.GetTags());
-                    copy = GenericStack<string>.InvertStack(copy);
-                    string value = (english) ? (text.GetEngData()) : (text.GetRusData());
                     
-                    if (copy.Count == 3)
-                    {
-                        string root = copy.Pop();
-                        string chapter = copy.Pop();
-                        string item = copy.Pop();
+                    XElement localPath = text.GetPath();
+                    XElement noRoot = localPath.Descendants().First();
+                    string value = (english) ? (text.GetEngData()) : (text.GetRusData());
 
-                        if (doc.Root.Descendants().Any(tag1 => tag1.Name == chapter && tag1.Descendants().Any()))
-                            doc.Root.Element(chapter).Add(getXElement(item, value));
-                        else
-                            doc.Root.Add(new XElement(chapter, getXElement(item, value)));
-                    }
-                    else if (copy.Count == 2)
+                    XElement child = noRoot;
+                    while (child.HasElements)
                     {
-                        string root = copy.Pop();
-                        string item = copy.Pop();
-                        doc.Root.Add( getXElement(item,value) );
+                        XName name = child.Descendants().First().Name;
+                        child = child.Element(name);
                     }
+                    
+                    child.SetValue(value);
+                    doc.Root.Add(noRoot);
                 }
 
                 if (json)
@@ -305,13 +286,12 @@ namespace InterfaceLocalizer.Classes
                     settings.Encoding = new UTF8Encoding(false);
                     settings.Indent = true;
                     settings.OmitXmlDeclaration = true;
-                    settings.NewLineOnAttributes = true;
+                    settings.NewLineOnAttributes = false;
                     using (System.Xml.XmlWriter w = System.Xml.XmlWriter.Create(path + file, settings))
                     {
                         doc.Save(w);
                     }
                 }
-                //doc.Save(path + file);
             }
         }
 
@@ -342,7 +322,7 @@ namespace InterfaceLocalizer.Classes
             stream.Close();
         }
 
-        private XElement getXElement(string item, string value)
+        /*private XElement getXElement(string item, string value)
         {
             XElement el;
             if (value != "")
@@ -350,7 +330,7 @@ namespace InterfaceLocalizer.Classes
             else 
                 el = new XElement(item);
             return el;
-        }
+        }*/
 
     }
 }
