@@ -197,10 +197,10 @@ namespace InterfaceLocalizer.Classes
         }
         private int checkLocation(int location)
         {
-            if (location >= 0 && location < 1500)
+            if (location >= -10 && location < 1500)
                 return location;
             else
-                return 50;
+                return 0;
         }
         private int checkColumnWidth(int width)
         {
