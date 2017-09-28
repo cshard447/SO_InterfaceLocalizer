@@ -290,5 +290,17 @@ namespace InterfaceLocalizer
         {
             SpellChecker.EnableCompleteMessageBox = !SpellChecker.EnableCompleteMessageBox;
         }
+
+        private void menuItemTest_Click(object sender, EventArgs e)
+        {
+            SpellChecker.SpellCheckMode = SpellCheckMode.AllAtOnce;
+            //SpellChecker.SpellingFormStartPosition = FormStartPosition.
+            var column = gridViewTranslation.Columns["columnEnglishPhrase"];
+            foreach (var row in gridViewTranslation.Rows)
+            {                
+                var cell = row.Cells["columnEnglishPhrase"];                
+                //SpellChecker.Check(cell.Value);   //gridViewTranslation.GridViewElement.hos
+            }
+        }
     }
 }

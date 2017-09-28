@@ -113,6 +113,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Properties\ru-RU.tdf" />
+    <None Include="Properties\sv-SE.tdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

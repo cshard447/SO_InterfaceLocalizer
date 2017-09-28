@@ -39,6 +39,8 @@
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemStatistics = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemSpellCheck = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemCompleteMessage = new Telerik.WinControls.UI.RadMenuItem();
             this.commandBarTranslation = new Telerik.WinControls.UI.RadCommandBar();
             this.cmbRow = new Telerik.WinControls.UI.CommandBarRowElement();
             this.cmbStripButtons = new Telerik.WinControls.UI.CommandBarStripElement();
@@ -52,8 +54,7 @@
             this.lMode = new Telerik.WinControls.UI.CommandBarLabel();
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             this.SpellChecker = new Telerik.WinControls.UI.RadSpellChecker();
-            this.menuItemSpellCheck = new Telerik.WinControls.UI.RadMenuItem();
-            this.menuItemCompleteMessage = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuItemTest = new Telerik.WinControls.UI.RadMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -99,6 +100,27 @@
             this.menuItemStatistics.Text = "Статистика";
             this.menuItemStatistics.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.menuItemStatistics.Click += new System.EventHandler(this.menuItemStatistics_Click);
+            // 
+            // menuItemSpellCheck
+            // 
+            this.menuItemSpellCheck.AccessibleDescription = "Правописание";
+            this.menuItemSpellCheck.AccessibleName = "Правописание";
+            this.menuItemSpellCheck.Items.AddRange(new Telerik.WinControls.RadItem[] {
+            this.menuItemCompleteMessage,
+            this.menuItemTest});
+            this.menuItemSpellCheck.Name = "menuItemSpellCheck";
+            this.menuItemSpellCheck.Text = "Правописание";
+            this.menuItemSpellCheck.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            // 
+            // menuItemCompleteMessage
+            // 
+            this.menuItemCompleteMessage.AccessibleDescription = "menuItemCompleteMessage";
+            this.menuItemCompleteMessage.AccessibleName = "menuItemCompleteMessage";
+            this.menuItemCompleteMessage.CheckOnClick = true;
+            this.menuItemCompleteMessage.Name = "menuItemCompleteMessage";
+            this.menuItemCompleteMessage.Text = "Подтверждение";
+            this.menuItemCompleteMessage.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemCompleteMessage.Click += new System.EventHandler(this.menuItemCompleteMessage_Click);
             // 
             // commandBarTranslation
             // 
@@ -285,25 +307,14 @@
             this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);
             this.gridViewTranslation.CellValidating += new Telerik.WinControls.UI.CellValidatingEventHandler(this.gridViewTranslation_CellValidating);
             // 
-            // menuItemSpellCheck
+            // menuItemTest
             // 
-            this.menuItemSpellCheck.AccessibleDescription = "Правописание";
-            this.menuItemSpellCheck.AccessibleName = "Правописание";
-            this.menuItemSpellCheck.Items.AddRange(new Telerik.WinControls.RadItem[] {
-            this.menuItemCompleteMessage});
-            this.menuItemSpellCheck.Name = "menuItemSpellCheck";
-            this.menuItemSpellCheck.Text = "Правописание";
-            this.menuItemSpellCheck.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            // 
-            // menuItemCompleteMessage
-            // 
-            this.menuItemCompleteMessage.AccessibleDescription = "menuItemCompleteMessage";
-            this.menuItemCompleteMessage.AccessibleName = "menuItemCompleteMessage";
-            this.menuItemCompleteMessage.CheckOnClick = true;
-            this.menuItemCompleteMessage.Name = "menuItemCompleteMessage";
-            this.menuItemCompleteMessage.Text = "Подтверждение";
-            this.menuItemCompleteMessage.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.menuItemCompleteMessage.Click += new System.EventHandler(this.menuItemCompleteMessage_Click);
+            this.menuItemTest.AccessibleDescription = "Spell check test";
+            this.menuItemTest.AccessibleName = "Spell check test";
+            this.menuItemTest.Name = "menuItemTest";
+            this.menuItemTest.Text = "Spell check test";
+            this.menuItemTest.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuItemTest.Click += new System.EventHandler(this.menuItemTest_Click);
             // 
             // MainForm
             // 
@@ -348,6 +359,7 @@
         private Telerik.WinControls.UI.RadSpellChecker SpellChecker;
         private Telerik.WinControls.UI.RadMenuItem menuItemSpellCheck;
         private Telerik.WinControls.UI.RadMenuItem menuItemCompleteMessage;
+        private Telerik.WinControls.UI.RadMenuItem menuItemTest;
     }
 }
 
