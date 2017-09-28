@@ -30,6 +30,9 @@ namespace InterfaceLocalizer.Classes
         private string checkedGossipFiles;
         private string pathToGossip;
         private bool spellCheckCompleteBox;
+        private string languagesNames;
+        private string translationFilenames;
+        private string originalTextFilename;
 
         public int MainFormTop
         {
@@ -133,6 +136,21 @@ namespace InterfaceLocalizer.Classes
             set { spellCheckCompleteBox = value; }
         }
 
+        public string LanguagesNames
+        {
+            get { return languagesNames; }
+            set { languagesNames = value; }
+        }
+        public string TranslationFilenames
+        {
+            get { return translationFilenames; }
+            set { translationFilenames = value; }
+        }
+        public string OriginalTextFilename
+        {
+            get { return originalTextFilename; }
+            set { originalTextFilename = value; }
+        }
 
         public AppSettings()
         {
@@ -158,6 +176,10 @@ namespace InterfaceLocalizer.Classes
             PathToGossip = Properties.Settings.Default.PathToGossip;
             CheckedGossipFiles = Properties.Settings.Default.CheckedGossipFiles;
             SpellCheckCompleteBox = Properties.Settings.Default.SpellCheckCompleteBox;
+
+            LanguagesNames = Properties.Settings.Default.LanguageNames;
+            OriginalTextFilename = Properties.Settings.Default.OriginalTextFilename;
+            TranslationFilenames = Properties.Settings.Default.TranslationFilenames;
         }
 
         public void SaveSettings()
@@ -184,6 +206,10 @@ namespace InterfaceLocalizer.Classes
             Properties.Settings.Default.PathToGossip = PathToGossip;
             Properties.Settings.Default.CheckedGossipFiles = CheckedGossipFiles;
             Properties.Settings.Default.SpellCheckCompleteBox = SpellCheckCompleteBox;
+
+            Properties.Settings.Default.LanguageNames = LanguagesNames;
+            Properties.Settings.Default.OriginalTextFilename = OriginalTextFilename;
+            Properties.Settings.Default.TranslationFilenames = TranslationFilenames;
 
             Properties.Settings.Default.Save();
         }

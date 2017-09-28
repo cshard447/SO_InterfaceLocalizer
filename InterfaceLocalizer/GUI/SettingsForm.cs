@@ -36,6 +36,8 @@ namespace InterfaceLocalizer.GUI
                 pvSettings.SelectedPage = pageInterface;
             else if (Properties.Settings.Default.WorkMode == (int)WorkMode.gossip)
                 pvSettings.SelectedPage = pageGossip;
+            
+            LoadMultiLanguage();
             // иниициализируем данные об интерфейсах
             path = appSettings.PathToFiles;
             bePathToFiles.Value = appSettings.PathToFiles;
@@ -178,6 +180,32 @@ namespace InterfaceLocalizer.GUI
             appSettings.SettingsFormLeft = this.Left;
             appSettings.SettingsFormTop = this.Top;
             appSettings.SaveSettings();
+        }
+
+        private void LoadMultiLanguage()
+        {
+            beOriginalFilename.Value = appSettings.OriginalTextFilename;
+            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
+            tbLanguage1.Text = languages[0];
+            tbLanguage2.Text = languages[1];
+            tbLanguage3.Text = languages[2];
+
+            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
+            beLanguageFile1.Value = translatedFiles[0];
+            beLanguageFile2.Value = translatedFiles[1];
+            //beLanguageFile3.Value = translatedFiles[2];
+        }
+
+        private void bOKMulti_Click(object sender, EventArgs e)
+        {
+            appSettings.OriginalTextFilename = beOriginalFilename.Value;
+            string langs = tbLanguage1.Text + ";" + tbLanguage2.Text + ";" + tbLanguage3.Text;
+            appSettings.LanguagesNames = langs;
+            string translationFiles = beLanguageFile1.Value + ";" + beLanguageFile2.Value + ";" + beLanguageFile3.Value;
+            appSettings.TranslationFilenames = translationFiles;
+
+            appSettings.SaveSettings();
+            this.Close();
         }
 
     }

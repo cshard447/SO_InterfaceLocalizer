@@ -262,5 +262,41 @@ namespace InterfaceLocalizer.Properties {
                 this["SpellCheckCompleteBox"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LanguageNames {
+            get {
+                return ((string)(this["LanguageNames"]));
+            }
+            set {
+                this["LanguageNames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TranslationFilenames {
+            get {
+                return ((string)(this["TranslationFilenames"]));
+            }
+            set {
+                this["TranslationFilenames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string OriginalTextFilename {
+            get {
+                return ((string)(this["OriginalTextFilename"]));
+            }
+            set {
+                this["OriginalTextFilename"] = value;
+            }
+        }
     }
 }
