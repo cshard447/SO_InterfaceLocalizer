@@ -86,7 +86,7 @@ namespace InterfaceLocalizer.GUI
                 count++;
             }
 
-            lFileCount.Text = "Найдено " + count.ToString() + " файла";
+            lFileCount.Text = "Found " + count.ToString() + " files";
         }
 
         private void bePathToGossip_ValueChanged(object sender, EventArgs e)
@@ -114,7 +114,7 @@ namespace InterfaceLocalizer.GUI
                 gossipCount++;
             }
 
-            lGossipFound.Text = "Найдено " + gossipCount.ToString() + " файла";
+            lGossipFound.Text = "Found " + gossipCount.ToString() + " files";
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -152,13 +152,13 @@ namespace InterfaceLocalizer.GUI
         private void lvFilesList_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
         {
             int checkedCount = lvFilesList.CheckedItems.Count;
-            lCheckedCount.Text = "Выделено " + checkedCount.ToString() + " файла";
+            lCheckedCount.Text = "Selected " + checkedCount.ToString() + " files";
         }
 
         private void lvGossipList_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
         {
             int checkedCount = lvGossipList.CheckedItems.Count;
-            lGossipChecked.Text = "Выделено " + checkedCount.ToString() + " файла";
+            lGossipChecked.Text = "Selected " + checkedCount.ToString() + " files";
         }
 
         private void cbSelectAll_ToggleStateChanged(object sender, StateChangedEventArgs args)

@@ -68,14 +68,14 @@
             // 
             // lFileCount
             // 
-            this.lFileCount.Location = new System.Drawing.Point(8, 394);
+            this.lFileCount.Location = new System.Drawing.Point(11, 400);
             this.lFileCount.Name = "lFileCount";
             this.lFileCount.Size = new System.Drawing.Size(2, 2);
             this.lFileCount.TabIndex = 6;
             // 
             // lCheckedCount
             // 
-            this.lCheckedCount.Location = new System.Drawing.Point(8, 418);
+            this.lCheckedCount.Location = new System.Drawing.Point(11, 424);
             this.lCheckedCount.Name = "lCheckedCount";
             this.lCheckedCount.Size = new System.Drawing.Size(2, 2);
             this.lCheckedCount.TabIndex = 7;
@@ -86,7 +86,7 @@
             this.pvSettings.Controls.Add(this.pageGossip);
             this.pvSettings.Location = new System.Drawing.Point(12, 12);
             this.pvSettings.Name = "pvSettings";
-            this.pvSettings.SelectedPage = this.pageGossip;
+            this.pvSettings.SelectedPage = this.pageInterface;
             this.pvSettings.Size = new System.Drawing.Size(356, 531);
             this.pvSettings.TabIndex = 9;
             this.pvSettings.Text = "pageViewSettings";
@@ -103,23 +103,23 @@
             this.pageInterface.Controls.Add(this.bePathToFiles);
             this.pageInterface.Controls.Add(this.lPathInfo);
             this.pageInterface.Controls.Add(this.bOK);
-            this.pageInterface.Location = new System.Drawing.Point(305, 4);
+            this.pageInterface.Location = new System.Drawing.Point(10, 37);
             this.pageInterface.Name = "pageInterface";
-            this.pageInterface.Size = new System.Drawing.Size(47, 523);
-            this.pageInterface.Text = "Интерфейсы";
+            this.pageInterface.Size = new System.Drawing.Size(335, 483);
+            this.pageInterface.Text = "Xml folders";
             // 
             // cbSelectAll
             // 
-            this.cbSelectAll.Location = new System.Drawing.Point(197, 394);
+            this.cbSelectAll.Location = new System.Drawing.Point(214, 400);
             this.cbSelectAll.Name = "cbSelectAll";
-            this.cbSelectAll.Size = new System.Drawing.Size(124, 18);
+            this.cbSelectAll.Size = new System.Drawing.Size(94, 18);
             this.cbSelectAll.TabIndex = 13;
-            this.cbSelectAll.Text = "Выделить/Снять все";
+            this.cbSelectAll.Text = "Select all/none";
             this.cbSelectAll.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.cbSelectAll_ToggleStateChanged);
             // 
             // lvFilesList
             // 
-            this.lvFilesList.Location = new System.Drawing.Point(8, 103);
+            this.lvFilesList.Location = new System.Drawing.Point(11, 109);
             this.lvFilesList.Name = "lvFilesList";
             this.lvFilesList.ShowCheckBoxes = true;
             this.lvFilesList.Size = new System.Drawing.Size(313, 284);
@@ -129,7 +129,7 @@
             // bePathToFiles
             // 
             this.bePathToFiles.DialogType = Telerik.WinControls.UI.BrowseEditorDialogType.FolderBrowseDialog;
-            this.bePathToFiles.Location = new System.Drawing.Point(8, 57);
+            this.bePathToFiles.Location = new System.Drawing.Point(11, 63);
             this.bePathToFiles.Name = "bePathToFiles";
             this.bePathToFiles.Size = new System.Drawing.Size(313, 20);
             this.bePathToFiles.TabIndex = 11;
@@ -137,15 +137,15 @@
             // 
             // lPathInfo
             // 
-            this.lPathInfo.Location = new System.Drawing.Point(8, 19);
+            this.lPathInfo.Location = new System.Drawing.Point(11, 25);
             this.lPathInfo.Name = "lPathInfo";
-            this.lPathInfo.Size = new System.Drawing.Size(320, 18);
+            this.lPathInfo.Size = new System.Drawing.Size(221, 18);
             this.lPathInfo.TabIndex = 10;
-            this.lPathInfo.Text = "Введите путь, по которому расположены файлы с данными:";
+            this.lPathInfo.Text = "Select a folder with xml files for translation:";
             // 
             // bOK
             // 
-            this.bOK.Location = new System.Drawing.Point(211, 427);
+            this.bOK.Location = new System.Drawing.Point(214, 428);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(110, 24);
             this.bOK.TabIndex = 9;
@@ -165,7 +165,7 @@
             this.pageGossip.Location = new System.Drawing.Point(10, 37);
             this.pageGossip.Name = "pageGossip";
             this.pageGossip.Size = new System.Drawing.Size(335, 483);
-            this.pageGossip.Text = "Слухи";
+            this.pageGossip.Text = "Text data";
             // 
             // lGossipChecked
             // 
@@ -183,11 +183,11 @@
             // 
             // cbSelectAllGossip
             // 
-            this.cbSelectAllGossip.Location = new System.Drawing.Point(200, 400);
+            this.cbSelectAllGossip.Location = new System.Drawing.Point(214, 400);
             this.cbSelectAllGossip.Name = "cbSelectAllGossip";
-            this.cbSelectAllGossip.Size = new System.Drawing.Size(124, 18);
+            this.cbSelectAllGossip.Size = new System.Drawing.Size(94, 18);
             this.cbSelectAllGossip.TabIndex = 18;
-            this.cbSelectAllGossip.Text = "Выделить/Снять все";
+            this.cbSelectAllGossip.Text = "Select all/none";
             // 
             // lvGossipList
             // 
@@ -211,13 +211,13 @@
             // 
             this.lPathToGossip.Location = new System.Drawing.Point(11, 25);
             this.lPathToGossip.Name = "lPathToGossip";
-            this.lPathToGossip.Size = new System.Drawing.Size(314, 18);
+            this.lPathToGossip.Size = new System.Drawing.Size(216, 18);
             this.lPathToGossip.TabIndex = 15;
-            this.lPathToGossip.Text = "Введите путь, по котрому расположены файлы со слухами:";
+            this.lPathToGossip.Text = "Select a folder with txt files for translation:";
             // 
             // bOkGossip
             // 
-            this.bOkGossip.Location = new System.Drawing.Point(214, 433);
+            this.bOkGossip.Location = new System.Drawing.Point(214, 428);
             this.bOkGossip.Name = "bOkGossip";
             this.bOkGossip.Size = new System.Drawing.Size(110, 24);
             this.bOkGossip.TabIndex = 14;
@@ -226,6 +226,8 @@
             // 
             // SettingsForm
             // 
+            this.AccessibleDescription = "Settings form";
+            this.AccessibleName = "Settings form";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 555);
@@ -238,7 +240,7 @@
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
-            this.Text = "Настройки";
+            this.Text = "Settings form";
             this.ThemeName = "ControlDefault";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
