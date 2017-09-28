@@ -18,26 +18,27 @@ namespace InterfaceLocalizer.Classes
     public class CXmlData : ITranslatable
     {
         private string phrase;
-        private string engPhrase;
+        private Dictionary<string, string> translation;
         private string filename;
         private XmlPath xmlPath;
 
         public CXmlData(string _phrase, string _eng, string _filename, XmlPath _path)
         {
+            translation = new Dictionary<string, string>();
             phrase = _phrase;
+            translation["eng"] = _eng;
             filename = _filename;
             xmlPath = new XmlPath(_path);
-            engPhrase = _eng;
         }
 
-        public string GetRusData()
+        public string GetOriginalText()
         {
             return phrase;
         }
 
-        public string GetEngData()
+        public string GetTranslation(String key)
         {
-            return engPhrase;
+            return translation[key];
         }
 
         public string GetFilename()
@@ -58,7 +59,7 @@ namespace InterfaceLocalizer.Classes
 
         public void SetEngData(string engData)
         {
-            engPhrase = engData;
+            translation["eng"] = engData;
         }
 
         public XElement GetPath()
@@ -114,7 +115,7 @@ namespace InterfaceLocalizer.Classes
             string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
             System.IO.Stream stream;
 
-            // preparing russian file to xml
+            // preparing original file to xml
             stream = File.Open(rusPath, FileMode.Open);
             var jsonReader = JsonReaderWriterFactory.CreateJsonReader(stream, new System.Xml.XmlDictionaryReaderQuotas());
             XElement root = XElement.Load(jsonReader);
@@ -123,7 +124,7 @@ namespace InterfaceLocalizer.Classes
             XmlReader reader = doc.CreateReader();
             stream.Close();
 
-            // preparing english file to xml;
+            // preparing translated file to xml
             stream = File.Open(engPath, FileMode.Open);
             jsonReader = JsonReaderWriterFactory.CreateJsonReader(stream, new System.Xml.XmlDictionaryReaderQuotas());
             root = XElement.Load(jsonReader);
@@ -216,8 +217,8 @@ namespace InterfaceLocalizer.Classes
                 int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
-                string rus = gridView.Rows[row].Cells["columnRussianPhrase"].Value.ToString();
-                string eng = gridView.Rows[row].Cells["columnEnglishPhrase"].Value.ToString();
+                string rus = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
+                string eng = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
@@ -230,10 +231,10 @@ namespace InterfaceLocalizer.Classes
             }            
         }
 
-        public void SaveDataToFile(bool english)
+        public void SaveDataToFile(bool original)
         {
             string path = Properties.Settings.Default.PathToFiles;
-            path += (english) ? ("\\English\\") : ("\\Russian\\");
+            path += (original) ? ("\\Russian\\") : ("\\English\\");
             bool json = false;
             foreach (string file in CFileList.CheckedFiles)
             {
@@ -262,7 +263,7 @@ namespace InterfaceLocalizer.Classes
                     
                     XElement localPath = text.GetPath();
                     XElement noRoot = localPath.Descendants().First();
-                    string value = (english) ? (text.GetEngData()) : (text.GetRusData());
+                    string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation("eng"));
 
                     XElement child = noRoot;
                     while (child.HasElements)
@@ -277,7 +278,7 @@ namespace InterfaceLocalizer.Classes
 
                 if (json)
                 {
-                    saveDataToJsonFile(english, file, doc);
+                    saveDataToJsonFile(original, file, doc);
                     continue;
                 }
                 else
@@ -295,10 +296,10 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        private void saveDataToJsonFile(bool english, string filename, XDocument doc)
+        private void saveDataToJsonFile(bool original, string filename, XDocument doc)
         {
             string path = Properties.Settings.Default.PathToFiles;
-            path += (english) ? ("\\English\\") : ("\\Russian\\");
+            path += (original) ? ("\\Russian\\") : ("\\English\\");
 
             System.IO.Stream stream;
             stream = File.Open(path + filename, FileMode.Create);

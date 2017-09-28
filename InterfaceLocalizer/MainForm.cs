@@ -113,7 +113,7 @@ namespace InterfaceLocalizer
                 addDataToGridView(id, textDict[id]);
 
             gridViewTranslation.EndUpdate();
-            cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";        
+            cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
         }
 
         private void cmbShowUndoneData_Click(object sender, EventArgs e)
@@ -130,13 +130,13 @@ namespace InterfaceLocalizer
                 gridViewTranslation.BeginUpdate();
                 foreach (int id in textDict.Keys)
                 {
-                    if (textDict[id].GetEngData() == "<NO DATA>" || textDict[id].GetEngData() == "")
+                    if (textDict[id].GetTranslation("eng") == "<NO DATA>" || textDict[id].GetTranslation("eng") == "")
                     {
                         addDataToGridView(id, textDict[id]);
                     }
                 }
                 gridViewTranslation.EndUpdate();
-                cmlListedItems.Text = "Выведено " + gridViewTranslation.Rows.Count + " строк";
+                cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
             }
         }
 
@@ -146,8 +146,8 @@ namespace InterfaceLocalizer
             values[0] = id.ToString();
             values[1] = Path.GetFileName(data.GetFilename());
             values[2] = data.GetPathString();
-            values[3] = data.GetRusData();
-            values[4] = data.GetEngData();
+            values[3] = data.GetOriginalText();
+            values[4] = data.GetTranslation("eng");
             gridViewTranslation.Rows.Add(values);
         }
 
@@ -160,25 +160,17 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             if (!showInfo)
             {
-                gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width / 2;
-                gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width / 2;
+                gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width / 2;
+                gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width / 2;
             }
             else
             {
-                gridViewTranslation.Columns["columnRussianPhrase"].Width = gridViewTranslation.Width = appSettings.ColRusWidth;
-                gridViewTranslation.Columns["columnEnglishPhrase"].Width = gridViewTranslation.Width = appSettings.ColEngWidth;
+                gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width = appSettings.ColRusWidth;
+                gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width = appSettings.ColEngWidth;
             }
         }
 
         private void cmbSaveEng_Click(object sender, EventArgs e)
-        {
-            if (workMode == WorkMode.interfaces)
-                SaveDataToFile(dataManager, true);
-            else if (workMode == WorkMode.gossip)
-                SaveDataToFile(textManager, true);
-        }
-
-        private void cmbSaveRus_Click(object sender, EventArgs e)
         {
             if (workMode == WorkMode.interfaces)
                 SaveDataToFile(dataManager, false);
@@ -186,10 +178,18 @@ namespace InterfaceLocalizer
                 SaveDataToFile(textManager, false);
         }
 
-        private void SaveDataToFile(IManager manager, bool englishData)
+        private void cmbSaveRus_Click(object sender, EventArgs e)
+        {
+            if (workMode == WorkMode.interfaces)
+                SaveDataToFile(dataManager, true);
+            else if (workMode == WorkMode.gossip)
+                SaveDataToFile(textManager, true);
+        }
+
+        private void SaveDataToFile(IManager manager, bool originalText)
         {
             manager.UpdateDataFromGridView(gridViewTranslation);
-            manager.SaveDataToFile(englishData);
+            manager.SaveDataToFile(originalText);
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -208,8 +208,8 @@ namespace InterfaceLocalizer
             appSettings.ColIDWidth = gridViewTranslation.Columns["columnID"].Width;
             appSettings.ColFilenameWidth = gridViewTranslation.Columns["columnFilename"].Width;
             appSettings.ColTagsWidth = gridViewTranslation.Columns["columnTags"].Width;
-            appSettings.ColRusWidth = gridViewTranslation.Columns["columnRussianPhrase"].Width;
-            appSettings.ColEngWidth = gridViewTranslation.Columns["columnEnglishPhrase"].Width;
+            appSettings.ColRusWidth = gridViewTranslation.Columns["columnOriginalPhrase"].Width;
+            appSettings.ColEngWidth = gridViewTranslation.Columns["columnTranslation1"].Width;
             appSettings.SaveSettings();
         }
 
@@ -226,8 +226,8 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].Width = appSettings.ColIDWidth;
             gridViewTranslation.Columns["columnFilename"].Width = appSettings.ColFilenameWidth;
             gridViewTranslation.Columns["columnTags"].Width = appSettings.ColTagsWidth;
-            gridViewTranslation.Columns["columnRussianPhrase"].Width = appSettings.ColRusWidth;
-            gridViewTranslation.Columns["columnEnglishPhrase"].Width = appSettings.ColEngWidth;
+            gridViewTranslation.Columns["columnOriginalPhrase"].Width = appSettings.ColRusWidth;
+            gridViewTranslation.Columns["columnTranslation1"].Width = appSettings.ColEngWidth;
             showInfo = appSettings.ServiceColumnsVisible;
             menuItemCompleteMessage.IsChecked = appSettings.SpellCheckCompleteBox;
             SpellChecker.EnableCompleteMessageBox = appSettings.SpellCheckCompleteBox;
@@ -248,10 +248,10 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
-            gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;
-            gridViewTranslation.Columns["columnEnglishPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
         }
 
@@ -261,10 +261,10 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = false;
             gridViewTranslation.Columns["columnTags"].IsVisible = false;
             gridViewTranslation.Columns["columnFilename"].IsVisible = false;
-            gridViewTranslation.Columns["columnRussianPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnEnglishPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnRussianPhrase"].TextAlignment = ContentAlignment.TopLeft;
-            gridViewTranslation.Columns["columnEnglishPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
         }
 
@@ -295,10 +295,10 @@ namespace InterfaceLocalizer
         {
             SpellChecker.SpellCheckMode = SpellCheckMode.AllAtOnce;
             //SpellChecker.SpellingFormStartPosition = FormStartPosition.
-            var column = gridViewTranslation.Columns["columnEnglishPhrase"];
+            var column = gridViewTranslation.Columns["columnTranslation1"];
             foreach (var row in gridViewTranslation.Rows)
             {                
-                var cell = row.Cells["columnEnglishPhrase"];                
+                var cell = row.Cells["columnTranslation1"];                
                 //SpellChecker.Check(cell.Value);   //gridViewTranslation.GridViewElement.hos
             }
         }

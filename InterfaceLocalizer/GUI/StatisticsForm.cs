@@ -62,14 +62,14 @@ namespace InterfaceLocalizer.GUI
             phrasesCount = texts.Count;
             foreach (CXmlData text in texts.Values)
             {
-                symbolsCount += text.GetRusData().Length;
-                if (text.GetEngData() == "<NO DATA>" || text.GetEngData() == "")
+                symbolsCount += text.GetOriginalText().Length;
+                if (text.GetTranslation("eng") == "<NO DATA>" || text.GetTranslation("eng") == "")
                 {
                     nonLocalizedPhrases++;
-                    nonLocalizedSymbols += text.GetRusData().Length;
+                    nonLocalizedSymbols += text.GetOriginalText().Length;
                 }
                 //else
-                    engSymbols += text.GetEngData().Length;
+                engSymbols += text.GetTranslation("eng").Length;
 
             }
             showStats();

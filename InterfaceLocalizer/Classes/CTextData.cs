@@ -22,12 +22,12 @@ namespace InterfaceLocalizer.Classes
             engText = _engText;
         }
 
-        public string GetRusData()
+        public string GetOriginalText()
         {
             return rusText;
         }
 
-        public string GetEngData()
+        public string GetTranslation(String key)
         {
             return engText;
         }
@@ -96,8 +96,8 @@ namespace InterfaceLocalizer.Classes
             {
                 int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
-                string rus = gridView.Rows[row].Cells["columnRussianPhrase"].Value.ToString();
-                string eng = gridView.Rows[row].Cells["columnEnglishPhrase"].Value.ToString();
+                string rus = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
+                string eng = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!textDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
@@ -110,14 +110,14 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        public void SaveDataToFile(bool english)
+        public void SaveDataToFile(bool original)
         {
             string path = Properties.Settings.Default.PathToGossip;
-            path += (english) ? (@"English\") : ("");
+            path += (original) ? ("") : (@"English\");
             
             foreach (CTextData text in textDict.Values)
             {
-                string value = (english) ? (text.GetEngData()) : (text.GetRusData());
+                string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation(""));
                 string file = path + text.GetFilename();
                 File.WriteAllText(file, value, Encoding.UTF8);
             }

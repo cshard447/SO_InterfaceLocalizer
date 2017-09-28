@@ -10,8 +10,8 @@ namespace InterfaceLocalizer.Classes
 {
     interface ITranslatable
     {
-        string GetRusData();
-        string GetEngData();
+        string GetOriginalText();
+        string GetTranslation(String key);
         string GetFilename();
         string GetPathString();
         void SetRusData(string rusData);
@@ -25,6 +25,6 @@ namespace InterfaceLocalizer.Classes
         void ClearAllData();
         void AddFileToManager(string filename);
         void UpdateDataFromGridView(RadGridView gridView);
-        void SaveDataToFile(bool english);
+        void SaveDataToFile(bool original);
     }
 }
