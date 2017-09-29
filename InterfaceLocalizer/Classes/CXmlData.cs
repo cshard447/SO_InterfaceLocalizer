@@ -69,6 +69,8 @@ namespace InterfaceLocalizer.Classes
                 
     }
 
+    //***************************************************************************************************
+
     class CDataManager : IManager
     {
         private Dictionary<int, ITranslatable> xmlDict = new Dictionary<int, ITranslatable>();
@@ -101,8 +103,8 @@ namespace InterfaceLocalizer.Classes
 
         private void addXmlToManager(string filename)
         {
-            string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
-            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
+            string rusPath = FolderDispatcher.OriginalPath() + filename;
+            string engPath = FolderDispatcher.TranslationPath() + filename;
             XmlReader reader = new XmlTextReader(rusPath);
             XDocument engDoc = new XDocument();
             engDoc = XDocument.Load(engPath);
@@ -111,8 +113,8 @@ namespace InterfaceLocalizer.Classes
 
         private void addJsonToManager(string filename)
         {
-            string rusPath = Properties.Settings.Default.PathToFiles + "\\Russian\\" + filename;
-            string engPath = Properties.Settings.Default.PathToFiles + "\\English\\" + filename;
+            string rusPath = FolderDispatcher.OriginalPath() + filename;
+            string engPath = FolderDispatcher.TranslationPath() + filename;
             System.IO.Stream stream;
 
             // preparing original file to xml
@@ -233,8 +235,7 @@ namespace InterfaceLocalizer.Classes
 
         public void SaveDataToFile(bool original)
         {
-            string path = Properties.Settings.Default.PathToFiles;
-            path += (original) ? ("\\Russian\\") : ("\\English\\");
+            string path = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath()); 
             bool json = false;
             foreach (string file in CFileList.CheckedFiles)
             {
@@ -298,8 +299,7 @@ namespace InterfaceLocalizer.Classes
 
         private void saveDataToJsonFile(bool original, string filename, XDocument doc)
         {
-            string path = Properties.Settings.Default.PathToFiles;
-            path += (original) ? ("\\Russian\\") : ("\\English\\");
+            string path = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath()); 
 
             System.IO.Stream stream;
             stream = File.Open(path + filename, FileMode.Create);
@@ -322,16 +322,6 @@ namespace InterfaceLocalizer.Classes
             jsonWriter.Flush();
             stream.Close();
         }
-
-        /*private XElement getXElement(string item, string value)
-        {
-            XElement el;
-            if (value != "")
-                el = new XElement(item, value);
-            else 
-                el = new XElement(item);
-            return el;
-        }*/
 
     }
 }

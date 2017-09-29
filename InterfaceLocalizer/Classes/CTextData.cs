@@ -58,6 +58,8 @@ namespace InterfaceLocalizer.Classes
         }
     }
 
+    //***************************************************************************************************
+
     class CTextManager : IManager
     {
         private Dictionary<int, ITranslatable> textDict = new Dictionary<int, ITranslatable>();
@@ -81,8 +83,8 @@ namespace InterfaceLocalizer.Classes
 
         public void AddFileToManager(string filename)
         {
-            string rusPath = Properties.Settings.Default.PathToGossip + filename;
-            string engPath = Properties.Settings.Default.PathToGossip + @"\English\" + filename;
+            string rusPath = FolderDispatcher.OriginalPath() + filename;
+            string engPath = FolderDispatcher.TranslationPath() + filename;
 
             string rus = File.ReadAllText(rusPath);
             string eng = File.ReadAllText(engPath);
@@ -112,8 +114,7 @@ namespace InterfaceLocalizer.Classes
 
         public void SaveDataToFile(bool original)
         {
-            string path = Properties.Settings.Default.PathToGossip;
-            path += (original) ? ("") : (@"English\");
+            string path = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath());
             
             foreach (CTextData text in textDict.Values)
             {

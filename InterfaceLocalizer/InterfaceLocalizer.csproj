@@ -62,6 +62,7 @@
     <Compile Include="Classes\CRussianDict.cs" />
     <Compile Include="Classes\CTextData.cs" />
     <Compile Include="Classes\CXmlData.cs" />
+    <Compile Include="Classes\FolderDispatcher.cs" />
     <Compile Include="Classes\ITranslatable.cs" />
     <Compile Include="Classes\PathAtom.cs" />
     <Compile Include="GUI\SettingsForm.cs">

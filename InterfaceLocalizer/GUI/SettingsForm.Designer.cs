@@ -31,6 +31,17 @@
             this.lFileCount = new Telerik.WinControls.UI.RadLabel();
             this.lCheckedCount = new Telerik.WinControls.UI.RadLabel();
             this.pvSettings = new Telerik.WinControls.UI.RadPageView();
+            this.pageMultilang = new Telerik.WinControls.UI.RadPageViewPage();
+            this.lSelectFilesForTranslations = new Telerik.WinControls.UI.RadLabel();
+            this.beLanguageFile3 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.beLanguageFile2 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.beLanguageFile1 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.tbLanguage3 = new Telerik.WinControls.UI.RadTextBox();
+            this.tbLanguage2 = new Telerik.WinControls.UI.RadTextBox();
+            this.tbLanguage1 = new Telerik.WinControls.UI.RadTextBox();
+            this.beOriginalFilename = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.lSelectMultilang = new Telerik.WinControls.UI.RadLabel();
+            this.bOKMulti = new Telerik.WinControls.UI.RadButton();
             this.pageInterface = new Telerik.WinControls.UI.RadPageViewPage();
             this.cbSelectAll = new Telerik.WinControls.UI.RadCheckBox();
             this.lvFilesList = new Telerik.WinControls.UI.RadListView();
@@ -45,21 +56,21 @@
             this.bePathToGossip = new Telerik.WinControls.UI.RadBrowseEditor();
             this.lPathToGossip = new Telerik.WinControls.UI.RadLabel();
             this.bOkGossip = new Telerik.WinControls.UI.RadButton();
-            this.pageMultilang = new Telerik.WinControls.UI.RadPageViewPage();
-            this.beOriginalFilename = new Telerik.WinControls.UI.RadBrowseEditor();
-            this.lSelectMultilang = new Telerik.WinControls.UI.RadLabel();
-            this.bOKMulti = new Telerik.WinControls.UI.RadButton();
-            this.tbLanguage1 = new Telerik.WinControls.UI.RadTextBox();
-            this.tbLanguage2 = new Telerik.WinControls.UI.RadTextBox();
-            this.tbLanguage3 = new Telerik.WinControls.UI.RadTextBox();
-            this.beLanguageFile1 = new Telerik.WinControls.UI.RadBrowseEditor();
-            this.beLanguageFile2 = new Telerik.WinControls.UI.RadBrowseEditor();
-            this.beLanguageFile3 = new Telerik.WinControls.UI.RadBrowseEditor();
-            this.lSelectFilesForTranslations = new Telerik.WinControls.UI.RadLabel();
             ((System.ComponentModel.ISupportInitialize)(this.lFileCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pvSettings)).BeginInit();
             this.pvSettings.SuspendLayout();
+            this.pageMultilang.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beOriginalFilename)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).BeginInit();
             this.pageInterface.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).BeginInit();
@@ -74,17 +85,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bePathToGossip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathToGossip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOkGossip)).BeginInit();
-            this.pageMultilang.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.beOriginalFilename)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,6 +115,107 @@
             this.pvSettings.Text = "pageViewSettings";
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pvSettings.GetChildAt(0))).StripButtons = Telerik.WinControls.UI.StripViewButtons.Scroll;
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pvSettings.GetChildAt(0))).EnsureSelectedItemVisible = true;
+            // 
+            // pageMultilang
+            // 
+// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
+            this.pageMultilang.Controls.Add(this.lSelectFilesForTranslations);
+            this.pageMultilang.Controls.Add(this.beLanguageFile3);
+            this.pageMultilang.Controls.Add(this.beLanguageFile2);
+            this.pageMultilang.Controls.Add(this.beLanguageFile1);
+            this.pageMultilang.Controls.Add(this.tbLanguage3);
+            this.pageMultilang.Controls.Add(this.tbLanguage2);
+            this.pageMultilang.Controls.Add(this.tbLanguage1);
+            this.pageMultilang.Controls.Add(this.beOriginalFilename);
+            this.pageMultilang.Controls.Add(this.lSelectMultilang);
+            this.pageMultilang.Controls.Add(this.bOKMulti);
+            this.pageMultilang.Location = new System.Drawing.Point(10, 37);
+            this.pageMultilang.Name = "pageMultilang";
+            this.pageMultilang.Size = new System.Drawing.Size(335, 483);
+            this.pageMultilang.Text = "Multi language";
+            // 
+            // lSelectFilesForTranslations
+            // 
+            this.lSelectFilesForTranslations.Location = new System.Drawing.Point(11, 106);
+            this.lSelectFilesForTranslations.Name = "lSelectFilesForTranslations";
+            this.lSelectFilesForTranslations.Size = new System.Drawing.Size(264, 18);
+            this.lSelectFilesForTranslations.TabIndex = 21;
+            this.lSelectFilesForTranslations.Text = "Select files for translations and set language names:";
+            // 
+            // beLanguageFile3
+            // 
+            this.beLanguageFile3.Location = new System.Drawing.Point(123, 220);
+            this.beLanguageFile3.Name = "beLanguageFile3";
+            this.beLanguageFile3.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile3.TabIndex = 20;
+            this.beLanguageFile3.Text = "radBrowseEditor3";
+            // 
+            // beLanguageFile2
+            // 
+            this.beLanguageFile2.Location = new System.Drawing.Point(123, 180);
+            this.beLanguageFile2.Name = "beLanguageFile2";
+            this.beLanguageFile2.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile2.TabIndex = 19;
+            this.beLanguageFile2.Text = "radBrowseEditor2";
+            // 
+            // beLanguageFile1
+            // 
+            this.beLanguageFile1.Location = new System.Drawing.Point(123, 140);
+            this.beLanguageFile1.Name = "beLanguageFile1";
+            this.beLanguageFile1.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile1.TabIndex = 18;
+            this.beLanguageFile1.Text = "radBrowseEditor1";
+            // 
+            // tbLanguage3
+            // 
+            this.tbLanguage3.Location = new System.Drawing.Point(11, 220);
+            this.tbLanguage3.Name = "tbLanguage3";
+            this.tbLanguage3.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage3.TabIndex = 17;
+            this.tbLanguage3.TabStop = false;
+            this.tbLanguage3.Text = "Language name";
+            // 
+            // tbLanguage2
+            // 
+            this.tbLanguage2.Location = new System.Drawing.Point(11, 180);
+            this.tbLanguage2.Name = "tbLanguage2";
+            this.tbLanguage2.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage2.TabIndex = 16;
+            this.tbLanguage2.TabStop = false;
+            this.tbLanguage2.Text = "Language name";
+            // 
+            // tbLanguage1
+            // 
+            this.tbLanguage1.Location = new System.Drawing.Point(11, 140);
+            this.tbLanguage1.Name = "tbLanguage1";
+            this.tbLanguage1.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage1.TabIndex = 15;
+            this.tbLanguage1.TabStop = false;
+            this.tbLanguage1.Text = "Language name";
+            // 
+            // beOriginalFilename
+            // 
+            this.beOriginalFilename.Location = new System.Drawing.Point(11, 66);
+            this.beOriginalFilename.Name = "beOriginalFilename";
+            this.beOriginalFilename.Size = new System.Drawing.Size(313, 20);
+            this.beOriginalFilename.TabIndex = 14;
+            // 
+            // lSelectMultilang
+            // 
+            this.lSelectMultilang.Location = new System.Drawing.Point(11, 28);
+            this.lSelectMultilang.Name = "lSelectMultilang";
+            this.lSelectMultilang.Size = new System.Drawing.Size(250, 18);
+            this.lSelectMultilang.TabIndex = 13;
+            this.lSelectMultilang.Text = "Select a file with original phrasses for translation:";
+            // 
+            // bOKMulti
+            // 
+            this.bOKMulti.Location = new System.Drawing.Point(214, 431);
+            this.bOKMulti.Name = "bOKMulti";
+            this.bOKMulti.Size = new System.Drawing.Size(110, 24);
+            this.bOKMulti.TabIndex = 12;
+            this.bOKMulti.Text = "ОК";
+            this.bOKMulti.Click += new System.EventHandler(this.bOKMulti_Click);
             // 
             // pageInterface
             // 
@@ -247,107 +348,6 @@
             this.bOkGossip.Text = "ОК";
             this.bOkGossip.Click += new System.EventHandler(this.bOkGossip_Click);
             // 
-            // pageMultilang
-            // 
-// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
-            this.pageMultilang.Controls.Add(this.lSelectFilesForTranslations);
-            this.pageMultilang.Controls.Add(this.beLanguageFile3);
-            this.pageMultilang.Controls.Add(this.beLanguageFile2);
-            this.pageMultilang.Controls.Add(this.beLanguageFile1);
-            this.pageMultilang.Controls.Add(this.tbLanguage3);
-            this.pageMultilang.Controls.Add(this.tbLanguage2);
-            this.pageMultilang.Controls.Add(this.tbLanguage1);
-            this.pageMultilang.Controls.Add(this.beOriginalFilename);
-            this.pageMultilang.Controls.Add(this.lSelectMultilang);
-            this.pageMultilang.Controls.Add(this.bOKMulti);
-            this.pageMultilang.Location = new System.Drawing.Point(10, 37);
-            this.pageMultilang.Name = "pageMultilang";
-            this.pageMultilang.Size = new System.Drawing.Size(335, 483);
-            this.pageMultilang.Text = "Multi languge";
-            // 
-            // beOriginalFilename
-            // 
-            this.beOriginalFilename.Location = new System.Drawing.Point(11, 66);
-            this.beOriginalFilename.Name = "beOriginalFilename";
-            this.beOriginalFilename.Size = new System.Drawing.Size(313, 20);
-            this.beOriginalFilename.TabIndex = 14;
-            // 
-            // lSelectMultilang
-            // 
-            this.lSelectMultilang.Location = new System.Drawing.Point(11, 28);
-            this.lSelectMultilang.Name = "lSelectMultilang";
-            this.lSelectMultilang.Size = new System.Drawing.Size(250, 18);
-            this.lSelectMultilang.TabIndex = 13;
-            this.lSelectMultilang.Text = "Select a file with original phrasses for translation:";
-            // 
-            // bOKMulti
-            // 
-            this.bOKMulti.Location = new System.Drawing.Point(214, 431);
-            this.bOKMulti.Name = "bOKMulti";
-            this.bOKMulti.Size = new System.Drawing.Size(110, 24);
-            this.bOKMulti.TabIndex = 12;
-            this.bOKMulti.Text = "ОК";
-            this.bOKMulti.Click += new System.EventHandler(this.bOKMulti_Click);
-            // 
-            // tbLanguage1
-            // 
-            this.tbLanguage1.Location = new System.Drawing.Point(11, 140);
-            this.tbLanguage1.Name = "tbLanguage1";
-            this.tbLanguage1.Size = new System.Drawing.Size(100, 20);
-            this.tbLanguage1.TabIndex = 15;
-            this.tbLanguage1.TabStop = false;
-            this.tbLanguage1.Text = "Language name";
-            // 
-            // tbLanguage2
-            // 
-            this.tbLanguage2.Location = new System.Drawing.Point(11, 180);
-            this.tbLanguage2.Name = "tbLanguage2";
-            this.tbLanguage2.Size = new System.Drawing.Size(100, 20);
-            this.tbLanguage2.TabIndex = 16;
-            this.tbLanguage2.TabStop = false;
-            this.tbLanguage2.Text = "Language name";
-            // 
-            // tbLanguage3
-            // 
-            this.tbLanguage3.Location = new System.Drawing.Point(11, 220);
-            this.tbLanguage3.Name = "tbLanguage3";
-            this.tbLanguage3.Size = new System.Drawing.Size(100, 20);
-            this.tbLanguage3.TabIndex = 17;
-            this.tbLanguage3.TabStop = false;
-            this.tbLanguage3.Text = "Language name";
-            // 
-            // beLanguageFile1
-            // 
-            this.beLanguageFile1.Location = new System.Drawing.Point(123, 140);
-            this.beLanguageFile1.Name = "beLanguageFile1";
-            this.beLanguageFile1.Size = new System.Drawing.Size(201, 20);
-            this.beLanguageFile1.TabIndex = 18;
-            this.beLanguageFile1.Text = "radBrowseEditor1";
-            // 
-            // beLanguageFile2
-            // 
-            this.beLanguageFile2.Location = new System.Drawing.Point(123, 180);
-            this.beLanguageFile2.Name = "beLanguageFile2";
-            this.beLanguageFile2.Size = new System.Drawing.Size(201, 20);
-            this.beLanguageFile2.TabIndex = 19;
-            this.beLanguageFile2.Text = "radBrowseEditor2";
-            // 
-            // beLanguageFile3
-            // 
-            this.beLanguageFile3.Location = new System.Drawing.Point(123, 220);
-            this.beLanguageFile3.Name = "beLanguageFile3";
-            this.beLanguageFile3.Size = new System.Drawing.Size(201, 20);
-            this.beLanguageFile3.TabIndex = 20;
-            this.beLanguageFile3.Text = "radBrowseEditor3";
-            // 
-            // lSelectFilesForTranslations
-            // 
-            this.lSelectFilesForTranslations.Location = new System.Drawing.Point(11, 106);
-            this.lSelectFilesForTranslations.Name = "lSelectFilesForTranslations";
-            this.lSelectFilesForTranslations.Size = new System.Drawing.Size(264, 18);
-            this.lSelectFilesForTranslations.TabIndex = 21;
-            this.lSelectFilesForTranslations.Text = "Select files for translations and set language names:";
-            // 
             // SettingsForm
             // 
             this.AccessibleDescription = "Settings form";
@@ -372,6 +372,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pvSettings)).EndInit();
             this.pvSettings.ResumeLayout(false);
+            this.pageMultilang.ResumeLayout(false);
+            this.pageMultilang.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beOriginalFilename)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).EndInit();
             this.pageInterface.ResumeLayout(false);
             this.pageInterface.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).EndInit();
@@ -388,18 +400,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.bePathToGossip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lPathToGossip)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOkGossip)).EndInit();
-            this.pageMultilang.ResumeLayout(false);
-            this.pageMultilang.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.beOriginalFilename)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
