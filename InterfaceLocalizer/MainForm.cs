@@ -20,7 +20,7 @@ using InterfaceLocalizer.Properties;
 
 namespace InterfaceLocalizer
 {
-    enum WorkMode { interfaces = 0, gossip = 1};
+    enum WorkMode { interfaces = 0, gossip = 1, multilang = 2};
 
     public partial class MainForm : Form
     {

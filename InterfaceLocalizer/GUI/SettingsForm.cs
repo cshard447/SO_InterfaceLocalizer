@@ -32,10 +32,12 @@ namespace InterfaceLocalizer.GUI
         {
             InitializeComponent();
             appSettings = _appSettings;
-            if (Properties.Settings.Default.WorkMode == (int) WorkMode.interfaces)
+            if (Properties.Settings.Default.WorkMode == (int)WorkMode.interfaces)
                 pvSettings.SelectedPage = pageInterface;
             else if (Properties.Settings.Default.WorkMode == (int)WorkMode.gossip)
                 pvSettings.SelectedPage = pageGossip;
+            else if (Properties.Settings.Default.WorkMode == (int)WorkMode.multilang)
+                pvSettings.SelectedPage = pageMultilang;
             
             LoadMultiLanguage();
             // иниициализируем данные об интерфейсах
@@ -205,6 +207,7 @@ namespace InterfaceLocalizer.GUI
             appSettings.TranslationFilenames = translationFiles;
 
             appSettings.SaveSettings();
+            //Properties.Settings.Default.WorkMode = (int)WorkMode.multilang;
             this.Close();
         }
 

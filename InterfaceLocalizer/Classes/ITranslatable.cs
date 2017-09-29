@@ -14,8 +14,8 @@ namespace InterfaceLocalizer.Classes
         string GetTranslation(String key);
         string GetFilename();
         string GetPathString();
-        void SetRusData(string rusData);
-        void SetEngData(string engData);
+        void SetOriginalText(string originalText);
+        void SetTranslation(String key, string translatedText);
         XElement GetPath();
     }
 

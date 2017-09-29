@@ -52,14 +52,14 @@ namespace InterfaceLocalizer.Classes
             return xmlPath.GetPathAsString();
         }
 
-        public void SetRusData(string rusData)
+        public void SetOriginalText(string originalText)
         {
-            phrase = rusData;
+            phrase = originalText;
         }
 
-        public void SetEngData(string engData)
+        public void SetTranslation(String key, string translatedText)
         {
-            translation["eng"] = engData;
+            translation[key] = translatedText;
         }
 
         public XElement GetPath()
@@ -217,8 +217,8 @@ namespace InterfaceLocalizer.Classes
                 int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
-                string rus = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
-                string eng = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
+                string originalText = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
+                string translation = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
@@ -226,8 +226,8 @@ namespace InterfaceLocalizer.Classes
                 if (xmlDict[id].GetFilename() != filename)
                     throw new System.ArgumentException("Имена файлов не совпадают!");
 
-                xmlDict[id].SetRusData(rus);
-                xmlDict[id].SetEngData(eng);
+                xmlDict[id].SetOriginalText(originalText);
+                xmlDict[id].SetTranslation("eng", translation);
             }            
         }
 

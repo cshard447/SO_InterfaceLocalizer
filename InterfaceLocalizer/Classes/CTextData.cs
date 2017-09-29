@@ -42,14 +42,14 @@ namespace InterfaceLocalizer.Classes
             return "";
         }
 
-        public void SetRusData(string rusData)
+        public void SetOriginalText(string originalText)
         {
-            rusText = rusData;
+            rusText = originalText;
         }
 
-        public void SetEngData(string engData)
+        public void SetTranslation(String key, string translatedText)
         {
-            engText = engData;
+            engText = translatedText;
         }
 
         public XElement GetPath()
@@ -96,8 +96,8 @@ namespace InterfaceLocalizer.Classes
             {
                 int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
-                string rus = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
-                string eng = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
+                string originalText = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
+                string translation = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!textDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
@@ -105,8 +105,8 @@ namespace InterfaceLocalizer.Classes
                 if (textDict[id].GetFilename() != filename)
                     throw new System.ArgumentException("Имена файлов не совпадают!");
 
-                textDict[id].SetRusData(rus);
-                textDict[id].SetEngData(eng);
+                textDict[id].SetOriginalText(originalText);
+                textDict[id].SetTranslation("default", translation);
             }
         }
 
