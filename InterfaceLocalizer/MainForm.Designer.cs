@@ -221,7 +221,7 @@
             this.cmbSaveTranslation.Text = "Save Translations";
             this.cmbSaveTranslation.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmbSaveTranslation.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.cmbSaveTranslation.Click += new System.EventHandler(this.cmbSaveEng_Click);
+            this.cmbSaveTranslation.Click += new System.EventHandler(this.cmbSaveTranslation_Click);
             // 
             // cmbSaveOriginal
             // 
@@ -235,7 +235,7 @@
             this.cmbSaveOriginal.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.cmbSaveOriginal.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.cmbSaveOriginal.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.cmbSaveOriginal.Click += new System.EventHandler(this.cmbSaveRus_Click);
+            this.cmbSaveOriginal.Click += new System.EventHandler(this.cmbSaveOriginal_Click);
             // 
             // cmbStripMode
             // 

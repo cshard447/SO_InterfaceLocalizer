@@ -14,6 +14,12 @@ namespace InterfaceLocalizer.Classes
         public static List<string> AllGossipFiles = new List<string>();
         public static List<string> CheckedGossipFiles = new List<string>();
 
+        public static Dictionary<string, string> LanguageToFile = new Dictionary<string, string>();
+        public static int LanguagesCount()
+        {
+            return LanguageToFile.Count;
+        }
+
         public static string GetListAsString(List<string> list)
         {
             string result = "";

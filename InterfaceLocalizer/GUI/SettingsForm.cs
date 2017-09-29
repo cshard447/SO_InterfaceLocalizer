@@ -206,8 +206,16 @@ namespace InterfaceLocalizer.GUI
             string translationFiles = beLanguageFile1.Value + ";" + beLanguageFile2.Value + ";" + beLanguageFile3.Value;
             appSettings.TranslationFilenames = translationFiles;
 
+            CFileList.LanguageToFile.Clear();
+            if (beLanguageFile1.Value != "" && File.Exists(beLanguageFile1.Value))
+                CFileList.LanguageToFile.Add(tbLanguage1.Text, beLanguageFile1.Value);
+            if (beLanguageFile2.Value != "" && File.Exists(beLanguageFile2.Value))
+                CFileList.LanguageToFile.Add(tbLanguage2.Text, beLanguageFile2.Value);
+            if (beLanguageFile3.Value != "" && File.Exists(beLanguageFile3.Value))
+                CFileList.LanguageToFile.Add(tbLanguage3.Text, beLanguageFile3.Value);
+
             appSettings.SaveSettings();
-            //Properties.Settings.Default.WorkMode = (int)WorkMode.multilang;
+            Properties.Settings.Default.WorkMode = (int)WorkMode.multilang;
             this.Close();
         }
 

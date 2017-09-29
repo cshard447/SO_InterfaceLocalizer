@@ -49,6 +49,7 @@ namespace InterfaceLocalizer
                         ref CFileList.AllFiles, ref CFileList.CheckedFiles);
                 LoadData(appSettings.PathToGossip, appSettings.CheckedGossipFiles, "*.txt",
                         ref CFileList.AllGossipFiles, ref CFileList.CheckedGossipFiles);
+                LoadMultilang();
             }
             catch (Exception)
             {
@@ -78,6 +79,20 @@ namespace InterfaceLocalizer
             {
                 MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }        
+        }
+
+        private void LoadMultilang()
+        {            
+            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
+            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
+            
+            CFileList.LanguageToFile.Clear();
+            int count = Math.Min(languages.Count(), translatedFiles.Count());
+            for (int i = 0; i < count; i++)
+            {
+                if (File.Exists(translatedFiles[i]))
+                    CFileList.LanguageToFile.Add(languages[i], translatedFiles[i]);
+            }
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)
@@ -170,7 +185,7 @@ namespace InterfaceLocalizer
             }
         }
 
-        private void cmbSaveEng_Click(object sender, EventArgs e)
+        private void cmbSaveTranslation_Click(object sender, EventArgs e)
         {
             if (workMode == WorkMode.interfaces)
                 SaveDataToFile(dataManager, false);
@@ -178,7 +193,7 @@ namespace InterfaceLocalizer
                 SaveDataToFile(textManager, false);
         }
 
-        private void cmbSaveRus_Click(object sender, EventArgs e)
+        private void cmbSaveOriginal_Click(object sender, EventArgs e)
         {
             if (workMode == WorkMode.interfaces)
                 SaveDataToFile(dataManager, true);
@@ -240,6 +255,8 @@ namespace InterfaceLocalizer
                 SetInterfacesView();
             else if (workMode == WorkMode.gossip)
                 SetGossipView();
+            else if (workMode == WorkMode.multilang)
+                SetMultilangView();
         }
 
         private void SetInterfacesView()
@@ -250,6 +267,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
@@ -263,6 +281,22 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = false;
             gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
+            gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
+
+            gridViewTranslation.AutoSizeRows = true;
+        }
+
+        private void SetMultilangView()
+        {
+            lMode.Text = "Multilang";
+            gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
+            gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
