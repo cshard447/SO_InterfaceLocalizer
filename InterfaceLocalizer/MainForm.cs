@@ -26,6 +26,7 @@ namespace InterfaceLocalizer
     {
         CDataManager dataManager = new CDataManager();
         CTextManager textManager = new CTextManager();
+        CMultiManager multiManager = new CMultiManager();
         AppSettings appSettings;
         private WorkMode workMode;
         private bool showInfo;
@@ -113,6 +114,8 @@ namespace InterfaceLocalizer
                 ShowDataOnGrid(dataManager, CFileList.CheckedFiles);
             else if (workMode == WorkMode.gossip)
                 ShowDataOnGrid(textManager, CFileList.CheckedGossipFiles);
+            else if (workMode == WorkMode.multilang)
+                ShowDataOnGrid(multiManager, new List<string>{Properties.Settings.Default.OriginalTextFilename});
         }
 
         private void ShowDataOnGrid(IManager manager, List<string> source)
@@ -157,12 +160,18 @@ namespace InterfaceLocalizer
 
         private void addDataToGridView(int id, ITranslatable data)
         {
-            object[] values = new object[5];
+            object[] values = new object[6];
             values[0] = id.ToString();
             values[1] = Path.GetFileName(data.GetFilename());
             values[2] = data.GetPathString();
             values[3] = data.GetOriginalText();
-            values[4] = data.GetTranslation("eng");
+            if (workMode == WorkMode.interfaces || workMode == WorkMode.gossip)
+                values[4] = data.GetTranslation("eng");
+            else
+            {
+                values[4] = data.GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(0));
+                values[5] = data.GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(1));
+            }
             gridViewTranslation.Rows.Add(values);
         }
 

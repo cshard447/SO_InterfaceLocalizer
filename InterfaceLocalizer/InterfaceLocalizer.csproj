@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Classes\AppSettings.cs" />
     <Compile Include="Classes\CFileList.cs" />
+    <Compile Include="Classes\CMultiData.cs" />
     <Compile Include="Classes\CRussianDict.cs" />
     <Compile Include="Classes\CTextData.cs" />
     <Compile Include="Classes\CXmlData.cs" />
