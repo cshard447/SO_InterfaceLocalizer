@@ -156,6 +156,26 @@ namespace InterfaceLocalizer
                 gridViewTranslation.EndUpdate();
                 cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
             }
+            else if (workMode == WorkMode.multilang)
+            {
+                multiManager.ClearAllData();
+                gridViewTranslation.Rows.Clear();
+                multiManager.AddFileToManager(Properties.Settings.Default.OriginalTextFilename);
+
+                Dictionary<int, ITranslatable> textDict = multiManager.GetFullDictionary();
+                gridViewTranslation.BeginUpdate();
+                foreach (int id in textDict.Keys)
+                {
+                    foreach (string language in CFileList.LanguageToFile.Keys)
+                        if (textDict[id].GetTranslation(language) == "<NO DATA>" || textDict[id].GetTranslation(language) == "")
+                        {
+                            addDataToGridView(id, textDict[id]);
+                            break;
+                        }
+                }
+                gridViewTranslation.EndUpdate();
+                cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";            
+            }
         }
 
         private void addDataToGridView(int id, ITranslatable data)
