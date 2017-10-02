@@ -24,7 +24,6 @@ namespace InterfaceLocalizer.Classes
         public CMultiData(string _phrase, Dictionary<string, string> data, string _filename, XmlPath _path)
         {
             translation = new Dictionary<string, string>(data);
-            //translation = data;
             phrase = _phrase;
             filename = _filename;
             xmlPath = new XmlPath(_path);
@@ -239,9 +238,6 @@ namespace InterfaceLocalizer.Classes
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                //if (xmlDict[id].GetFilename() != filename)
-                //    throw new System.ArgumentException("Имена файлов не совпадают!");
-
                 xmlDict[id].SetOriginalText(originalText);
 
                 for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
@@ -254,14 +250,12 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        [System.Obsolete("Rewrite from XmlData to MultiData")]
         public void SaveDataToFile(bool original)
         {
-            string path;// = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath());
             bool json = false;
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
-                path = CFileList.LanguageToFile[language];
+                string path = (original) ? (Properties.Settings.Default.OriginalTextFilename) : (CFileList.LanguageToFile[language]);
                 XDocument doc = new XDocument();
                 /*if (Path.GetExtension(file) == ".json")
                 {
