@@ -160,7 +160,7 @@ namespace InterfaceLocalizer
 
         private void addDataToGridView(int id, ITranslatable data)
         {
-            object[] values = new object[6];
+            object[] values = new object[7];
             values[0] = id.ToString();
             values[1] = Path.GetFileName(data.GetFilename());
             values[2] = data.GetPathString();
@@ -169,8 +169,8 @@ namespace InterfaceLocalizer
                 values[4] = data.GetTranslation("eng");
             else
             {
-                values[4] = data.GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(0));
-                values[5] = data.GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(1));
+                for (int i = 0; i < CFileList.LanguageToFile.Count(); i++ )
+                    values[i+4] = data.GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
             }
             gridViewTranslation.Rows.Add(values);
         }
@@ -284,6 +284,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation2"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
@@ -298,6 +299,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = false;
             gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation2"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
@@ -312,11 +314,12 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
+            gridViewTranslation.Columns["columnTranslation2"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
-            gridViewTranslation.Columns["columnTranslation1"].HeaderText = CFileList.LanguageToFile.Keys.First();
-            gridViewTranslation.Columns["columnTranslation2"].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(1);
+            for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
+                gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i-1);
             gridViewTranslation.AutoSizeRows = true;
         }
 
