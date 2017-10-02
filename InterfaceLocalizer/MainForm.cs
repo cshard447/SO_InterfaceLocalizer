@@ -200,6 +200,8 @@ namespace InterfaceLocalizer
                 SaveDataToFile(dataManager, false);
             else if (workMode == WorkMode.gossip)
                 SaveDataToFile(textManager, false);
+            else if (workMode == WorkMode.multilang)
+                SaveDataToFile(multiManager, false);
         }
 
         private void cmbSaveOriginal_Click(object sender, EventArgs e)
@@ -208,6 +210,8 @@ namespace InterfaceLocalizer
                 SaveDataToFile(dataManager, true);
             else if (workMode == WorkMode.gossip)
                 SaveDataToFile(textManager, true);
+            else if (workMode == WorkMode.multilang)
+                SaveDataToFile(multiManager, true);
         }
 
         private void SaveDataToFile(IManager manager, bool originalText)
@@ -308,6 +312,8 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
+            gridViewTranslation.Columns["columnTranslation1"].HeaderText = CFileList.LanguageToFile.Keys.First();
+            gridViewTranslation.Columns["columnTranslation2"].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(1);
             gridViewTranslation.AutoSizeRows = true;
         }
 

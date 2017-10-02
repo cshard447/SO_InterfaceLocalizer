@@ -227,7 +227,6 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        [System.Obsolete("Rewrite from XmlData to MultiData")]
         public void UpdateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
@@ -236,52 +235,59 @@ namespace InterfaceLocalizer.Classes
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
                 string originalText = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
-                string translation = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                if (xmlDict[id].GetFilename() != filename)
-                    throw new System.ArgumentException("Имена файлов не совпадают!");
+                //if (xmlDict[id].GetFilename() != filename)
+                //    throw new System.ArgumentException("Имена файлов не совпадают!");
 
                 xmlDict[id].SetOriginalText(originalText);
-                xmlDict[id].SetTranslation("eng", translation);
+
+                for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
+                {
+                    string columnName = "columnTranslation" + i.ToString();
+                    string language = CFileList.LanguageToFile.Keys.ElementAt(i - 1);
+                    string translation = gridView.Rows[row].Cells[columnName].Value.ToString();
+                    xmlDict[id].SetTranslation(language, translation);
+                }
             }
         }
 
         [System.Obsolete("Rewrite from XmlData to MultiData")]
         public void SaveDataToFile(bool original)
         {
-            string path = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath());
+            string path;// = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath());
             bool json = false;
-            foreach (string file in CFileList.CheckedFiles)
+            foreach (string language in CFileList.LanguageToFile.Keys)
             {
+                path = CFileList.LanguageToFile[language];
                 XDocument doc = new XDocument();
-                if (Path.GetExtension(file) == ".json")
+                /*if (Path.GetExtension(file) == ".json")
                 {
                     json = true;
                     XElement el = new XElement("root");
                     doc.Add(el);
                 }
-                else
+                else*/
                     json = false;
 
                 if (!json)
                 {
-                    doc = XDocument.Load(path + file);
+                    doc = XDocument.Load(path);
                     IEnumerable<XElement> del = doc.Root.Descendants().ToList();
                     del.Remove();
-                    doc.Save(path + file);
+                    doc.Save(path);
                 }
 
-                foreach (CXmlData text in xmlDict.Values)
+                foreach (CMultiData text in xmlDict.Values)
                 {
-                    if (text.GetFilename() != file)
-                        continue;
+                    //if (text.GetFilename() != file)
+                        //continue;
 
                     XElement localPath = text.GetPath();
                     XElement noRoot = localPath.Descendants().First();
-                    string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation("eng"));
+                    string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation(language));
 
                     XElement child = noRoot;
                     while (child.HasElements)
@@ -296,7 +302,7 @@ namespace InterfaceLocalizer.Classes
 
                 if (json)
                 {
-                    saveDataToJsonFile(original, file, doc);
+                    saveDataToJsonFile(original, path, doc);
                     continue;
                 }
                 else
@@ -306,7 +312,7 @@ namespace InterfaceLocalizer.Classes
                     settings.Indent = true;
                     settings.OmitXmlDeclaration = true;
                     settings.NewLineOnAttributes = false;
-                    using (System.Xml.XmlWriter w = System.Xml.XmlWriter.Create(path + file, settings))
+                    using (System.Xml.XmlWriter w = System.Xml.XmlWriter.Create(path, settings))
                     {
                         doc.Save(w);
                     }
