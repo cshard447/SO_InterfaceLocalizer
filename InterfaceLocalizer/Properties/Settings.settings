@@ -71,5 +71,8 @@
     <Setting Name="OriginalTextFilename" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="ColLang2Width" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

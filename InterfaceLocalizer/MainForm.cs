@@ -184,13 +184,15 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             if (!showInfo)
             {
-                gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width / 2;
-                gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width / 2;
+                gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width / 3;
+                gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width / 3;
+                gridViewTranslation.Columns["columnTranslation2"].Width = gridViewTranslation.Width / 3;
             }
             else
             {
                 gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width = appSettings.ColRusWidth;
                 gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width = appSettings.ColEngWidth;
+                gridViewTranslation.Columns["columnTranslation2"].Width = gridViewTranslation.Width = appSettings.ColLanguage2Width;
             }
         }
 
@@ -238,6 +240,7 @@ namespace InterfaceLocalizer
             appSettings.ColTagsWidth = gridViewTranslation.Columns["columnTags"].Width;
             appSettings.ColRusWidth = gridViewTranslation.Columns["columnOriginalPhrase"].Width;
             appSettings.ColEngWidth = gridViewTranslation.Columns["columnTranslation1"].Width;
+            appSettings.ColLanguage2Width = gridViewTranslation.Columns["columnTranslation2"].Width;
             appSettings.SaveSettings();
         }
 
@@ -256,6 +259,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnTags"].Width = appSettings.ColTagsWidth;
             gridViewTranslation.Columns["columnOriginalPhrase"].Width = appSettings.ColRusWidth;
             gridViewTranslation.Columns["columnTranslation1"].Width = appSettings.ColEngWidth;
+            gridViewTranslation.Columns["columnTranslation2"].Width = appSettings.ColLanguage2Width;
             showInfo = appSettings.ServiceColumnsVisible;
             menuItemCompleteMessage.IsChecked = appSettings.SpellCheckCompleteBox;
             SpellChecker.EnableCompleteMessageBox = appSettings.SpellCheckCompleteBox;
@@ -297,7 +301,6 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
-
             gridViewTranslation.AutoSizeRows = true;
         }
 
