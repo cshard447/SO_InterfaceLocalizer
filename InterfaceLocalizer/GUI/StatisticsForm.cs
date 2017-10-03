@@ -15,17 +15,36 @@ namespace InterfaceLocalizer.GUI
     public partial class StatisticsForm : Telerik.WinControls.UI.RadForm
     {
         AppSettings appSettings;
+        IManager manager;
+        List<string> fileList;
         int filesCount = 0;
         int phrasesCount = 0;
-        int symbolsCount =0 ;
-        int engSymbols = 0 ;
+        int symbolsCount = 0;
+        int engSymbols = 0;
         int nonLocalizedPhrases = 0;
         int nonLocalizedSymbols = 0;
 
-        public StatisticsForm(AppSettings _appSettings)
+        public StatisticsForm(AppSettings _appSettings, WorkMode mode)
         {
             InitializeComponent();
             appSettings = _appSettings;
+            switch (mode)
+            {
+                case WorkMode.interfaces:
+                    manager = new CDataManager();
+                    fileList = CFileList.CheckedFiles;
+                    break;
+                case WorkMode.gossip:
+                    manager = new CTextManager();
+                    fileList = CFileList.CheckedGossipFiles;
+                    break;
+                case WorkMode.multilang:
+                    manager = new CMultiManager();
+                    fileList = CFileList.MultilangFile;
+                    break;
+                default:
+                    break;
+            }            
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -42,28 +61,29 @@ namespace InterfaceLocalizer.GUI
 
         private void rbTotal_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            calcStats(CFileList.AllFiles);
+            //calcStats(CFileList.AllFiles);
+            calcStats();
         }
 
         private void rbChecked_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            calcStats(CFileList.CheckedFiles);
+            //calcStats(CFileList.CheckedFiles);
+            calcStats();
         }
 
-        private void calcStats(List<string> fileList)
+        private void calcStats()    // List<string> fileList
         {
-            nullData();
-            CDataManager dataManager = new CDataManager();
+            nullData();            
             filesCount = fileList.Count;
             foreach (string file in fileList)
-                dataManager.AddFileToManager(file);
+                manager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> texts = dataManager.GetFullDictionary();
+            Dictionary<int, ITranslatable> texts = manager.GetFullDictionary();
             phrasesCount = texts.Count;
-            foreach (CXmlData text in texts.Values)
+            foreach (ITranslatable text in texts.Values)
             {
                 symbolsCount += text.GetOriginalText().Length;
-                if (text.GetTranslation("eng") == "<NO DATA>" || text.GetTranslation("eng") == "")
+                if (text.Undone())
                 {
                     nonLocalizedPhrases++;
                     nonLocalizedSymbols += text.GetOriginalText().Length;
@@ -77,14 +97,14 @@ namespace InterfaceLocalizer.GUI
 
         private void showStats()
         {
-            string stats = "Файлов для перевода: " + filesCount.ToString();
-            stats += "\nФраз для перевода: " + phrasesCount.ToString();
-            stats += "\nСимволов для перевода: " + symbolsCount.ToString();
+            string stats = "Files for translation: " + filesCount.ToString();
+            stats += "\nPhrases totally: " + phrasesCount.ToString();
+            stats += "\nSymbols totally: " + symbolsCount.ToString();
             stats += "\n\n";
 
-            stats += "Переведено символов: " + engSymbols.ToString();
-            stats += "\nОсталось перевести фраз: " + nonLocalizedPhrases.ToString();
-            stats += "\nОсталось перевести символов: " + nonLocalizedSymbols.ToString();
+            stats += "Symbols translated: " + engSymbols.ToString();
+            stats += "\nPhrases left to translate: " + nonLocalizedPhrases.ToString();
+            stats += "\nSymbols left to translate: " + nonLocalizedSymbols.ToString();
 
             lStats.Text = stats;
             lStats.Update();

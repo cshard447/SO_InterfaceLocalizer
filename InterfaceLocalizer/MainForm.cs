@@ -20,7 +20,7 @@ using InterfaceLocalizer.Properties;
 
 namespace InterfaceLocalizer
 {
-    enum WorkMode { interfaces = 0, gossip = 1, multilang = 2};
+    public enum WorkMode { interfaces = 0, gossip = 1, multilang = 2};
 
     public partial class MainForm : Form
     {
@@ -104,7 +104,7 @@ namespace InterfaceLocalizer
 
         private void menuItemStatistics_Click(object sender, EventArgs e)
         {
-            StatisticsForm sf = new StatisticsForm(appSettings);
+            StatisticsForm sf = new StatisticsForm(appSettings, workMode);
             sf.Show();
         }
 
