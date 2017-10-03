@@ -27,6 +27,7 @@ namespace InterfaceLocalizer
         CDataManager dataManager = new CDataManager();
         CTextManager textManager = new CTextManager();
         CMultiManager multiManager = new CMultiManager();
+        IManager currentManager;
         AppSettings appSettings;
         private WorkMode workMode;
         private bool showInfo;
@@ -54,7 +55,7 @@ namespace InterfaceLocalizer
             }
             catch (Exception)
             {
-                MessageBox.Show("Ошибка загрузки настроек. Перезапустите приложение", "Ошибка",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Can't load your settings. Please restart the app", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //gridviewControlSpellChecker = SpellChecker.GetControlSpellChecker(typeof(RadTextBox));
             //documentSpellChecker = gridviewControlSpellChecker.SpellChecker as DocumentSpellChecker;
@@ -78,7 +79,7 @@ namespace InterfaceLocalizer
             }
             catch
             {
-                MessageBox.Show("Задайте путь к рабочему каталогу в настройках", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please specify the path to the working directory", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }        
         }
 
@@ -111,21 +112,21 @@ namespace InterfaceLocalizer
         private void cmbShowData_Click(object sender, EventArgs e)
         {
             if (workMode == WorkMode.interfaces)
-                ShowDataOnGrid(dataManager, CFileList.CheckedFiles);
+                ShowDataOnGrid(CFileList.CheckedFiles);
             else if (workMode == WorkMode.gossip)
-                ShowDataOnGrid(textManager, CFileList.CheckedGossipFiles);
+                ShowDataOnGrid(CFileList.CheckedGossipFiles);
             else if (workMode == WorkMode.multilang)
-                ShowDataOnGrid(multiManager, new List<string>{Properties.Settings.Default.OriginalTextFilename});
+                ShowDataOnGrid(new List<string>{Properties.Settings.Default.OriginalTextFilename});
         }
 
-        private void ShowDataOnGrid(IManager manager, List<string> source)
+        private void ShowDataOnGrid(List<string> source)
         {
-            manager.ClearAllData();
+            currentManager.ClearAllData();
             gridViewTranslation.Rows.Clear();
             foreach (string file in source)
-                manager.AddFileToManager(file);
+                currentManager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> textDict = manager.GetFullDictionary();
+            Dictionary<int, ITranslatable> textDict = currentManager.GetFullDictionary();
             gridViewTranslation.BeginUpdate();
             foreach (int id in textDict.Keys)
                 addDataToGridView(id, textDict[id]);
@@ -218,28 +219,14 @@ namespace InterfaceLocalizer
 
         private void cmbSaveTranslation_Click(object sender, EventArgs e)
         {
-            if (workMode == WorkMode.interfaces)
-                SaveDataToFile(dataManager, false);
-            else if (workMode == WorkMode.gossip)
-                SaveDataToFile(textManager, false);
-            else if (workMode == WorkMode.multilang)
-                SaveDataToFile(multiManager, false);
+            currentManager.UpdateDataFromGridView(gridViewTranslation);
+            currentManager.SaveDataToFile(false);
         }
 
         private void cmbSaveOriginal_Click(object sender, EventArgs e)
         {
-            if (workMode == WorkMode.interfaces)
-                SaveDataToFile(dataManager, true);
-            else if (workMode == WorkMode.gossip)
-                SaveDataToFile(textManager, true);
-            else if (workMode == WorkMode.multilang)
-                SaveDataToFile(multiManager, true);
-        }
-
-        private void SaveDataToFile(IManager manager, bool originalText)
-        {
-            manager.UpdateDataFromGridView(gridViewTranslation);
-            manager.SaveDataToFile(originalText);
+            currentManager.UpdateDataFromGridView(gridViewTranslation);
+            currentManager.SaveDataToFile(true);
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -299,45 +286,33 @@ namespace InterfaceLocalizer
         private void SetInterfacesView()
         {
             lMode.Text = "Interfaces";
+            currentManager = dataManager;
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
-            gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
-            gridViewTranslation.Columns["columnTranslation2"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
-            gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
-            gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
         }
 
         private void SetGossipView()
         {
             lMode.Text = "Gossip";
+            currentManager = textManager;
             gridViewTranslation.Columns["columnID"].IsVisible = false;
             gridViewTranslation.Columns["columnTags"].IsVisible = false;
             gridViewTranslation.Columns["columnFilename"].IsVisible = false;
-            gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
-            gridViewTranslation.Columns["columnTranslation2"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
-            gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
-            gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             gridViewTranslation.AutoSizeRows = true;
         }
 
         private void SetMultilangView()
         {
             lMode.Text = "Multilang";
+            currentManager = multiManager;
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
-            gridViewTranslation.Columns["columnOriginalPhrase"].WrapText = true;
-            gridViewTranslation.Columns["columnTranslation1"].WrapText = true;
-            gridViewTranslation.Columns["columnTranslation2"].WrapText = true;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
-            gridViewTranslation.Columns["columnOriginalPhrase"].TextAlignment = ContentAlignment.TopLeft;
-            gridViewTranslation.Columns["columnTranslation1"].TextAlignment = ContentAlignment.TopLeft;
             for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
                 gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i-1);
             gridViewTranslation.AutoSizeRows = true;
