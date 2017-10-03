@@ -51,6 +51,10 @@ namespace InterfaceLocalizer.Classes
         {
             engText = translatedText;
         }
+        public bool Undone()
+        {
+            return true;
+        }
 
         public XElement GetPath()
         {

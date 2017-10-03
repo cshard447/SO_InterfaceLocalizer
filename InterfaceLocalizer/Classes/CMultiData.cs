@@ -63,6 +63,15 @@ namespace InterfaceLocalizer.Classes
             translation[key] = translatedText;
         }
 
+        public bool Undone()
+        {
+            foreach (string language in translation.Keys)
+                if (GetTranslation(language) == "<NO DATA>" || GetTranslation(language) == "")
+                    return true;
+
+            return false;
+        }
+
         public XElement GetPath()
         {
             return xmlPath.GetPathAsElement();

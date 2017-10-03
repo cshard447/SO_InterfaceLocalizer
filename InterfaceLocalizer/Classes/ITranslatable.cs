@@ -16,6 +16,7 @@ namespace InterfaceLocalizer.Classes
         string GetPathString();
         void SetOriginalText(string originalText);
         void SetTranslation(String key, string translatedText);
+        bool Undone();
         XElement GetPath();
     }
 

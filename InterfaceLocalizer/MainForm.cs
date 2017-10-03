@@ -137,46 +137,27 @@ namespace InterfaceLocalizer
 
         private void cmbShowUndoneData_Click(object sender, EventArgs e)
         {
+            currentManager.ClearAllData();
+            gridViewTranslation.Rows.Clear();
+
             if (workMode == WorkMode.interfaces)
             {
-                dataManager.ClearAllData();
-                gridViewTranslation.Rows.Clear();
-
                 foreach (string file in CFileList.CheckedFiles)
                     dataManager.AddFileToManager(file);
-
-                Dictionary<int, ITranslatable> textDict = dataManager.GetFullDictionary();
-                gridViewTranslation.BeginUpdate();
-                foreach (int id in textDict.Keys)
-                {
-                    if (textDict[id].GetTranslation("eng") == "<NO DATA>" || textDict[id].GetTranslation("eng") == "")
-                    {
-                        addDataToGridView(id, textDict[id]);
-                    }
-                }
-                gridViewTranslation.EndUpdate();
-                cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
             }
             else if (workMode == WorkMode.multilang)
             {
-                multiManager.ClearAllData();
-                gridViewTranslation.Rows.Clear();
                 multiManager.AddFileToManager(Properties.Settings.Default.OriginalTextFilename);
-
-                Dictionary<int, ITranslatable> textDict = multiManager.GetFullDictionary();
-                gridViewTranslation.BeginUpdate();
-                foreach (int id in textDict.Keys)
-                {
-                    foreach (string language in CFileList.LanguageToFile.Keys)
-                        if (textDict[id].GetTranslation(language) == "<NO DATA>" || textDict[id].GetTranslation(language) == "")
-                        {
-                            addDataToGridView(id, textDict[id]);
-                            break;
-                        }
-                }
-                gridViewTranslation.EndUpdate();
-                cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";            
             }
+
+            Dictionary<int, ITranslatable> textDict = currentManager.GetFullDictionary();
+            gridViewTranslation.BeginUpdate();
+            foreach (int id in textDict.Keys)
+                if (textDict[id].Undone())
+                    addDataToGridView(id, textDict[id]);
+
+            gridViewTranslation.EndUpdate();
+            cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
         }
 
         private void addDataToGridView(int id, ITranslatable data)
