@@ -310,5 +310,17 @@ namespace InterfaceLocalizer.Properties {
                 this["ColLang2Width"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("300")]
+        public int ColLang3Width {
+            get {
+                return ((int)(this["ColLang3Width"]));
+            }
+            set {
+                this["ColLang3Width"] = value;
+            }
+        }
     }
 }

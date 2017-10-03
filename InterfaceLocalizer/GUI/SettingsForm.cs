@@ -195,7 +195,7 @@ namespace InterfaceLocalizer.GUI
             var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
             beLanguageFile1.Value = translatedFiles[0];
             beLanguageFile2.Value = translatedFiles[1];
-            //beLanguageFile3.Value = translatedFiles[2];
+            beLanguageFile3.Value = translatedFiles[2];
         }
 
         private void bOKMulti_Click(object sender, EventArgs e)

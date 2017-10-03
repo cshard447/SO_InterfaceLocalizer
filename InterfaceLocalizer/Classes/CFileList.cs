@@ -13,7 +13,7 @@ namespace InterfaceLocalizer.Classes
         public static List<string> CheckedFiles = new List<string>();
         public static List<string> AllGossipFiles = new List<string>();
         public static List<string> CheckedGossipFiles = new List<string>();
-
+        public static List<string> MultilangFile = new List<string>(new List<string>{Properties.Settings.Default.OriginalTextFilename});
         public static Dictionary<string, string> LanguageToFile = new Dictionary<string, string>();
 
         public static string GetListAsString(List<string> list)

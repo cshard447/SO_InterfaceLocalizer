@@ -21,6 +21,7 @@ namespace InterfaceLocalizer.Classes
         private int colRusWidth;
         private int colEngWidth;
         private int colLanguage2Width;
+        private int colLanguage3Width;
         private bool serviceColumnsVisible;
         private int settingsFormTop;
         private int settingsFormLeft;
@@ -34,6 +35,7 @@ namespace InterfaceLocalizer.Classes
         private string languagesNames;
         private string translationFilenames;
         private string originalTextFilename;
+
 
         public int MainFormTop
         {
@@ -84,6 +86,11 @@ namespace InterfaceLocalizer.Classes
         {
             get { return checkColumnWidth(colLanguage2Width); }
             set { colLanguage2Width = checkColumnWidth(value); }
+        }
+        public int ColLanguage3Width
+        {
+            get { return checkColumnWidth(colLanguage3Width); }
+            set { colLanguage3Width = checkColumnWidth(value); }
         }
         public bool ServiceColumnsVisible
         {
@@ -171,6 +178,7 @@ namespace InterfaceLocalizer.Classes
             ColRusWidth = Properties.Settings.Default.ColRusWidth;
             ColEngWidth = Properties.Settings.Default.ColEngWidth;
             ColLanguage2Width = Properties.Settings.Default.ColLang2Width;
+            ColLanguage3Width = Properties.Settings.Default.ColLang3Width;
 
             ServiceColumnsVisible = Properties.Settings.Default.ServiceColumnsVisible;
             SettingsFormLeft = Properties.Settings.Default.SettingsFormLeft;
@@ -202,6 +210,7 @@ namespace InterfaceLocalizer.Classes
             Properties.Settings.Default.ColRusWidth = ColRusWidth;
             Properties.Settings.Default.ColEngWidth = ColEngWidth;
             Properties.Settings.Default.ColLang2Width = ColLanguage2Width;
+            Properties.Settings.Default.ColLang3Width = ColLanguage3Width;
 
             Properties.Settings.Default.ServiceColumnsVisible = ServiceColumnsVisible;
             Properties.Settings.Default.SettingsFormLeft = SettingsFormLeft;
