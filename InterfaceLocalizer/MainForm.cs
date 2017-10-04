@@ -26,7 +26,8 @@ namespace InterfaceLocalizer
     {
         CDataManager dataManager = new CDataManager();
         CTextManager textManager = new CTextManager();
-        CMultiManager multiManager = new CMultiManager();
+        //CMultiManager multiManager = new CMultiManager();
+        CKeyValueManager multiManager = new CKeyValueManager();
         AppSettings appSettings;
         private IManager currentManager;
         private List<string> currentFilelist;
@@ -115,9 +116,9 @@ namespace InterfaceLocalizer
             foreach (string file in currentFilelist)
                 currentManager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> textDict = currentManager.GetFullDictionary();
+            Dictionary<object, ITranslatable> textDict = currentManager.GetFullDictionary();
             gridViewTranslation.BeginUpdate();
-            foreach (int id in textDict.Keys)
+            foreach (object id in textDict.Keys)
                 addDataToGridView(id, textDict[id]);
 
             gridViewTranslation.EndUpdate();
@@ -132,9 +133,9 @@ namespace InterfaceLocalizer
             foreach (string file in currentFilelist)
                 currentManager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> textDict = currentManager.GetFullDictionary();
+            Dictionary<object, ITranslatable> textDict = currentManager.GetFullDictionary();
             gridViewTranslation.BeginUpdate();
-            foreach (int id in textDict.Keys)
+            foreach (object id in textDict.Keys)
                 if (textDict[id].Undone())
                     addDataToGridView(id, textDict[id]);
 
@@ -142,7 +143,7 @@ namespace InterfaceLocalizer
             cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
         }
 
-        private void addDataToGridView(int id, ITranslatable data)
+        private void addDataToGridView(object id, ITranslatable data)
         {
             object[] values = new object[7];
             values[0] = id.ToString();

@@ -188,14 +188,14 @@ namespace InterfaceLocalizer.GUI
         {
             beOriginalFilename.Value = appSettings.OriginalTextFilename;
             var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
-            tbLanguage1.Text = languages[0];
-            tbLanguage2.Text = languages[1];
-            tbLanguage3.Text = languages[2];
+            tbLanguage1.Text = (languages.Count() > 0 ) ? (languages[0]) : "";
+            tbLanguage2.Text = (languages.Count() > 1 ) ? (languages[1]) : "";
+            tbLanguage3.Text = (languages.Count() > 2 ) ? (languages[2]) : "";            
 
             var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
-            beLanguageFile1.Value = translatedFiles[0];
-            beLanguageFile2.Value = translatedFiles[1];
-            beLanguageFile3.Value = translatedFiles[2];
+            beLanguageFile1.Value = (translatedFiles.Count() > 0) ? (translatedFiles[0]) : "";
+            beLanguageFile2.Value = (translatedFiles.Count() > 1) ? (translatedFiles[1]) : "";
+            beLanguageFile3.Value = (translatedFiles.Count() > 2) ? (translatedFiles[2]) : "";
         }
 
         private void bOKMulti_Click(object sender, EventArgs e)

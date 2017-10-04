@@ -22,7 +22,7 @@ namespace InterfaceLocalizer.Classes
 
     interface IManager
     {
-        Dictionary<int, ITranslatable> GetFullDictionary();
+        Dictionary<object, ITranslatable> GetFullDictionary();
         void ClearAllData();
         void AddFileToManager(string filename);
         void UpdateDataFromGridView(RadGridView gridView);

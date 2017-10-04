@@ -65,6 +65,7 @@
     <Compile Include="Classes\CXmlData.cs" />
     <Compile Include="Classes\FolderDispatcher.cs" />
     <Compile Include="Classes\ITranslatable.cs" />
+    <Compile Include="Classes\KeyValue.cs" />
     <Compile Include="Classes\PathAtom.cs" />
     <Compile Include="GUI\SettingsForm.cs">
       <SubType>Form</SubType>

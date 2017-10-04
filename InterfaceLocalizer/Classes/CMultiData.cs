@@ -83,7 +83,7 @@ namespace InterfaceLocalizer.Classes
 
     class CMultiManager : IManager
     {
-        private Dictionary<int, ITranslatable> xmlDict = new Dictionary<int, ITranslatable>();
+        private Dictionary<object, ITranslatable> xmlDict = new Dictionary<object, ITranslatable>();
         int id = 0;
 
         public CMultiManager()
@@ -91,7 +91,7 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, ITranslatable> GetFullDictionary()
+        public Dictionary<object, ITranslatable> GetFullDictionary()
         {
             return xmlDict;
         }

@@ -66,7 +66,7 @@ namespace InterfaceLocalizer.Classes
 
     class CTextManager : IManager
     {
-        private Dictionary<int, ITranslatable> textDict = new Dictionary<int, ITranslatable>();
+        private Dictionary<object, ITranslatable> textDict = new Dictionary<object, ITranslatable>();
         int id = 0;
 
         public CTextManager()
@@ -74,7 +74,7 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, ITranslatable> GetFullDictionary()
+        public Dictionary<object, ITranslatable> GetFullDictionary()
         {
             return textDict;
         }

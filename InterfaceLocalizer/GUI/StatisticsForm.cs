@@ -78,7 +78,7 @@ namespace InterfaceLocalizer.GUI
             foreach (string file in fileList)
                 manager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> texts = manager.GetFullDictionary();
+            Dictionary<object, ITranslatable> texts = manager.GetFullDictionary();
             phrasesCount = texts.Count;
             foreach (ITranslatable text in texts.Values)
             {

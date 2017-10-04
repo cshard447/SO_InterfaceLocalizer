@@ -15,7 +15,7 @@ using System.Web.Helpers;
 
 namespace InterfaceLocalizer.Classes
 {
-    public class CXmlData : ITranslatable
+    class CXmlData : ITranslatable
     {
         private string phrase;
         private Dictionary<string, string> translation;
@@ -78,7 +78,7 @@ namespace InterfaceLocalizer.Classes
 
     class CDataManager : IManager
     {
-        private Dictionary<int, ITranslatable> xmlDict = new Dictionary<int, ITranslatable>();
+        private Dictionary<object, ITranslatable> xmlDict = new Dictionary<object, ITranslatable>();
         int id = 0;
         
         public CDataManager()
@@ -86,7 +86,7 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, ITranslatable> GetFullDictionary()
+        public Dictionary<object, ITranslatable> GetFullDictionary()
         {
             return xmlDict;
         }
