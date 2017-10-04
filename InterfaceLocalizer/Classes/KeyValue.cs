@@ -86,7 +86,6 @@ namespace InterfaceLocalizer.Classes
     class CKeyValueManager : IManager
     {
         private Dictionary<object, ITranslatable> dict;
-        //private int id = 0;
 
         public CKeyValueManager()
         {
@@ -101,7 +100,6 @@ namespace InterfaceLocalizer.Classes
         public void ClearAllData()
         {
             dict.Clear();
-            //id = 0;
         }
 
         public void AddFileToManager(string filename)
@@ -115,11 +113,6 @@ namespace InterfaceLocalizer.Classes
 
         private void ReadKeyValueFile(string language, string filename)
         {
-            //TextReader reader;
-            //reader.ReadLine();
-            //FileStream reader = File.OpenRead(filename);
-            //reader.ReadByte();
-
             StreamReader reader = new StreamReader(filename, true);
             while (!reader.EndOfStream)
             {
@@ -131,7 +124,9 @@ namespace InterfaceLocalizer.Classes
                     continue;
                 int length = rawline.Length;                
                 string key = rawline.Substring(0, indexOfEquality);
-                string value = rawline.Substring(indexOfEquality, length - indexOfEquality);
+                string value = rawline.Substring(indexOfEquality+1, length - indexOfEquality-1);
+                key = RemoveQuotes(key);
+                value = RemoveQuotes(value);
                 if (!dict.ContainsKey(key))
                 {
                     CKeyValue chunk = new CKeyValue(key, language, value, filename);
@@ -142,6 +137,18 @@ namespace InterfaceLocalizer.Classes
                     dict[key].SetTranslation(language, value);
                 }
             }
+        }
+
+        private string RemoveQuotes(string source)
+        {
+            source = source.Trim();
+            string result = source;
+            if( source.StartsWith("\""))
+                result = source.Replace('"', ' ');
+            if ( source.EndsWith(";"))
+                result = result.Substring(0,result.Length-2);
+            result = result.Trim();
+            return result;
         }
 
         public void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)
