@@ -52,7 +52,7 @@
             this.cmbRow = new Telerik.WinControls.UI.CommandBarRowElement();
             this.cmbStripButtons = new Telerik.WinControls.UI.CommandBarStripElement();
             this.cmbShowData = new Telerik.WinControls.UI.CommandBarButton();
-            this.cmbShowUndoneData = new Telerik.WinControls.UI.CommandBarButton();
+            this.cmbShowTroublesomeData = new Telerik.WinControls.UI.CommandBarButton();
             this.cmbColumnsHide = new Telerik.WinControls.UI.CommandBarButton();
             this.cmlListedItems = new Telerik.WinControls.UI.CommandBarLabel();
             this.cmbSaveTranslation = new Telerik.WinControls.UI.CommandBarButton();
@@ -144,7 +144,7 @@
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
             this.cmbRow});
-            this.commandBarTranslation.Size = new System.Drawing.Size(911, 45);
+            this.commandBarTranslation.Size = new System.Drawing.Size(911, 70);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
@@ -161,7 +161,7 @@
             this.cmbStripButtons.DisplayName = "Полоса управления";
             this.cmbStripButtons.Items.AddRange(new Telerik.WinControls.UI.RadCommandBarBaseItem[] {
             this.cmbShowData,
-            this.cmbShowUndoneData,
+            this.cmbShowTroublesomeData,
             this.cmbColumnsHide,
             this.cmlListedItems,
             this.cmbSaveTranslation,
@@ -182,18 +182,18 @@
             this.cmbShowData.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.cmbShowData.Click += new System.EventHandler(this.cmbShowData_Click);
             // 
-            // cmbShowUndoneData
+            // cmbShowTroublesomeData
             // 
-            this.cmbShowUndoneData.AccessibleDescription = "Show undone";
-            this.cmbShowUndoneData.AccessibleName = "Show undone";
-            this.cmbShowUndoneData.DisplayName = "Показать неготовые данные";
-            this.cmbShowUndoneData.DrawText = true;
-            this.cmbShowUndoneData.Image = ((System.Drawing.Image)(resources.GetObject("cmbShowUndoneData.Image")));
-            this.cmbShowUndoneData.Name = "cmbShowUndoneData";
-            this.cmbShowUndoneData.Text = "Show undone";
-            this.cmbShowUndoneData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.cmbShowUndoneData.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.cmbShowUndoneData.Click += new System.EventHandler(this.cmbShowUndoneData_Click);
+            this.cmbShowTroublesomeData.AccessibleDescription = "Show undone";
+            this.cmbShowTroublesomeData.AccessibleName = "Show undone";
+            this.cmbShowTroublesomeData.DisplayName = "Показать неготовые данные";
+            this.cmbShowTroublesomeData.DrawText = true;
+            this.cmbShowTroublesomeData.Image = ((System.Drawing.Image)(resources.GetObject("cmbShowTroublesomeData.Image")));
+            this.cmbShowTroublesomeData.Name = "cmbShowTroublesomeData";
+            this.cmbShowTroublesomeData.Text = "Show troubles";
+            this.cmbShowTroublesomeData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.cmbShowTroublesomeData.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.cmbShowTroublesomeData.Click += new System.EventHandler(this.cmbShowTroublesomeData_Click);
             // 
             // cmbColumnsHide
             // 
@@ -268,7 +268,7 @@
             this.gridViewTranslation.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.gridViewTranslation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridViewTranslation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewTranslation.Location = new System.Drawing.Point(0, 65);
+            this.gridViewTranslation.Location = new System.Drawing.Point(0, 90);
             // 
             // gridViewTranslation
             // 
@@ -360,7 +360,7 @@
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(911, 535);
+            this.gridViewTranslation.Size = new System.Drawing.Size(911, 510);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
             this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);
@@ -401,7 +401,7 @@
         private Telerik.WinControls.UI.CommandBarButton cmbColumnsHide;
         private Telerik.WinControls.UI.RadMenuItem menuItemStatistics;
         private Telerik.WinControls.UI.CommandBarLabel cmlListedItems;
-        private Telerik.WinControls.UI.CommandBarButton cmbShowUndoneData;
+        private Telerik.WinControls.UI.CommandBarButton cmbShowTroublesomeData;
         private Telerik.WinControls.UI.CommandBarButton cmbSaveTranslation;
         private Telerik.WinControls.UI.CommandBarButton cmbSaveOriginal;
         private Telerik.WinControls.UI.CommandBarStripElement cmbStripMode;

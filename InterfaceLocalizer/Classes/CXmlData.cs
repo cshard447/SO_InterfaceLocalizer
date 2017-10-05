@@ -62,7 +62,7 @@ namespace InterfaceLocalizer.Classes
             translation[key] = translatedText;
         }
 
-        public bool Undone()
+        public bool Troublesome()
         {
             return (GetTranslation("eng") == "<NO DATA>" || GetTranslation("eng") == "");
         }

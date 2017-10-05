@@ -125,7 +125,7 @@ namespace InterfaceLocalizer
             cmlListedItems.Text = "Found " + gridViewTranslation.Rows.Count + " strings";
         }
 
-        private void cmbShowUndoneData_Click(object sender, EventArgs e)
+        private void cmbShowTroublesomeData_Click(object sender, EventArgs e)
         {
             currentManager.ClearAllData();
             gridViewTranslation.Rows.Clear();
@@ -136,7 +136,7 @@ namespace InterfaceLocalizer
             Dictionary<object, ITranslatable> textDict = currentManager.GetFullDictionary();
             gridViewTranslation.BeginUpdate();
             foreach (object id in textDict.Keys)
-                if (textDict[id].Undone())
+                if (textDict[id].Troublesome())
                     addDataToGridView(id, textDict[id]);
 
             gridViewTranslation.EndUpdate();

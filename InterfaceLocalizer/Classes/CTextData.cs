@@ -51,7 +51,7 @@ namespace InterfaceLocalizer.Classes
         {
             engText = translatedText;
         }
-        public bool Undone()
+        public bool Troublesome()
         {
             return true;
         }

@@ -56,10 +56,15 @@ namespace InterfaceLocalizer.Classes
             values[language] = translatedText;
         }
 
-        public bool Undone()
+        public bool Troublesome()
         {
             if (values.Count < CFileList.LanguageToFile.Count)
                 return true;
+
+            var duplicateValues = values.GroupBy(x => x.Value).Where(x => x.Count() > 1);
+            if (duplicateValues.Count() > 0)
+                return true;
+
             return false;            
         }
 
@@ -80,6 +85,8 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
     }
+
+    //***************************************************************************************************
 
     class CKeyValueManager : IManager
     {

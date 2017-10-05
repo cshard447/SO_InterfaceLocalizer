@@ -63,11 +63,15 @@ namespace InterfaceLocalizer.Classes
             translation[key] = translatedText;
         }
 
-        public bool Undone()
+        public bool Troublesome()
         {
             foreach (string language in translation.Keys)
                 if (GetTranslation(language) == "<NO DATA>" || GetTranslation(language) == "")
                     return true;
+
+            var duplicateValues = translation.GroupBy(x => x.Value).Where(x => x.Count() > 1);
+            if (duplicateValues.Count() > 0)
+                return true;
 
             return false;
         }
@@ -113,8 +117,7 @@ namespace InterfaceLocalizer.Classes
 
         private void addXmlToManager(string filename)
         {
-            string originalPath = filename; // FolderDispatcher.OriginalPath() +
-            XmlReader reader = new XmlTextReader(originalPath);
+            XmlReader reader = new XmlTextReader(filename);
 
             Dictionary<string, XDocument> langsAndDocs = new Dictionary<string, XDocument>();
 

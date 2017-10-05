@@ -83,7 +83,7 @@ namespace InterfaceLocalizer.GUI
             foreach (ITranslatable text in texts.Values)
             {
                 symbolsCount += text.GetOriginalText().Length;
-                if (text.Undone())
+                if (text.Troublesome())
                 {
                     nonLocalizedPhrases++;
                     nonLocalizedSymbols += text.GetOriginalText().Length;
