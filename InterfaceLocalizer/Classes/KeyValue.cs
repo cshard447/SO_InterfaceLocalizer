@@ -58,10 +58,8 @@ namespace InterfaceLocalizer.Classes
 
         public bool Undone()
         {
-            foreach (string text in values.Values)
-                if (text == "<NO DATA>" || text == "")
-                    return true;
-
+            if (values.Count < CFileList.LanguageToFile.Count)
+                return true;
             return false;            
         }
 
@@ -70,7 +68,7 @@ namespace InterfaceLocalizer.Classes
             throw new NotImplementedException();
         }
 
-        public string ToString()
+        public override string ToString()
         {
             string result = key + ": " + values.Count;
             return result;        
@@ -128,14 +126,9 @@ namespace InterfaceLocalizer.Classes
                 key = RemoveQuotes(key);
                 value = RemoveQuotes(value);
                 if (!dict.ContainsKey(key))
-                {
-                    CKeyValue chunk = new CKeyValue(key, language, value, filename);
-                    dict.Add(key, chunk);
-                }
+                    dict.Add(key, new CKeyValue(key, language, value, filename));
                 else
-                {
                     dict[key].SetTranslation(language, value);
-                }
             }
         }
 
