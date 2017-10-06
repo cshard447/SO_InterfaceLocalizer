@@ -118,12 +118,13 @@ namespace InterfaceLocalizer.Classes
 
         private void ReadKeyValueFile(string language, string filename)
         {
-            StreamReader reader = new StreamReader(filename, true);
+            StreamReader reader = new StreamReader(filename);   //, Encoding.GetEncoding(1252)
             while (!reader.EndOfStream)
             {
                 string rawline = reader.ReadLine();
                 if (String.IsNullOrEmpty(rawline))      // skip empty lines
                     continue;
+                rawline = ConvertCodepointsToChars(rawline);
                 int indexOfEquality = rawline.IndexOf("=");
                 if (indexOfEquality == -1)              // skip lines without = sign for now
                     continue;
@@ -148,6 +149,28 @@ namespace InterfaceLocalizer.Classes
             if ( source.EndsWith(";"))
                 result = result.Substring(0,result.Length-2);
             result = result.Trim();
+            return result;
+        }
+
+        private string ConvertCodepointsToChars(string source)
+        {
+            string result = source;
+            Encoding utf8 = Encoding.GetEncoding(1252);
+            int indexofUnichar = result.IndexOf("\\u"); ;
+            while (indexofUnichar > 0)
+            {
+                string charString = result.Substring(indexofUnichar + 2, 4);
+                int charInt = Int32.Parse(charString, System.Globalization.NumberStyles.HexNumber);
+                byte[] array = { (byte)charInt };
+                string character = utf8.GetString(array);
+                result = source.Substring(0, indexofUnichar);
+                result += character;
+                result += source.Substring(indexofUnichar + 6, source.Length - indexofUnichar - 6);
+                indexofUnichar = result.IndexOf("\\u");
+                source = result;
+            }
+            
+
             return result;
         }
 
