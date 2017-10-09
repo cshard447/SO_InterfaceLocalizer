@@ -71,6 +71,9 @@
     <Report>
       <Path>InterfaceLocalizer170925.vsp</Path>
     </Report>
+    <Report>
+      <Path>InterfaceLocalizer171009.vsp</Path>
+    </Report>
   </Reports>
   <Launches>
     <ProjBinary>

@@ -14,7 +14,7 @@ using System.Web.Helpers;
 
 namespace InterfaceLocalizer.Classes
 {
-    public class CMultiData : ITranslatable
+    class CMultiData : ITranslatable
     {
         private string phrase;
         private Dictionary<string, string> translation;
