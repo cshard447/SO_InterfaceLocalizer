@@ -24,10 +24,6 @@ namespace InterfaceLocalizer
 
     public partial class MainForm : Form
     {
-        CDataManager dataManager = new CDataManager();
-        CTextManager textManager = new CTextManager();
-        //CMultiManager multiManager = new CMultiManager();
-        CKeyValueManager multiManager = new CKeyValueManager();
         AppSettings appSettings;
         private IManager currentManager;
         private List<string> currentFilelist;
@@ -86,7 +82,7 @@ namespace InterfaceLocalizer
         }
 
         private void LoadMultilang()
-        {            
+        {
             var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
             var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
             
@@ -243,54 +239,38 @@ namespace InterfaceLocalizer
         private void MainForm_Activated(object sender, EventArgs e)
         {
             workMode = (WorkMode) Properties.Settings.Default.WorkMode;
-            if (workMode == WorkMode.interfaces)
-                SetInterfacesView();
-            else if (workMode == WorkMode.gossip)
-                SetGossipView();
-            else if (workMode == WorkMode.multilang)
-                SetMultilangView();
-        }
+            currentFilelist = CFileList.GetProperList(workMode);
+            currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
 
-        private void SetInterfacesView()
-        {
-            lMode.Text = "Interfaces";
-            currentManager = dataManager;
-            currentFilelist = CFileList.CheckedFiles;
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnTranslation3"].IsVisible = false;
+
+            switch (workMode)
+            {
+                case WorkMode.interfaces:
+                    lMode.Text = "Interfaces";
+                    break;
+                case  WorkMode.gossip:
+                    lMode.Text = "Gossip";
+                    gridViewTranslation.Columns["columnID"].IsVisible = false;
+                    gridViewTranslation.Columns["columnTags"].IsVisible = false;
+                    gridViewTranslation.Columns["columnFilename"].IsVisible = false;
+                    break;
+                case  WorkMode.multilang:
+                    lMode.Text = "Multilang";
+                    gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
+                    gridViewTranslation.Columns["columnTranslation3"].IsVisible = true;
+                    for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
+                        gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i - 1);
+                    break;
+            }
+
             gridViewTranslation.AutoSizeRows = true;
         }
 
-        private void SetGossipView()
-        {
-            lMode.Text = "Gossip";
-            currentManager = textManager;
-            currentFilelist = CFileList.CheckedGossipFiles;
-            gridViewTranslation.Columns["columnID"].IsVisible = false;
-            gridViewTranslation.Columns["columnTags"].IsVisible = false;
-            gridViewTranslation.Columns["columnFilename"].IsVisible = false;
-            gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
-            gridViewTranslation.Columns["columnTranslation3"].IsVisible = false;
-            gridViewTranslation.AutoSizeRows = true;
-        }
-
-        private void SetMultilangView()
-        {
-            lMode.Text = "Multilang";
-            currentManager = multiManager;
-            currentFilelist = CFileList.MultilangFile;
-            gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
-            gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
-            gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
-            gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
-            gridViewTranslation.Columns["columnTranslation3"].IsVisible = true;
-            for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
-                gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i-1);
-            gridViewTranslation.AutoSizeRows = true;
-        }
 
         private void gridViewTranslation_CellValidating(object sender, Telerik.WinControls.UI.CellValidatingEventArgs e)
         {

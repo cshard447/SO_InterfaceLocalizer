@@ -42,6 +42,16 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAndroid|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\DebugAndroid\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -76,6 +86,7 @@
     <Compile Include="Classes\FolderDispatcher.cs" />
     <Compile Include="Classes\ITranslatable.cs" />
     <Compile Include="Classes\KeyValue.cs" />
+    <Compile Include="Classes\ManagerFactory.cs" />
     <Compile Include="Classes\PathAtom.cs" />
     <Compile Include="GUI\SettingsForm.cs">
       <SubType>Form</SubType>

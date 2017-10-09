@@ -11,12 +11,15 @@ EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
+		DebugAndroid|x86 = DebugAndroid|x86
 		DebugIOS|x86 = DebugIOS|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.Debug|x86.ActiveCfg = Debug|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.Debug|x86.Build.0 = Debug|x86
+		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.DebugAndroid|x86.ActiveCfg = DebugAndroid|x86
+		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.DebugAndroid|x86.Build.0 = DebugAndroid|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.DebugIOS|x86.ActiveCfg = DebugIOS|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.DebugIOS|x86.Build.0 = DebugIOS|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.Release|x86.ActiveCfg = Release|x86

@@ -31,6 +31,21 @@ namespace InterfaceLocalizer.Classes
                 result.Add(str);
             return result;
         }
+
+        public static List<string> GetProperList(WorkMode mode)
+        {
+            switch (mode)
+            {
+                case WorkMode.interfaces:
+                    return CheckedFiles;
+                case WorkMode.gossip:
+                    return CheckedGossipFiles;
+                case WorkMode.multilang:
+                    return MultilangFile;
+                default:
+                    return AllFiles;
+            }
+        }
     }
 
 }
