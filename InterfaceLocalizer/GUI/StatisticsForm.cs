@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,23 +29,8 @@ namespace InterfaceLocalizer.GUI
         {
             InitializeComponent();
             appSettings = _appSettings;
-            switch (mode)
-            {
-                case WorkMode.interfaces:
-                    manager = new CDataManager();
-                    fileList = CFileList.CheckedFiles;
-                    break;
-                case WorkMode.gossip:
-                    manager = new CTextManager();
-                    fileList = CFileList.CheckedGossipFiles;
-                    break;
-                case WorkMode.multilang:
-                    manager = new CMultiManager();
-                    fileList = CFileList.MultilangFile;
-                    break;
-                default:
-                    break;
-            }            
+            fileList = CFileList.GetProperList(mode);
+            manager = ManagerFactory.CreateManager(mode, fileList.First());
         }
 
         private void bOK_Click(object sender, EventArgs e)
