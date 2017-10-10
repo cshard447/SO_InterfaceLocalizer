@@ -24,6 +24,7 @@ namespace InterfaceLocalizer.GUI
         int engSymbols = 0;
         int nonLocalizedPhrases = 0;
         int nonLocalizedSymbols = 0;
+        Dictionary<TroubleType, int> troubleDict = new Dictionary<TroubleType, int>();
 
         public StatisticsForm(AppSettings _appSettings, WorkMode mode)
         {
@@ -31,6 +32,8 @@ namespace InterfaceLocalizer.GUI
             appSettings = _appSettings;
             fileList = CFileList.GetProperList(mode);
             manager = ManagerFactory.CreateManager(mode, fileList.First());
+            foreach(TroubleType type in Enum.GetValues(typeof(TroubleType)))
+                troubleDict.Add(type, 0);
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -65,13 +68,15 @@ namespace InterfaceLocalizer.GUI
                 manager.AddFileToManager(file);
 
             Dictionary<object, ITranslatable> texts = manager.GetFullDictionary();
+            TroubleType trouble;
             phrasesCount = texts.Count;
             foreach (ITranslatable text in texts.Values)
             {
                 symbolsCount += text.GetOriginalText().Length;
-                if (text.Troublesome())
+                if (text.Troublesome(out trouble))
                 {
                     nonLocalizedPhrases++;
+                    troubleDict[trouble]++;
                     nonLocalizedSymbols += text.GetOriginalText().Length;
                 }
                 //else
@@ -91,6 +96,9 @@ namespace InterfaceLocalizer.GUI
             stats += "Symbols translated: " + engSymbols.ToString();
             stats += "\nPhrases left to translate: " + nonLocalizedPhrases.ToString();
             stats += "\nSymbols left to translate: " + nonLocalizedSymbols.ToString();
+            foreach (TroubleType trouble in Enum.GetValues(typeof(TroubleType)))
+                if (trouble != TroubleType.none)
+                    stats += "\n "+ Enum.GetName(typeof(TroubleType), trouble) + ": "+troubleDict[trouble].ToString();
 
             lStats.Text = stats;
             lStats.Update();

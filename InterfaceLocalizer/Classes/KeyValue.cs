@@ -56,14 +56,21 @@ namespace InterfaceLocalizer.Classes
             values[language] = translatedText;
         }
 
-        public bool Troublesome()
+        public bool Troublesome(out TroubleType trouble)
         {
+            trouble = TroubleType.none;
             if (values.Count < CFileList.LanguageToFile.Count)
+            {
+                trouble = TroubleType.absence;
                 return true;
+            }
 
             var duplicateValues = values.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             if (duplicateValues.Count() > 0)
+            {
+                trouble = TroubleType.duplicate;
                 return true;
+            }
 
             return false;            
         }

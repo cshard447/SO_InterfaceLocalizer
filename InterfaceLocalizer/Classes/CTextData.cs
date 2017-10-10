@@ -51,8 +51,9 @@ namespace InterfaceLocalizer.Classes
         {
             engText = translatedText;
         }
-        public bool Troublesome()
+        public bool Troublesome(out TroubleType trouble)
         {
+            trouble = TroubleType.absence;
             return true;
         }
 

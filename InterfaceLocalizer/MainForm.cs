@@ -130,9 +130,10 @@ namespace InterfaceLocalizer
                 currentManager.AddFileToManager(file);
 
             Dictionary<object, ITranslatable> textDict = currentManager.GetFullDictionary();
+            TroubleType trouble;
             gridViewTranslation.BeginUpdate();
             foreach (object id in textDict.Keys)
-                if (textDict[id].Troublesome())
+                if (textDict[id].Troublesome(out trouble))
                     addDataToGridView(id, textDict[id]);
 
             gridViewTranslation.EndUpdate();

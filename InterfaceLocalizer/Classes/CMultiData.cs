@@ -63,15 +63,22 @@ namespace InterfaceLocalizer.Classes
             translation[key] = translatedText;
         }
 
-        public bool Troublesome()
+        public bool Troublesome(out TroubleType trouble)
         {
+            trouble = TroubleType.none;
             foreach (string language in translation.Keys)
                 if (GetTranslation(language) == "<NO DATA>" || GetTranslation(language) == "")
+                {
+                    trouble = TroubleType.absence;
                     return true;
+                }
 
             var duplicateValues = translation.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             if (duplicateValues.Count() > 0)
+            {
+                trouble = TroubleType.duplicate;
                 return true;
+            }
 
             return false;
         }

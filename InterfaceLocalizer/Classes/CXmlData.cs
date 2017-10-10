@@ -62,9 +62,12 @@ namespace InterfaceLocalizer.Classes
             translation[key] = translatedText;
         }
 
-        public bool Troublesome()
+        public bool Troublesome(out TroubleType trouble)
         {
-            return (GetTranslation("eng") == "<NO DATA>" || GetTranslation("eng") == "");
+            trouble = TroubleType.none;
+            if (GetTranslation("eng") == "<NO DATA>" || GetTranslation("eng") == "")
+                trouble = TroubleType.absence;
+            return (trouble != TroubleType.none);
         }
 
         public XElement GetPath()

@@ -8,6 +8,8 @@ using Telerik.WinControls.UI;
 
 namespace InterfaceLocalizer.Classes
 {
+    enum TroubleType { none, absence, duplicate };
+
     interface ITranslatable
     {
         string GetOriginalText();
@@ -16,7 +18,7 @@ namespace InterfaceLocalizer.Classes
         string GetPathString();
         void SetOriginalText(string originalText);
         void SetTranslation(String key, string translatedText);
-        bool Troublesome();
+        bool Troublesome(out TroubleType trouble);
         XElement GetPath();
     }
 
