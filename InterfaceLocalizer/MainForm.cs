@@ -243,6 +243,7 @@ namespace InterfaceLocalizer
             currentFilelist = CFileList.GetProperList(workMode);
             currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
 
+            lMode.Text = Enum.GetName(typeof(WorkMode), workMode);
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTags"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
@@ -252,16 +253,13 @@ namespace InterfaceLocalizer
             switch (workMode)
             {
                 case WorkMode.interfaces:
-                    lMode.Text = "Interfaces";
                     break;
                 case  WorkMode.gossip:
-                    lMode.Text = "Gossip";
                     gridViewTranslation.Columns["columnID"].IsVisible = false;
                     gridViewTranslation.Columns["columnTags"].IsVisible = false;
                     gridViewTranslation.Columns["columnFilename"].IsVisible = false;
                     break;
                 case  WorkMode.multilang:
-                    lMode.Text = "Multilang";
                     gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
                     gridViewTranslation.Columns["columnTranslation3"].IsVisible = true;
                     for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)

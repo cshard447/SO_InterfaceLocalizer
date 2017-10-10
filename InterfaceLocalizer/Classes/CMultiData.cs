@@ -16,22 +16,21 @@ namespace InterfaceLocalizer.Classes
 {
     class CMultiData : ITranslatable
     {
-        private string phrase;
         private Dictionary<string, string> translation;
         private string filename;
         private XmlPath xmlPath;
 
-        public CMultiData(string _phrase, Dictionary<string, string> data, string _filename, XmlPath _path)
+        public CMultiData(string language, string text, string _filename, XmlPath _path)
         {
-            translation = new Dictionary<string, string>(data);
-            phrase = _phrase;
             filename = _filename;
             xmlPath = new XmlPath(_path);
+            translation = new Dictionary<string, string>();
+            translation[language] = text;
         }
 
         public string GetOriginalText()
         {
-            return phrase;
+            return "orig";
         }
 
         public string GetTranslation(String key)
@@ -55,7 +54,7 @@ namespace InterfaceLocalizer.Classes
 
         public void SetOriginalText(string originalText)
         {
-            phrase = originalText;
+            throw new NotImplementedException();
         }
 
         public void SetTranslation(String key, string translatedText)
@@ -94,12 +93,11 @@ namespace InterfaceLocalizer.Classes
 
     class CMultiManager : IManager
     {
-        private Dictionary<object, ITranslatable> xmlDict = new Dictionary<object, ITranslatable>();
-        int id = 0;
+        private Dictionary<object, ITranslatable> xmlDict;
 
         public CMultiManager()
         {
-            id = 0;
+            xmlDict = new Dictionary<object, ITranslatable>();
         }
 
         public Dictionary<object, ITranslatable> GetFullDictionary()
@@ -110,33 +108,20 @@ namespace InterfaceLocalizer.Classes
         public void ClearAllData()
         {
             xmlDict.Clear();
-            id = 0;
         }
 
         public void AddFileToManager(string filename)
         {
-            string ext = Path.GetExtension(filename);
-            if (ext == ".xml")
-                addXmlToManager(filename);
-            //else if (ext == ".json")
-            //    addJsonToManager(filename);
-        }
-
-        private void addXmlToManager(string filename)
-        {
-            XmlReader reader = new XmlTextReader(filename);
-
-            Dictionary<string, XDocument> langsAndDocs = new Dictionary<string, XDocument>();
-
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
                 string translationPath = CFileList.LanguageToFile[language];
-                XDocument doc = new XDocument();
-                doc = XDocument.Load(translationPath);
-                langsAndDocs.Add(language, doc);
+                string ext = Path.GetExtension(translationPath);
+                if (ext == ".xml")
+                    parseXmlFile(language, translationPath);
+                    //addXmlToManager(translationPath);
+                //else if (ext == ".json")
+                //    addJsonToManager(translationPath);
             }
-
-            parseXmlFile(reader, langsAndDocs, filename);
         }
 
         private void addJsonToManager(string filename)
@@ -166,12 +151,12 @@ namespace InterfaceLocalizer.Classes
             //parseXmlFile(reader, engDoc, filename);
         }
 
-        private void parseXmlFile(XmlReader reader, Dictionary<string, XDocument> translatedDocs, string filename)
+        private void parseXmlFile(string language, string filename)
         {
-            string original = "";            
             XmlPath myPath = new XmlPath();
             bool gotten = false;
-            Dictionary<string, string> translation = new Dictionary<string, string>();
+            string text = "";
+            XmlReader reader = new XmlTextReader(filename);
 
             while (reader.Read())
             {
@@ -182,74 +167,41 @@ namespace InterfaceLocalizer.Classes
                         myPath.Push(new PathAtom(reader.Name, tempAttr));
                         if (reader.IsEmptyElement)
                         {
-                            translation.Clear();
-                            xmlDict.Add(id++, new CMultiData(original, translation, filename, myPath));
-                            original = "";
-                            translation.Clear();
+                            if (xmlDict.ContainsKey(myPath.GetPathAsString()))
+                                xmlDict[myPath.GetPathAsString()].SetTranslation(language, text);
+                            else
+                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(language, text, filename, myPath));
+                            text = "";
                             myPath.Pop();
                         }
                         break;
 
                     case XmlNodeType.Text: // Нашли текст в элементе, сохраняем его
-                        original = reader.Value.Trim();
+                        text = reader.Value.Trim();
                         gotten = true;
                         break;
 
                     case XmlNodeType.EndElement: // Нашли конец элемента, сохраняем данные в словарь
                         if (gotten)
-                        {                            
-                            foreach (string language in CFileList.LanguageToFile.Keys)
-                            {
-                                XmlPath cpy = new XmlPath(myPath);
-                                string translatedText = getValueFromXml(translatedDocs[language], cpy);
-                                translation.Add(language, translatedText);
-                            }
-                            xmlDict.Add(id++, new CMultiData(original, translation, filename, myPath));
+                        {
+                            if (xmlDict.ContainsKey(myPath.GetPathAsString()))
+                                xmlDict[myPath.GetPathAsString()].SetTranslation(language, text);
+                            else
+                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(language, text, filename, myPath));
                             gotten = false;
-                            original = "";
-                            translation.Clear();
+                            text = "";
                         }
                         myPath.Pop();
                         break;
                 }
             }
-
-        }
-
-        private string getValueFromXml(XDocument doc, XmlPath path)
-        {
-            string result = "";
-            try
-            {
-                XElement step1 = path.Pop().GetAtom(); ;
-                IEnumerable<XElement> try1 = doc.Elements(step1.Name);
-
-                while (path.Count() > 0)
-                {
-                    step1 = path.Pop().GetAtom();
-                    try1 = try1.Elements(step1.Name);
-                    if (step1.HasAttributes)
-                        try1 = try1.Where(x => (string)x.Attribute("name") == step1.Attribute("name").Value.ToString()).ToArray();
-                    else
-                        try1 = try1.Where(x => x.HasAttributes == false).ToArray();
-                    //try1 = try1.Where(x => x.Attributes().Count() == 0).ToArray();                        
-                }
-
-                result = try1.First().Value.ToString();
-            }
-            catch
-            {
-                result = "<NO DATA>";
-            }
-            result = result.Trim();
-            return result;
         }
 
         public void UpdateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
-                int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
+                string id = gridView.Rows[row].Cells["columnID"].Value.ToString();
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
                 string originalText = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
