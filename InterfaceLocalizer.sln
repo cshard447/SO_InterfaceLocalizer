@@ -10,12 +10,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		ArabicAndroid|x86 = ArabicAndroid|x86
+		ArabicIOS|x86 = ArabicIOS|x86
 		Debug|x86 = Debug|x86
 		DebugAndroid|x86 = DebugAndroid|x86
 		DebugIOS|x86 = DebugIOS|x86
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.ArabicAndroid|x86.ActiveCfg = ArabicAndroid|x86
+		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.ArabicAndroid|x86.Build.0 = ArabicAndroid|x86
+		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.ArabicIOS|x86.ActiveCfg = Arabic|x86
+		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.ArabicIOS|x86.Build.0 = Arabic|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.Debug|x86.ActiveCfg = Debug|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.Debug|x86.Build.0 = Debug|x86
 		{C735B5AD-180A-413C-94A1-D8006B4FAB0C}.DebugAndroid|x86.ActiveCfg = DebugAndroid|x86
