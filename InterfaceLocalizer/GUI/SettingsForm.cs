@@ -68,12 +68,12 @@ namespace InterfaceLocalizer.GUI
 
             if (!System.IO.Directory.Exists(rusPath))
             {
-                MessageBox.Show("Не существует папка Russian по указанному пути");
+                //MessageBox.Show("Не существует папка Russian по указанному путиXML");
                 return;
             }
             if (!System.IO.Directory.Exists(engPath))
             {
-                MessageBox.Show("Не существует папка English по указанному пути");
+                //MessageBox.Show("Не существует папка English по указанному пути");
                 return;
             }
 
@@ -101,12 +101,12 @@ namespace InterfaceLocalizer.GUI
 
             if (!System.IO.Directory.Exists(rusPath))
             {
-                MessageBox.Show("Не существует папка Russian по указанному пути");
+                //MessageBox.Show("Не существует папка Russian по указанному путиTEXT");
                 return;
             }
             if (!System.IO.Directory.Exists(engPath))
             {
-                MessageBox.Show("Не существует папка English по указанному пути");
+                //MessageBox.Show("Не существует папка English по указанному пути");
                 return;
             }
 

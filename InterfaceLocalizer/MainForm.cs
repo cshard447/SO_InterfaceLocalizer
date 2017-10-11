@@ -77,7 +77,7 @@ namespace InterfaceLocalizer
             }
             catch
             {
-                MessageBox.Show("Please specify the path to the working directory", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //MessageBox.Show("Please specify the path to the working directory", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }        
         }
 
@@ -252,10 +252,11 @@ namespace InterfaceLocalizer
                     gridViewTranslation.Columns["columnFilename"].IsVisible = false;
                     break;
                 case  WorkMode.multilang:
-                    gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
-                    gridViewTranslation.Columns["columnTranslation3"].IsVisible = true;
                     for (int i = 0; i <= CFileList.LanguageToFile.Count(); i++)
+                    {
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i);
+                        gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
+                    }
                     break;
             }
         }
