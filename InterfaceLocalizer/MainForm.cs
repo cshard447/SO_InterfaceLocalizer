@@ -83,8 +83,8 @@ namespace InterfaceLocalizer
 
         private void LoadMultilang()
         {
-            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
-            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
+            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
             
             CFileList.LanguageToFile.Clear();
             int count = Math.Min(languages.Count(), translatedFiles.Count());

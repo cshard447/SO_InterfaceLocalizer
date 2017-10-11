@@ -32,6 +32,7 @@
             this.lCheckedCount = new Telerik.WinControls.UI.RadLabel();
             this.pvSettings = new Telerik.WinControls.UI.RadPageView();
             this.pageMultilang = new Telerik.WinControls.UI.RadPageViewPage();
+            this.tbLanguage0 = new Telerik.WinControls.UI.RadTextBox();
             this.lSelectFilesForTranslations = new Telerik.WinControls.UI.RadLabel();
             this.beLanguageFile3 = new Telerik.WinControls.UI.RadBrowseEditor();
             this.beLanguageFile2 = new Telerik.WinControls.UI.RadBrowseEditor();
@@ -39,7 +40,7 @@
             this.tbLanguage3 = new Telerik.WinControls.UI.RadTextBox();
             this.tbLanguage2 = new Telerik.WinControls.UI.RadTextBox();
             this.tbLanguage1 = new Telerik.WinControls.UI.RadTextBox();
-            this.beOriginalFilename = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.beLanguageFile0 = new Telerik.WinControls.UI.RadBrowseEditor();
             this.lSelectMultilang = new Telerik.WinControls.UI.RadLabel();
             this.bOKMulti = new Telerik.WinControls.UI.RadButton();
             this.pageInterface = new Telerik.WinControls.UI.RadPageViewPage();
@@ -61,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pvSettings)).BeginInit();
             this.pvSettings.SuspendLayout();
             this.pageMultilang.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).BeginInit();
@@ -68,7 +70,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beOriginalFilename)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).BeginInit();
             this.pageInterface.SuspendLayout();
@@ -119,6 +121,7 @@
             // pageMultilang
             // 
 // TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
+            this.pageMultilang.Controls.Add(this.tbLanguage0);
             this.pageMultilang.Controls.Add(this.lSelectFilesForTranslations);
             this.pageMultilang.Controls.Add(this.beLanguageFile3);
             this.pageMultilang.Controls.Add(this.beLanguageFile2);
@@ -126,13 +129,22 @@
             this.pageMultilang.Controls.Add(this.tbLanguage3);
             this.pageMultilang.Controls.Add(this.tbLanguage2);
             this.pageMultilang.Controls.Add(this.tbLanguage1);
-            this.pageMultilang.Controls.Add(this.beOriginalFilename);
+            this.pageMultilang.Controls.Add(this.beLanguageFile0);
             this.pageMultilang.Controls.Add(this.lSelectMultilang);
             this.pageMultilang.Controls.Add(this.bOKMulti);
             this.pageMultilang.Location = new System.Drawing.Point(10, 37);
             this.pageMultilang.Name = "pageMultilang";
             this.pageMultilang.Size = new System.Drawing.Size(335, 483);
             this.pageMultilang.Text = "Multi language";
+            // 
+            // tbLanguage0
+            // 
+            this.tbLanguage0.Location = new System.Drawing.Point(11, 66);
+            this.tbLanguage0.Name = "tbLanguage0";
+            this.tbLanguage0.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage0.TabIndex = 22;
+            this.tbLanguage0.TabStop = false;
+            this.tbLanguage0.Text = "Language name";
             // 
             // lSelectFilesForTranslations
             // 
@@ -193,12 +205,13 @@
             this.tbLanguage1.TabStop = false;
             this.tbLanguage1.Text = "Language name";
             // 
-            // beOriginalFilename
+            // beLanguageFile0
             // 
-            this.beOriginalFilename.Location = new System.Drawing.Point(11, 66);
-            this.beOriginalFilename.Name = "beOriginalFilename";
-            this.beOriginalFilename.Size = new System.Drawing.Size(313, 20);
-            this.beOriginalFilename.TabIndex = 14;
+            this.beLanguageFile0.Location = new System.Drawing.Point(123, 66);
+            this.beLanguageFile0.Name = "beLanguageFile0";
+            this.beLanguageFile0.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile0.TabIndex = 14;
+            ((Telerik.WinControls.UI.RadTextBoxItem)(this.beLanguageFile0.GetChildAt(0).GetChildAt(2).GetChildAt(0))).FlipText = true;
             // 
             // lSelectMultilang
             // 
@@ -374,6 +387,7 @@
             this.pvSettings.ResumeLayout(false);
             this.pageMultilang.ResumeLayout(false);
             this.pageMultilang.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).EndInit();
@@ -381,7 +395,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.beOriginalFilename)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).EndInit();
             this.pageInterface.ResumeLayout(false);
@@ -425,7 +439,7 @@
         private Telerik.WinControls.UI.RadLabel lGossipChecked;
         private Telerik.WinControls.UI.RadLabel lGossipFound;
         private Telerik.WinControls.UI.RadPageViewPage pageMultilang;
-        private Telerik.WinControls.UI.RadBrowseEditor beOriginalFilename;
+        private Telerik.WinControls.UI.RadBrowseEditor beLanguageFile0;
         private Telerik.WinControls.UI.RadLabel lSelectMultilang;
         private Telerik.WinControls.UI.RadButton bOKMulti;
         private Telerik.WinControls.UI.RadLabel lSelectFilesForTranslations;
@@ -435,5 +449,6 @@
         private Telerik.WinControls.UI.RadTextBox tbLanguage3;
         private Telerik.WinControls.UI.RadTextBox tbLanguage2;
         private Telerik.WinControls.UI.RadTextBox tbLanguage1;
+        private Telerik.WinControls.UI.RadTextBox tbLanguage0;
     }
 }

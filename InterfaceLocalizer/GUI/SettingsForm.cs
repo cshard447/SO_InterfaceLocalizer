@@ -186,27 +186,29 @@ namespace InterfaceLocalizer.GUI
 
         private void LoadMultiLanguage()
         {
-            beOriginalFilename.Value = appSettings.OriginalTextFilename;
-            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
-            tbLanguage1.Text = (languages.Count() > 0 ) ? (languages[0]) : "";
-            tbLanguage2.Text = (languages.Count() > 1 ) ? (languages[1]) : "";
-            tbLanguage3.Text = (languages.Count() > 2 ) ? (languages[2]) : "";            
+            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            tbLanguage0.Text = (languages.Count() > 0) ? (languages[0]) : "";
+            tbLanguage1.Text = (languages.Count() > 1) ? (languages[1]) : "";
+            tbLanguage2.Text = (languages.Count() > 2 ) ? (languages[2]) : "";
+            tbLanguage3.Text = (languages.Count() > 3 ) ? (languages[3]) : "";            
 
-            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 3, StringSplitOptions.RemoveEmptyEntries);
-            beLanguageFile1.Value = (translatedFiles.Count() > 0) ? (translatedFiles[0]) : "";
-            beLanguageFile2.Value = (translatedFiles.Count() > 1) ? (translatedFiles[1]) : "";
-            beLanguageFile3.Value = (translatedFiles.Count() > 2) ? (translatedFiles[2]) : "";
+            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            beLanguageFile0.Value = (translatedFiles.Count() > 0) ? (translatedFiles[0]) : "";
+            beLanguageFile1.Value = (translatedFiles.Count() > 1) ? (translatedFiles[1]) : "";
+            beLanguageFile2.Value = (translatedFiles.Count() > 2) ? (translatedFiles[2]) : "";
+            beLanguageFile3.Value = (translatedFiles.Count() > 3) ? (translatedFiles[3]) : "";
         }
 
         private void bOKMulti_Click(object sender, EventArgs e)
         {
-            appSettings.OriginalTextFilename = beOriginalFilename.Value;
-            string langs = tbLanguage1.Text + ";" + tbLanguage2.Text + ";" + tbLanguage3.Text;
+            string langs = tbLanguage0.Text + ";" + tbLanguage1.Text + ";" + tbLanguage2.Text + ";" + tbLanguage3.Text;
             appSettings.LanguagesNames = langs;
-            string translationFiles = beLanguageFile1.Value + ";" + beLanguageFile2.Value + ";" + beLanguageFile3.Value;
+            string translationFiles = beLanguageFile0.Value + ";" + beLanguageFile1.Value + ";" + beLanguageFile2.Value + ";" + beLanguageFile3.Value;
             appSettings.TranslationFilenames = translationFiles;
 
             CFileList.LanguageToFile.Clear();
+            if (beLanguageFile0.Value != "" && File.Exists(beLanguageFile0.Value))
+                CFileList.LanguageToFile.Add(tbLanguage0.Text, beLanguageFile0.Value);
             if (beLanguageFile1.Value != "" && File.Exists(beLanguageFile1.Value))
                 CFileList.LanguageToFile.Add(tbLanguage1.Text, beLanguageFile1.Value);
             if (beLanguageFile2.Value != "" && File.Exists(beLanguageFile2.Value))
