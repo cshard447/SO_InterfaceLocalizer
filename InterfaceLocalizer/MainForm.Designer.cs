@@ -144,7 +144,7 @@
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
             this.cmbRow});
-            this.commandBarTranslation.Size = new System.Drawing.Size(911, 70);
+            this.commandBarTranslation.Size = new System.Drawing.Size(911, 45);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
@@ -268,7 +268,7 @@
             this.gridViewTranslation.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.gridViewTranslation.ForeColor = System.Drawing.SystemColors.ControlText;
             this.gridViewTranslation.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.gridViewTranslation.Location = new System.Drawing.Point(0, 90);
+            this.gridViewTranslation.Location = new System.Drawing.Point(0, 65);
             // 
             // gridViewTranslation
             // 
@@ -289,10 +289,10 @@
             gridViewTextBoxColumn3.Name = "columnTags";
             gridViewTextBoxColumn3.Width = 117;
             gridViewTextBoxColumn4.EnableExpressionEditor = false;
-            gridViewTextBoxColumn4.HeaderText = "Original phrase";
+            gridViewTextBoxColumn4.HeaderText = "Translation 0";
             gridViewTextBoxColumn4.MaxLength = 100000;
             gridViewTextBoxColumn4.Multiline = true;
-            gridViewTextBoxColumn4.Name = "columnOriginalPhrase";
+            gridViewTextBoxColumn4.Name = "columnTranslation0";
             gridViewTextBoxColumn4.StretchVertically = false;
             gridViewTextBoxColumn4.Width = 202;
             gridViewTextBoxColumn4.WrapText = true;
@@ -360,7 +360,7 @@
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(911, 510);
+            this.gridViewTranslation.Size = new System.Drawing.Size(911, 535);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
             this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);

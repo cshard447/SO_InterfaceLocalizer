@@ -80,6 +80,17 @@ namespace InterfaceLocalizer.Classes
             throw new NotImplementedException();
         }
 
+        public object[] GetAsRow()
+        {
+            object[] values = new object[7];
+            values[0] = GetPathString();
+            values[1] = Path.GetFileName(GetFilename());
+            values[2] = GetPathString();
+            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+                values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
+            return values;
+        }
+
         public override string ToString()
         {
             string result = key + ": " + values.Count;

@@ -142,18 +142,7 @@ namespace InterfaceLocalizer
 
         private void addDataToGridView(object id, ITranslatable data)
         {
-            object[] values = new object[7];
-            values[0] = id.ToString();
-            values[1] = Path.GetFileName(data.GetFilename());
-            values[2] = data.GetPathString();
-            values[3] = data.GetOriginalText();
-            if (workMode == WorkMode.interfaces || workMode == WorkMode.gossip)
-                values[4] = data.GetTranslation("eng");
-            else
-            {
-                for (int i = 0; i < CFileList.LanguageToFile.Count(); i++ )
-                    values[i+4] = data.GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
-            }
+            object[] values = data.GetAsRow();
             gridViewTranslation.Rows.Add(values);
         }
 
@@ -166,14 +155,14 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
             if (!showInfo)
             {
-                gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width / 4;
+                gridViewTranslation.Columns["columnTranslation0"].Width = gridViewTranslation.Width / 4;
                 gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width / 4;
                 gridViewTranslation.Columns["columnTranslation2"].Width = gridViewTranslation.Width / 4;
                 gridViewTranslation.Columns["columnTranslation3"].Width = gridViewTranslation.Width / 4;
             }
             else
             {
-                gridViewTranslation.Columns["columnOriginalPhrase"].Width = gridViewTranslation.Width = appSettings.ColRusWidth;
+                gridViewTranslation.Columns["columnTranslation0"].Width = gridViewTranslation.Width = appSettings.ColRusWidth;
                 gridViewTranslation.Columns["columnTranslation1"].Width = gridViewTranslation.Width = appSettings.ColEngWidth;
                 gridViewTranslation.Columns["columnTranslation2"].Width = gridViewTranslation.Width = appSettings.ColLanguage2Width;
                 gridViewTranslation.Columns["columnTranslation3"].Width = gridViewTranslation.Width = appSettings.ColLanguage3Width;
@@ -208,7 +197,7 @@ namespace InterfaceLocalizer
             appSettings.ColIDWidth = gridViewTranslation.Columns["columnID"].Width;
             appSettings.ColFilenameWidth = gridViewTranslation.Columns["columnFilename"].Width;
             appSettings.ColTagsWidth = gridViewTranslation.Columns["columnTags"].Width;
-            appSettings.ColRusWidth = gridViewTranslation.Columns["columnOriginalPhrase"].Width;
+            appSettings.ColRusWidth = gridViewTranslation.Columns["columnTranslation0"].Width;
             appSettings.ColEngWidth = gridViewTranslation.Columns["columnTranslation1"].Width;
             appSettings.ColLanguage2Width = gridViewTranslation.Columns["columnTranslation2"].Width;
             appSettings.ColLanguage3Width = gridViewTranslation.Columns["columnTranslation3"].Width;
@@ -228,7 +217,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnID"].Width = appSettings.ColIDWidth;
             gridViewTranslation.Columns["columnFilename"].Width = appSettings.ColFilenameWidth;
             gridViewTranslation.Columns["columnTags"].Width = appSettings.ColTagsWidth;
-            gridViewTranslation.Columns["columnOriginalPhrase"].Width = appSettings.ColRusWidth;
+            gridViewTranslation.Columns["columnTranslation0"].Width = appSettings.ColRusWidth;
             gridViewTranslation.Columns["columnTranslation1"].Width = appSettings.ColEngWidth;
             gridViewTranslation.Columns["columnTranslation2"].Width = appSettings.ColLanguage2Width;
             gridViewTranslation.Columns["columnTranslation3"].Width = appSettings.ColLanguage3Width;
@@ -262,8 +251,8 @@ namespace InterfaceLocalizer
                 case  WorkMode.multilang:
                     gridViewTranslation.Columns["columnTranslation2"].IsVisible = true;
                     gridViewTranslation.Columns["columnTranslation3"].IsVisible = true;
-                    for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
-                        gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i - 1);
+                    for (int i = 0; i <= CFileList.LanguageToFile.Count(); i++)
+                        gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i);
                     break;
             }
 

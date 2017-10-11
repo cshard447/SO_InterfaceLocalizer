@@ -87,6 +87,16 @@ namespace InterfaceLocalizer.Classes
             return xmlPath.GetPathAsElement();
         }
 
+        public object[] GetAsRow()
+        {
+            object[] values = new object[7];
+            values[0] = GetPathString();
+            values[1] = Path.GetFileName(GetFilename());
+            values[2] = GetPathString();
+            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+                values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
+            return values;
+        }
     }
 
     //***************************************************************************************************
@@ -204,14 +214,11 @@ namespace InterfaceLocalizer.Classes
                 string id = gridView.Rows[row].Cells["columnID"].Value.ToString();
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
-                string originalText = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
 
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                xmlDict[id].SetOriginalText(originalText);
-
-                for (int i = 1; i <= CFileList.LanguageToFile.Count(); i++)
+                for (int i = 0; i <= CFileList.LanguageToFile.Count(); i++)
                 {
                     string columnName = "columnTranslation" + i.ToString();
                     string language = CFileList.LanguageToFile.Keys.ElementAt(i - 1);

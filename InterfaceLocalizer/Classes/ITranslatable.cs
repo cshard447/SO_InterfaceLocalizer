@@ -20,6 +20,7 @@ namespace InterfaceLocalizer.Classes
         void SetTranslation(String key, string translatedText);
         bool Troublesome(out TroubleType trouble);
         XElement GetPath();
+        object[] GetAsRow();
     }
 
     interface IManager

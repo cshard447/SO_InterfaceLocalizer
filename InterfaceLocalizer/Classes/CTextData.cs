@@ -61,6 +61,17 @@ namespace InterfaceLocalizer.Classes
         {
             return new XElement("test");
         }
+
+        public object[] GetAsRow()
+        {
+            object[] values = new object[5];
+            values[0] = 2;
+            values[1] = Path.GetFileName(GetFilename());
+            values[2] = GetPathString();
+            values[3] = GetOriginalText();
+            values[4] = GetTranslation("eng");
+            return values;
+        }
     }
 
     //***************************************************************************************************
@@ -103,7 +114,7 @@ namespace InterfaceLocalizer.Classes
             {
                 int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
-                string originalText = gridView.Rows[row].Cells["columnOriginalPhrase"].Value.ToString();
+                string originalText = gridView.Rows[row].Cells["columnTranslation0"].Value.ToString();
                 string translation = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!textDict.ContainsKey(id))
