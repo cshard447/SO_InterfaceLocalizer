@@ -233,7 +233,7 @@ namespace InterfaceLocalizer.Classes
             bool json = false;
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
-                string path = (original) ? (Properties.Settings.Default.OriginalTextFilename) : (CFileList.LanguageToFile[language]);
+                string path = CFileList.LanguageToFile[language];
                 XDocument doc = new XDocument();
                 /*if (Path.GetExtension(file) == ".json")
                 {
@@ -259,6 +259,7 @@ namespace InterfaceLocalizer.Classes
 
                     XElement localPath = text.GetPath();
                     XElement noRoot = localPath.Descendants().First();
+                    //!!!!!!!!
                     string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation(language));
 
                     XElement child = noRoot;

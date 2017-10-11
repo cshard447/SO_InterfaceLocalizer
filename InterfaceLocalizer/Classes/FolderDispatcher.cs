@@ -26,7 +26,7 @@ namespace InterfaceLocalizer.Classes
                     result += "\\";
                     break;
                 case WorkMode.multilang:
-                    result = Properties.Settings.Default.OriginalTextFilename;
+                    result = Properties.Settings.Default.TranslationFilenames;
                     break;
                 default:
                     break;

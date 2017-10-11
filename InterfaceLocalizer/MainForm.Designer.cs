@@ -261,6 +261,7 @@
             // 
             // gridViewTranslation
             // 
+            this.gridViewTranslation.AutoSizeRows = true;
             this.gridViewTranslation.BackColor = System.Drawing.SystemColors.Control;
             this.gridViewTranslation.CausesValidation = false;
             this.gridViewTranslation.Cursor = System.Windows.Forms.Cursors.Default;
@@ -293,7 +294,6 @@
             gridViewTextBoxColumn4.MaxLength = 100000;
             gridViewTextBoxColumn4.Multiline = true;
             gridViewTextBoxColumn4.Name = "columnTranslation0";
-            gridViewTextBoxColumn4.StretchVertically = false;
             gridViewTextBoxColumn4.Width = 202;
             gridViewTextBoxColumn4.WrapText = true;
             conditionalFormattingObject1.CellBackColor = System.Drawing.Color.Red;

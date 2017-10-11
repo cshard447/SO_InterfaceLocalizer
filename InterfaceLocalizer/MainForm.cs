@@ -90,7 +90,10 @@ namespace InterfaceLocalizer
             int count = Math.Min(languages.Count(), translatedFiles.Count());
             for (int i = 0; i < count; i++)
                 if (File.Exists(translatedFiles[i]))
+                {
                     CFileList.LanguageToFile.Add(languages[i], translatedFiles[i]);
+                    CFileList.MultilangFile.Add(translatedFiles[i]);
+                }
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)
@@ -255,8 +258,6 @@ namespace InterfaceLocalizer
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i);
                     break;
             }
-
-            gridViewTranslation.AutoSizeRows = true;
         }
 
 

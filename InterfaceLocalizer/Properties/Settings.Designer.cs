@@ -289,18 +289,6 @@ namespace InterfaceLocalizer.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string OriginalTextFilename {
-            get {
-                return ((string)(this["OriginalTextFilename"]));
-            }
-            set {
-                this["OriginalTextFilename"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("300")]
         public int ColLang2Width {
             get {
