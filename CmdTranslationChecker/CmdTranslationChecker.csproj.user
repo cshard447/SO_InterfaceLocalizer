@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabAndroid|x64'">
+    <StartArguments>f:\MyStuff\CODING\ArabicTexts\android_strings-en.xml f:\MyStuff\CODING\ArabicTexts\android_strings-ar.xml</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>f:\MyStuff\CODING\FastpoolIOSTexts\en.lproj\Localizable.strings f:\MyStuff\CODING\FastpoolIOSTexts\sv.lproj\Localizable.strings f:\MyStuff\CODING\FastpoolIOSTexts\fi.lproj\Localizable.strings</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabIOS|AnyCPU'">
+    <StartArguments>f:\MyStuff\CODING\ArabicTexts\Base.lproj\Localizable.strings f:\MyStuff\CODING\ArabicTexts\ar.lproj\Localizable.strings</StartArguments>
+  </PropertyGroup>
+</Project>

@@ -1,3 +1,8 @@
 /InterfaceLocalizer/bin
 /InterfaceLocalizer/obj
 /InterfaceLocalizer.v11.suo
+CmdTranslationChecker/bin/Debug/
+CmdTranslationChecker/bin/Release/
+CmdTranslationChecker/obj/
+CmdTranslationChecker/bin/x64/
+CmdTranslationChecker/bin/ArabIOS/
