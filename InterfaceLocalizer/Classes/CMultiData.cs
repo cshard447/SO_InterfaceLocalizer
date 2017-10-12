@@ -38,7 +38,7 @@ namespace InterfaceLocalizer.Classes
             if (translation.ContainsKey(key))
                 return translation[key];
             else
-                return "<NO DATA!>";
+                return "<NO DATA>";
         }
 
         public string GetFilename()
@@ -65,12 +65,11 @@ namespace InterfaceLocalizer.Classes
         public bool Troublesome(out TroubleType trouble)
         {
             trouble = TroubleType.none;
-            foreach (string language in translation.Keys)
-                if (GetTranslation(language) == "<NO DATA>" || GetTranslation(language) == "")
-                {
-                    trouble = TroubleType.absence;
-                    return true;
-                }
+            if (translation.Count < CFileList.LanguageToFile.Count)
+            {
+                trouble = TroubleType.absence;
+                return true;
+            }
 
             var duplicateValues = translation.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             if (duplicateValues.Count() > 0)

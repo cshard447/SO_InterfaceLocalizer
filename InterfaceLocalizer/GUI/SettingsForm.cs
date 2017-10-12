@@ -216,6 +216,10 @@ namespace InterfaceLocalizer.GUI
             if (beLanguageFile3.Value != "" && File.Exists(beLanguageFile3.Value))
                 CFileList.LanguageToFile.Add(tbLanguage3.Text, beLanguageFile3.Value);
 
+            CFileList.MultilangFile.Clear();
+            foreach (string filename in CFileList.LanguageToFile.Values)
+                CFileList.MultilangFile.Add(filename);
+
             appSettings.SaveSettings();
             Properties.Settings.Default.WorkMode = (int)WorkMode.multilang;
             this.Close();
