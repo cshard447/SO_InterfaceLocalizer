@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InterfaceLocalizer.Classes
 {
-    class ManagerFactory
+    public class ManagerFactory
     {
         public static IManager CreateManager(WorkMode mode, String filename)
         {
