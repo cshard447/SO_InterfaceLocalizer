@@ -60,18 +60,20 @@
             // 
             this.rbTotal.Location = new System.Drawing.Point(56, 329);
             this.rbTotal.Name = "rbTotal";
-            this.rbTotal.Size = new System.Drawing.Size(59, 18);
+            this.rbTotal.Size = new System.Drawing.Size(55, 18);
             this.rbTotal.TabIndex = 2;
-            this.rbTotal.Text = "Полная";
+            this.rbTotal.Text = "Full list";
+            this.rbTotal.Visible = false;
             this.rbTotal.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.rbTotal_ToggleStateChanged);
             // 
             // rbChecked
             // 
             this.rbChecked.Location = new System.Drawing.Point(232, 329);
             this.rbChecked.Name = "rbChecked";
-            this.rbChecked.Size = new System.Drawing.Size(118, 18);
+            this.rbChecked.Size = new System.Drawing.Size(86, 18);
             this.rbChecked.TabIndex = 3;
-            this.rbChecked.Text = "Выбранные файлы";
+            this.rbChecked.Text = "Checked files";
+            this.rbChecked.Visible = false;
             this.rbChecked.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.rbChecked_ToggleStateChanged);
             // 
             // StatisticsForm
@@ -91,7 +93,7 @@
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
-            this.Text = "Статистика";
+            this.Text = "Statistics";
             this.ThemeName = "ControlDefault";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StatisticsForm_FormClosed);
             this.Load += new System.EventHandler(this.StatisticsForm_Load);

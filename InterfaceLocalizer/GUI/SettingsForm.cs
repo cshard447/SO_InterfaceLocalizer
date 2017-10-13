@@ -32,14 +32,18 @@ namespace InterfaceLocalizer.GUI
         {
             InitializeComponent();
             appSettings = _appSettings;
-            if (Properties.Settings.Default.WorkMode == (int) WorkMode.interfaces)
+            if (Properties.Settings.Default.WorkMode == (int)WorkMode.interfaces)
                 pvSettings.SelectedPage = pageInterface;
             else if (Properties.Settings.Default.WorkMode == (int)WorkMode.gossip)
                 pvSettings.SelectedPage = pageGossip;
+            else if (Properties.Settings.Default.WorkMode == (int)WorkMode.multilang)
+                pvSettings.SelectedPage = pageMultilang;
+            
+            LoadMultiLanguage();
             // иниициализируем данные об интерфейсах
             path = appSettings.PathToFiles;
             bePathToFiles.Value = appSettings.PathToFiles;
-            List<string> filenames = CFileList.getListFromString(appSettings.CheckedFiles);
+            List<string> filenames = CFileList.GetListFromString(appSettings.CheckedFiles);
             foreach (ListViewDataItem item in lvFilesList.Items)
             {
                 if (filenames.Contains(item.Text))
@@ -48,7 +52,7 @@ namespace InterfaceLocalizer.GUI
             
             gossipPath = appSettings.PathToGossip;
             bePathToGossip.Value = appSettings.PathToGossip;
-            List<string> gossipFilenames = CFileList.getListFromString(appSettings.CheckedGossipFiles);
+            List<string> gossipFilenames = CFileList.GetListFromString(appSettings.CheckedGossipFiles);
             foreach (ListViewDataItem item in lvGossipList.Items)
             {
                 if (gossipFilenames.Contains(item.Text))
@@ -64,12 +68,12 @@ namespace InterfaceLocalizer.GUI
 
             if (!System.IO.Directory.Exists(rusPath))
             {
-                MessageBox.Show("Не существует папка Russian по указанному пути");
+                //MessageBox.Show("Не существует папка Russian по указанному путиXML");
                 return;
             }
             if (!System.IO.Directory.Exists(engPath))
             {
-                MessageBox.Show("Не существует папка English по указанному пути");
+                //MessageBox.Show("Не существует папка English по указанному пути");
                 return;
             }
 
@@ -86,7 +90,7 @@ namespace InterfaceLocalizer.GUI
                 count++;
             }
 
-            lFileCount.Text = "Найдено " + count.ToString() + " файла";
+            lFileCount.Text = "Found " + count.ToString() + " files";
         }
 
         private void bePathToGossip_ValueChanged(object sender, EventArgs e)
@@ -97,12 +101,12 @@ namespace InterfaceLocalizer.GUI
 
             if (!System.IO.Directory.Exists(rusPath))
             {
-                MessageBox.Show("Не существует папка Russian по указанному пути");
+                //MessageBox.Show("Не существует папка Russian по указанному путиTEXT");
                 return;
             }
             if (!System.IO.Directory.Exists(engPath))
             {
-                MessageBox.Show("Не существует папка English по указанному пути");
+                //MessageBox.Show("Не существует папка English по указанному пути");
                 return;
             }
 
@@ -114,7 +118,7 @@ namespace InterfaceLocalizer.GUI
                 gossipCount++;
             }
 
-            lGossipFound.Text = "Найдено " + gossipCount.ToString() + " файла";
+            lGossipFound.Text = "Found " + gossipCount.ToString() + " files";
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -124,11 +128,11 @@ namespace InterfaceLocalizer.GUI
                 checkedFiles.Add(item.Text);
 
             appSettings.PathToFiles = path;
-            appSettings.CheckedFiles = CFileList.getListAsString(checkedFiles);
+            appSettings.CheckedFiles = CFileList.GetListAsString(checkedFiles);
             appSettings.SaveSettings();
 
-            CFileList.allFiles = fileList;
-            CFileList.checkedFiles = checkedFiles;
+            CFileList.AllFiles = fileList;
+            CFileList.CheckedFiles = checkedFiles;
             Properties.Settings.Default.WorkMode = (int) WorkMode.interfaces;
             this.Close();
         }
@@ -140,11 +144,11 @@ namespace InterfaceLocalizer.GUI
                 checkedFiles.Add(item.Text);
 
             appSettings.PathToGossip = gossipPath;
-            appSettings.CheckedGossipFiles = CFileList.getListAsString(checkedFiles);
+            appSettings.CheckedGossipFiles = CFileList.GetListAsString(checkedFiles);
             appSettings.SaveSettings();
 
-            CFileList.allGossipFiles = fileList;
-            CFileList.checkedGossipFiles = checkedFiles;
+            CFileList.AllGossipFiles = fileList;
+            CFileList.CheckedGossipFiles = checkedFiles;
             Properties.Settings.Default.WorkMode = (int) WorkMode.gossip;
             this.Close();
         }
@@ -152,13 +156,13 @@ namespace InterfaceLocalizer.GUI
         private void lvFilesList_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
         {
             int checkedCount = lvFilesList.CheckedItems.Count;
-            lCheckedCount.Text = "Выделено " + checkedCount.ToString() + " файла";
+            lCheckedCount.Text = "Selected " + checkedCount.ToString() + " files";
         }
 
         private void lvGossipList_ItemCheckedChanged(object sender, ListViewItemEventArgs e)
         {
             int checkedCount = lvGossipList.CheckedItems.Count;
-            lGossipChecked.Text = "Выделено " + checkedCount.ToString() + " файла";
+            lGossipChecked.Text = "Selected " + checkedCount.ToString() + " files";
         }
 
         private void cbSelectAll_ToggleStateChanged(object sender, StateChangedEventArgs args)
@@ -178,6 +182,47 @@ namespace InterfaceLocalizer.GUI
             appSettings.SettingsFormLeft = this.Left;
             appSettings.SettingsFormTop = this.Top;
             appSettings.SaveSettings();
+        }
+
+        private void LoadMultiLanguage()
+        {
+            var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            tbLanguage0.Text = (languages.Count() > 0) ? (languages[0]) : "";
+            tbLanguage1.Text = (languages.Count() > 1) ? (languages[1]) : "";
+            tbLanguage2.Text = (languages.Count() > 2 ) ? (languages[2]) : "";
+            tbLanguage3.Text = (languages.Count() > 3 ) ? (languages[3]) : "";            
+
+            var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            beLanguageFile0.Value = (translatedFiles.Count() > 0) ? (translatedFiles[0]) : "";
+            beLanguageFile1.Value = (translatedFiles.Count() > 1) ? (translatedFiles[1]) : "";
+            beLanguageFile2.Value = (translatedFiles.Count() > 2) ? (translatedFiles[2]) : "";
+            beLanguageFile3.Value = (translatedFiles.Count() > 3) ? (translatedFiles[3]) : "";
+        }
+
+        private void bOKMulti_Click(object sender, EventArgs e)
+        {
+            string langs = tbLanguage0.Text + ";" + tbLanguage1.Text + ";" + tbLanguage2.Text + ";" + tbLanguage3.Text;
+            appSettings.LanguagesNames = langs;
+            string translationFiles = beLanguageFile0.Value + ";" + beLanguageFile1.Value + ";" + beLanguageFile2.Value + ";" + beLanguageFile3.Value;
+            appSettings.TranslationFilenames = translationFiles;
+
+            CFileList.LanguageToFile.Clear();
+            if (beLanguageFile0.Value != "" && File.Exists(beLanguageFile0.Value))
+                CFileList.LanguageToFile.Add(tbLanguage0.Text, beLanguageFile0.Value);
+            if (beLanguageFile1.Value != "" && File.Exists(beLanguageFile1.Value))
+                CFileList.LanguageToFile.Add(tbLanguage1.Text, beLanguageFile1.Value);
+            if (beLanguageFile2.Value != "" && File.Exists(beLanguageFile2.Value))
+                CFileList.LanguageToFile.Add(tbLanguage2.Text, beLanguageFile2.Value);
+            if (beLanguageFile3.Value != "" && File.Exists(beLanguageFile3.Value))
+                CFileList.LanguageToFile.Add(tbLanguage3.Text, beLanguageFile3.Value);
+
+            CFileList.MultilangFile.Clear();
+            foreach (string filename in CFileList.LanguageToFile.Values)
+                CFileList.MultilangFile.Add(filename);
+
+            appSettings.SaveSettings();
+            Properties.Settings.Default.WorkMode = (int)WorkMode.multilang;
+            this.Close();
         }
 
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,17 +16,24 @@ namespace InterfaceLocalizer.GUI
     public partial class StatisticsForm : Telerik.WinControls.UI.RadForm
     {
         AppSettings appSettings;
+        IManager manager;
+        List<string> fileList;
         int filesCount = 0;
         int phrasesCount = 0;
-        int symbolsCount =0 ;
-        int engSymbols = 0 ;
+        int symbolsCount = 0;
+        int engSymbols = 0;
         int nonLocalizedPhrases = 0;
         int nonLocalizedSymbols = 0;
+        Dictionary<TroubleType, int> troubleDict = new Dictionary<TroubleType, int>();
 
-        public StatisticsForm(AppSettings _appSettings)
+        public StatisticsForm(AppSettings _appSettings, WorkMode mode)
         {
             InitializeComponent();
             appSettings = _appSettings;
+            fileList = CFileList.GetProperList(mode);
+            manager = ManagerFactory.CreateManager(mode, fileList.First());
+            foreach(TroubleType type in Enum.GetValues(typeof(TroubleType)))
+                troubleDict.Add(type, 0);
         }
 
         private void bOK_Click(object sender, EventArgs e)
@@ -42,34 +50,37 @@ namespace InterfaceLocalizer.GUI
 
         private void rbTotal_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            calcStats(CFileList.allFiles);
+            //calcStats(CFileList.AllFiles);
+            calcStats();
         }
 
         private void rbChecked_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            calcStats(CFileList.checkedFiles);
+            //calcStats(CFileList.CheckedFiles);
+            calcStats();
         }
 
-        private void calcStats(List<string> fileList)
+        private void calcStats()    // List<string> fileList
         {
-            nullData();
-            CDataManager dataManager = new CDataManager();
+            nullData();            
             filesCount = fileList.Count;
             foreach (string file in fileList)
-                dataManager.addFileToManager(file);
+                manager.AddFileToManager(file);
 
-            Dictionary<int, ITranslatable> texts = dataManager.getFullDictionary();
+            Dictionary<object, ITranslatable> texts = manager.GetFullDictionary();
+            TroubleType trouble;
             phrasesCount = texts.Count;
-            foreach (CXmlData text in texts.Values)
+            foreach (ITranslatable text in texts.Values)
             {
-                symbolsCount += text.getRusData().Length;
-                if (text.getEngData() == "<NO DATA>" || text.getEngData() == "")
+                symbolsCount += text.GetOriginalText().Length;
+                if (text.Troublesome(out trouble))
                 {
                     nonLocalizedPhrases++;
-                    nonLocalizedSymbols += text.getRusData().Length;
+                    troubleDict[trouble]++;
+                    nonLocalizedSymbols += text.GetOriginalText().Length;
                 }
                 //else
-                    engSymbols += text.getEngData().Length;
+                engSymbols += text.GetTranslation("eng").Length;
 
             }
             showStats();
@@ -77,14 +88,17 @@ namespace InterfaceLocalizer.GUI
 
         private void showStats()
         {
-            string stats = "Файлов для перевода: " + filesCount.ToString();
-            stats += "\nФраз для перевода: " + phrasesCount.ToString();
-            stats += "\nСимволов для перевода: " + symbolsCount.ToString();
+            string stats = "Files for translation: " + filesCount.ToString();
+            stats += "\nPhrases totally: " + phrasesCount.ToString();
+            stats += "\nSymbols totally: " + symbolsCount.ToString();
             stats += "\n\n";
 
-            stats += "Переведено символов: " + engSymbols.ToString();
-            stats += "\nОсталось перевести фраз: " + nonLocalizedPhrases.ToString();
-            stats += "\nОсталось перевести символов: " + nonLocalizedSymbols.ToString();
+            stats += "Symbols translated: " + engSymbols.ToString();
+            stats += "\nPhrases left to translate: " + nonLocalizedPhrases.ToString();
+            stats += "\nSymbols left to translate: " + nonLocalizedSymbols.ToString();
+            foreach (TroubleType trouble in Enum.GetValues(typeof(TroubleType)))
+                if (trouble != TroubleType.none)
+                    stats += "\n "+ Enum.GetName(typeof(TroubleType), trouble) + ": "+troubleDict[trouble].ToString();
 
             lStats.Text = stats;
             lStats.Update();

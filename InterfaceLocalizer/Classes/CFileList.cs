@@ -6,38 +6,46 @@ using System.Threading.Tasks;
 
 namespace InterfaceLocalizer.Classes
 {
+
     public class CFileList
     {
-        public static List<string> allFiles = new List<string>();
-        public static List<string> checkedFiles = new List<string>();
-        public static List<string> allGossipFiles = new List<string>();
-        public static List<string> checkedGossipFiles = new List<string>();
+        public static List<string> AllFiles = new List<string>();
+        public static List<string> CheckedFiles = new List<string>();
+        public static List<string> AllGossipFiles = new List<string>();
+        public static List<string> CheckedGossipFiles = new List<string>();
+        public static List<string> MultilangFile = new List<string>();
+        public static Dictionary<string, string> LanguageToFile = new Dictionary<string, string>();
 
-        public static string getListAsString(List<string> list)
+        public static string GetListAsString(List<string> list)
         {
             string result = "";
             foreach (string str in list)
                 result += str + ";";
             return result;
         }
-        public static List<string> getListFromString(string value)
+        public static List<string> GetListFromString(string value)
         {
             List<string> result = new List<string>();
             string []arr = value.Split(';');
             foreach (string str in arr)
-            {
                 result.Add(str);
-            }
             return result;
         }
-        
-        public static Stack<string> invertStack(Stack<string> stack)
+
+        public static List<string> GetProperList(WorkMode mode)
         {
-            Stack<string> result = new Stack<string>(stack);
-            //while (stack.Count > 0)
-            //    result.Push(stack.Pop());
-            return result;
+            switch (mode)
+            {
+                case WorkMode.interfaces:
+                    return CheckedFiles;
+                case WorkMode.gossip:
+                    return CheckedGossipFiles;
+                case WorkMode.multilang:
+                    return MultilangFile;
+                default:
+                    return AllFiles;
+            }
         }
-          
     }
+
 }

@@ -31,6 +31,18 @@
             this.lFileCount = new Telerik.WinControls.UI.RadLabel();
             this.lCheckedCount = new Telerik.WinControls.UI.RadLabel();
             this.pvSettings = new Telerik.WinControls.UI.RadPageView();
+            this.pageMultilang = new Telerik.WinControls.UI.RadPageViewPage();
+            this.tbLanguage0 = new Telerik.WinControls.UI.RadTextBox();
+            this.lSelectFilesForTranslations = new Telerik.WinControls.UI.RadLabel();
+            this.beLanguageFile3 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.beLanguageFile2 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.beLanguageFile1 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.tbLanguage3 = new Telerik.WinControls.UI.RadTextBox();
+            this.tbLanguage2 = new Telerik.WinControls.UI.RadTextBox();
+            this.tbLanguage1 = new Telerik.WinControls.UI.RadTextBox();
+            this.beLanguageFile0 = new Telerik.WinControls.UI.RadBrowseEditor();
+            this.lSelectMultilang = new Telerik.WinControls.UI.RadLabel();
+            this.bOKMulti = new Telerik.WinControls.UI.RadButton();
             this.pageInterface = new Telerik.WinControls.UI.RadPageViewPage();
             this.cbSelectAll = new Telerik.WinControls.UI.RadCheckBox();
             this.lvFilesList = new Telerik.WinControls.UI.RadListView();
@@ -49,6 +61,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pvSettings)).BeginInit();
             this.pvSettings.SuspendLayout();
+            this.pageMultilang.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).BeginInit();
             this.pageInterface.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lvFilesList)).BeginInit();
@@ -68,30 +92,143 @@
             // 
             // lFileCount
             // 
-            this.lFileCount.Location = new System.Drawing.Point(8, 394);
+            this.lFileCount.Location = new System.Drawing.Point(11, 400);
             this.lFileCount.Name = "lFileCount";
             this.lFileCount.Size = new System.Drawing.Size(2, 2);
             this.lFileCount.TabIndex = 6;
             // 
             // lCheckedCount
             // 
-            this.lCheckedCount.Location = new System.Drawing.Point(8, 418);
+            this.lCheckedCount.Location = new System.Drawing.Point(11, 424);
             this.lCheckedCount.Name = "lCheckedCount";
             this.lCheckedCount.Size = new System.Drawing.Size(2, 2);
             this.lCheckedCount.TabIndex = 7;
             // 
             // pvSettings
             // 
+            this.pvSettings.Controls.Add(this.pageMultilang);
             this.pvSettings.Controls.Add(this.pageInterface);
             this.pvSettings.Controls.Add(this.pageGossip);
             this.pvSettings.Location = new System.Drawing.Point(12, 12);
             this.pvSettings.Name = "pvSettings";
-            this.pvSettings.SelectedPage = this.pageGossip;
+            this.pvSettings.SelectedPage = this.pageMultilang;
             this.pvSettings.Size = new System.Drawing.Size(356, 531);
             this.pvSettings.TabIndex = 9;
             this.pvSettings.Text = "pageViewSettings";
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pvSettings.GetChildAt(0))).StripButtons = Telerik.WinControls.UI.StripViewButtons.Scroll;
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.pvSettings.GetChildAt(0))).EnsureSelectedItemVisible = true;
+            // 
+            // pageMultilang
+            // 
+// TODO: Code generation for '' failed because of Exception 'Invalid Primitive Type: System.IntPtr. Consider using CodeObjectCreateExpression.'.
+            this.pageMultilang.Controls.Add(this.tbLanguage0);
+            this.pageMultilang.Controls.Add(this.lSelectFilesForTranslations);
+            this.pageMultilang.Controls.Add(this.beLanguageFile3);
+            this.pageMultilang.Controls.Add(this.beLanguageFile2);
+            this.pageMultilang.Controls.Add(this.beLanguageFile1);
+            this.pageMultilang.Controls.Add(this.tbLanguage3);
+            this.pageMultilang.Controls.Add(this.tbLanguage2);
+            this.pageMultilang.Controls.Add(this.tbLanguage1);
+            this.pageMultilang.Controls.Add(this.beLanguageFile0);
+            this.pageMultilang.Controls.Add(this.lSelectMultilang);
+            this.pageMultilang.Controls.Add(this.bOKMulti);
+            this.pageMultilang.Location = new System.Drawing.Point(10, 37);
+            this.pageMultilang.Name = "pageMultilang";
+            this.pageMultilang.Size = new System.Drawing.Size(335, 483);
+            this.pageMultilang.Text = "Multi language";
+            // 
+            // tbLanguage0
+            // 
+            this.tbLanguage0.Location = new System.Drawing.Point(11, 66);
+            this.tbLanguage0.Name = "tbLanguage0";
+            this.tbLanguage0.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage0.TabIndex = 22;
+            this.tbLanguage0.TabStop = false;
+            this.tbLanguage0.Text = "Language name";
+            // 
+            // lSelectFilesForTranslations
+            // 
+            this.lSelectFilesForTranslations.Location = new System.Drawing.Point(11, 106);
+            this.lSelectFilesForTranslations.Name = "lSelectFilesForTranslations";
+            this.lSelectFilesForTranslations.Size = new System.Drawing.Size(264, 18);
+            this.lSelectFilesForTranslations.TabIndex = 21;
+            this.lSelectFilesForTranslations.Text = "Select files for translations and set language names:";
+            // 
+            // beLanguageFile3
+            // 
+            this.beLanguageFile3.Location = new System.Drawing.Point(123, 220);
+            this.beLanguageFile3.Name = "beLanguageFile3";
+            this.beLanguageFile3.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile3.TabIndex = 20;
+            this.beLanguageFile3.Text = "radBrowseEditor3";
+            // 
+            // beLanguageFile2
+            // 
+            this.beLanguageFile2.Location = new System.Drawing.Point(123, 180);
+            this.beLanguageFile2.Name = "beLanguageFile2";
+            this.beLanguageFile2.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile2.TabIndex = 19;
+            this.beLanguageFile2.Text = "radBrowseEditor2";
+            // 
+            // beLanguageFile1
+            // 
+            this.beLanguageFile1.Location = new System.Drawing.Point(123, 140);
+            this.beLanguageFile1.Name = "beLanguageFile1";
+            this.beLanguageFile1.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile1.TabIndex = 18;
+            this.beLanguageFile1.Text = "radBrowseEditor1";
+            // 
+            // tbLanguage3
+            // 
+            this.tbLanguage3.Location = new System.Drawing.Point(11, 220);
+            this.tbLanguage3.Name = "tbLanguage3";
+            this.tbLanguage3.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage3.TabIndex = 17;
+            this.tbLanguage3.TabStop = false;
+            this.tbLanguage3.Text = "Language name";
+            // 
+            // tbLanguage2
+            // 
+            this.tbLanguage2.Location = new System.Drawing.Point(11, 180);
+            this.tbLanguage2.Name = "tbLanguage2";
+            this.tbLanguage2.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage2.TabIndex = 16;
+            this.tbLanguage2.TabStop = false;
+            this.tbLanguage2.Text = "Language name";
+            // 
+            // tbLanguage1
+            // 
+            this.tbLanguage1.Location = new System.Drawing.Point(11, 140);
+            this.tbLanguage1.Name = "tbLanguage1";
+            this.tbLanguage1.Size = new System.Drawing.Size(100, 20);
+            this.tbLanguage1.TabIndex = 15;
+            this.tbLanguage1.TabStop = false;
+            this.tbLanguage1.Text = "Language name";
+            // 
+            // beLanguageFile0
+            // 
+            this.beLanguageFile0.Location = new System.Drawing.Point(123, 66);
+            this.beLanguageFile0.Name = "beLanguageFile0";
+            this.beLanguageFile0.Size = new System.Drawing.Size(201, 20);
+            this.beLanguageFile0.TabIndex = 14;
+            ((Telerik.WinControls.UI.RadTextBoxItem)(this.beLanguageFile0.GetChildAt(0).GetChildAt(2).GetChildAt(0))).FlipText = true;
+            // 
+            // lSelectMultilang
+            // 
+            this.lSelectMultilang.Location = new System.Drawing.Point(11, 28);
+            this.lSelectMultilang.Name = "lSelectMultilang";
+            this.lSelectMultilang.Size = new System.Drawing.Size(250, 18);
+            this.lSelectMultilang.TabIndex = 13;
+            this.lSelectMultilang.Text = "Select a file with original phrasses for translation:";
+            // 
+            // bOKMulti
+            // 
+            this.bOKMulti.Location = new System.Drawing.Point(214, 431);
+            this.bOKMulti.Name = "bOKMulti";
+            this.bOKMulti.Size = new System.Drawing.Size(110, 24);
+            this.bOKMulti.TabIndex = 12;
+            this.bOKMulti.Text = "ОК";
+            this.bOKMulti.Click += new System.EventHandler(this.bOKMulti_Click);
             // 
             // pageInterface
             // 
@@ -103,23 +240,23 @@
             this.pageInterface.Controls.Add(this.bePathToFiles);
             this.pageInterface.Controls.Add(this.lPathInfo);
             this.pageInterface.Controls.Add(this.bOK);
-            this.pageInterface.Location = new System.Drawing.Point(305, 4);
+            this.pageInterface.Location = new System.Drawing.Point(10, 37);
             this.pageInterface.Name = "pageInterface";
-            this.pageInterface.Size = new System.Drawing.Size(47, 523);
-            this.pageInterface.Text = "Интерфейсы";
+            this.pageInterface.Size = new System.Drawing.Size(335, 483);
+            this.pageInterface.Text = "Xml folders";
             // 
             // cbSelectAll
             // 
-            this.cbSelectAll.Location = new System.Drawing.Point(197, 394);
+            this.cbSelectAll.Location = new System.Drawing.Point(214, 400);
             this.cbSelectAll.Name = "cbSelectAll";
-            this.cbSelectAll.Size = new System.Drawing.Size(124, 18);
+            this.cbSelectAll.Size = new System.Drawing.Size(94, 18);
             this.cbSelectAll.TabIndex = 13;
-            this.cbSelectAll.Text = "Выделить/Снять все";
+            this.cbSelectAll.Text = "Select all/none";
             this.cbSelectAll.ToggleStateChanged += new Telerik.WinControls.UI.StateChangedEventHandler(this.cbSelectAll_ToggleStateChanged);
             // 
             // lvFilesList
             // 
-            this.lvFilesList.Location = new System.Drawing.Point(8, 103);
+            this.lvFilesList.Location = new System.Drawing.Point(11, 109);
             this.lvFilesList.Name = "lvFilesList";
             this.lvFilesList.ShowCheckBoxes = true;
             this.lvFilesList.Size = new System.Drawing.Size(313, 284);
@@ -129,7 +266,7 @@
             // bePathToFiles
             // 
             this.bePathToFiles.DialogType = Telerik.WinControls.UI.BrowseEditorDialogType.FolderBrowseDialog;
-            this.bePathToFiles.Location = new System.Drawing.Point(8, 57);
+            this.bePathToFiles.Location = new System.Drawing.Point(11, 63);
             this.bePathToFiles.Name = "bePathToFiles";
             this.bePathToFiles.Size = new System.Drawing.Size(313, 20);
             this.bePathToFiles.TabIndex = 11;
@@ -137,15 +274,15 @@
             // 
             // lPathInfo
             // 
-            this.lPathInfo.Location = new System.Drawing.Point(8, 19);
+            this.lPathInfo.Location = new System.Drawing.Point(11, 25);
             this.lPathInfo.Name = "lPathInfo";
-            this.lPathInfo.Size = new System.Drawing.Size(320, 18);
+            this.lPathInfo.Size = new System.Drawing.Size(221, 18);
             this.lPathInfo.TabIndex = 10;
-            this.lPathInfo.Text = "Введите путь, по которому расположены файлы с данными:";
+            this.lPathInfo.Text = "Select a folder with xml files for translation:";
             // 
             // bOK
             // 
-            this.bOK.Location = new System.Drawing.Point(211, 427);
+            this.bOK.Location = new System.Drawing.Point(214, 428);
             this.bOK.Name = "bOK";
             this.bOK.Size = new System.Drawing.Size(110, 24);
             this.bOK.TabIndex = 9;
@@ -165,7 +302,7 @@
             this.pageGossip.Location = new System.Drawing.Point(10, 37);
             this.pageGossip.Name = "pageGossip";
             this.pageGossip.Size = new System.Drawing.Size(335, 483);
-            this.pageGossip.Text = "Слухи";
+            this.pageGossip.Text = "Text data";
             // 
             // lGossipChecked
             // 
@@ -183,11 +320,11 @@
             // 
             // cbSelectAllGossip
             // 
-            this.cbSelectAllGossip.Location = new System.Drawing.Point(200, 400);
+            this.cbSelectAllGossip.Location = new System.Drawing.Point(214, 400);
             this.cbSelectAllGossip.Name = "cbSelectAllGossip";
-            this.cbSelectAllGossip.Size = new System.Drawing.Size(124, 18);
+            this.cbSelectAllGossip.Size = new System.Drawing.Size(94, 18);
             this.cbSelectAllGossip.TabIndex = 18;
-            this.cbSelectAllGossip.Text = "Выделить/Снять все";
+            this.cbSelectAllGossip.Text = "Select all/none";
             // 
             // lvGossipList
             // 
@@ -211,13 +348,13 @@
             // 
             this.lPathToGossip.Location = new System.Drawing.Point(11, 25);
             this.lPathToGossip.Name = "lPathToGossip";
-            this.lPathToGossip.Size = new System.Drawing.Size(314, 18);
+            this.lPathToGossip.Size = new System.Drawing.Size(216, 18);
             this.lPathToGossip.TabIndex = 15;
-            this.lPathToGossip.Text = "Введите путь, по котрому расположены файлы со слухами:";
+            this.lPathToGossip.Text = "Select a folder with txt files for translation:";
             // 
             // bOkGossip
             // 
-            this.bOkGossip.Location = new System.Drawing.Point(214, 433);
+            this.bOkGossip.Location = new System.Drawing.Point(214, 428);
             this.bOkGossip.Name = "bOkGossip";
             this.bOkGossip.Size = new System.Drawing.Size(110, 24);
             this.bOkGossip.TabIndex = 14;
@@ -226,6 +363,8 @@
             // 
             // SettingsForm
             // 
+            this.AccessibleDescription = "Settings form";
+            this.AccessibleName = "Settings form";
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(387, 555);
@@ -238,7 +377,7 @@
             // 
             // 
             this.RootElement.ApplyShapeToControl = true;
-            this.Text = "Настройки";
+            this.Text = "Settings form";
             this.ThemeName = "ControlDefault";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
@@ -246,6 +385,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.lCheckedCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pvSettings)).EndInit();
             this.pvSettings.ResumeLayout(false);
+            this.pageMultilang.ResumeLayout(false);
+            this.pageMultilang.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectFilesForTranslations)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbLanguage1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.beLanguageFile0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lSelectMultilang)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bOKMulti)).EndInit();
             this.pageInterface.ResumeLayout(false);
             this.pageInterface.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cbSelectAll)).EndInit();
@@ -286,5 +438,17 @@
         private Telerik.WinControls.UI.RadButton bOkGossip;
         private Telerik.WinControls.UI.RadLabel lGossipChecked;
         private Telerik.WinControls.UI.RadLabel lGossipFound;
+        private Telerik.WinControls.UI.RadPageViewPage pageMultilang;
+        private Telerik.WinControls.UI.RadBrowseEditor beLanguageFile0;
+        private Telerik.WinControls.UI.RadLabel lSelectMultilang;
+        private Telerik.WinControls.UI.RadButton bOKMulti;
+        private Telerik.WinControls.UI.RadLabel lSelectFilesForTranslations;
+        private Telerik.WinControls.UI.RadBrowseEditor beLanguageFile3;
+        private Telerik.WinControls.UI.RadBrowseEditor beLanguageFile2;
+        private Telerik.WinControls.UI.RadBrowseEditor beLanguageFile1;
+        private Telerik.WinControls.UI.RadTextBox tbLanguage3;
+        private Telerik.WinControls.UI.RadTextBox tbLanguage2;
+        private Telerik.WinControls.UI.RadTextBox tbLanguage1;
+        private Telerik.WinControls.UI.RadTextBox tbLanguage0;
     }
 }

@@ -2,28 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using System.Threading.Tasks;
 using Telerik.WinControls.UI;
 
 namespace InterfaceLocalizer.Classes
 {
-    interface ITranslatable
+    public enum TroubleType { none, absence, duplicate };
+
+    public interface ITranslatable
     {
-        string getRusData();
-        string getEngData();
-        string getFilename();
-        string getTagsString();
-        void setRusData(string rusData);
-        void setEngData(string engData);
-        Stack<string> getTags();
+        string GetOriginalText();
+        string GetTranslation(String key);
+        string GetFilename();
+        string GetPathString();
+        void SetOriginalText(string originalText);
+        void SetTranslation(String key, string translatedText);
+        bool Troublesome(out TroubleType trouble);
+        XElement GetPath();
+        object[] GetAsRow();
     }
 
-    interface IManager
+    public interface IManager
     {
-        Dictionary<int, ITranslatable> getFullDictionary();
-        void clearAllData();
-        void addFileToManager(string filename);
-        void updateDataFromGridView(RadGridView gridView);
-        void saveDataToFile(bool english);
+        Dictionary<object, ITranslatable> GetFullDictionary();
+        void ClearAllData();
+        void AddFileToManager(string filename);
+        void UpdateDataFromGridView(RadGridView gridView);
+        void SaveDataToFile(bool original);
     }
 }

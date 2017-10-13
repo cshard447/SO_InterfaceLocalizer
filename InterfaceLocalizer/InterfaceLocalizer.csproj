@@ -32,6 +32,52 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugIOS|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\DebugIOS\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAndroid|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\DebugAndroid\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Arabic|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Arabic\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabicAndroid|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\ArabicAndroid\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabIOS|x86'">
+    <OutputPath>bin\x86\ArabIOS\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabAndroid|x86'">
+    <OutputPath>bin\x86\ArabAndroid\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,10 +105,15 @@
   <ItemGroup>
     <Compile Include="Classes\AppSettings.cs" />
     <Compile Include="Classes\CFileList.cs" />
+    <Compile Include="Classes\CMultiData.cs" />
     <Compile Include="Classes\CRussianDict.cs" />
     <Compile Include="Classes\CTextData.cs" />
     <Compile Include="Classes\CXmlData.cs" />
+    <Compile Include="Classes\FolderDispatcher.cs" />
     <Compile Include="Classes\ITranslatable.cs" />
+    <Compile Include="Classes\KeyValue.cs" />
+    <Compile Include="Classes\ManagerFactory.cs" />
+    <Compile Include="Classes\PathAtom.cs" />
     <Compile Include="GUI\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +163,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Properties\ru-RU.tdf" />
+    <None Include="Properties\sv-SE.tdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

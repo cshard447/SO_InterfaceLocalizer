@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Xml.Linq;
 using Telerik.WinControls.UI;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -21,44 +22,63 @@ namespace InterfaceLocalizer.Classes
             engText = _engText;
         }
 
-        public string getRusData()
+        public string GetOriginalText()
         {
             return rusText;
         }
 
-        public string getEngData()
+        public string GetTranslation(String key)
         {
             return engText;
         }
 
-        public string getFilename()
+        public string GetFilename()
         {
             return filename;
         }
 
-        public string getTagsString()
+        public string GetPathString()
         {
             return "";
         }
 
-        public void setRusData(string rusData)
+        public void SetOriginalText(string originalText)
         {
-            rusText = rusData;
+            rusText = originalText;
         }
 
-        public void setEngData(string engData)
+        public void SetTranslation(String key, string translatedText)
         {
-            engText = engData;
+            engText = translatedText;
         }
-        public Stack<string> getTags()
+        public bool Troublesome(out TroubleType trouble)
         {
-            return new Stack<string>();
+            trouble = TroubleType.absence;
+            return true;
+        }
+
+        public XElement GetPath()
+        {
+            return new XElement("test");
+        }
+
+        public object[] GetAsRow()
+        {
+            object[] values = new object[5];
+            values[0] = 2;
+            values[1] = Path.GetFileName(GetFilename());
+            values[2] = GetPathString();
+            values[3] = GetOriginalText();
+            values[4] = GetTranslation("eng");
+            return values;
         }
     }
 
+    //***************************************************************************************************
+
     class CTextManager : IManager
     {
-        private Dictionary<int, ITranslatable> textDict = new Dictionary<int, ITranslatable>();
+        private Dictionary<object, ITranslatable> textDict = new Dictionary<object, ITranslatable>();
         int id = 0;
 
         public CTextManager()
@@ -66,21 +86,21 @@ namespace InterfaceLocalizer.Classes
             id = 0;
         }
 
-        public Dictionary<int, ITranslatable> getFullDictionary()
+        public Dictionary<object, ITranslatable> GetFullDictionary()
         {
             return textDict;
         }
 
-        public void clearAllData()
+        public void ClearAllData()
         {
             textDict.Clear();
             id = 0;
         }
 
-        public void addFileToManager(string filename)
+        public void AddFileToManager(string filename)
         {
-            string rusPath = Properties.Settings.Default.PathToGossip + filename;
-            string engPath = Properties.Settings.Default.PathToGossip + @"\English\" + filename;
+            string rusPath = FolderDispatcher.OriginalPath() + filename;
+            string engPath = FolderDispatcher.TranslationPath() + filename;
 
             string rus = File.ReadAllText(rusPath);
             string eng = File.ReadAllText(engPath);
@@ -88,40 +108,36 @@ namespace InterfaceLocalizer.Classes
             id++;
         }
 
-        public void updateDataFromGridView(RadGridView gridView)
+        public void UpdateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
                 int id = int.Parse(gridView.Rows[row].Cells["columnID"].Value.ToString());
                 string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
-                string rus = gridView.Rows[row].Cells["columnRussianPhrase"].Value.ToString();
-                string eng = gridView.Rows[row].Cells["columnEnglishPhrase"].Value.ToString();
+                string originalText = gridView.Rows[row].Cells["columnTranslation0"].Value.ToString();
+                string translation = gridView.Rows[row].Cells["columnTranslation1"].Value.ToString();
 
                 if (!textDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                if (textDict[id].getFilename() != filename)
+                if (textDict[id].GetFilename() != filename)
                     throw new System.ArgumentException("Имена файлов не совпадают!");
 
-                textDict[id].setRusData(rus);
-                textDict[id].setEngData(eng);
+                textDict[id].SetOriginalText(originalText);
+                textDict[id].SetTranslation("default", translation);
             }
         }
 
-        public void saveDataToFile(bool english)
+        public void SaveDataToFile(bool original)
         {
-            string path = Properties.Settings.Default.PathToGossip;
-            path += (english) ? (@"English\") : ("");
+            string path = (original) ? (FolderDispatcher.OriginalPath()) : (FolderDispatcher.TranslationPath());
             
-            //foreach (string file in CFileList.checkedGossipFiles)
-            //{
             foreach (CTextData text in textDict.Values)
             {
-                string value = (english) ? (text.getEngData()) : (text.getRusData());
-                string file = path + text.getFilename();
+                string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation(""));
+                string file = path + text.GetFilename();
                 File.WriteAllText(file, value, Encoding.UTF8);
             }
-            //}
         }
 
     }
