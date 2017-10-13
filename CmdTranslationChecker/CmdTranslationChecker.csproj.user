@@ -32,9 +32,15 @@
     <StartArguments>f:\MyStuff\CODING\ArabicTexts\Base.lproj\Localizable.strings f:\MyStuff\CODING\ArabicTexts\ar.lproj\Localizable.strings</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugIOS|x86'">
-    <StartArguments>agadfg</StartArguments>
+    <StartArguments>/s f:\MyStuff\CODING\FastpoolIOSTexts\en.lproj\Localizable.strings f:\MyStuff\CODING\FastpoolIOSTexts\sv.lproj\Localizable.strings f:\MyStuff\CODING\FastpoolIOSTexts\fi.lproj\Localizable.strings</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <StartArguments>f:\MyStuff\CODING\FastpoolCoreTexts\messages.properties f:\MyStuff\CODING\FastpoolCoreTexts\messages_sv.properties f:\MyStuff\CODING\FastpoolCoreTexts\messages_fi.properties</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabAndroid|x86'">
+    <StartArguments>f:\MyStuff\CODING\ArabicTexts\android_strings-en.xml f:\MyStuff\CODING\ArabicTexts\android_strings-ar.xml</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAndroid|x86'">
+    <StartArguments>/s f:\MyStuff\CODING\FastpoolAndroidTexts\English\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Finnish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Swedish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Russian\strings.xml</StartArguments>
   </PropertyGroup>
 </Project>

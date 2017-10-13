@@ -7,15 +7,18 @@ using InterfaceLocalizer.Classes;
 
 namespace CmdTranslationChecker
 {
+    enum InputParameters { none = 0, silent = 1};
     enum ExitCodes { success = 0, noFiles = 1, notTranslated = 2};
+
     class Program
     {
         static int Main(string[] args)
         {
             List<string> filesToCheck = new List<string>();
+            int parameters;
             CmdParser parser = new CmdParser();
-            filesToCheck = parser.ParseCommandLine();
-            Worker worker = new Worker();
+            filesToCheck = parser.ParseCommandLine(out parameters);
+            Worker worker = new Worker(parameters);
 
             if (worker.PrepareMembers(filesToCheck))
             {
@@ -23,7 +26,6 @@ namespace CmdTranslationChecker
                 worker.showStats();
             }
 
-            System.Console.ReadLine();
             Environment.ExitCode = (int) worker.Result;
             return (int) worker.Result;
         }

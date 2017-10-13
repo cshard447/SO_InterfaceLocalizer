@@ -13,10 +13,16 @@ namespace CmdTranslationChecker
         private IManager fileManager;
         private Dictionary<TroubleType, int> troubleDict = new Dictionary<TroubleType, int>();
         private ExitCodes result;
+        private bool Silent;
 
         public ExitCodes Result 
         { 
             get { return result; }
+        }
+
+        public Worker(int _inputParameters)
+        {
+            Silent = (_inputParameters & (int)InputParameters.silent) > 0;
         }
 
         public bool PrepareMembers(List<string> filesToAdd)
@@ -32,6 +38,7 @@ namespace CmdTranslationChecker
             if (filesToAdd.Count < 2)
             {
                 result = ExitCodes.noFiles;
+                WaitForUser();
                 return false;
             }
 
@@ -67,6 +74,13 @@ namespace CmdTranslationChecker
                     stats += "\n " + Enum.GetName(typeof(TroubleType), trouble) + ": " + troubleDict[trouble].ToString();
 
             System.Console.WriteLine(stats);
+            WaitForUser();
+        }
+
+        private void WaitForUser()
+        { 
+            if (!Silent)
+                System.Console.ReadLine();
         }
 
     }

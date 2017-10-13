@@ -9,19 +9,21 @@ namespace CmdTranslationChecker
 {
     class CmdParser
     {
-        public List<string> ParseCommandLine()
+        public List<string> ParseCommandLine(out int _parameters)
         {
             string[] cmd = Environment.GetCommandLineArgs();
             List<string> existedFiles = new List<string>();
             int i = 0;
+            _parameters = (int) InputParameters.none;
             foreach (string file in cmd)
             {
-                if (i == 0 && Path.GetExtension(file) == ".exe")
-                {
-                    System.Console.WriteLine("Started app: {0}", file);
-                    continue;
-                }
                 //System.Console.WriteLine("Cmd parameter {0}: {1}", (i++).ToString(), file);
+                if (i == 0 && Path.GetExtension(file) == ".exe")
+                    continue;
+
+                if (file == "/s")
+                    _parameters |= (int) InputParameters.silent;
+
                 if (File.Exists(file))
                 {
                     existedFiles.Add(file);
