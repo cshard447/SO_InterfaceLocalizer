@@ -10,22 +10,31 @@ namespace CmdTranslationChecker
 
     class Worker
     {
-        IManager fileManager;
-        Dictionary<TroubleType, int> troubleDict = new Dictionary<TroubleType, int>();
+        private IManager fileManager;
+        private Dictionary<TroubleType, int> troubleDict = new Dictionary<TroubleType, int>();
+        private ExitCodes result;
 
+        public ExitCodes Result 
+        { 
+            get { return result; }
+        }
 
-        public void PrepareMembers(List<string> filesToAdd)
+        public bool PrepareMembers(List<string> filesToAdd)
         {
             int i = 0;
+            result = ExitCodes.success;
             foreach (string file in filesToAdd)
             {
                 string language = "lang" + (i++).ToString();
                 CFileList.LanguageToFile.Add(language, file);
             }
-            if (filesToAdd.Count < 2)
-                return;
-
             System.Console.WriteLine("Total files with localizations found: " + CFileList.LanguageToFile.Count.ToString());
+            if (filesToAdd.Count < 2)
+            {
+                result = ExitCodes.noFiles;
+                return false;
+            }
+
             string tempfile = CFileList.LanguageToFile.Values.First();
             fileManager = ManagerFactory.CreateManager(InterfaceLocalizer.WorkMode.multilang, tempfile);
             System.Console.WriteLine("Created manager: " + fileManager.ToString());
@@ -35,6 +44,7 @@ namespace CmdTranslationChecker
 
             foreach (TroubleType type in Enum.GetValues(typeof(TroubleType)))
                 troubleDict.Add(type, 0);
+            return true;
         }
 
         public void calcStats()
@@ -43,7 +53,10 @@ namespace CmdTranslationChecker
             TroubleType trouble;
             foreach (ITranslatable text in texts.Values)
                 if (text.Troublesome(out trouble))
+                {
                     troubleDict[trouble]++;
+                    result = ExitCodes.notTranslated;
+                }
         }
 
         public void showStats()
@@ -55,5 +68,6 @@ namespace CmdTranslationChecker
 
             System.Console.WriteLine(stats);
         }
+
     }
 }
