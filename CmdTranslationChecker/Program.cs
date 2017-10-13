@@ -14,20 +14,10 @@ namespace CmdTranslationChecker
         {
             List<string> filesToCheck = new List<string>();
             CmdParser parser = new CmdParser();
-            filesToCheck = parser.ParseCommandLine();
-
-            int i = 0;
-            foreach (string file in filesToCheck)
-            {
-                string language = "lang" + (i++).ToString();
-                CFileList.LanguageToFile.Add(language, file);
-            }
-            if (filesToCheck.Count < 2)
-                return;
-            
-
             Worker stuff = new Worker();
-            stuff.PrepareMembers();
+            filesToCheck = parser.ParseCommandLine();            
+
+            stuff.PrepareMembers(filesToCheck);
             stuff.calcStats();
             stuff.showStats();
 

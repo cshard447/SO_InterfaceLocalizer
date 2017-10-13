@@ -14,8 +14,17 @@ namespace CmdTranslationChecker
         Dictionary<TroubleType, int> troubleDict = new Dictionary<TroubleType, int>();
 
 
-        public void PrepareMembers()
+        public void PrepareMembers(List<string> filesToAdd)
         {
+            int i = 0;
+            foreach (string file in filesToAdd)
+            {
+                string language = "lang" + (i++).ToString();
+                CFileList.LanguageToFile.Add(language, file);
+            }
+            if (filesToAdd.Count < 2)
+                return;
+
             System.Console.WriteLine("Total files with localizations found: " + CFileList.LanguageToFile.Count.ToString());
             string tempfile = CFileList.LanguageToFile.Values.First();
             fileManager = ManagerFactory.CreateManager(InterfaceLocalizer.WorkMode.multilang, tempfile);
@@ -30,27 +39,11 @@ namespace CmdTranslationChecker
 
         public void calcStats()
         {
-            /*
-            foreach (string file in fileList)
-                manager.AddFileToManager(file);*/
-
             Dictionary<object, ITranslatable> texts = fileManager.GetFullDictionary();
             TroubleType trouble;
-            //phrasesCount = texts.Count;
             foreach (ITranslatable text in texts.Values)
-            {
-                //symbolsCount += text.GetOriginalText().Length;
                 if (text.Troublesome(out trouble))
-                {
-                    //nonLocalizedPhrases++;
                     troubleDict[trouble]++;
-                    //nonLocalizedSymbols += text.GetOriginalText().Length;
-                }
-                //else
-                //engSymbols += text.GetTranslation("eng").Length;
-
-            }
-            //showStats();
         }
 
         public void showStats()
