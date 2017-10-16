@@ -60,10 +60,12 @@ namespace CmdTranslationChecker
             TroubleType trouble;
             foreach (ITranslatable text in texts.Values)
                 if (text.Troublesome(out trouble))
-                {
                     troubleDict[trouble]++;
-                    result = ExitCodes.notTranslated;
-                }
+
+            if (troubleDict[TroubleType.duplicate] > 0)
+                result |= ExitCodes.duplicates;
+            if (troubleDict[TroubleType.absence] > 0)
+                result |= ExitCodes.absence;
         }
 
         public void showStats()

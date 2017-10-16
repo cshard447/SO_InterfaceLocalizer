@@ -8,7 +8,7 @@ using InterfaceLocalizer.Classes;
 namespace CmdTranslationChecker
 {
     enum InputParameters { none = 0, silent = 1};
-    enum ExitCodes { success = 0, noFiles = 1, notTranslated = 2};
+    enum ExitCodes { success = 0, noFiles = 1, duplicates = 2, absence = 4};
 
     class Program
     {
