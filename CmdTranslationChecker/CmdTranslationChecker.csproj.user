@@ -41,6 +41,6 @@
     <StartArguments>f:\MyStuff\CODING\ArabicTexts\android_strings-en.xml f:\MyStuff\CODING\ArabicTexts\android_strings-ar.xml</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAndroid|x86'">
-    <StartArguments>/s f:\MyStuff\CODING\FastpoolAndroidTexts\English\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Finnish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Swedish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Russian\strings.xml</StartArguments>
+    <StartArguments>f:\MyStuff\CODING\FastpoolAndroidTexts\English\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Finnish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Swedish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Russian\strings.xml</StartArguments>
   </PropertyGroup>
 </Project>
