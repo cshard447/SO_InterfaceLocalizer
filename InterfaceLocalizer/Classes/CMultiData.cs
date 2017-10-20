@@ -91,7 +91,7 @@ namespace InterfaceLocalizer.Classes
             object[] values = new object[7];
             values[0] = GetPathString();
             values[1] = Path.GetFileName(GetFilename());
-            values[2] = GetPathString();
+            values[2] = values[0];
             for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
                 values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
             return values;

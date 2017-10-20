@@ -296,5 +296,26 @@ namespace InterfaceLocalizer
                 //SpellChecker.Check(cell.Value);   //gridViewTranslation.GridViewElement.hos
             }
         }
+
+        private void menuSaveCSV_Click(object sender, EventArgs e)
+        {
+            DialogResult result = saveFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string file = saveFileDialog.FileName;
+                string delimiter = ";";
+                using (var stream = File.CreateText(file))
+                {
+                    foreach (var row in gridViewTranslation.Rows)
+                    {
+                        string line = "";
+                        foreach (var column in gridViewTranslation.Columns.Where(u => u.IsVisible))
+                            line += row.Cells[column.Name].Value.ToString() + delimiter;
+
+                        stream.WriteLine(line);
+                    }
+                }
+            }
+        }
     }
 }
