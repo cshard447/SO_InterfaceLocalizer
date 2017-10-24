@@ -16,12 +16,14 @@ namespace InterfaceLocalizer.Classes
 {
     class CMultiData : ITranslatable
     {
+        private string key;
         private Dictionary<string, string> translation;
         private string filename;
         private XmlPath xmlPath;
 
-        public CMultiData(string language, string text, string _filename, XmlPath _path)
+        public CMultiData(string _key, string language, string text, string _filename, XmlPath _path)
         {
+            key = _key;
             filename = _filename;
             xmlPath = new XmlPath(_path);
             translation = new Dictionary<string, string>();
@@ -30,7 +32,7 @@ namespace InterfaceLocalizer.Classes
 
         public string GetOriginalText()
         {
-            return "orig";
+            return key;
         }
 
         public string GetTranslation(String key)
@@ -57,9 +59,9 @@ namespace InterfaceLocalizer.Classes
             throw new NotImplementedException();
         }
 
-        public void SetTranslation(String key, string translatedText)
+        public void SetTranslation(String language, string translatedText)
         {
-            translation[key] = translatedText;
+            translation[language] = translatedText;
         }
 
         public bool Troublesome(out TroubleType trouble)
@@ -89,7 +91,7 @@ namespace InterfaceLocalizer.Classes
         public object[] GetAsRow()
         {
             object[] values = new object[7];
-            values[0] = GetPathString();
+            values[0] = key;
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetPathString();
             for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
@@ -163,6 +165,7 @@ namespace InterfaceLocalizer.Classes
         private void parseXmlFile(string language, string filename)
         {
             XmlPath myPath = new XmlPath();
+            string key = "";
             bool gotten = false;
             string text = "";
             XmlReader reader = new XmlTextReader(filename);
@@ -173,13 +176,14 @@ namespace InterfaceLocalizer.Classes
                 {
                     case XmlNodeType.Element: // Узел является элементом.
                         String tempAttr = (reader.HasAttributes) ? (reader.GetAttribute(0)) : ("");
+                        key = tempAttr;
                         myPath.Push(new PathAtom(reader.Name, tempAttr));
                         if (reader.IsEmptyElement)
                         {
                             if (xmlDict.ContainsKey(myPath.GetPathAsString()))
                                 xmlDict[myPath.GetPathAsString()].SetTranslation(language, text);
                             else
-                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(language, text, filename, myPath));
+                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(key, language, text, filename, myPath));
                             text = "";
                             myPath.Pop();
                         }
@@ -196,9 +200,10 @@ namespace InterfaceLocalizer.Classes
                             if (xmlDict.ContainsKey(myPath.GetPathAsString()))
                                 xmlDict[myPath.GetPathAsString()].SetTranslation(language, text);
                             else
-                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(language, text, filename, myPath));
+                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(key, language, text, filename, myPath));
                             gotten = false;
                             text = "";
+                            key = "";
                         }
                         myPath.Pop();
                         break;

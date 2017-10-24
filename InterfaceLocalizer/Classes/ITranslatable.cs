@@ -8,9 +8,9 @@ using Telerik.WinControls.UI;
 
 namespace InterfaceLocalizer.Classes
 {
-    enum TroubleType { none, absence, duplicate };
+    public enum TroubleType { none, absence, duplicate };
 
-    interface ITranslatable
+    public interface ITranslatable
     {
         string GetOriginalText();
         string GetTranslation(String key);
@@ -23,7 +23,7 @@ namespace InterfaceLocalizer.Classes
         object[] GetAsRow();
     }
 
-    interface IManager
+    public interface IManager
     {
         Dictionary<object, ITranslatable> GetFullDictionary();
         void ClearAllData();
