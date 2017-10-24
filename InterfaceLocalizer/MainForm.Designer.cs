@@ -403,7 +403,6 @@
             this.Controls.Add(this.mainMenu);
             this.Name = "MainForm";
             this.Text = "Interface localization";
-            this.Activated += new System.EventHandler(this.MainForm_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).EndInit();

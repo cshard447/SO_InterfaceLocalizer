@@ -175,10 +175,7 @@ namespace InterfaceLocalizer.Classes
                         myPath.Push(new PathAtom(reader.Name, tempAttr));
                         if (reader.IsEmptyElement)
                         {
-                            if (xmlDict.ContainsKey(myPath.GetPathAsString()))
-                                xmlDict[myPath.GetPathAsString()].SetTranslation(language, text);
-                            else
-                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(key, language, text, filename, myPath));
+                            AddOrUpdate(key, language, text, filename, myPath);
                             text = "";
                             myPath.Pop();
                         }
@@ -192,10 +189,7 @@ namespace InterfaceLocalizer.Classes
                     case XmlNodeType.EndElement: // Нашли конец элемента, сохраняем данные в словарь
                         if (gotten)
                         {
-                            if (xmlDict.ContainsKey(myPath.GetPathAsString()))
-                                xmlDict[myPath.GetPathAsString()].SetTranslation(language, text);
-                            else
-                                xmlDict.Add(myPath.GetPathAsString(), new CMultiData(key, language, text, filename, myPath));
+                            AddOrUpdate(key, language, text, filename, myPath);
                             gotten = false;
                             text = "";
                             key = "";
@@ -204,6 +198,17 @@ namespace InterfaceLocalizer.Classes
                         break;
                 }
             }
+        }
+
+        private void AddOrUpdate(string key, string language, string text, string filename, XmlPath xmlPath)
+        {
+            if (String.IsNullOrEmpty(key))
+                key = xmlPath.GetPathAsString();
+
+            if (xmlDict.ContainsKey(key))
+                xmlDict[key].SetTranslation(language, text);
+            else
+                xmlDict.Add(key, new CMultiData(key, language, text, filename, xmlPath));
         }
 
         public void UpdateDataFromGridView(RadGridView gridView)
@@ -217,10 +222,10 @@ namespace InterfaceLocalizer.Classes
                 if (!xmlDict.ContainsKey(id))
                     throw new System.ArgumentException("Фразы с таким ID не существует!");
 
-                for (int i = 0; i <= CFileList.LanguageToFile.Count(); i++)
+                for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
                 {
                     string columnName = "columnTranslation" + i.ToString();
-                    string language = CFileList.LanguageToFile.Keys.ElementAt(i - 1);
+                    string language = CFileList.LanguageToFile.Keys.ElementAt(i);
                     string translation = gridView.Rows[row].Cells[columnName].Value.ToString();
                     xmlDict[id].SetTranslation(language, translation);
                 }

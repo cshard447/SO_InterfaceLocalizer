@@ -55,6 +55,7 @@ namespace InterfaceLocalizer
             {
                 MessageBox.Show("Can't load your settings. Please restart the app", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            Activate();
             //gridviewControlSpellChecker = SpellChecker.GetControlSpellChecker(typeof(RadTextBox));
             //documentSpellChecker = gridviewControlSpellChecker.SpellChecker as DocumentSpellChecker;
             //documentSpellChecker.AddDictionary(new CRussianDict(), RussianCulture);
@@ -99,7 +100,8 @@ namespace InterfaceLocalizer
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
             SettingsForm sf = new SettingsForm(appSettings);
-            sf.Show();
+            sf.ShowDialog();
+            Activate();
         }
 
         private void menuItemStatistics_Click(object sender, EventArgs e)
@@ -229,7 +231,7 @@ namespace InterfaceLocalizer
             SpellChecker.EnableCompleteMessageBox = appSettings.SpellCheckCompleteBox;
         }
 
-        private void MainForm_Activated(object sender, EventArgs e)
+        private void Activate()
         {
             workMode = (WorkMode) Properties.Settings.Default.WorkMode;
             currentFilelist = CFileList.GetProperList(workMode);
