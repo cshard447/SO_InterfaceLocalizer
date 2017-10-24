@@ -46,7 +46,8 @@ namespace CmdTranslationChecker
             fileManager = ManagerFactory.CreateManager(InterfaceLocalizer.WorkMode.multilang, tempfile);
             System.Console.WriteLine("Created manager: " + fileManager.ToString());
 
-            fileManager.AddFileToManager("emty arg");
+            foreach (string file in filesToAdd)
+                fileManager.AddFileToManager(file);
             System.Console.WriteLine("Files added to manager");
 
             foreach (TroubleType type in Enum.GetValues(typeof(TroubleType)))

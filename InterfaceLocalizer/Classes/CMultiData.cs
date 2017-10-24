@@ -123,16 +123,11 @@ namespace InterfaceLocalizer.Classes
 
         public void AddFileToManager(string filename)
         {
-            foreach (string language in CFileList.LanguageToFile.Keys)
-            {
-                string translationPath = CFileList.LanguageToFile[language];
-                string ext = Path.GetExtension(translationPath);
-                if (ext == ".xml")
-                    parseXmlFile(language, translationPath);
-                    //addXmlToManager(translationPath);
-                //else if (ext == ".json")
-                //    addJsonToManager(translationPath);
-            }
+            string language = CFileList.LanguageToFile.Where(u => u.Value == filename).First().Key;
+            parseXmlFile(language, filename);
+            //string ext = Path.GetExtension(translationPath);
+            //else if (ext == ".json")
+            //    addJsonToManager(translationPath);
         }
 
         private void addJsonToManager(string filename)

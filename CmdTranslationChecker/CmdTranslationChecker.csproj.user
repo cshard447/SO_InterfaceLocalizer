@@ -13,7 +13,7 @@
     <StartArguments>f:\MyStuff\CODING\FastpoolAndroidTexts\English\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Finnish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Swedish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Russian\strings.xml</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugIOS|AnyCPU'">
-    <StartArguments>agadfg</StartArguments>
+    <StartArguments>f:\MyStuff\CODING\FastpoolIOSTexts\en.lproj\Localizable.strings f:\MyStuff\CODING\FastpoolIOSTexts\sv.lproj\Localizable.strings f:\MyStuff\CODING\FastpoolIOSTexts\fi.lproj\Localizable.strings</StartArguments>
   </PropertyGroup>
   <PropertyGroup>
     <PublishUrlHistory>publish\</PublishUrlHistory>
@@ -41,6 +41,12 @@
     <StartArguments>f:\MyStuff\CODING\ArabicTexts\android_strings-en.xml f:\MyStuff\CODING\ArabicTexts\android_strings-ar.xml</StartArguments>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAndroid|x86'">
+    <StartArguments>f:\MyStuff\CODING\FastpoolAndroidTexts\English\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Finnish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Swedish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Russian\strings.xml</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ArabAndroid|AnyCPU'">
+    <StartArguments>f:\MyStuff\CODING\ArabicTexts\android_strings-en.xml f:\MyStuff\CODING\ArabicTexts\android_strings-ar.xml</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugAndroid|AnyCPU'">
     <StartArguments>f:\MyStuff\CODING\FastpoolAndroidTexts\English\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Finnish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Swedish\strings.xml f:\MyStuff\CODING\FastpoolAndroidTexts\Russian\strings.xml</StartArguments>
   </PropertyGroup>
 </Project>

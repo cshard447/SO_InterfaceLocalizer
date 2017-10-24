@@ -129,14 +129,12 @@ namespace InterfaceLocalizer.Classes
 
         public void AddFileToManager(string filename)
         {
-            foreach (string language in CFileList.LanguageToFile.Keys)
-            {
-                string translationPath = CFileList.LanguageToFile[language];
-                ReadKeyValueFile(language, translationPath);
-            }
+            string language = CFileList.LanguageToFile.Where(u => u.Value == filename).First().Key;
+            readKeyValueFile(language, filename);
         }
 
-        private void ReadKeyValueFile(string language, string filename)
+
+        private void readKeyValueFile(string language, string filename)
         {
             StreamReader reader = new StreamReader(filename);   //, Encoding.GetEncoding(1252)
             bool withQuotes = Path.GetExtension(filename) == ".strings";
@@ -145,18 +143,18 @@ namespace InterfaceLocalizer.Classes
                 string rawline = reader.ReadLine();
                 if (String.IsNullOrEmpty(rawline))      // skip empty lines
                     continue;
-                rawline = ConcatenateFurtherStrings(reader, rawline);
-                rawline = ConvertCodepointsToChars(rawline);
+                rawline = concatenateFurtherStrings(reader, rawline);
+                rawline = convertCodepointsToChars(rawline);
                 int indexOfEquality = rawline.IndexOf("=");
-                if (indexOfEquality == -1)              // skip lines without = sign for now
+                if (indexOfEquality == -1)              // skip lines without '=' sign 
                     continue;
                 int length = rawline.Length;                
                 string key = rawline.Substring(0, indexOfEquality).Trim();
                 string value = rawline.Substring(indexOfEquality+1, length - indexOfEquality-1).Trim();
                 if (withQuotes)
                 {
-                    key = RemoveQuotes(key);
-                    value = RemoveQuotes(value);
+                    key = removeQuotes(key);
+                    value = removeQuotes(value);
                 }
                 if (!dict.ContainsKey(key))
                     dict.Add(key, new CKeyValue(key, language, value, filename));
@@ -165,7 +163,7 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        private string ConcatenateFurtherStrings(StreamReader reader, string source)
+        private string concatenateFurtherStrings(StreamReader reader, string source)
         {
             string result = source;
             while (source.EndsWith("\\"))
@@ -178,7 +176,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        private string RemoveQuotes(string source)
+        private string removeQuotes(string source)
         {
             string result = source;
             if( source.StartsWith("\""))
@@ -189,7 +187,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        private string ConvertCodepointsToChars(string source)
+        private string convertCodepointsToChars(string source)
         {
             string result = source;
             int indexofUnichar = result.IndexOf("\\u"); ;
