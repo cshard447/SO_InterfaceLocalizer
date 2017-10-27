@@ -254,7 +254,7 @@ namespace InterfaceLocalizer
                     gridViewTranslation.Columns["columnFilename"].IsVisible = false;
                     break;
                 case  WorkMode.multilang:
-                    for (int i = 0; i <= CFileList.LanguageToFile.Count(); i++)
+                    for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
                     {
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
