@@ -65,6 +65,12 @@ namespace InterfaceLocalizer.Classes
                 return true;
             }
 
+            if (values.Values.Where( u => u == "<NO DATA>").Count() > 0)
+            {
+                trouble = TroubleType.absence;
+                return true;
+            }
+
             var duplicateValues = values.GroupBy(x => x.Value).Where(x => x.Count() > 1);
             if (duplicateValues.Count() > 0)
             {

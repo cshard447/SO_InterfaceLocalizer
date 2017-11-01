@@ -8,3 +8,5 @@ CmdTranslationChecker/bin/x64/
 CmdTranslationChecker/bin/ArabIOS/
 CmdTranslationChecker/bin/DebugIOS/
 CmdTranslationChecker/bin/x86/
+CmdTranslationChecker/bin/ArabAndroid
+CmdTranslationChecker/bin/DebugAndroid/
