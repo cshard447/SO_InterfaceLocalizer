@@ -187,6 +187,14 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
+        private string addQuotes(string source, bool semicolon)
+        {
+            string result = String.Format("\"{0}\"", source);
+            if (semicolon)
+                result += ";";
+            return result;
+        }
+
         private string convertCodepointsToChars(string source)
         {
             string result = source;
@@ -208,12 +216,40 @@ namespace InterfaceLocalizer.Classes
 
         public void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)
         {
-            throw new NotImplementedException();
+            for (int row = 0; row < gridView.RowCount; row++)
+            {
+                string id = gridView.Rows[row].Cells["columnID"].Value.ToString();
+                string filename = gridView.Rows[row].Cells["columnFileName"].Value.ToString();
+                string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
+
+                if (!dict.ContainsKey(id))
+                    throw new System.ArgumentException("Фразы с таким ID не существует!");
+
+                for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+                {
+                    string columnName = "columnTranslation" + i.ToString();
+                    string language = CFileList.LanguageToFile.Keys.ElementAt(i);
+                    string translation = gridView.Rows[row].Cells[columnName].Value.ToString();
+                    dict[id].SetTranslation(language, translation);
+                }
+            }
         }
 
         public void SaveDataToFile(bool original)
         {
-            throw new NotImplementedException();
+            foreach (string language in CFileList.LanguageToFile.Keys)
+            {
+                string filename = CFileList.LanguageToFile[language];
+                StreamWriter writer = new StreamWriter(filename);
+                foreach (CKeyValue stuff in dict.Values)
+                {
+                    string newKey = addQuotes(stuff.GetPathString(), false);
+                    string newValue = addQuotes(stuff.GetTranslation(language), true);
+                    string line = newKey + " = " + newValue;
+                    writer.WriteLine(line);
+                }
+                writer.Close();
+            }
         }
     }
 
