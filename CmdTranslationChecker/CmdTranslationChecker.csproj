@@ -147,6 +147,15 @@
     <OutputPath>bin\x86\DebugIOS\</OutputPath>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mixed|AnyCPU'">
+    <OutputPath>bin\Mixed\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mixed|x64'">
+    <OutputPath>bin\x64\Mixed\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Mixed|x86'">
+    <OutputPath>bin\x86\Mixed\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

@@ -25,7 +25,7 @@ namespace InterfaceLocalizer.Classes
 
         public string GetOriginalText()
         {
-            return "im original";
+            return key;
         }
 
         public string GetTranslation(string key)
@@ -107,6 +107,18 @@ namespace InterfaceLocalizer.Classes
         {
             string result = key + ": " + values.Count;
             return result;
+        }
+
+        public bool Add(ITranslatable addendum)
+        {
+            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+            {
+                string lang = CFileList.LanguageToFile.Keys.ElementAt(i);
+                string text = addendum.GetTranslation(lang);
+                if (text != "<NO DATA>")
+                    this.SetTranslation(lang, text);
+            }
+            return true;
         }
     }
 

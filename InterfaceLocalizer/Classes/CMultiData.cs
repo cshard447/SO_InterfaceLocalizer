@@ -98,6 +98,18 @@ namespace InterfaceLocalizer.Classes
                 values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
             return values;
         }
+
+        public bool Add(ITranslatable addendum)
+        {
+            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+            {
+                string lang = CFileList.LanguageToFile.Keys.ElementAt(i);
+                string text = addendum.GetTranslation(lang);
+                if (text != "<NO DATA>")
+                    this.SetTranslation(lang, text);
+            }
+            return true;
+        }
     }
 
     //***************************************************************************************************

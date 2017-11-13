@@ -21,6 +21,7 @@ namespace InterfaceLocalizer.Classes
         bool Troublesome(out TroubleType trouble);
         XElement GetPath();
         object[] GetAsRow();
+        bool Add(ITranslatable addendum);
     }
 
     public interface IManager

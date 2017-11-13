@@ -235,7 +235,8 @@ namespace InterfaceLocalizer
         {
             workMode = (WorkMode) Properties.Settings.Default.WorkMode;
             currentFilelist = CFileList.GetProperList(workMode);
-            currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
+            //currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
+            currentManager = new ChiefManager();
 
             lMode.Text = Enum.GetName(typeof(WorkMode), workMode);
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;

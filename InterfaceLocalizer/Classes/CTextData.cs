@@ -72,6 +72,11 @@ namespace InterfaceLocalizer.Classes
             values[4] = GetTranslation("eng");
             return values;
         }
+
+        public bool Add(ITranslatable addendum)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     //***************************************************************************************************
