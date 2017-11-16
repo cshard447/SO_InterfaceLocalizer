@@ -241,7 +241,7 @@ namespace InterfaceLocalizer.Classes
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
 
                 if (!dict.ContainsKey(id))
-                    throw new System.ArgumentException("Фразы с таким ID не существует!");
+                    dict.Add(id, new CKeyValue(id, "", "", filename));
 
                 for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
                 {
@@ -258,6 +258,8 @@ namespace InterfaceLocalizer.Classes
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
                 string filename = CFileList.LanguageToFile[language];
+                if (Path.GetExtension(filename) != ".strings")
+                    continue;
                 StreamWriter writer = new StreamWriter(filename);
                 foreach (CKeyValue stuff in dict.Values)
                 {

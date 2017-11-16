@@ -232,7 +232,12 @@ namespace InterfaceLocalizer.Classes
                 string tags = gridView.Rows[row].Cells["columnTags"].Value.ToString();
 
                 if (!xmlDict.ContainsKey(id))
-                    throw new System.ArgumentException("Фразы с таким ID не существует!");
+                {
+                    XmlPath tempPath = new XmlPath();
+                    tempPath.Push(new PathAtom("string", id));
+                    tempPath.Push(new PathAtom("resources", ""));
+                    xmlDict.Add(id, new CMultiData(id, "", "", filename, tempPath));
+                }
 
                 for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
                 {
@@ -250,6 +255,8 @@ namespace InterfaceLocalizer.Classes
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
                 string path = CFileList.LanguageToFile[language];
+                if (Path.GetExtension(path) != ".xml")
+                    continue;
                 XDocument doc = new XDocument();
                 /*if (Path.GetExtension(file) == ".json")
                 {
@@ -270,15 +277,11 @@ namespace InterfaceLocalizer.Classes
 
                 foreach (CMultiData text in xmlDict.Values)
                 {
-                    //if (text.GetFilename() != file)
-                        //continue;
-
+                    string value = text.GetTranslation(language);
                     XElement localPath = text.GetPath();
                     XElement noRoot = localPath.Descendants().First();
-                    //!!!!!!!!
-                    string value = (original) ? (text.GetOriginalText()) : (text.GetTranslation(language));
-
                     XElement child = noRoot;
+
                     while (child.HasElements)
                     {
                         XName name = child.Descendants().First().Name;

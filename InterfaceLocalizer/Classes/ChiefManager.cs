@@ -29,8 +29,6 @@ namespace InterfaceLocalizer.Classes
                     else
                         textDict.Add(text.GetOriginalText(), text);
                 }
-                //var shit = textDict.Concat(tempD).ToDictionary(u => u.Key, i => i.Value);
-                //textDict = shit;
             }
 
             return textDict;
@@ -54,12 +52,14 @@ namespace InterfaceLocalizer.Classes
 
         public void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)
         {
-            throw new NotImplementedException();
+            foreach (IManager manager in managerDict.Values)
+                manager.UpdateDataFromGridView(gridView);
         }
 
         public void SaveDataToFile(bool original)
         {
-            throw new NotImplementedException();
+            foreach (IManager manager in managerDict.Values)
+                manager.SaveDataToFile(false);
         }
     }
 }
