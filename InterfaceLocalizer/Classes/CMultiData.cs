@@ -27,7 +27,8 @@ namespace InterfaceLocalizer.Classes
             filename = _filename;
             xmlPath = new XmlPath(_path);
             translation = new Dictionary<string, string>();
-            translation[language] = text;
+            if (language != "")
+                translation[language] = text;
         }
 
         public string GetOriginalText()

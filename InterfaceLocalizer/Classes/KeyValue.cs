@@ -20,7 +20,8 @@ namespace InterfaceLocalizer.Classes
             key = _key;
             filename = _filename;
             values = new Dictionary<string, string>();
-            values.Add(_language, _text);
+            if (_language != "")
+                values.Add(_language, _text);
         }
 
         public string GetOriginalText()
