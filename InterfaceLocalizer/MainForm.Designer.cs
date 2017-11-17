@@ -1,4 +1,6 @@
-﻿namespace InterfaceLocalizer
+﻿using InterfaceLocalizer.Classes;
+
+namespace InterfaceLocalizer
 {
     partial class MainForm
     {
@@ -307,7 +309,7 @@
             conditionalFormattingObject6.Name = "NewCondition";
             conditionalFormattingObject6.RowBackColor = System.Drawing.Color.Empty;
             conditionalFormattingObject6.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject6.TValue1 = "<NO DATA>";
+            conditionalFormattingObject6.TValue1 = Const.NO_DATA;
             conditionalFormattingObject6.TValue2 = "\"\"";
             gridViewTextBoxColumn11.ConditionalFormattingObjectList.Add(conditionalFormattingObject6);
             gridViewTextBoxColumn11.EnableExpressionEditor = false;
@@ -322,7 +324,7 @@
             conditionalFormattingObject7.Name = "NewCondition";
             conditionalFormattingObject7.RowBackColor = System.Drawing.Color.Empty;
             conditionalFormattingObject7.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject7.TValue1 = "<NO DATA>";
+            conditionalFormattingObject7.TValue1 = Const.NO_DATA;
             conditionalFormattingObject7.TValue2 = "\"\"";
             conditionalFormattingObject8.CellBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             conditionalFormattingObject8.CellForeColor = System.Drawing.Color.Empty;
@@ -342,7 +344,7 @@
             conditionalFormattingObject9.Name = "NewCondition";
             conditionalFormattingObject9.RowBackColor = System.Drawing.Color.Empty;
             conditionalFormattingObject9.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject9.TValue1 = "<NO DATA>";
+            conditionalFormattingObject9.TValue1 = Const.NO_DATA;
             conditionalFormattingObject9.TValue2 = "\"\"";
             gridViewTextBoxColumn13.ConditionalFormattingObjectList.Add(conditionalFormattingObject9);
             gridViewTextBoxColumn13.EnableExpressionEditor = false;
@@ -355,7 +357,7 @@
             conditionalFormattingObject10.Name = "NewCondition";
             conditionalFormattingObject10.RowBackColor = System.Drawing.Color.Empty;
             conditionalFormattingObject10.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject10.TValue1 = "<NO DATA>";
+            conditionalFormattingObject10.TValue1 = Const.NO_DATA;
             conditionalFormattingObject10.TValue2 = "\"\"";
             gridViewTextBoxColumn14.ConditionalFormattingObjectList.Add(conditionalFormattingObject10);
             gridViewTextBoxColumn14.EnableExpressionEditor = false;

@@ -40,7 +40,7 @@ namespace InterfaceLocalizer.Classes
             if (translation.ContainsKey(key))
                 return translation[key];
             else
-                return "<NO DATA>";
+                return Const.NO_DATA;
         }
 
         public string GetFilename()
@@ -105,7 +105,7 @@ namespace InterfaceLocalizer.Classes
             {
                 string lang = CFileList.LanguageToFile.Keys.ElementAt(i);
                 string text = addendum.GetTranslation(lang);
-                if (text != "<NO DATA>")
+                if (text != Const.NO_DATA)
                     this.SetTranslation(lang, text);
             }
             return true;

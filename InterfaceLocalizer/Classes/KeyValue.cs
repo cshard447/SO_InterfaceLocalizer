@@ -33,7 +33,7 @@ namespace InterfaceLocalizer.Classes
             if (values.ContainsKey(key))
                 return values[key];
             else
-                return "<NO DATA>";
+                return Const.NO_DATA;
         }
 
         public string GetFilename()
@@ -65,7 +65,7 @@ namespace InterfaceLocalizer.Classes
                 return true;
             }
 
-            if (values.Values.Where( u => u == "<NO DATA>").Count() > 0)
+            if (values.Values.Where(u => u == Const.NO_DATA).Count() > 0)
             {
                 trouble = TroubleType.absence;
                 return true;
@@ -115,7 +115,7 @@ namespace InterfaceLocalizer.Classes
             {
                 string lang = CFileList.LanguageToFile.Keys.ElementAt(i);
                 string text = addendum.GetTranslation(lang);
-                if (text != "<NO DATA>")
+                if (text != Const.NO_DATA)
                     this.SetTranslation(lang, text);
             }
             return true;

@@ -65,7 +65,7 @@ namespace InterfaceLocalizer.Classes
         public bool Troublesome(out TroubleType trouble)
         {
             trouble = TroubleType.none;
-            if (GetTranslation("eng") == "<NO DATA>" || GetTranslation("eng") == "")
+            if (GetTranslation("eng") == Const.NO_DATA || GetTranslation("eng") == "")
                 trouble = TroubleType.absence;
             return (trouble != TroubleType.none);
         }
@@ -229,7 +229,7 @@ namespace InterfaceLocalizer.Classes
             }
             catch
             {
-                result = "<NO DATA>";
+                result = Const.NO_DATA;
             }
             result = result.Trim();
             return result;
