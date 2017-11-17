@@ -44,7 +44,7 @@ namespace InterfaceLocalizer.Classes
 
         public string GetPathString()
         {
-            return key;
+            throw new NotImplementedException();
         }
 
         public void SetOriginalText(string originalText)
@@ -79,7 +79,7 @@ namespace InterfaceLocalizer.Classes
                 return true;
             }
 
-            return false;            
+            return false;
         }
 
         public XElement GetPath()
@@ -90,9 +90,9 @@ namespace InterfaceLocalizer.Classes
         public object[] GetAsRow()
         {
             object[] values = new object[7];
-            values[0] = GetPathString();
+            values[0] = GetOriginalText();
             values[1] = Path.GetFileName(GetFilename());
-            values[2] = GetPathString();
+            values[2] = GetOriginalText();
             for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
                 values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
             return values;
@@ -259,7 +259,8 @@ namespace InterfaceLocalizer.Classes
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
                 string filename = CFileList.LanguageToFile[language];
-                if (Path.GetExtension(filename) != ".strings")
+                string ext = Path.GetExtension(filename);
+                if (ext != ".strings" && ext != ".properties")
                     continue;
                 StreamWriter writer = new StreamWriter(filename);
                 foreach (CKeyValue stuff in dict.Values)
