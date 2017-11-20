@@ -265,7 +265,7 @@ namespace InterfaceLocalizer.Classes
                 StreamWriter writer = new StreamWriter(filename);
                 foreach (CKeyValue stuff in dict.Values)
                 {
-                    string newKey = addQuotes(stuff.GetPathString(), false);
+                    string newKey = addQuotes(stuff.GetOriginalText(), false);
                     string newValue = addQuotes(stuff.GetTranslation(language), true);
                     string line = newKey + " = " + newValue;
                     writer.WriteLine(line);
