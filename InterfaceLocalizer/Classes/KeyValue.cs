@@ -263,11 +263,17 @@ namespace InterfaceLocalizer.Classes
                 if (ext != ".strings" && ext != ".properties")
                     continue;
                 StreamWriter writer = new StreamWriter(filename);
+                string EqualsSign = (ext == ".properties") ? ("=") : (" = ");
                 foreach (CKeyValue stuff in dict.Values)
                 {
-                    string newKey = addQuotes(stuff.GetOriginalText(), false);
-                    string newValue = addQuotes(stuff.GetTranslation(language), true);
-                    string line = newKey + " = " + newValue;
+                    string newKey = stuff.GetOriginalText();
+                    string newValue = stuff.GetTranslation(language);
+                    if (ext == ".strings")
+                    {
+                        newKey = addQuotes(newKey, false);
+                        newValue = addQuotes(newValue, true);
+                    }
+                    string line = newKey + EqualsSign + newValue;
                     writer.WriteLine(line);
                 }
                 writer.Close();
