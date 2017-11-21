@@ -156,7 +156,7 @@ namespace InterfaceLocalizer.Classes
         private void readKeyValueFile(string language, string filename)
         {
             StreamReader reader = new StreamReader(filename);   //, Encoding.GetEncoding(1252)
-            bool withQuotes = Path.GetExtension(filename) == ".strings";
+            bool withQuotes = Extension.Get(filename) == Extensions.strings;
             while (!reader.EndOfStream)
             {
                 string rawline = reader.ReadLine();
@@ -167,7 +167,7 @@ namespace InterfaceLocalizer.Classes
                 int indexOfEquality = rawline.IndexOf("=");
                 if (indexOfEquality == -1)              // skip lines without '=' sign 
                     continue;
-                int length = rawline.Length;                
+                int length = rawline.Length;
                 string key = rawline.Substring(0, indexOfEquality).Trim();
                 string value = rawline.Substring(indexOfEquality+1, length - indexOfEquality-1).Trim();
                 if (withQuotes)
@@ -259,16 +259,16 @@ namespace InterfaceLocalizer.Classes
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
                 string filename = CFileList.LanguageToFile[language];
-                string ext = Path.GetExtension(filename);
-                if (ext != ".strings" && ext != ".properties")
+                Extensions ext = Extension.Get(filename);
+                if (ext != Extensions.strings && ext != Extensions.properties)
                     continue;
                 StreamWriter writer = new StreamWriter(filename);
-                string EqualsSign = (ext == ".properties") ? ("=") : (" = ");
+                string EqualsSign = (ext == Extensions.properties) ? ("=") : (" = ");
                 foreach (CKeyValue stuff in dict.Values)
                 {
                     string newKey = stuff.GetOriginalText();
                     string newValue = stuff.GetTranslation(language);
-                    if (ext == ".strings")
+                    if (ext == Extensions.strings)
                     {
                         newKey = addQuotes(newKey, false);
                         newValue = addQuotes(newValue, true);

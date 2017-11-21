@@ -117,10 +117,9 @@ namespace InterfaceLocalizer.Classes
 
         public void AddFileToManager(string filename)
         {
-            string ext = Path.GetExtension(filename);
-            if (ext == ".xml")
+            if (Extension.Get(filename) == Extensions.xml)
                 addXmlToManager(filename);
-            else if (ext == ".json")
+            else if (Extension.Get(filename) == Extensions.json)
                 addJsonToManager(filename);
         }
 

@@ -256,7 +256,7 @@ namespace InterfaceLocalizer.Classes
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
                 string path = CFileList.LanguageToFile[language];
-                if (Path.GetExtension(path) != ".xml")
+                if (Extension.Get(path) != Extensions.xml)
                     continue;
                 XDocument doc = new XDocument();
                 /*if (Path.GetExtension(file) == ".json")

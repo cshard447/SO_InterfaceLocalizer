@@ -11,7 +11,6 @@ namespace InterfaceLocalizer.Classes
     {
         public static IManager CreateManager(WorkMode mode, String filename)
         {
-            string extension = Path.GetExtension(filename);
             switch (mode)
             {   
                 case WorkMode.interfaces:
@@ -19,7 +18,7 @@ namespace InterfaceLocalizer.Classes
                 case WorkMode.gossip:
                     return new CTextManager();
                 case WorkMode.multilang:
-                    if (extension == ".xml")
+                    if (Extension.Get(filename) == Extensions.xml)
                         return new CMultiManager();
                     else
                         return new CKeyValueManager();
