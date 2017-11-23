@@ -60,7 +60,7 @@ namespace InterfaceLocalizer.Classes
         public bool Troublesome(out TroubleType trouble)
         {
             trouble = TroubleType.none;
-            if (values.Count < CFileList.LanguageToFile.Count)
+            if (values.Count < CFileList.GetNumberOfFiles())
             {
                 trouble = TroubleType.absence;
                 return true;
@@ -93,7 +93,7 @@ namespace InterfaceLocalizer.Classes
             values[0] = GetOriginalText();
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetOriginalText();
-            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
                 values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
             return values;
         }
@@ -112,7 +112,7 @@ namespace InterfaceLocalizer.Classes
 
         public bool Add(ITranslatable addendum)
         {
-            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
             {
                 string lang = CFileList.LanguageToFile.Keys.ElementAt(i);
                 string text = addendum.GetTranslation(lang);
@@ -155,7 +155,7 @@ namespace InterfaceLocalizer.Classes
 
         private void readKeyValueFile(string language, string filename)
         {
-            StreamReader reader = new StreamReader(filename);   //, Encoding.GetEncoding(1252)
+            StreamReader reader = new StreamReader(filename);
             bool withQuotes = Extension.Get(filename) == Extensions.strings;
             while (!reader.EndOfStream)
             {
@@ -244,7 +244,7 @@ namespace InterfaceLocalizer.Classes
                 if (!dict.ContainsKey(id))
                     dict.Add(id, new CKeyValue(id, "", "", filename));
 
-                for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+                for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
                 {
                     string columnName = "columnTranslation" + i.ToString();
                     string language = CFileList.LanguageToFile.Keys.ElementAt(i);

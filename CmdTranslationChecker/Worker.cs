@@ -34,7 +34,7 @@ namespace CmdTranslationChecker
                 string language = "lang" + (i++).ToString();
                 CFileList.LanguageToFile.Add(language, file);
             }
-            System.Console.WriteLine("Total files with localizations found: " + CFileList.LanguageToFile.Count.ToString());
+            System.Console.WriteLine("Total files with localizations found: " + CFileList.GetNumberOfFiles().ToString());
             if (filesToAdd.Count < 2)
             {
                 result = ExitCodes.noFiles;

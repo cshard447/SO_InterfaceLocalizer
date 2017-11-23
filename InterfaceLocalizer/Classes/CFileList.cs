@@ -46,6 +46,11 @@ namespace InterfaceLocalizer.Classes
                     return AllFiles;
             }
         }
+
+        public static int GetNumberOfFiles()
+        {
+            return LanguageToFile.Count;
+        }
     }
 
 }

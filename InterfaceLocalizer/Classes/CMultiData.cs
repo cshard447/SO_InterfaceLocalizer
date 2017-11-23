@@ -68,7 +68,7 @@ namespace InterfaceLocalizer.Classes
         public bool Troublesome(out TroubleType trouble)
         {
             trouble = TroubleType.none;
-            if (translation.Count < CFileList.LanguageToFile.Count)
+            if (translation.Count < CFileList.GetNumberOfFiles())
             {
                 trouble = TroubleType.absence;
                 return true;
@@ -95,14 +95,14 @@ namespace InterfaceLocalizer.Classes
             values[0] = key;
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetPathString();
-            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
                 values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
             return values;
         }
 
         public bool Add(ITranslatable addendum)
         {
-            for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
             {
                 string lang = CFileList.LanguageToFile.Keys.ElementAt(i);
                 string text = addendum.GetTranslation(lang);
@@ -240,7 +240,7 @@ namespace InterfaceLocalizer.Classes
                     xmlDict.Add(id, new CMultiData(id, "", "", filename, tempPath));
                 }
 
-                for (int i = 0; i < CFileList.LanguageToFile.Count(); i++)
+                for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
                 {
                     string columnName = "columnTranslation" + i.ToString();
                     string language = CFileList.LanguageToFile.Keys.ElementAt(i);

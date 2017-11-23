@@ -50,17 +50,15 @@ namespace InterfaceLocalizer.GUI
 
         private void rbTotal_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            //calcStats(CFileList.AllFiles);
             calcStats();
         }
 
         private void rbChecked_ToggleStateChanged(object sender, Telerik.WinControls.UI.StateChangedEventArgs args)
         {
-            //calcStats(CFileList.CheckedFiles);
             calcStats();
         }
 
-        private void calcStats()    // List<string> fileList
+        private void calcStats()
         {
             nullData();            
             filesCount = fileList.Count;
@@ -79,7 +77,6 @@ namespace InterfaceLocalizer.GUI
                     troubleDict[trouble]++;
                     nonLocalizedSymbols += text.GetOriginalText().Length;
                 }
-                //else
                 engSymbols += text.GetTranslation("eng").Length;
 
             }
