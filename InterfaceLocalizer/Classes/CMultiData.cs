@@ -340,6 +340,10 @@ namespace InterfaceLocalizer.Classes
             stream.Close();
         }
 
+        public void AddData(ITranslatable addendum)
+        {
+            xmlDict[addendum.GetOriginalText()].Add(addendum);
+        }
     }
 
 }

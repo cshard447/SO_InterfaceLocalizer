@@ -320,5 +320,39 @@ namespace InterfaceLocalizer
                 }
             }
         }
+
+        private void menuLoadCSV_Click(object sender, EventArgs e)
+        {
+            DialogResult result = openFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string file = openFileDialog.FileName;
+                string delimiter = ";";
+                var stream = File.OpenText(file);
+                while (stream.Peek() > 0)
+                {
+                    string str = stream.ReadLine();
+                    string[] values = str.Split(new string[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+                    if (values.Count() > gridViewTranslation.Columns.Count)
+                    {
+                        MessageBox.Show("Too much columns in CSV file. ", "Error");
+                        return;
+                    }
+                    string key = values[0];
+                    string _file = values[1];
+                    string path = values[2];                    
+                    ITranslatable temp = new CKeyValue(key, "", "", _file);
+                    for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
+                    {
+                        string language = CFileList.LanguageToFile.Keys.ElementAt(i);
+                        string text = values[3+i];
+                        temp.SetTranslation(language, text);
+                    }
+                    currentManager.AddData(temp);
+                }
+                stream.Close();
+                cmbShowTroublesomeData_Click(sender, e);
+            }
+        }
     }
 }

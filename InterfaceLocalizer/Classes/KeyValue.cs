@@ -279,6 +279,11 @@ namespace InterfaceLocalizer.Classes
                 writer.Close();
             }
         }
+
+        public void AddData(ITranslatable addendum)
+        {
+            dict[addendum.GetOriginalText()].Add(addendum);
+        }
     }
 
 

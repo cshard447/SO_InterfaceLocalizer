@@ -31,19 +31,19 @@ namespace InterfaceLocalizer
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn9 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn10 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn11 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject6 = new Telerik.WinControls.UI.ConditionalFormattingObject();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn12 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject7 = new Telerik.WinControls.UI.ConditionalFormattingObject();
-            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject8 = new Telerik.WinControls.UI.ConditionalFormattingObject();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn13 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject9 = new Telerik.WinControls.UI.ConditionalFormattingObject();
-            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn14 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
-            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject10 = new Telerik.WinControls.UI.ConditionalFormattingObject();
-            Telerik.WinControls.Data.SortDescriptor sortDescriptor2 = new Telerik.WinControls.Data.SortDescriptor();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn1 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn2 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn3 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn4 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject1 = new Telerik.WinControls.UI.ConditionalFormattingObject();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn5 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject2 = new Telerik.WinControls.UI.ConditionalFormattingObject();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject3 = new Telerik.WinControls.UI.ConditionalFormattingObject();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn6 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject4 = new Telerik.WinControls.UI.ConditionalFormattingObject();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
+            Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject5 = new Telerik.WinControls.UI.ConditionalFormattingObject();
+            Telerik.WinControls.Data.SortDescriptor sortDescriptor1 = new Telerik.WinControls.Data.SortDescriptor();
             this.mainMenu = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
@@ -66,6 +66,8 @@ namespace InterfaceLocalizer
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             this.SpellChecker = new Telerik.WinControls.UI.RadSpellChecker();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.menuLoadCSV = new Telerik.WinControls.UI.RadMenuItem();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTranslation)).BeginInit();
@@ -90,7 +92,8 @@ namespace InterfaceLocalizer
             this.menuItemMain.Items.AddRange(new Telerik.WinControls.RadItem[] {
             this.menuItemSettings,
             this.menuItemStatistics,
-            this.menuSaveCSV});
+            this.menuSaveCSV,
+            this.menuLoadCSV});
             this.menuItemMain.Name = "menuItemMain";
             this.menuItemMain.Text = "Main";
             this.menuItemMain.Visibility = Telerik.WinControls.ElementVisibility.Visible;
@@ -291,94 +294,94 @@ namespace InterfaceLocalizer
             this.gridViewTranslation.MasterTemplate.AllowAddNewRow = false;
             this.gridViewTranslation.MasterTemplate.AllowColumnReorder = false;
             this.gridViewTranslation.MasterTemplate.AllowDeleteRow = false;
-            gridViewTextBoxColumn8.EnableExpressionEditor = false;
-            gridViewTextBoxColumn8.HeaderText = "ID";
-            gridViewTextBoxColumn8.Name = "columnID";
-            gridViewTextBoxColumn8.ReadOnly = true;
-            gridViewTextBoxColumn9.EnableExpressionEditor = false;
-            gridViewTextBoxColumn9.HeaderText = "Filename";
-            gridViewTextBoxColumn9.Name = "columnFileName";
-            gridViewTextBoxColumn9.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
-            gridViewTextBoxColumn9.Width = 93;
-            gridViewTextBoxColumn10.EnableExpressionEditor = false;
-            gridViewTextBoxColumn10.HeaderText = "Path & tags";
-            gridViewTextBoxColumn10.Name = "columnTags";
-            gridViewTextBoxColumn10.Width = 117;
-            conditionalFormattingObject6.CellBackColor = System.Drawing.Color.Red;
-            conditionalFormattingObject6.CellForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject6.Name = "NewCondition";
-            conditionalFormattingObject6.RowBackColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject6.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject6.TValue1 = Const.NO_DATA;
-            conditionalFormattingObject6.TValue2 = "\"\"";
-            gridViewTextBoxColumn11.ConditionalFormattingObjectList.Add(conditionalFormattingObject6);
-            gridViewTextBoxColumn11.EnableExpressionEditor = false;
-            gridViewTextBoxColumn11.HeaderText = "Translation 0";
-            gridViewTextBoxColumn11.MaxLength = 100000;
-            gridViewTextBoxColumn11.Multiline = true;
-            gridViewTextBoxColumn11.Name = "columnTranslation0";
-            gridViewTextBoxColumn11.Width = 202;
-            gridViewTextBoxColumn11.WrapText = true;
-            conditionalFormattingObject7.CellBackColor = System.Drawing.Color.Red;
-            conditionalFormattingObject7.CellForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject7.Name = "NewCondition";
-            conditionalFormattingObject7.RowBackColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject7.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject7.TValue1 = Const.NO_DATA;
-            conditionalFormattingObject7.TValue2 = "\"\"";
-            conditionalFormattingObject8.CellBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            conditionalFormattingObject8.CellForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject8.Name = "NewCondition";
-            conditionalFormattingObject8.RowBackColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject8.RowForeColor = System.Drawing.Color.Empty;
-            gridViewTextBoxColumn12.ConditionalFormattingObjectList.Add(conditionalFormattingObject7);
-            gridViewTextBoxColumn12.ConditionalFormattingObjectList.Add(conditionalFormattingObject8);
-            gridViewTextBoxColumn12.EnableExpressionEditor = false;
-            gridViewTextBoxColumn12.HeaderText = "Translation 1";
-            gridViewTextBoxColumn12.Multiline = true;
-            gridViewTextBoxColumn12.Name = "columnTranslation1";
-            gridViewTextBoxColumn12.Width = 181;
-            gridViewTextBoxColumn12.WrapText = true;
-            conditionalFormattingObject9.CellBackColor = System.Drawing.Color.Red;
-            conditionalFormattingObject9.CellForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject9.Name = "NewCondition";
-            conditionalFormattingObject9.RowBackColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject9.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject9.TValue1 = Const.NO_DATA;
-            conditionalFormattingObject9.TValue2 = "\"\"";
-            gridViewTextBoxColumn13.ConditionalFormattingObjectList.Add(conditionalFormattingObject9);
-            gridViewTextBoxColumn13.EnableExpressionEditor = false;
-            gridViewTextBoxColumn13.HeaderText = "Translation 2";
-            gridViewTextBoxColumn13.Name = "columnTranslation2";
-            gridViewTextBoxColumn13.Width = 218;
-            gridViewTextBoxColumn13.WrapText = true;
-            conditionalFormattingObject10.CellBackColor = System.Drawing.Color.Red;
-            conditionalFormattingObject10.CellForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject10.Name = "NewCondition";
-            conditionalFormattingObject10.RowBackColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject10.RowForeColor = System.Drawing.Color.Empty;
-            conditionalFormattingObject10.TValue1 = Const.NO_DATA;
-            conditionalFormattingObject10.TValue2 = "\"\"";
-            gridViewTextBoxColumn14.ConditionalFormattingObjectList.Add(conditionalFormattingObject10);
-            gridViewTextBoxColumn14.EnableExpressionEditor = false;
-            gridViewTextBoxColumn14.HeaderText = "Translation3";
-            gridViewTextBoxColumn14.Name = "columnTranslation3";
-            gridViewTextBoxColumn14.Width = 100;
-            gridViewTextBoxColumn14.WrapText = true;
+            gridViewTextBoxColumn1.EnableExpressionEditor = false;
+            gridViewTextBoxColumn1.HeaderText = "ID";
+            gridViewTextBoxColumn1.Name = "columnID";
+            gridViewTextBoxColumn1.ReadOnly = true;
+            gridViewTextBoxColumn2.EnableExpressionEditor = false;
+            gridViewTextBoxColumn2.HeaderText = "Filename";
+            gridViewTextBoxColumn2.Name = "columnFileName";
+            gridViewTextBoxColumn2.SortOrder = Telerik.WinControls.UI.RadSortOrder.Ascending;
+            gridViewTextBoxColumn2.Width = 93;
+            gridViewTextBoxColumn3.EnableExpressionEditor = false;
+            gridViewTextBoxColumn3.HeaderText = "Path & tags";
+            gridViewTextBoxColumn3.Name = "columnTags";
+            gridViewTextBoxColumn3.Width = 117;
+            conditionalFormattingObject1.CellBackColor = System.Drawing.Color.Red;
+            conditionalFormattingObject1.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject1.Name = "NewCondition";
+            conditionalFormattingObject1.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject1.RowForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject1.TValue1 = "<NO DATA>";
+            conditionalFormattingObject1.TValue2 = "\"\"";
+            gridViewTextBoxColumn4.ConditionalFormattingObjectList.Add(conditionalFormattingObject1);
+            gridViewTextBoxColumn4.EnableExpressionEditor = false;
+            gridViewTextBoxColumn4.HeaderText = "Translation 0";
+            gridViewTextBoxColumn4.MaxLength = 100000;
+            gridViewTextBoxColumn4.Multiline = true;
+            gridViewTextBoxColumn4.Name = "columnTranslation0";
+            gridViewTextBoxColumn4.Width = 202;
+            gridViewTextBoxColumn4.WrapText = true;
+            conditionalFormattingObject2.CellBackColor = System.Drawing.Color.Red;
+            conditionalFormattingObject2.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject2.Name = "NewCondition";
+            conditionalFormattingObject2.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject2.RowForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject2.TValue1 = "<NO DATA>";
+            conditionalFormattingObject2.TValue2 = "\"\"";
+            conditionalFormattingObject3.CellBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            conditionalFormattingObject3.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject3.Name = "NewCondition";
+            conditionalFormattingObject3.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject3.RowForeColor = System.Drawing.Color.Empty;
+            gridViewTextBoxColumn5.ConditionalFormattingObjectList.Add(conditionalFormattingObject2);
+            gridViewTextBoxColumn5.ConditionalFormattingObjectList.Add(conditionalFormattingObject3);
+            gridViewTextBoxColumn5.EnableExpressionEditor = false;
+            gridViewTextBoxColumn5.HeaderText = "Translation 1";
+            gridViewTextBoxColumn5.Multiline = true;
+            gridViewTextBoxColumn5.Name = "columnTranslation1";
+            gridViewTextBoxColumn5.Width = 181;
+            gridViewTextBoxColumn5.WrapText = true;
+            conditionalFormattingObject4.CellBackColor = System.Drawing.Color.Red;
+            conditionalFormattingObject4.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject4.Name = "NewCondition";
+            conditionalFormattingObject4.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject4.RowForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject4.TValue1 = "<NO DATA>";
+            conditionalFormattingObject4.TValue2 = "\"\"";
+            gridViewTextBoxColumn6.ConditionalFormattingObjectList.Add(conditionalFormattingObject4);
+            gridViewTextBoxColumn6.EnableExpressionEditor = false;
+            gridViewTextBoxColumn6.HeaderText = "Translation 2";
+            gridViewTextBoxColumn6.Name = "columnTranslation2";
+            gridViewTextBoxColumn6.Width = 218;
+            gridViewTextBoxColumn6.WrapText = true;
+            conditionalFormattingObject5.CellBackColor = System.Drawing.Color.Red;
+            conditionalFormattingObject5.CellForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject5.Name = "NewCondition";
+            conditionalFormattingObject5.RowBackColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject5.RowForeColor = System.Drawing.Color.Empty;
+            conditionalFormattingObject5.TValue1 = "<NO DATA>";
+            conditionalFormattingObject5.TValue2 = "\"\"";
+            gridViewTextBoxColumn7.ConditionalFormattingObjectList.Add(conditionalFormattingObject5);
+            gridViewTextBoxColumn7.EnableExpressionEditor = false;
+            gridViewTextBoxColumn7.HeaderText = "Translation3";
+            gridViewTextBoxColumn7.Name = "columnTranslation3";
+            gridViewTextBoxColumn7.Width = 100;
+            gridViewTextBoxColumn7.WrapText = true;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
-            gridViewTextBoxColumn8,
-            gridViewTextBoxColumn9,
-            gridViewTextBoxColumn10,
-            gridViewTextBoxColumn11,
-            gridViewTextBoxColumn12,
-            gridViewTextBoxColumn13,
-            gridViewTextBoxColumn14});
+            gridViewTextBoxColumn1,
+            gridViewTextBoxColumn2,
+            gridViewTextBoxColumn3,
+            gridViewTextBoxColumn4,
+            gridViewTextBoxColumn5,
+            gridViewTextBoxColumn6,
+            gridViewTextBoxColumn7});
             this.gridViewTranslation.MasterTemplate.EnableFiltering = true;
             this.gridViewTranslation.MasterTemplate.EnableGrouping = false;
             this.gridViewTranslation.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
-            sortDescriptor2.PropertyName = "columnFileName";
+            sortDescriptor1.PropertyName = "columnFileName";
             this.gridViewTranslation.MasterTemplate.SortDescriptors.AddRange(new Telerik.WinControls.Data.SortDescriptor[] {
-            sortDescriptor2});
+            sortDescriptor1});
             this.gridViewTranslation.MasterTemplate.VerticalScrollState = Telerik.WinControls.UI.ScrollState.AlwaysShow;
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
@@ -394,6 +397,21 @@ namespace InterfaceLocalizer
             this.saveFileDialog.FileName = "Translations.csv";
             this.saveFileDialog.Filter = "CSV files|*.csv|All files|*.*";
             this.saveFileDialog.Title = "Save current view as a CSV file...";
+            // 
+            // menuLoadCSV
+            // 
+            this.menuLoadCSV.AccessibleDescription = "menuLoadCSV";
+            this.menuLoadCSV.AccessibleName = "menuLoadCSV";
+            this.menuLoadCSV.Name = "menuLoadCSV";
+            this.menuLoadCSV.Text = "Load from CSV...";
+            this.menuLoadCSV.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuLoadCSV.Click += new System.EventHandler(this.menuLoadCSV_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog";
+            this.openFileDialog.Filter = "CSV files|*.csv|All files|*.*";
+            this.openFileDialog.Title = "Update current sheet from CSV file...";
             // 
             // MainForm
             // 
@@ -440,6 +458,8 @@ namespace InterfaceLocalizer
         private Telerik.WinControls.UI.RadMenuItem menuItemTest;
         private Telerik.WinControls.UI.RadMenuItem menuSaveCSV;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private Telerik.WinControls.UI.RadMenuItem menuLoadCSV;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
 

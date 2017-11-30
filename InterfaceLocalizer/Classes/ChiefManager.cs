@@ -61,5 +61,11 @@ namespace InterfaceLocalizer.Classes
             foreach (IManager manager in managerDict.Values)
                 manager.SaveDataToFile(false);
         }
+
+        public void AddData(ITranslatable addendum)
+        {
+            foreach (IManager manager in managerDict.Values)
+                manager.AddData(addendum);
+        }
     }
 }

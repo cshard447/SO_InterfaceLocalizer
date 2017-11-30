@@ -145,5 +145,9 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
+        public void AddData(ITranslatable addendum)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

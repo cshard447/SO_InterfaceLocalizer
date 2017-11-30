@@ -31,5 +31,6 @@ namespace InterfaceLocalizer.Classes
         void AddFileToManager(string filename);
         void UpdateDataFromGridView(RadGridView gridView);
         void SaveDataToFile(bool original);
+        void AddData(ITranslatable addendum);
     }
 }
