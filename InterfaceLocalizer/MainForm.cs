@@ -40,21 +40,25 @@ namespace InterfaceLocalizer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            bool load1 = false, load2 = false, load3 = false;
             try
             {
                 appSettings = new AppSettings();
                 LoadSettings();
 
-                LoadData(appSettings.PathToFiles + "\\Russian\\", appSettings.CheckedFiles, "*.xml",
+                load1 = LoadData(appSettings.PathToFiles + "\\Russian\\", appSettings.CheckedFiles, "*.xml",
                         ref CFileList.AllFiles, ref CFileList.CheckedFiles);
-                LoadData(appSettings.PathToGossip, appSettings.CheckedGossipFiles, "*.txt",
+                load2 = LoadData(appSettings.PathToGossip, appSettings.CheckedGossipFiles, "*.txt",
                         ref CFileList.AllGossipFiles, ref CFileList.CheckedGossipFiles);
-                LoadMultilang();
+                load3 = LoadMultilang();
             }
             catch (Exception)
             {
-                MessageBox.Show("Can't load your settings. Please restart the app", "Error",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Can't load your settings. Please restart the app", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            if (!load3 && !load2 && !load3)
+                MessageBox.Show("No files found. Please specify a path int the settings." , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //MessageBox.Show("Modules loaded: " + load1.ToString() + " " + load2.ToString() + " " + load3.ToString() , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             ApplySettings();
             //gridviewControlSpellChecker = SpellChecker.GetControlSpellChecker(typeof(RadTextBox));
             //documentSpellChecker = gridviewControlSpellChecker.SpellChecker as DocumentSpellChecker;
@@ -62,8 +66,9 @@ namespace InterfaceLocalizer
             //documentSpellChecker.SpellCheckingCulture = RussianCulture;
         }
 
-        private void LoadData(string path, string check, string mask, ref List<string> allFiles, ref List<string> checkedFiles)
+        private bool LoadData(string path, string check, string mask, ref List<string> allFiles, ref List<string> checkedFiles)
         {
+            bool result = true;
             allFiles.Clear();
             checkedFiles.Clear();
             try
@@ -78,11 +83,12 @@ namespace InterfaceLocalizer
             }
             catch
             {
-                //MessageBox.Show("Please specify the path to the working directory", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }        
+                result = false;
+            }
+            return result;
         }
 
-        private void LoadMultilang()
+        private bool LoadMultilang()
         {
             var languages = appSettings.LanguagesNames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
             var translatedFiles = appSettings.TranslationFilenames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
@@ -95,6 +101,8 @@ namespace InterfaceLocalizer
                     CFileList.LanguageToFile.Add(languages[i], translatedFiles[i]);
                     CFileList.MultilangFile.Add(translatedFiles[i]);
                 }
+            bool result = CFileList.GetNumberOfFiles() > 1;
+            return result;
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)
@@ -112,11 +120,7 @@ namespace InterfaceLocalizer
 
         private void cmbShowData_Click(object sender, EventArgs e)
         {
-            currentManager.ClearAllData();
             gridViewTranslation.Rows.Clear();
-            foreach (string file in currentFilelist)
-                currentManager.AddFileToManager(file);
-
             Dictionary<object, ITranslatable> textDict = currentManager.GetFullDictionary();
             gridViewTranslation.BeginUpdate();
             foreach (object id in textDict.Keys)
@@ -128,12 +132,7 @@ namespace InterfaceLocalizer
 
         private void cmbShowTroublesomeData_Click(object sender, EventArgs e)
         {
-            currentManager.ClearAllData();
             gridViewTranslation.Rows.Clear();
-
-            foreach (string file in currentFilelist)
-                currentManager.AddFileToManager(file);
-
             Dictionary<object, ITranslatable> textDict = currentManager.GetFullDictionary();
             TroubleType trouble;
             gridViewTranslation.BeginUpdate();
@@ -237,6 +236,9 @@ namespace InterfaceLocalizer
             currentFilelist = CFileList.GetProperList(workMode);
             //currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
             currentManager = new ChiefManager();
+            currentManager.ClearAllData();
+            foreach (string file in currentFilelist)
+                currentManager.AddFileToManager(file);
 
             lMode.Text = Enum.GetName(typeof(WorkMode), workMode);
             gridViewTranslation.Columns["columnID"].IsVisible = showInfo;
@@ -291,7 +293,6 @@ namespace InterfaceLocalizer
         private void menuItemTest_Click(object sender, EventArgs e)
         {
             SpellChecker.SpellCheckMode = SpellCheckMode.AllAtOnce;
-            //SpellChecker.SpellingFormStartPosition = FormStartPosition.
             var column = gridViewTranslation.Columns["columnTranslation1"];
             foreach (var row in gridViewTranslation.Rows)
             {                
