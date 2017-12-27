@@ -310,5 +310,41 @@ namespace InterfaceLocalizer.Properties {
                 this["ColLang3Width"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string GroupNames {
+            get {
+                return ((string)(this["GroupNames"]));
+            }
+            set {
+                this["GroupNames"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LanguagesInsideGroups {
+            get {
+                return ((string)(this["LanguagesInsideGroups"]));
+            }
+            set {
+                this["LanguagesInsideGroups"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FilesInsideGroups {
+            get {
+                return ((string)(this["FilesInsideGroups"]));
+            }
+            set {
+                this["FilesInsideGroups"] = value;
+            }
+        }
     }
 }

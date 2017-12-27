@@ -28,6 +28,9 @@ namespace InterfaceLocalizer.GUI
         List<string> gossipFileList = new List<string>();
         int gossipCount = 0;
 
+        List<RadPanel> panelList = new List<RadPanel>();
+        int newPanelInitialHeight = 5;
+
         public SettingsForm(AppSettings _appSettings)
         {
             InitializeComponent();
@@ -38,8 +41,11 @@ namespace InterfaceLocalizer.GUI
                 pvSettings.SelectedPage = pageGossip;
             else if (Properties.Settings.Default.WorkMode == (int)WorkMode.multilang)
                 pvSettings.SelectedPage = pageMultilang;
+            else if (Properties.Settings.Default.WorkMode == (int)WorkMode.groups)
+                pvSettings.SelectedPage = pageGroups;
             
             LoadMultiLanguage();
+            LoadGroupData();
             // иниициализируем данные об интерфейсах
             path = appSettings.PathToFiles;
             bePathToFiles.Value = appSettings.PathToFiles;
@@ -223,6 +229,87 @@ namespace InterfaceLocalizer.GUI
             appSettings.SaveSettings();
             Properties.Settings.Default.WorkMode = (int)WorkMode.multilang;
             this.Close();
+        }
+
+        private void bAddGroup_Click(object sender, EventArgs e)
+        {
+            RadTextBox textGroup = new RadTextBox();
+            RadTextBox textbox1 = new RadTextBox();
+            RadTextBox textbox2 = new RadTextBox();
+            RadBrowseEditor browse1 = new RadBrowseEditor();
+            RadBrowseEditor browse2 = new RadBrowseEditor();
+            textGroup.Text = "Enter group name";
+            textGroup.Location = new Point(130, 10);
+            textbox1.Text = "Language name";
+            textbox1.Location = new Point(15, 40);
+            textbox2.Text = "Language name";
+            textbox2.Location = new Point(15, 70);
+            browse1.Location = new Point (130, 40);
+            browse2.Location = new Point (130, 70);
+            browse1.Width = 200;
+            browse2.Width = 200;
+            RadPanel panel = new RadPanel();
+            panel.Width = pageGroups.Width;
+            panel.Top = newPanelInitialHeight;
+            panel.Controls.Add(textGroup);
+            panel.Controls.Add(textbox1);
+            panel.Controls.Add(textbox2);
+            panel.Controls.Add(browse1);
+            panel.Controls.Add(browse2);
+            pageGroups.Controls.Add(panel);
+            bAddGroup.Top += panel.Height + 10;
+            newPanelInitialHeight += panel.Height + 10;
+            panelList.Add(panel);
+        }
+
+        private void bOkGroups_Click(object sender, EventArgs e)
+        {
+            string groupNames = "";
+            string languageNames = "";
+            string fileNames = "";
+            foreach (RadPanel panel in panelList)
+            {
+                groupNames += panel.Controls[0].Text + ";";
+                languageNames += panel.Controls[1].Text + ";";
+                languageNames += panel.Controls[2].Text + ";";
+                fileNames += (panel.Controls[3] as RadBrowseEditor).Value + ";";
+                fileNames += (panel.Controls[4] as RadBrowseEditor).Value + ";";
+            }
+
+            CFileList.GroupedFiles.Clear();
+            //CFileList.GroupedData.Add(
+
+            appSettings.GroupNames = groupNames;
+            appSettings.LanguagesInsideGroups = languageNames;
+            appSettings.FilesInsideGroups = fileNames;
+            appSettings.SaveSettings();
+            Properties.Settings.Default.WorkMode = (int)WorkMode.groups;
+            this.Close();
+        }
+
+        private void LoadGroupData()
+        {
+            string[] groupNames = appSettings.GroupNames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            string[] languages = appSettings.LanguagesInsideGroups.Split(new string[] { ";" }, 8, StringSplitOptions.RemoveEmptyEntries);
+            string[] files = appSettings.FilesInsideGroups.Split(new string[] { ";" }, 16, StringSplitOptions.RemoveEmptyEntries);
+
+            int groupCounter = 0;
+            int langCounter = 0;
+            int fileCounter = 0;
+            foreach (string group in groupNames)
+            {
+                bAddGroup_Click(this, null);
+                panelList.ElementAt(groupCounter).Controls[0].Text = group;
+                panelList.ElementAt(groupCounter).Controls[1].Text = languages[langCounter];
+                panelList.ElementAt(groupCounter).Controls[2].Text = languages[++langCounter];
+                (panelList.ElementAt(groupCounter).Controls[3] as RadBrowseEditor).Value = files[fileCounter];
+                (panelList.ElementAt(groupCounter).Controls[4] as RadBrowseEditor).Value = files[++fileCounter];
+
+                fileCounter ++;
+                langCounter ++;
+                groupCounter ++;
+            }
+
         }
 
     }

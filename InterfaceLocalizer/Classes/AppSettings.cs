@@ -34,7 +34,11 @@ namespace InterfaceLocalizer.Classes
         private bool spellCheckCompleteBox;
         private string languagesNames;
         private string translationFilenames;
+        private string groupNames;
+        private string languagesInsideGroups;
+        private string filesInsideGroups;
 
+        //******************** UI Properties*******************************************************
 
         public int MainFormTop
         {
@@ -117,6 +121,7 @@ namespace InterfaceLocalizer.Classes
             set { statsFormTop = checkLocation(value); }
         }
         
+        // **************** Paths & files properties **********************************************
         
 	    public string PathToFiles
 	    {
@@ -159,6 +164,24 @@ namespace InterfaceLocalizer.Classes
             set { translationFilenames = value; }
         }
 
+        public string GroupNames
+        {
+            get { return groupNames; }
+            set { groupNames = value; }
+        }
+
+        public string LanguagesInsideGroups
+        {
+            get { return languagesInsideGroups; }
+            set { languagesInsideGroups = value; }
+        }
+
+        public string FilesInsideGroups
+        {
+            get { return filesInsideGroups; }
+            set { filesInsideGroups = value; }
+        }
+
 
         public AppSettings()
         {
@@ -189,6 +212,10 @@ namespace InterfaceLocalizer.Classes
 
             LanguagesNames = Properties.Settings.Default.LanguageNames;
             TranslationFilenames = Properties.Settings.Default.TranslationFilenames;
+
+            GroupNames = Properties.Settings.Default.GroupNames;
+            LanguagesInsideGroups = Properties.Settings.Default.LanguagesInsideGroups;
+            FilesInsideGroups = Properties.Settings.Default.FilesInsideGroups;
         }
 
         public void SaveSettings()
@@ -220,6 +247,10 @@ namespace InterfaceLocalizer.Classes
 
             Properties.Settings.Default.LanguageNames = LanguagesNames;
             Properties.Settings.Default.TranslationFilenames = TranslationFilenames;
+
+            Properties.Settings.Default.GroupNames = GroupNames;
+            Properties.Settings.Default.LanguagesInsideGroups  =LanguagesInsideGroups;
+            Properties.Settings.Default.FilesInsideGroups = FilesInsideGroups;
 
             Properties.Settings.Default.Save();
         }
