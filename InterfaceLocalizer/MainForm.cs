@@ -20,7 +20,7 @@ using InterfaceLocalizer.Properties;
 
 namespace InterfaceLocalizer
 {
-    public enum WorkMode { interfaces = 0, gossip = 1, multilang = 2};
+    public enum WorkMode { interfaces = 0, gossip = 1, multilang = 2, groups = 3};
 
     public partial class MainForm : Form
     {
@@ -234,8 +234,8 @@ namespace InterfaceLocalizer
         {
             workMode = (WorkMode) Properties.Settings.Default.WorkMode;
             currentFilelist = CFileList.GetProperList(workMode);
-            //currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
-            currentManager = new ChiefManager();
+            currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
+            //currentManager = new ChiefManager();
             currentManager.ClearAllData();
             foreach (string file in currentFilelist)
                 currentManager.AddFileToManager(file);
@@ -263,6 +263,7 @@ namespace InterfaceLocalizer
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
                     }
                     break;
+                //case WorkMode.groups:
             }
         }
 

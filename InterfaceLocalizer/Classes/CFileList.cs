@@ -14,7 +14,9 @@ namespace InterfaceLocalizer.Classes
         public static List<string> AllGossipFiles = new List<string>();
         public static List<string> CheckedGossipFiles = new List<string>();
         public static List<string> MultilangFile = new List<string>();
+        public static List<string> GroupedFiles = new List<string>();
         public static Dictionary<string, string> LanguageToFile = new Dictionary<string, string>();
+        public static Dictionary<string, Dictionary<string, string>> GroupedData = new Dictionary<string, Dictionary<string, string>>();
 
         public static string GetListAsString(List<string> list)
         {
@@ -42,6 +44,8 @@ namespace InterfaceLocalizer.Classes
                     return CheckedGossipFiles;
                 case WorkMode.multilang:
                     return MultilangFile;
+                case WorkMode.groups:
+                    return GroupedFiles;
                 default:
                     return AllFiles;
             }

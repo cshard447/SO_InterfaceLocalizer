@@ -22,6 +22,8 @@ namespace InterfaceLocalizer.Classes
                         return new CMultiManager();
                     else
                         return new CKeyValueManager();
+                case WorkMode.groups:
+                    return new ChiefManager();
             }
             return new CTextManager();
         }

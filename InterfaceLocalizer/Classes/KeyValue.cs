@@ -57,7 +57,7 @@ namespace InterfaceLocalizer.Classes
             values[language] = translatedText;
         }
 
-        public bool Troublesome(out TroubleType trouble)
+        public virtual bool Troublesome(out TroubleType trouble)
         {
             trouble = TroubleType.none;
             if (values.Count < CFileList.GetNumberOfFiles())
@@ -127,7 +127,7 @@ namespace InterfaceLocalizer.Classes
 
     class CKeyValueManager : IManager
     {
-        private Dictionary<object, ITranslatable> dict;
+        protected Dictionary<object, ITranslatable> dict;
         private Encoding encoding = Encoding.GetEncoding(1252);
 
 
@@ -146,14 +146,14 @@ namespace InterfaceLocalizer.Classes
             dict.Clear();
         }
 
-        public void AddFileToManager(string filename)
+        public virtual void AddFileToManager(string filename)
         {
             string language = CFileList.LanguageToFile.Where(u => u.Value == filename).First().Key;
             readKeyValueFile(language, filename);
         }
 
 
-        private void readKeyValueFile(string language, string filename)
+        protected void readKeyValueFile(string language, string filename)
         {
             StreamReader reader = new StreamReader(filename);
             bool withQuotes = Extension.Get(filename) == Extensions.strings;
@@ -195,7 +195,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        private string removeQuotes(string source)
+        protected string removeQuotes(string source)
         {
             string result = source;
             if( source.StartsWith("\""))
@@ -206,7 +206,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        private string addQuotes(string source, bool semicolon)
+        protected string addQuotes(string source, bool semicolon)
         {
             string result = String.Format("\"{0}\"", source);
             if (semicolon)
@@ -233,7 +233,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        public void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)
+        public virtual void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
@@ -254,7 +254,7 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        public void SaveDataToFile(bool original)
+        public virtual void SaveDataToFile(bool original)
         {
             foreach (string language in CFileList.LanguageToFile.Keys)
             {
