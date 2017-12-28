@@ -272,20 +272,22 @@ namespace InterfaceLocalizer.GUI
             foreach (RadPanel panel in panelList)
             {
                 string groupName = panel.Controls[0].Text;
+                string lang1 = panel.Controls[1].Text;
+                string lang2 = panel.Controls[2].Text;
                 string file1 = (panel.Controls[3] as RadBrowseEditor).Value;
                 string file2 = (panel.Controls[4] as RadBrowseEditor).Value;
 
                 groupNames += groupName + ";";
-                languageNames += panel.Controls[1].Text + ";";
-                languageNames += panel.Controls[2].Text + ";";
-                fileNames += file1 + ";";
-                fileNames += file2 + ";";
+                languageNames += lang1 + ";" + lang2 + ";";
+                fileNames += file1 + ";" + file2 + ";";
 
                 CFileList.GroupedData[groupName] = new Dictionary<string, string>();
-                CFileList.GroupedData[groupName].Add(panel.Controls[1].Text, file1);
-                CFileList.GroupedData[groupName].Add(panel.Controls[2].Text, file2);
+                CFileList.GroupedData[groupName].Add(lang1, file1);
+                CFileList.GroupedData[groupName].Add(lang2, file2);
                 CFileList.GroupedFiles.Add(file1);
                 CFileList.GroupedFiles.Add(file2);
+                CFileList.FileToGroupAndLanguage.Add(file1, groupName + ":" + lang1);
+                CFileList.FileToGroupAndLanguage.Add(file2, groupName + ":" + lang2);
             }
 
             appSettings.GroupNames = groupNames;

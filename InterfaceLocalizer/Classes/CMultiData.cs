@@ -65,7 +65,7 @@ namespace InterfaceLocalizer.Classes
             translation[language] = translatedText;
         }
 
-        public bool Troublesome(out TroubleType trouble)
+        public virtual bool Troublesome(out TroubleType trouble)
         {
             trouble = TroubleType.none;
             if (translation.Count < CFileList.GetNumberOfFiles())
@@ -117,7 +117,7 @@ namespace InterfaceLocalizer.Classes
 
     class CMultiManager : IManager
     {
-        private Dictionary<object, ITranslatable> xmlDict;
+        protected Dictionary<object, ITranslatable> xmlDict;
 
         public CMultiManager()
         {
@@ -134,7 +134,7 @@ namespace InterfaceLocalizer.Classes
             xmlDict.Clear();
         }
 
-        public void AddFileToManager(string filename)
+        public virtual void AddFileToManager(string filename)
         {
             string language = CFileList.LanguageToFile.Where(u => u.Value == filename).First().Key;
             parseXmlFile(language, filename);
@@ -170,7 +170,7 @@ namespace InterfaceLocalizer.Classes
             //parseXmlFile(reader, engDoc, filename);
         }
 
-        private void parseXmlFile(string language, string filename)
+        protected void parseXmlFile(string language, string filename)
         {
             XmlPath myPath = new XmlPath();
             string key = "";
@@ -224,7 +224,7 @@ namespace InterfaceLocalizer.Classes
                 xmlDict.Add(key, new CMultiData(key, language, text, filename, xmlPath));
         }
 
-        public void UpdateDataFromGridView(RadGridView gridView)
+        public virtual void UpdateDataFromGridView(RadGridView gridView)
         {
             for (int row = 0; row < gridView.RowCount; row++)
             {
@@ -250,7 +250,7 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        public void SaveDataToFile(bool original)
+        public virtual void SaveDataToFile(bool original)
         {
             bool json = false;
             foreach (string language in CFileList.LanguageToFile.Keys)

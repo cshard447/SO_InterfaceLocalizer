@@ -17,6 +17,7 @@ namespace InterfaceLocalizer.Classes
         public static List<string> GroupedFiles = new List<string>();
         public static Dictionary<string, string> LanguageToFile = new Dictionary<string, string>();
         public static Dictionary<string, Dictionary<string, string>> GroupedData = new Dictionary<string, Dictionary<string, string>>();
+        public static Dictionary<string, string> FileToGroupAndLanguage = new Dictionary<string, string>();
 
         public static string GetListAsString(List<string> list)
         {

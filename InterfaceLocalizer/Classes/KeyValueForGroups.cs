@@ -30,8 +30,8 @@ namespace InterfaceLocalizer.Classes
 
         public override void AddFileToManager(string filename)
         {
-            string language = CFileList.LanguageToFile.Where(u => u.Value == filename).First().Key;
-            readKeyValueFile(language, filename);
+            string groupAndLang = CFileList.FileToGroupAndLanguage[filename];
+            readKeyValueFile(groupAndLang, filename);
         }
 
 
