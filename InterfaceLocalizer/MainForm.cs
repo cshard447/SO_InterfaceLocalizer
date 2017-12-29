@@ -38,9 +38,11 @@ namespace InterfaceLocalizer
             InitializeComponent();
         }
 
+        //**************Data loading for different modes************************************************************
+
         private void MainForm_Load(object sender, EventArgs e)
         {
-            bool load1 = false, load2 = false, load3 = false;
+            bool load1 = false, load2 = false, load3 = false, load4 = false;
             try
             {
                 appSettings = new AppSettings();
@@ -51,14 +53,15 @@ namespace InterfaceLocalizer
                 load2 = LoadData(appSettings.PathToGossip, appSettings.CheckedGossipFiles, "*.txt",
                         ref CFileList.AllGossipFiles, ref CFileList.CheckedGossipFiles);
                 load3 = LoadMultilang();
+                load4 = LoadGroupedData();
             }
             catch (Exception)
             {
                 MessageBox.Show("Can't load your settings. Please restart the app", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            if (!load3 && !load2 && !load3)
+            if (!load3 && !load2 && !load3 && !load4)
                 MessageBox.Show("No files found. Please specify a path int the settings." , "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //MessageBox.Show("Modules loaded: " + load1.ToString() + " " + load2.ToString() + " " + load3.ToString() , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //MessageBox.Show("Modules loaded: " + load1.ToString() + " " + load2.ToString() + " " + load3.ToString() + " " + load4.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             ApplySettings();
             //gridviewControlSpellChecker = SpellChecker.GetControlSpellChecker(typeof(RadTextBox));
             //documentSpellChecker = gridviewControlSpellChecker.SpellChecker as DocumentSpellChecker;
@@ -104,6 +107,39 @@ namespace InterfaceLocalizer
             bool result = CFileList.GetNumberOfFiles() > 1;
             return result;
         }
+
+        private bool LoadGroupedData()
+        {
+            bool result = false;
+
+            string[] groupNames = appSettings.GroupNames.Split(new string[] { ";" }, 4, StringSplitOptions.RemoveEmptyEntries);
+            string[] languages = appSettings.LanguagesInsideGroups.Split(new string[] { ";" }, 8, StringSplitOptions.RemoveEmptyEntries);
+            string[] files = appSettings.FilesInsideGroups.Split(new string[] { ";" }, 16, StringSplitOptions.RemoveEmptyEntries);
+            
+            CFileList.GroupedFiles.Clear();
+            int langCounter = 0;
+            int fileCounter = 0;
+            foreach (string group in groupNames)
+            {
+                string lang1 = languages[langCounter];
+                string lang2 = languages[++langCounter];
+                string file1 = files[fileCounter];
+                string file2 = files[++fileCounter];
+                CFileList.GroupedData[group] = new Dictionary<string, string>();
+                CFileList.GroupedData[group].Add(lang1, file1);
+                CFileList.GroupedData[group].Add(lang2, file2);
+                CFileList.GroupedFiles.Add(file1);
+                CFileList.GroupedFiles.Add(file2);
+                CFileList.FileToGroupAndLanguage.Add(file1, group + ":" + lang1);
+                CFileList.FileToGroupAndLanguage.Add(file2, group + ":" + lang2);
+                langCounter++;
+                fileCounter++;
+            }
+
+            return result;
+        }
+
+        //**************Buttons and and menu item clicks************************************************************
 
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
@@ -185,10 +221,17 @@ namespace InterfaceLocalizer
             currentManager.SaveDataToFile(true);
         }
 
+        private void menuItemCompleteMessage_Click(object sender, EventArgs e)
+        {
+            SpellChecker.EnableCompleteMessageBox = !SpellChecker.EnableCompleteMessageBox;
+        }
+
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             SaveSettings();
         }
+
+        //**************Settings load, save and apply************************************************************
 
         private void SaveSettings()
         {
@@ -288,11 +331,6 @@ namespace InterfaceLocalizer
         }
 
         private static readonly CultureInfo RussianCulture = CultureInfo.GetCultureInfo("ru-RU");
-
-        private void menuItemCompleteMessage_Click(object sender, EventArgs e)
-        {
-            SpellChecker.EnableCompleteMessageBox = !SpellChecker.EnableCompleteMessageBox;
-        }
 
         private void menuItemTest_Click(object sender, EventArgs e)
         {
