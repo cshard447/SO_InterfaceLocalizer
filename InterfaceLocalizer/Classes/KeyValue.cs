@@ -87,7 +87,7 @@ namespace InterfaceLocalizer.Classes
             throw new NotImplementedException();
         }
 
-        public object[] GetAsRow()
+        public virtual object[] GetAsRow()
         {
             object[] values = new object[7];
             values[0] = GetOriginalText();
@@ -153,7 +153,7 @@ namespace InterfaceLocalizer.Classes
         }
 
 
-        protected void readKeyValueFile(string language, string filename)
+        protected virtual void readKeyValueFile(string language, string filename)
         {
             StreamReader reader = new StreamReader(filename);
             bool withQuotes = Extension.Get(filename) == Extensions.strings;
@@ -182,7 +182,7 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        private string concatenateFurtherStrings(StreamReader reader, string source)
+        protected string concatenateFurtherStrings(StreamReader reader, string source)
         {
             string result = source;
             while (source.EndsWith("\\"))
@@ -214,7 +214,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        private string convertCodepointsToChars(string source)
+        protected string convertCodepointsToChars(string source)
         {
             string result = source;
             int indexofUnichar = result.IndexOf("\\u"); ;

@@ -263,7 +263,10 @@ namespace InterfaceLocalizer
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
                     }
                     break;
-                //case WorkMode.groups:
+                case WorkMode.groups:
+                    for (int i = 0; i < 4; i++ )
+                        gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
+                    break;
             }
         }
 

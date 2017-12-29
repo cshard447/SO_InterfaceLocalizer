@@ -9,10 +9,20 @@ namespace InterfaceLocalizer.Classes
     class ChiefManager : IManager
     {
         private Dictionary<object, IManager> managerDict;
+        private Dictionary<Extensions, string> FilenameToManagerName;
 
         public ChiefManager()
         {
             managerDict = new Dictionary<object, IManager>();
+            IManager manager1 = new MultiDataManagerForGroups();
+            IManager manager2 = new KeyValueManagerForGroups();
+            managerDict.Add(manager1.ToString(), manager1);
+            managerDict.Add(manager2.ToString(), manager2);
+
+            FilenameToManagerName = new Dictionary<Extensions, string>();
+            FilenameToManagerName.Add(Extensions.xml, manager1.ToString());
+            FilenameToManagerName.Add(Extensions.strings, manager2.ToString());
+            FilenameToManagerName.Add(Extensions.properties, manager2.ToString());
         }
 
         public Dictionary<object, ITranslatable> GetFullDictionary()
@@ -42,12 +52,9 @@ namespace InterfaceLocalizer.Classes
 
         public void AddFileToManager(string filename)
         {
-            IManager tempManager = ManagerFactory.CreateManager(WorkMode.multilang, filename);
-            string newKey = tempManager.ToString();
-            if (!managerDict.ContainsKey(newKey))
-                managerDict.Add(newKey, tempManager);
-
-            managerDict[newKey].AddFileToManager(filename);
+            Extensions ext = Extension.Get(filename);
+            string name = FilenameToManagerName[ext];
+            managerDict[name].AddFileToManager(filename);
         }
 
         public void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)

@@ -89,7 +89,7 @@ namespace InterfaceLocalizer.Classes
             return xmlPath.GetPathAsElement();
         }
 
-        public object[] GetAsRow()
+        public virtual object[] GetAsRow()
         {
             object[] values = new object[7];
             values[0] = key;
@@ -213,7 +213,7 @@ namespace InterfaceLocalizer.Classes
             }
         }
 
-        private void AddOrUpdate(string key, string language, string text, string filename, XmlPath xmlPath)
+        protected virtual void AddOrUpdate(string key, string language, string text, string filename, XmlPath xmlPath)
         {
             if (String.IsNullOrEmpty(key))
                 key = xmlPath.GetPathAsString();

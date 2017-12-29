@@ -19,6 +19,24 @@ namespace InterfaceLocalizer.Classes
             trouble = TroubleType.duplicate;
             return true;
         }
+
+        public override object[] GetAsRow()
+        {
+            object[] values = new object[7];
+            values[0] = GetOriginalText();
+            values[1] = Path.GetFileName(GetFilename());
+            values[2] = GetOriginalText();
+            //for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
+            //    values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
+
+            for (int i = 0; i < 4; i++ )
+            {
+                string key = CFileList.FileToGroupAndLanguage[GetFilename()];
+                values[i + 3] = GetTranslation(key);
+            }
+
+            return values;
+        }
     }
 
     class KeyValueManagerForGroups : CKeyValueManager
@@ -34,6 +52,34 @@ namespace InterfaceLocalizer.Classes
             readKeyValueFile(groupAndLang, filename);
         }
 
+        protected override void readKeyValueFile(string language, string filename)
+        {
+            StreamReader reader = new StreamReader(filename);
+            bool withQuotes = Extension.Get(filename) == Extensions.strings;
+            while (!reader.EndOfStream)
+            {
+                string rawline = reader.ReadLine();
+                if (String.IsNullOrEmpty(rawline))      // skip empty lines
+                    continue;
+                rawline = concatenateFurtherStrings(reader, rawline);
+                rawline = convertCodepointsToChars(rawline);
+                int indexOfEquality = rawline.IndexOf("=");
+                if (indexOfEquality == -1)              // skip lines without '=' sign 
+                    continue;
+                int length = rawline.Length;
+                string key = rawline.Substring(0, indexOfEquality).Trim();
+                string value = rawline.Substring(indexOfEquality + 1, length - indexOfEquality - 1).Trim();
+                if (withQuotes)
+                {
+                    key = removeQuotes(key);
+                    value = removeQuotes(value);
+                }
+                if (!dict.ContainsKey(key))
+                    dict.Add(key, new KeyValueForGroups(key, language, value, filename));
+                else
+                    dict[key].SetTranslation(language, value);
+            }
+        }
 
         public override void UpdateDataFromGridView(Telerik.WinControls.UI.RadGridView gridView)
         {

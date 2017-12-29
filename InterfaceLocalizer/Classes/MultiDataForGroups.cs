@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 using System.Text;
@@ -24,6 +25,23 @@ namespace InterfaceLocalizer.Classes
             return false;
         }
 
+        public override object[] GetAsRow()
+        {
+            object[] values = new object[7];
+            values[0] = GetOriginalText();
+            values[1] = Path.GetFileName(GetFilename());
+            values[2] = GetPathString();
+            //for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
+                //values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
+
+            for (int i = 0; i < 4; i++)
+            {
+                string key = CFileList.FileToGroupAndLanguage[GetFilename()];
+                values[i + 3] = GetTranslation(key);
+            }
+            return values;
+        }
+
     }
 
 
@@ -35,9 +53,19 @@ namespace InterfaceLocalizer.Classes
 
         public override void AddFileToManager(string filename)
         {
-            //string language = CFileList.LanguageToFile.Where(u => u.Value == filename).First().Key;
             string groupAndLang = CFileList.FileToGroupAndLanguage[filename];
             parseXmlFile(groupAndLang, filename);
+        }
+
+        protected override void AddOrUpdate(string key, string language, string text, string filename, XmlPath xmlPath)
+        {
+            if (String.IsNullOrEmpty(key))
+                key = xmlPath.GetPathAsString();
+
+            if (xmlDict.ContainsKey(key))
+                xmlDict[key].SetTranslation(language, text);
+            else
+                xmlDict.Add(key, new MultiDataForGroups(key, language, text, filename, xmlPath));
         }
 
         public override void UpdateDataFromGridView(RadGridView gridView)
