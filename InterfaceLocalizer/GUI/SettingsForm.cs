@@ -268,6 +268,7 @@ namespace InterfaceLocalizer.GUI
             string languageNames = "";
             string fileNames = "";
             CFileList.GroupedFiles.Clear();
+            CFileList.FileToGroupAndLanguage.Clear();
 
             foreach (RadPanel panel in panelList)
             {

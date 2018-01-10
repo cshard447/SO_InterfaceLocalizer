@@ -31,12 +31,10 @@ namespace InterfaceLocalizer.Classes
             values[0] = GetOriginalText();
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetPathString();
-            //for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
-                //values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
 
             for (int i = 0; i < 4; i++)
             {
-                string key = CFileList.FileToGroupAndLanguage[GetFilename()];
+                string key = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                 values[i + 3] = GetTranslation(key);
             }
             return values;

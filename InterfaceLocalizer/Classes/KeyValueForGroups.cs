@@ -9,7 +9,8 @@ namespace InterfaceLocalizer.Classes
 {
     class KeyValueForGroups : CKeyValue
     {
-        public KeyValueForGroups (string _key, string _language, string _text, string _filename) : base(_key, _language, _text, _filename)
+        public KeyValueForGroups (string _key, string _language, string _text, string _filename) 
+            : base(_key, _language, _text, _filename)
         {
         }
 
@@ -26,12 +27,10 @@ namespace InterfaceLocalizer.Classes
             values[0] = GetOriginalText();
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetOriginalText();
-            //for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
-            //    values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
 
             for (int i = 0; i < 4; i++ )
             {
-                string key = CFileList.FileToGroupAndLanguage[GetFilename()];
+                string key = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                 values[i + 3] = GetTranslation(key);
             }
 

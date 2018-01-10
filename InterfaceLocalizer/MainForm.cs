@@ -308,7 +308,10 @@ namespace InterfaceLocalizer
                     break;
                 case WorkMode.groups:
                     for (int i = 0; i < 4; i++ )
+                    {
+                        gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
+                    }
                     break;
             }
         }
