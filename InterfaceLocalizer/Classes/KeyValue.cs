@@ -110,7 +110,7 @@ namespace InterfaceLocalizer.Classes
             return result;
         }
 
-        public bool Add(ITranslatable addendum)
+        public virtual bool Add(ITranslatable addendum)
         {
             for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
             {

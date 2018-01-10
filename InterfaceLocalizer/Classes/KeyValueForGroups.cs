@@ -36,6 +36,18 @@ namespace InterfaceLocalizer.Classes
 
             return values;
         }
+
+        public override bool Add(ITranslatable addendum)
+        {
+            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
+            {
+                string lang = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
+                string text = addendum.GetTranslation(lang);
+                if (text != Const.NO_DATA)
+                    this.SetTranslation(lang, text);
+            }
+            return true;
+        }
     }
 
     class KeyValueManagerForGroups : CKeyValueManager
