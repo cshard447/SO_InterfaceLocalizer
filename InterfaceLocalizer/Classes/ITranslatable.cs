@@ -8,7 +8,7 @@ using Telerik.WinControls.UI;
 
 namespace InterfaceLocalizer.Classes
 {
-    public enum TroubleType { none, absence, duplicate };
+    public enum TroubleType { none, absence, duplicate, difference };
 
     public interface ITranslatable
     {

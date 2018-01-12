@@ -16,9 +16,21 @@ namespace InterfaceLocalizer.Classes
 
         public override bool Troublesome(out TroubleType trouble)
         {
-            // think about new way of detecting troubles
-            trouble = TroubleType.duplicate;
-            return true;
+            trouble = TroubleType.difference;
+            string group0 = CFileList.GroupedData.Keys.ElementAt(0);
+            foreach (string language in CFileList.GroupedData[group0].Keys)
+            {
+                string key1 = group0 + ":" + language;
+                string text = GetTranslation(key1);
+                foreach (string group in CFileList.GroupedData.Keys)
+                {
+                    string key2 = group + ":" + language;
+                    if (GetTranslation(key2) != text)
+                        return true;
+                }
+            }
+            trouble = TroubleType.none;
+            return false;
         }
 
         public override object[] GetAsRow()
@@ -49,6 +61,7 @@ namespace InterfaceLocalizer.Classes
             return true;
         }
     }
+
 
     class KeyValueManagerForGroups : CKeyValueManager
     {
