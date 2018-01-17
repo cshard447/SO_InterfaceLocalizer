@@ -35,16 +35,21 @@ namespace InterfaceLocalizer.Classes
 
         public override object[] GetAsRow()
         {
-            object[] values = new object[7];
+            int i;
+            object[] values = new object[8];
             values[0] = GetOriginalText();
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetOriginalText();
 
-            for (int i = 0; i < 4; i++ )
+            for (i = 0; i < 4; i++ )
             {
                 string key = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                 values[i + 3] = GetTranslation(key);
             }
+
+            TroubleType trouble;
+            Troublesome(out trouble);
+            values[i+3] = Troubles.GetText(trouble);
 
             return values;
         }

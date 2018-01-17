@@ -139,6 +139,7 @@
     <Compile Include="Classes\KeyValueForGroups.cs" />
     <Compile Include="Classes\ManagerFactory.cs" />
     <Compile Include="Classes\PathAtom.cs" />
+    <Compile Include="Classes\TroubleTypes.cs" />
     <Compile Include="GUI\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

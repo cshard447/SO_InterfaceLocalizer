@@ -289,6 +289,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnTranslation3"].IsVisible = false;
+            gridViewTranslation.Columns["colDecision"].IsVisible = false;
 
             switch (workMode)
             {
@@ -311,6 +312,7 @@ namespace InterfaceLocalizer
                     {
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
+                        gridViewTranslation.Columns["colDecision"].IsVisible = true;
                     }
                     break;
             }

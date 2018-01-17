@@ -43,12 +43,14 @@ namespace InterfaceLocalizer
             Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject4 = new Telerik.WinControls.UI.ConditionalFormattingObject();
             Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn7 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.UI.ConditionalFormattingObject conditionalFormattingObject5 = new Telerik.WinControls.UI.ConditionalFormattingObject();
+            Telerik.WinControls.UI.GridViewTextBoxColumn gridViewTextBoxColumn8 = new Telerik.WinControls.UI.GridViewTextBoxColumn();
             Telerik.WinControls.Data.SortDescriptor sortDescriptor1 = new Telerik.WinControls.Data.SortDescriptor();
             this.mainMenu = new Telerik.WinControls.UI.RadMenu();
             this.menuItemMain = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSettings = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemStatistics = new Telerik.WinControls.UI.RadMenuItem();
             this.menuSaveCSV = new Telerik.WinControls.UI.RadMenuItem();
+            this.menuLoadCSV = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemSpellCheck = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemCompleteMessage = new Telerik.WinControls.UI.RadMenuItem();
             this.menuItemTest = new Telerik.WinControls.UI.RadMenuItem();
@@ -66,7 +68,6 @@ namespace InterfaceLocalizer
             this.gridViewTranslation = new Telerik.WinControls.UI.RadGridView();
             this.SpellChecker = new Telerik.WinControls.UI.RadSpellChecker();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.menuLoadCSV = new Telerik.WinControls.UI.RadMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.mainMenu)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.commandBarTranslation)).BeginInit();
@@ -81,7 +82,7 @@ namespace InterfaceLocalizer
             this.menuItemSpellCheck});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(911, 20);
+            this.mainMenu.Size = new System.Drawing.Size(894, 20);
             this.mainMenu.TabIndex = 0;
             this.mainMenu.Text = "radMenu1";
             // 
@@ -125,6 +126,15 @@ namespace InterfaceLocalizer
             this.menuSaveCSV.Visibility = Telerik.WinControls.ElementVisibility.Visible;
             this.menuSaveCSV.Click += new System.EventHandler(this.menuSaveCSV_Click);
             // 
+            // menuLoadCSV
+            // 
+            this.menuLoadCSV.AccessibleDescription = "menuLoadCSV";
+            this.menuLoadCSV.AccessibleName = "menuLoadCSV";
+            this.menuLoadCSV.Name = "menuLoadCSV";
+            this.menuLoadCSV.Text = "Load from CSV...";
+            this.menuLoadCSV.Visibility = Telerik.WinControls.ElementVisibility.Visible;
+            this.menuLoadCSV.Click += new System.EventHandler(this.menuLoadCSV_Click);
+            // 
             // menuItemSpellCheck
             // 
             this.menuItemSpellCheck.AccessibleDescription = "Spell checker";
@@ -162,7 +172,7 @@ namespace InterfaceLocalizer
             this.commandBarTranslation.Name = "commandBarTranslation";
             this.commandBarTranslation.Rows.AddRange(new Telerik.WinControls.UI.CommandBarRowElement[] {
             this.cmbRow});
-            this.commandBarTranslation.Size = new System.Drawing.Size(911, 45);
+            this.commandBarTranslation.Size = new System.Drawing.Size(894, 45);
             this.commandBarTranslation.TabIndex = 1;
             this.commandBarTranslation.Text = "radCommandBar1";
             // 
@@ -368,6 +378,10 @@ namespace InterfaceLocalizer
             gridViewTextBoxColumn7.Name = "columnTranslation3";
             gridViewTextBoxColumn7.Width = 100;
             gridViewTextBoxColumn7.WrapText = true;
+            gridViewTextBoxColumn8.EnableExpressionEditor = false;
+            gridViewTextBoxColumn8.HeaderText = "Decision";
+            gridViewTextBoxColumn8.Name = "colDecision";
+            gridViewTextBoxColumn8.Width = 122;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
             gridViewTextBoxColumn2,
@@ -375,7 +389,8 @@ namespace InterfaceLocalizer
             gridViewTextBoxColumn4,
             gridViewTextBoxColumn5,
             gridViewTextBoxColumn6,
-            gridViewTextBoxColumn7});
+            gridViewTextBoxColumn7,
+            gridViewTextBoxColumn8});
             this.gridViewTranslation.MasterTemplate.EnableFiltering = true;
             this.gridViewTranslation.MasterTemplate.EnableGrouping = false;
             this.gridViewTranslation.MasterTemplate.SelectionMode = Telerik.WinControls.UI.GridViewSelectionMode.CellSelect;
@@ -386,7 +401,7 @@ namespace InterfaceLocalizer
             this.gridViewTranslation.Name = "gridViewTranslation";
             this.gridViewTranslation.NewRowEnterKeyMode = Telerik.WinControls.UI.RadGridViewNewRowEnterKeyMode.None;
             this.gridViewTranslation.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.gridViewTranslation.Size = new System.Drawing.Size(911, 535);
+            this.gridViewTranslation.Size = new System.Drawing.Size(894, 532);
             this.gridViewTranslation.TabIndex = 2;
             this.gridViewTranslation.Text = "radGridView1";
             this.gridViewTranslation.CellEndEdit += new Telerik.WinControls.UI.GridViewCellEventHandler(this.gridViewTranslation_CellEndEdit);
@@ -398,15 +413,6 @@ namespace InterfaceLocalizer
             this.saveFileDialog.Filter = "CSV files|*.csv|All files|*.*";
             this.saveFileDialog.Title = "Save current view as a CSV file...";
             // 
-            // menuLoadCSV
-            // 
-            this.menuLoadCSV.AccessibleDescription = "menuLoadCSV";
-            this.menuLoadCSV.AccessibleName = "menuLoadCSV";
-            this.menuLoadCSV.Name = "menuLoadCSV";
-            this.menuLoadCSV.Text = "Load from CSV...";
-            this.menuLoadCSV.Visibility = Telerik.WinControls.ElementVisibility.Visible;
-            this.menuLoadCSV.Click += new System.EventHandler(this.menuLoadCSV_Click);
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog";
@@ -417,7 +423,7 @@ namespace InterfaceLocalizer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(911, 600);
+            this.ClientSize = new System.Drawing.Size(894, 597);
             this.Controls.Add(this.gridViewTranslation);
             this.Controls.Add(this.commandBarTranslation);
             this.Controls.Add(this.mainMenu);
