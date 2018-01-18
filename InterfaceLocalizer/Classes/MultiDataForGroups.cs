@@ -65,7 +65,7 @@ namespace InterfaceLocalizer.Classes
 
         public override bool Add(ITranslatable addendum)
         {
-            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
+            for (int i = 0; i < CFileList.FileToGroupAndLanguage.Count; i++)
             {
                 string lang = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                 string text = addendum.GetTranslation(lang);
