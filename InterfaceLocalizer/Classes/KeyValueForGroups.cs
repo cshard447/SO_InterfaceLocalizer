@@ -16,7 +16,6 @@ namespace InterfaceLocalizer.Classes
 
         public override bool Troublesome(out TroubleType trouble)
         {
-            trouble = TroubleType.difference;
             string group0 = CFileList.GroupedData.Keys.ElementAt(0);
             foreach (string language in CFileList.GroupedData[group0].Keys)
             {
@@ -25,8 +24,16 @@ namespace InterfaceLocalizer.Classes
                 foreach (string group in CFileList.GroupedData.Keys)
                 {
                     string key2 = group + ":" + language;
+                    if (GetTranslation(key2) == Const.NO_DATA)
+                    {
+                        trouble = TroubleType.absence;
+                        return true;                    
+                    }
                     if (GetTranslation(key2) != text)
+                    {
+                        trouble = TroubleType.difference;
                         return true;
+                    }
                 }
             }
             trouble = TroubleType.none;
