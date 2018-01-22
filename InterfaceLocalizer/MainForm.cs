@@ -278,7 +278,6 @@ namespace InterfaceLocalizer
             workMode = (WorkMode) Properties.Settings.Default.WorkMode;
             currentFilelist = CFileList.GetProperList(workMode);
             currentManager = ManagerFactory.CreateManager(workMode, currentFilelist.First());
-            //currentManager = new ChiefManager();
             currentManager.ClearAllData();
             foreach (string file in currentFilelist)
                 currentManager.AddFileToManager(file);
@@ -306,14 +305,15 @@ namespace InterfaceLocalizer
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
                     }
+                    gridViewTranslation.Columns["colDecision"].IsVisible = true;
                     break;
                 case WorkMode.groups:
                     for (int i = 0; i < 4; i++ )
                     {
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
-                        gridViewTranslation.Columns["colDecision"].IsVisible = true;
                     }
+                    gridViewTranslation.Columns["colDecision"].IsVisible = true;
                     break;
             }
         }

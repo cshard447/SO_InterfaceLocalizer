@@ -91,12 +91,17 @@ namespace InterfaceLocalizer.Classes
 
         public virtual object[] GetAsRow()
         {
-            object[] values = new object[7];
+            int i;
+            object[] values = new object[Const.MaxColumns];
             values[0] = key;
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetPathString();
-            for (int i = 0; i < CFileList.GetNumberOfFiles(); i++)
+            for (i = 0; i < CFileList.GetNumberOfFiles(); i++)
                 values[i + 3] = GetTranslation(CFileList.LanguageToFile.Keys.ElementAt(i));
+
+            TroubleType trouble;
+            Troublesome(out trouble);
+            values[Const.MaxColumns-1] = Troubles.GetText(trouble);
             return values;
         }
 

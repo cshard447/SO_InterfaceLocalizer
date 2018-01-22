@@ -43,7 +43,7 @@ namespace InterfaceLocalizer.Classes
         public override object[] GetAsRow()
         {
             int i;
-            object[] values = new object[8];
+            object[] values = new object[Const.MaxColumns];
             values[0] = GetOriginalText();
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetOriginalText();
@@ -56,7 +56,7 @@ namespace InterfaceLocalizer.Classes
 
             TroubleType trouble;
             Troublesome(out trouble);
-            values[i+3] = Troubles.GetText(trouble);
+            values[Const.MaxColumns - 1] = Troubles.GetText(trouble);
 
             return values;
         }

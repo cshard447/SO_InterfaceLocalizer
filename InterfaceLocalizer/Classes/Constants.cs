@@ -10,6 +10,7 @@ namespace InterfaceLocalizer.Classes
     static class Const
     {
         public const string NO_DATA = "<NO DATA>";
+        public const int MaxColumns = 8;
     }
 
 

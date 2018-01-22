@@ -77,7 +77,7 @@ namespace InterfaceLocalizer.Classes
 
         public object[] GetAsRow()
         {
-            object[] values = new object[5];
+            object[] values = new object[Const.MaxColumns];
             values[0] = 0;
             values[1] = Path.GetFileName(GetFilename());
             values[2] = GetPathString();
