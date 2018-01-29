@@ -248,6 +248,7 @@ namespace InterfaceLocalizer
             appSettings.ColEngWidth = gridViewTranslation.Columns["columnTranslation1"].Width;
             appSettings.ColLanguage2Width = gridViewTranslation.Columns["columnTranslation2"].Width;
             appSettings.ColLanguage3Width = gridViewTranslation.Columns["columnTranslation3"].Width;
+            appSettings.ColDecisionWidth = gridViewTranslation.Columns["columnDecision"].Width;
             appSettings.SaveSettings();
         }
 
@@ -268,6 +269,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnTranslation1"].Width = appSettings.ColEngWidth;
             gridViewTranslation.Columns["columnTranslation2"].Width = appSettings.ColLanguage2Width;
             gridViewTranslation.Columns["columnTranslation3"].Width = appSettings.ColLanguage3Width;
+            gridViewTranslation.Columns["columnDecision"].Width = appSettings.ColDecisionWidth;
             showInfo = appSettings.ServiceColumnsVisible;
             menuItemCompleteMessage.IsChecked = appSettings.SpellCheckCompleteBox;
             SpellChecker.EnableCompleteMessageBox = appSettings.SpellCheckCompleteBox;
@@ -288,7 +290,7 @@ namespace InterfaceLocalizer
             gridViewTranslation.Columns["columnFilename"].IsVisible = showInfo;
             gridViewTranslation.Columns["columnTranslation2"].IsVisible = false;
             gridViewTranslation.Columns["columnTranslation3"].IsVisible = false;
-            gridViewTranslation.Columns["colDecision"].IsVisible = false;
+            gridViewTranslation.Columns["columnDecision"].IsVisible = false;
 
             switch (workMode)
             {
@@ -305,7 +307,7 @@ namespace InterfaceLocalizer
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.LanguageToFile.Keys.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
                     }
-                    gridViewTranslation.Columns["colDecision"].IsVisible = true;
+                    gridViewTranslation.Columns["columnDecision"].IsVisible = true;
                     break;
                 case WorkMode.groups:
                     for (int i = 0; i < 4; i++ )
@@ -313,7 +315,7 @@ namespace InterfaceLocalizer
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].HeaderText = CFileList.FileToGroupAndLanguage.Values.ElementAt(i);
                         gridViewTranslation.Columns["columnTranslation" + i.ToString()].IsVisible = true;
                     }
-                    gridViewTranslation.Columns["colDecision"].IsVisible = true;
+                    gridViewTranslation.Columns["columnDecision"].IsVisible = true;
                     break;
             }
         }

@@ -346,5 +346,17 @@ namespace InterfaceLocalizer.Properties {
                 this["FilesInsideGroups"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int ColDecisionWidth {
+            get {
+                return ((int)(this["ColDecisionWidth"]));
+            }
+            set {
+                this["ColDecisionWidth"] = value;
+            }
+        }
     }
 }

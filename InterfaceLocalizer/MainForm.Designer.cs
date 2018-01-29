@@ -380,7 +380,7 @@ namespace InterfaceLocalizer
             gridViewTextBoxColumn7.WrapText = true;
             gridViewTextBoxColumn8.EnableExpressionEditor = false;
             gridViewTextBoxColumn8.HeaderText = "Decision";
-            gridViewTextBoxColumn8.Name = "colDecision";
+            gridViewTextBoxColumn8.Name = "columnDecision";
             gridViewTextBoxColumn8.Width = 122;
             this.gridViewTranslation.MasterTemplate.Columns.AddRange(new Telerik.WinControls.UI.GridViewDataColumn[] {
             gridViewTextBoxColumn1,
